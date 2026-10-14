@@ -1,15 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useLayoutEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { EXPERIENCES, type Experience } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { sortedNews, upcomingEvents, type CampusEvent, type NewsCategory, type NewsPost } from "@/data/sccs-content";
-import { cn, span } from "@/lib/utils";
-import { useStaticMotion } from "@/lib/use-static-motion";
+import { cn } from "@/lib/utils";
 import { useLang } from "./i18n";
 import { Container, Photo, Reveal, Section, SectionHeading, TextLink } from "./sccs-shared";
 
@@ -252,135 +250,6 @@ export function CampusLife() {
           </div>
         </div>
 
-        <div className="mt-20">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{c.newsTitle}</h3>
-              <p className="mt-2 text-mist">{c.newsIntro}</p>
-            </div>
-            <TextLink href="/news">{c.allNews}</TextLink>
-          </div>
-          <div className="mt-8">
-            <NewsPreview />
-          </div>
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-/* ───────── Jaguar Experience pan rail (home) ───────── */
-
-export function ExperienceRail() {
-  const { t, tr } = useLang();
-  const c = t.campusLife;
-  const reduce = useStaticMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const railRef = useRef<HTMLDivElement>(null);
-  const [travel, setTravel] = useState(0);
-
-  useLayoutEffect(() => {
-    const measure = () => {
-      const rail = railRef.current;
-      if (!rail) return;
-      setTravel(Math.max(0, rail.scrollWidth - window.innerWidth));
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    if (railRef.current) ro.observe(railRef.current);
-    window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, []);
-
-  const { scrollYProgress: p } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const x = useTransform(p, ...span([0.04, 0.96], [0, -travel]));
-
-  const cards = (
-    <>
-      <div className="flex w-[82vw] shrink-0 flex-col justify-center pr-6 sm:w-[26rem]">
-        <h2 className="font-display text-4xl font-semibold leading-[1.05] text-navy-900 sm:text-5xl">{c.title}</h2>
-        <p className="mt-5 max-w-sm text-base leading-relaxed text-mist sm:text-lg">{c.intro}</p>
-      </div>
-      {EXPERIENCES.map((e) => (
-        <Link
-          key={e.slug}
-          href={`/campus-life/jaguar-experience/${e.slug}`}
-          className="group relative isolate block h-[62svh] max-h-[36rem] w-[78vw] shrink-0 overflow-hidden rounded-3xl bg-navy-900 sm:w-[24rem] lg:w-[28rem]"
-        >
-          <Photo photo={e.hero} className="absolute inset-0 -z-10" sizes="(min-width:1024px) 28rem, 78vw" imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/90 via-navy-950/25 to-transparent" aria-hidden="true" />
-          <div className="flex h-full flex-col justify-end p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-400">{tr(e.note)}</p>
-            <p className="font-display mt-2 text-3xl font-semibold leading-tight text-white">{tr(e.title)}</p>
-            <p className="mt-2 text-sm text-white/80">{tr(e.tagline)}</p>
-            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white group-hover:text-amber-400">
-              {c.explore}
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-            </span>
-          </div>
-        </Link>
-      ))}
-      <div className="flex w-[70vw] shrink-0 flex-col justify-center pl-4 sm:w-[22rem]">
-        <p className="font-display text-2xl leading-snug text-navy-900">{c.beyondIntro}</p>
-        <TextLink href="/campus-life/jaguar-experience" className="mt-4">
-          {c.exploreAll}
-        </TextLink>
-      </div>
-    </>
-  );
-
-  if (reduce) {
-    return (
-      <section id="campus-life" className="scroll-mt-28 py-16 sm:py-20">
-        <div ref={railRef} className="flex snap-x snap-proximity gap-5 overflow-x-auto px-5 pb-4 sm:px-8 [&>*]:snap-start">
-          {cards}
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section ref={sectionRef} id="campus-life" className="relative scroll-mt-28" style={{ height: `calc(100svh + ${travel}px)` }}>
-      <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
-        <motion.div ref={railRef} style={{ x }} className="flex items-center gap-5 px-5 will-change-transform sm:px-8 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
-          {cards}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/** Home: what follows the rail. Traditions, the calendar and the newsroom, in flow. */
-export function CampusLifeMore() {
-  const { t } = useLang();
-  const c = t.campusLife;
-  return (
-    <Section className="pt-0 sm:pt-4 lg:pt-6">
-      <Container>
-        <div className="grid gap-8 rounded-3xl bg-cream/70 p-7 sm:p-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-4">
-            <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{c.beyondTitle}</h3>
-            <p className="mt-3 text-mist">{c.beyondIntro}</p>
-            <TextLink href="/campus-life/beyond-the-classroom" className="mt-3">
-              {c.beyondCta}
-            </TextLink>
-          </div>
-          <div className="lg:col-span-8 lg:pt-1">
-            <BeyondChips />
-          </div>
-        </div>
-        <div id="events" className="mt-20 scroll-mt-28">
-          <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
-            <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{c.eventsTitle}</h3>
-            <p className="text-mist">{c.eventsIntro}</p>
-          </div>
-          <div className="mt-8">
-            <EventsGrid />
-          </div>
-        </div>
         <div className="mt-20">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>

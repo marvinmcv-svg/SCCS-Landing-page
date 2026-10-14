@@ -61,7 +61,7 @@ export function ExperiencePage({ exp }: { exp: Experience }) {
       <Section>
         <Container className="space-y-20 lg:space-y-28">
           {exp.sections.map((s, i) => (
-            <Split key={s.title.en} photo={s.image ?? exp.hero} title={tr(s.title)} body={tr(s.body)} reverse={i % 2 === 1} />
+            <Split key={s.title.en} photo={s.image ?? exp.hero} title={tr(s.title)} body={tr(s.body)} reverse={i % 2 === 1} kicker={`0${i + 1}`} />
           ))}
         </Container>
       </Section>
@@ -76,7 +76,7 @@ export function ExperiencePage({ exp }: { exp: Experience }) {
           <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {exp.pillars.map((p, i) => (
               <Reveal as="li" key={p.title.en} delay={i * 0.07} className="bg-navy-950 p-7">
-                <span className="block h-0.5 w-8 rounded-full bg-amber-400" aria-hidden="true" />
+                <span className="font-display text-sm text-amber-400">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 text-lg font-semibold text-white">{tr(p.title)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-cream/70">{tr(p.text)}</p>
               </Reveal>
@@ -175,7 +175,7 @@ export function JaguarExperienceHub() {
                 </div>
                 <div className="flex flex-col justify-center p-8 sm:p-12">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-600">
-                    {tr(e.kicker)}
+                    {String(i + 1).padStart(2, "0")} · {tr(e.kicker)}
                   </p>
                   <h2 className="font-display mt-3 text-3xl font-semibold text-navy-900 sm:text-4xl">{tr(e.title)}</h2>
                   <p className="font-display mt-3 text-lg italic text-navy-700">{tr(e.tagline)}</p>

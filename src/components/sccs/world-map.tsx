@@ -1,10 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, X } from "lucide-react";
 import { memo, useEffect, useMemo, useState } from "react";
 import { COUNTRIES, type MatriculationEntry } from "@/data/sccs-content";
-import { useStaticMotion } from "@/lib/use-static-motion";
 import { useLang } from "./i18n";
 
 const W = 1000;
@@ -14,7 +13,7 @@ function project(lat: number, lng: number): [number, number] {
   return [((lng + 180) / 360) * W, ((82 - lat) / 140) * H];
 }
 
-// Coarse coastlines as [lng, lat], original artwork.
+// Coarse coastlines as [lng, lat] — original artwork.
 const LAND: number[][][] = [
   [[-168,68],[-160,70],[-140,70],[-128,71],[-110,73],[-95,74],[-82,74],[-70,68],[-61,60],[-55,52],[-60,47],[-66,44],[-70,42],[-74,40],[-76,35],[-81,31],[-80,25],[-82,28],[-85,30],[-90,29],[-94,29],[-97,26],[-96,20],[-91,21],[-87,21],[-88,17],[-84,10],[-79,8],[-81,8],[-85,11],[-92,15],[-97,17],[-105,20],[-110,24],[-113,28],[-115,31],[-117,33],[-121,35],[-124,40],[-124,46],[-127,50],[-132,55],[-137,58],[-146,60],[-151,59],[-158,57],[-164,54],[-168,60],[-166,64],[-168,68]],
   [[-52,60],[-44,60],[-40,64],[-32,68],[-22,70],[-20,75],[-25,80],[-38,82],[-50,82],[-58,78],[-56,72],[-54,66],[-52,60]],
@@ -85,7 +84,7 @@ const DotsLayer = memo(function DotsLayer({ dots }: { dots: [number, number][] }
 
 export function WorldMap({ entries }: { entries: MatriculationEntry[] }) {
   const { t, tr } = useLang();
-  const reduce = useStaticMotion();
+  const reduce = useReducedMotion();
   const dots = useMemo(buildDots, []);
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);

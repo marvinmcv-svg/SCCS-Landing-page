@@ -33,7 +33,7 @@
 
   --radius: 0.75rem;
 
-  --font-sans: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
 
   --ease-signature: cubic-bezier(0.22, 1, 0.36, 1);
@@ -51,7 +51,8 @@
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-        -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01" on, "cv11" on;
+    -webkit-font-smoothing: antialiased;
   }
   ::selection {
     background: #F8A724;

@@ -47,8 +47,8 @@ export function AdmissionsPage() {
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-mist">
                 {tr({
-                  en: "Does your vision for your child include a premier American education led by licensed, international educators? Our admissions process is designed for families seeking rigorous preparation where English mastery and global fluency are the standard, and where every child is known.",
-                  es: "¿Tu visión para tu hijo incluye una educación americana de primer nivel, guiada por educadores internacionales titulados? Nuestro proceso de admisión está pensado para familias que buscan una preparación exigente, donde el dominio del inglés y la fluidez global son la norma, y donde cada niño es conocido.",
+                  en: "Does your vision for your child include a premier American education led by licensed, international educators? Our admissions process is designed for families seeking rigorous preparation where English mastery and global fluency are the standard — and where every child is known.",
+                  es: "¿Tu visión para tu hijo incluye una educación americana de primer nivel, guiada por educadores internacionales titulados? Nuestro proceso de admisión está pensado para familias que buscan una preparación exigente, donde el dominio del inglés y la fluidez global son la norma — y donde cada niño es conocido.",
                 })}
               </p>
             </Reveal>

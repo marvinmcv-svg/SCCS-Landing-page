@@ -48,8 +48,8 @@ export function AdvantagePage() {
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-mist">
                 {tr({
-                  en: "Founded by visionary Bolivian families and international energy companies, SCCS grew from an enclave for expatriate families into the region's premier private, coeducational preparatory school, with a significant population of dual-national learners.",
-                  es: "Fundado por familias bolivianas visionarias y empresas energéticas internacionales, SCCS pasó de ser un enclave para familias extranjeras al principal colegio preparatorio privado y mixto de la región, con una importante población de estudiantes con doble nacionalidad.",
+                  en: "Founded by visionary Bolivian families and international energy companies, SCCS grew from an enclave for expatriate families into the region's premier private, coeducational preparatory school — with a significant population of dual-national learners.",
+                  es: "Fundado por familias bolivianas visionarias y empresas energéticas internacionales, SCCS pasó de ser un enclave para familias extranjeras al principal colegio preparatorio privado y mixto de la región — con una importante población de estudiantes con doble nacionalidad.",
                 })}
               </p>
             </Reveal>
@@ -131,7 +131,7 @@ export function SafetyPage() {
       <Section>
         <Container className="space-y-20 lg:space-y-28">
           {SAFETY.pillars.map((p, i) => (
-            <Split key={p.title.en} photo={p.image} title={tr(p.title)} body={tr(p.body)} reverse={i % 2 === 1} />
+            <Split key={p.title.en} photo={p.image} title={tr(p.title)} body={tr(p.body)} reverse={i % 2 === 1} kicker={`0${i + 1}`} />
           ))}
         </Container>
       </Section>

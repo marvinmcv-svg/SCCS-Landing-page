@@ -1,143 +1,116 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { media } from "@/data/media";
-import { cn, EASE, span } from "@/lib/utils";
-import { useStaticMotion } from "@/lib/use-static-motion";
+import { cn, EASE, scrollToId } from "@/lib/utils";
 import { useLang } from "./i18n";
-import { Crest, Photo, buttonStyles } from "./sccs-shared";
+import { buttonStyles } from "./sccs-shared";
 
-/**
- * Layered hero (scroll-craft "hero depth"): planes built from real SCCS
- * photography move at different rates. Far: the campus gardens. Mid: two
- * photo plates (commencement, Friendship Games). Near: the crest. Copy rides
- * at 1x between the planes. Pointer adds a few pixels of lean on fine pointers.
- */
-function usePointerLean() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 60, damping: 20 });
-  const sy = useSpring(y, { stiffness: 60, damping: 20 });
-  useEffect(() => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const onMove = (e: PointerEvent) => {
-      x.set(e.clientX / window.innerWidth - 0.5);
-      y.set(e.clientY / window.innerHeight - 0.5);
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
-  }, [x, y]);
-  return { sx, sy };
-}
-
-function useLean(v: MotionValue<number>, px: number) {
-  return useTransform(v, (n) => n * px);
-}
+const SLIDES = [media.campusGardens, media.graduationPac, media.fgPepRally];
+const SLIDE_MS = 7000;
 
 export function Hero() {
-  const { t } = useLang();
-  const reduce = useStaticMotion();
+  const { t, tr } = useLang();
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const { sx, sy } = usePointerLean();
-  const [wide, setWide] = useState(true);
+  const [index, setIndex] = useState(0);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const overlay = useTransform(scrollYProgress, [0, 1], [0.72, 0.94]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const set = () => setWide(mq.matches);
-    set();
-    mq.addEventListener("change", set);
-    return () => mq.removeEventListener("change", set);
-  }, []);
+    if (reduce) return;
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), SLIDE_MS);
+    return () => window.clearInterval(id);
+  }, [reduce]);
 
-  // Scroll rates: far plane slowest, near plane fastest; copy holds until the exit.
-  const farY = useTransform(p, ...span([0, 1], ["0%", "-8%"]));
-  const farScale = useTransform(p, ...span([0, 1], [1.12, 1.02]));
-  const plateAY = useTransform(p, ...span([0, 1], [0, -260]));
-  const plateBY = useTransform(p, ...span([0, 1], [0, -420]));
-  const plateBRot = useTransform(p, ...span([0, 1], [4, -2]));
-  const crestY = useTransform(p, ...span([0, 1], [0, wide ? -620 : -120]));
-  const crestO = useTransform(p, ...span([0, 0.12, 0.3], [1, 1, wide ? 1 : 0]));
-  const crestRot = useTransform(p, ...span([0, 1], [-8, 6]));
-  const copyY = useTransform(p, ...span([0.55, 1], [0, -80]));
-  const copyO = useTransform(p, ...span([0.6, 0.95], [1, 0]));
-  const scrim = useTransform(p, ...span([0, 1], [0.85, 1]));
-
-  const farLX = useLean(sx, -10);
-  const farLY = useLean(sy, -8);
-  const midLX = useLean(sx, -22);
-  const midLY = useLean(sy, -16);
-  const nearLX = useLean(sx, -38);
-  const nearLY = useLean(sy, -26);
-
-  const enter = (delay: number) => (reduce ? {} : { initial: { opacity: 0, y: 22 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.9, delay, ease: EASE } });
+  const enter = (delay: number) =>
+    reduce ? {} : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, delay, ease: EASE } };
 
   return (
-    <section ref={ref} id="top" className={cn("relative bg-navy-950", reduce ? "min-h-[100svh]" : "h-[170svh]")}>
-      <div className={cn("overflow-hidden", reduce ? "relative min-h-[100svh]" : "sticky top-0 h-[100svh]")}>
-        {/* Far plane: the campus */}
-        <motion.div className="absolute inset-0" style={reduce ? undefined : { y: farY, scale: farScale }}>
-          <motion.div className="absolute -inset-4" style={reduce ? undefined : { x: farLX, y: farLY }}>
-            <Photo photo={media.campusGardens} priority sizes="100vw" className="absolute inset-0" imgClassName="object-[50%_60%]" />
-          </motion.div>
-        </motion.div>
-        {/* Scrim only on the lead side where the copy sits, plus a floor fade */}
-        <motion.div
-          className="absolute inset-0 bg-[linear-gradient(100deg,rgba(20,20,58,0.92)_0%,rgba(20,20,58,0.72)_38%,rgba(20,20,58,0.18)_70%,rgba(20,20,58,0.06)_100%)]"
-          style={{ opacity: reduce ? 0.9 : scrim }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy-950/80 to-transparent" aria-hidden="true" />
-
-        {/* Mid plane: two photo plates (tablet and up) */}
-        <motion.div className="pointer-events-none absolute inset-0 hidden md:block" style={reduce ? undefined : { x: midLX, y: midLY }} aria-hidden="true">
+    <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center overflow-hidden bg-navy-950">
+      <div className="absolute inset-0" aria-hidden="true">
+        <AnimatePresence initial={false}>
           <motion.div
-            className="absolute right-[6%] top-[18%] w-[30vw] max-w-[30rem] overflow-hidden rounded-2xl border-[6px] border-white/90 shadow-[0_40px_80px_rgba(10,10,30,0.55)]"
-            style={reduce ? { rotate: -3 } : { y: plateAY, rotate: -3 }}
+            key={index}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.6, ease: "easeInOut" }}
           >
-            <Photo photo={media.graduationPac} sizes="30vw" className="aspect-[4/3]" />
+            <Image
+              src={SLIDES[index].src}
+              alt=""
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className={cn("object-cover", !reduce && "sccs-kenburns")}
+            />
           </motion.div>
-          <motion.div
-            className="absolute right-[19%] top-[57%] w-[18vw] max-w-[18rem] overflow-hidden rounded-2xl border-[6px] border-white/90 shadow-[0_40px_80px_rgba(10,10,30,0.55)]"
-            style={reduce ? { rotate: 4 } : { y: plateBY, rotate: plateBRot }}
-          >
-            <Photo photo={media.fgPepRally} sizes="18vw" className="aspect-[4/3]" />
-          </motion.div>
-        </motion.div>
-
-        {/* Near plane: the crest */}
-        <motion.div className="pointer-events-none absolute inset-0" style={reduce ? undefined : { x: nearLX, y: nearLY }} aria-hidden="true">
-          <motion.div
-            className="absolute bottom-[7%] right-[6%] w-24 drop-shadow-[0_24px_40px_rgba(10,10,30,0.6)] sm:w-32 md:bottom-[9%] md:right-[7%] md:w-40 lg:w-48"
-            style={reduce ? { rotate: -8 } : { y: crestY, rotate: crestRot, opacity: crestO }}
-          >
-            <Crest className="h-auto w-full" />
-          </motion.div>
-        </motion.div>
-
-        {/* Copy rides at 1x between the planes */}
-        <motion.div style={reduce ? undefined : { y: copyY, opacity: copyO }} className="relative z-10 mx-auto flex h-full min-h-[100svh] w-full max-w-7xl flex-col justify-center px-5 pb-16 pt-32 sm:px-8">
-          <motion.h1
-            {...enter(0.15)}
-            className="font-display max-w-[13ch] text-balance text-[2.7rem] font-semibold leading-[1.02] tracking-[-0.025em] text-white sm:text-6xl lg:text-[5.4rem]"
-          >
-            {t.hero.title}
-          </motion.h1>
-          <motion.p {...enter(0.35)} className="mt-6 max-w-[34ch] text-pretty text-lg leading-relaxed text-white/85 sm:text-xl">
-            {t.hero.sub}
-          </motion.p>
-          <motion.div {...enter(0.55)} className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/admissions#inquire" className={cn(buttonStyles.gold, "h-14 px-9 text-base")}>
-              {t.hero.ctaPrimary}
-            </Link>
-            <Link href="/admissions#inquire" className={cn(buttonStyles.outlineDark, "h-14 px-8 text-base")}>
-              {t.hero.ctaSecondary}
-            </Link>
-          </motion.div>
-        </motion.div>
+        </AnimatePresence>
       </div>
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/55 to-navy-950/85"
+        style={{ opacity: reduce ? 0.8 : overlay }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-navy-800/25 mix-blend-multiply" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(248,167,36,0.18),transparent_55%)]" aria-hidden="true" />
+
+      <motion.div style={reduce ? undefined : { y, opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-28 pt-36 sm:px-8 lg:pb-32 lg:pt-40">
+        <motion.p {...enter(0.15)} className="flex max-w-3xl items-start gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-amber-400 sm:items-center sm:text-xs">
+          <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
+          {t.hero.badge}
+        </motion.p>
+        <motion.h1 {...enter(0.3)} className="font-display mt-6 max-w-4xl text-[2.6rem] font-semibold leading-[1.04] text-white sm:text-6xl lg:text-7xl">
+          {t.hero.title}
+        </motion.h1>
+        <motion.p {...enter(0.5)} className="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg lg:text-xl">
+          {t.hero.sub}
+        </motion.p>
+        <motion.div {...enter(0.68)} className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <Link href="/admissions#inquire" className={cn(buttonStyles.gold, "h-14 px-9 text-base")}>
+            {t.hero.ctaPrimary}
+          </Link>
+          <Link href="/admissions#inquire" className={cn(buttonStyles.outlineDark, "h-14 px-8 text-base")}>
+            {t.hero.ctaSecondary}
+          </Link>
+        </motion.div>
+        <motion.ul {...enter(0.85)} className="mt-10 flex flex-wrap gap-2.5">
+          {t.hero.credentials.map((c) => (
+            <li key={c} className="inline-flex items-center gap-2 rounded-full border border-amber-400/60 bg-navy-950/30 px-3.5 py-1.5 text-xs font-medium text-amber-100 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" aria-hidden="true" />
+              {c}
+            </li>
+          ))}
+        </motion.ul>
+      </motion.div>
+
+      {/* Slide indicator */}
+      <div className="absolute bottom-8 right-5 z-10 hidden items-center gap-4 sm:right-8 md:flex" aria-hidden="true">
+        <span className="text-[0.68rem] uppercase tracking-[0.2em] text-white/60">{t.hero.slides[index]}</span>
+        <div className="flex gap-1.5">
+          {SLIDES.map((s, i) => (
+            <span key={s.src} className={cn("h-0.5 rounded-full transition-all duration-700", i === index ? "w-8 bg-amber-400" : "w-3 bg-white/35")} />
+          ))}
+        </div>
+      </div>
+      <span className="sr-only">{tr(SLIDES[index].alt)}</span>
+
+      <button
+        type="button"
+        onClick={() => scrollToId("stats")}
+        className="absolute bottom-7 left-1/2 z-10 flex min-h-11 -translate-x-1/2 flex-col items-center gap-1 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/70 hover:text-amber-400"
+      >
+        {t.hero.scrollCue}
+        <ChevronDown className="sccs-scroll-cue h-5 w-5" aria-hidden="true" />
+      </button>
     </section>
   );
 }

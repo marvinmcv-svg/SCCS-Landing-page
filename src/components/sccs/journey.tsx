@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef, useState } from "react";
 import { media, type Photo as PhotoT } from "@/data/media";
 import { cn, EASE } from "@/lib/utils";
-import { useStaticMotion } from "@/lib/use-static-motion";
 import { useLang } from "./i18n";
 import { Container, Photo, Section, SectionHeading, TextLink } from "./sccs-shared";
 
@@ -19,7 +18,7 @@ export const DIVISION_PHOTOS: Record<string, PhotoT> = {
 export function JourneyTabs({ initial = 0 }: { initial?: number }) {
   const { t } = useLang();
   const j = t.journey;
-  const reduce = useStaticMotion();
+  const reduce = useReducedMotion();
   const [active, setActive] = useState(initial);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const tab = j.tabs[active];
@@ -75,14 +74,7 @@ export function JourneyTabs({ initial = 0 }: { initial?: number }) {
           transition={{ duration: 0.45, ease: EASE }}
           className="mt-10 grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14"
         >
-          <motion.div
-            initial={reduce ? false : { clipPath: "inset(0 100% 0 0 round 16px)" }}
-            whileInView={{ clipPath: "inset(0 0% 0 0 round 16px)" }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 1, ease: EASE }}
-          >
-            <Photo photo={DIVISION_PHOTOS[tab.id]} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
-          </motion.div>
+          <Photo photo={DIVISION_PHOTOS[tab.id]} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
           <div>
             <p className="font-display text-3xl font-medium italic leading-snug text-navy-900 sm:text-4xl">{tab.tagline}</p>
             <p className="mt-5 leading-relaxed text-mist">{tab.body}</p>
@@ -114,7 +106,7 @@ export function Journey() {
     <Section id="journey">
       <Container>
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading title={j.title} intro={j.intro} />
+          <SectionHeading kicker={j.kicker} title={j.title} intro={j.intro} />
           <TextLink href="/learning/academic-journey">{j.more}</TextLink>
         </div>
         <div className="mt-12">

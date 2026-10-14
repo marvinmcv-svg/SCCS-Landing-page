@@ -72,28 +72,13 @@ The old site's stock photos (generic classroom images) were deliberately left ou
 
 ## Carlita, the AI receptionist
 
-The "Ask Carlita" button (also in ⌘K) opens a bilingual chat. `POST /api/carlita` streams answers from Claude, grounded only in verified school facts (`src/lib/carlita-knowledge.ts`). It allows 30 messages per IP every 10 minutes.
+The "Ask Carlita" button (also in ⌘K) opens a bilingual chat. `POST /api/carlita` streams answers from Claude, grounded only in verified school facts (`src/lib/carlita-knowledge.ts`).
 
 - **To turn on full AI mode:** set `ANTHROPIC_API_KEY` in Vercel (Project → Settings → Environment Variables) and redeploy.
-- **Without the key:** Carlita answers from a keyword FAQ (`src/lib/carlita-offline.ts`) and sends the header `X-Carlita-Mode: offline`. She also falls back to this FAQ if the API errors.
-
-## Scroll design
-
-The home page was rebuilt with the [scroll-craft](https://github.com/nateherkai/scroll-craft) method. The brief, feeling curve and score are in `scrollcraft/builds/sccs-home/BRIEF.md`, and the build is logged in `scrollcraft/FINGERPRINTS.md`. The devices are written with framer-motion on sticky sections rather than with the scroll-craft runtime, so React and the language toggle keep ownership of the DOM.
-
-The acts, in order:
-- a layered hero;
-- a pinned founding story;
-- **the crest split**, the signature move: the shield opens into the U.S. and Bolivian diplomas, then seals back together;
-- a clip-path wipe for each division;
-- a sideways pan through the Jaguar Experience;
-- a closing crest.
-
-With `prefers-reduced-motion`, every act renders as a complete static section.
+- **Without the key:** Carlita answers from a keyword FAQ (`src/lib/carlita-offline.ts`).
 
 ## Notes for review
 
-- **Brand colors:** the palette is taken from sccs.edu.bo and the crest: navy `#1B1B4D`, crimson `#B72034`, amber `#F8A724` on ivory, with Montserrat (the current site's typeface) and Fraunces for display. The crest is redrawn as an SVG (`Crest` in `sccs-shared.tsx`); the PNG originals are in `public/brand/`. Every color is a token in `src/app/globals.css` (`@theme`).
-- **Matriculation counter:** the "graduates placed" figures and the map pins come from the sample matriculation table, so replace that table before launch.
+- **Brand colors:** the palette comes from sccs.edu.bo and the crest: navy, crimson and amber on ivory. The crest is redrawn as an SVG (`Crest` in `sccs-shared.tsx`), and the PNG originals are in `public/brand/`. Every color is a token in `src/app/globals.css` (`@theme`).
 - **"Since 1960":** the copy brief's footer tagline says 1960 but every other source says 1959. The site uses **1959** throughout.
 - **Campus size:** one paragraph of the brief says "seven-acre"; the site uses **8 acres**, as stated everywhere else.

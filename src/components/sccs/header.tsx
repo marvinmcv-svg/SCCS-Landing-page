@@ -57,8 +57,6 @@ export function Header() {
       const m = document.getElementById("matriculation")?.getBoundingClientRect();
       const j = document.getElementById("journey")?.getBoundingClientRect();
       if ((m && m.top <= 140 && m.bottom > 140) || (j && j.top <= 140 && j.bottom > 140)) current = "learning";
-      const v = document.getElementById("values")?.getBoundingClientRect();
-      if (v && v.top <= 140 && v.bottom > 140) current = "discover";
       setActive(current);
     };
     onScroll();
@@ -114,7 +112,7 @@ export function Header() {
 
         {/* Main bar */}
         <div className={cn("flex items-center justify-between gap-4 transition-[height] duration-300", scrolled ? "h-[4.5rem]" : "h-20")}>
-          <Link href="/" aria-label="Santa Cruz Cooperative School, home" className="pressable shrink-0">
+          <Link href="/" aria-label="Santa Cruz Cooperative School — home" className="pressable shrink-0">
             <LogoLockup variant={light ? "light" : "dark"} />
           </Link>
 
@@ -184,7 +182,7 @@ export function Header() {
       </div>
     </header>
 
-      {/* Mobile drawer, rendered outside <header> so backdrop-filter doesn't become its containing block. */}
+      {/* Mobile drawer — rendered outside <header> so backdrop-filter doesn't become its containing block. */}
       <AnimatePresence>
         {open && (
           <>

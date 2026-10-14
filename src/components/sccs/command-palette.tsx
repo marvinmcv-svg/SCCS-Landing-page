@@ -46,7 +46,7 @@ export function CommandPalette() {
       setOpen(false);
       const [path, hash] = href.split("#");
       if ((path === "" || path === pathname) && hash) {
-        // Same page, smooth-scroll after the dialog closes.
+        // Same page — smooth-scroll after the dialog closes.
         requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" }));
         return;
       }

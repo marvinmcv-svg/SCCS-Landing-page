@@ -61,7 +61,7 @@ export function BeyondHub() {
       {groups.map((g, gi) => (
         <Section key={g} id={g} className={gi % 2 === 1 ? "bg-cream/50" : undefined}>
           <Container>
-            <SectionHeading title={tr(TRADITION_GROUPS[g].title)} intro={tr(TRADITION_GROUPS[g].intro)} />
+            <SectionHeading kicker={`0${gi + 1}`} title={tr(TRADITION_GROUPS[g].title)} intro={tr(TRADITION_GROUPS[g].intro)} />
             <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {TRADITIONS.filter((x) => x.group === g).map((x, i) => (
                 <Reveal as="li" key={x.slug} delay={i * 0.06}>

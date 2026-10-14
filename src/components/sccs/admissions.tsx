@@ -186,7 +186,7 @@ export function InquiryForm() {
       <Field id="inq-message" label={<>{f.message} {opt}</>} error={err("message")}>
         <textarea id="inq-message" rows={4} placeholder={f.messagePlaceholder} className={cn(inputCls, "resize-y")} aria-invalid={!!errors.message} {...register("message")} />
       </Field>
-      {/* Honeypot, hidden from people, tempting to bots. */}
+      {/* Honeypot — hidden from people, tempting to bots. */}
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="inq-website">Website</label>
         <input id="inq-website" tabIndex={-1} autoComplete="off" {...register("website")} />
@@ -271,7 +271,7 @@ export function Admissions() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
-            <SectionHeading title={a.title} intro={a.intro} />
+            <SectionHeading kicker={a.kicker} title={a.title} intro={a.intro} />
             <div className="mt-6">
               <TextLink href="/admissions">{a.more}</TextLink>
             </div>

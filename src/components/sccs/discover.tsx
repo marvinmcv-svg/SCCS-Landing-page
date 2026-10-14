@@ -45,8 +45,8 @@ export function LearnerProfile() {
       <div className="grid lg:grid-cols-[1fr_1.4fr]">
         <Photo photo={media.esFriends2} className="min-h-64 lg:min-h-full" sizes="(min-width:1024px) 40vw, 100vw" />
         <div className="p-7 sm:p-10">
-          <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{d.learnerTitle}</h3>
-          <p className="mt-2 text-mist">{d.learnerIntro}</p>
+          <Kicker>{d.learnerTitle}</Kicker>
+          <p className="font-display mt-4 text-2xl font-semibold text-navy-900 sm:text-3xl">{d.learnerIntro}</p>
           <ul className="mt-8 grid gap-6 sm:grid-cols-2">
             {d.learner.map((l, i) => {
               const Icon = LEARNER_ICONS[i];
@@ -125,8 +125,8 @@ export function SafetyWellness({ withCta = true }: { withCta?: boolean }) {
         <Photo photo={media.esLunchTrio} className="absolute inset-0 -z-10" sizes="(min-width:1024px) 50vw, 100vw" imgClassName="object-[50%_70%]" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/90 via-navy-950/30 to-transparent" aria-hidden="true" />
         <div className="flex h-full flex-col justify-end p-7 sm:p-10">
-          <h3 className="text-sm font-semibold text-amber-400">{d.safetyTitle}</h3>
-          <p className="font-display mt-3 max-w-md text-3xl font-semibold leading-tight text-white sm:text-4xl">{d.safetyIntro}</p>
+          <Kicker dark>{d.safetyTitle}</Kicker>
+          <p className="font-display mt-4 max-w-md text-3xl font-semibold leading-tight text-white sm:text-4xl">{d.safetyIntro}</p>
         </div>
       </Reveal>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -180,29 +180,6 @@ export function Discover() {
           <div>
             <SafetyWellness />
           </div>
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-/** Home: the values block that follows the peak. Calm, flow-only. */
-export function HomeValues() {
-  const { t } = useLang();
-  const d = t.discover;
-  return (
-    <Section id="values">
-      <Container>
-        <div className="grid items-end gap-6 lg:grid-cols-[1.3fr_1fr]">
-          <SectionHeading title={d.title} intro={d.intro} />
-          <div className="lg:justify-self-end">
-            <TextLink href="/discover">{d.advantageCta}</TextLink>
-          </div>
-        </div>
-        <div className="mt-14 space-y-16 lg:mt-16 lg:space-y-24">
-          <MissionValues />
-          <LearnerProfile />
-          <SafetyWellness />
         </div>
       </Container>
     </Section>

@@ -2,19 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { animate, motion, useInView } from "framer-motion";
+import { animate, motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { cn, EASE } from "@/lib/utils";
-import { useStaticMotion } from "@/lib/use-static-motion";
 import type { Photo } from "@/data/media";
 import { useLang } from "./i18n";
 
 /* ───────────────────────── Brand marks ───────────────────────── */
 
 /**
- * The official SCCS crest, shield, staggered "SCCS" letters, and the U.S. and
- * Bolivian flags, redrawn as vector from the school's published logo so it
+ * The official SCCS crest — shield, staggered "SCCS" letters, and the U.S. and
+ * Bolivian flags — redrawn as vector from the school's published logo so it
  * stays crisp at every size. `mono` renders a single-color version for dark grounds.
  */
 export function Crest({ className, mono }: { className?: string; mono?: boolean }) {
@@ -116,7 +115,7 @@ export function Reveal({
   className?: string;
   as?: "div" | "li" | "section" | "article";
 }) {
-  const reduce = useStaticMotion();
+  const reduce = useReducedMotion();
   const Comp = motion[as];
   if (reduce) {
     const Static = as;
@@ -138,8 +137,8 @@ export function Reveal({
 export function CountUp({ value, duration = 1.8, className }: { value: number; duration?: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const reduce = useStaticMotion();
-  const [display, setDisplay] = useState(0);
+  const reduce = useReducedMotion();
+  const [display, setDisplay] = useState(reduce ? value : 0);
   const prev = useRef(0);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 /**
- * Photo library, every image is real SCCS media, sourced from the
+ * Photo library — every image is real SCCS media, sourced from the
  * @sccsjaguars Instagram feed and the school's own photo archive
  * (sccs.edu.bo). Alt text describes what is actually in each frame.
  */
@@ -10,7 +10,7 @@ export type Photo = {
   width: number;
   height: number;
   alt: L;
-  /** Where the photo came from, shown nowhere, kept for the content team. */
+  /** Where the photo came from — shown nowhere, kept for the content team. */
   source: "instagram" | "sccs.edu.bo";
 };
 
