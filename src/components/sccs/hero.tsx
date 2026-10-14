@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { media } from "@/data/media";
-import { cn, EASE } from "@/lib/utils";
+import { cn, EASE, span } from "@/lib/utils";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { useLang } from "./i18n";
 import { Crest, Photo, buttonStyles } from "./sccs-shared";
 
@@ -38,7 +39,7 @@ function useLean(v: MotionValue<number>, px: number) {
 
 export function Hero() {
   const { t } = useLang();
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const { sx, sy } = usePointerLean();
@@ -52,17 +53,17 @@ export function Hero() {
   }, []);
 
   // Scroll rates: far plane slowest, near plane fastest; copy holds until the exit.
-  const farY = useTransform(p, [0, 1], ["0%", "-8%"]);
-  const farScale = useTransform(p, [0, 1], [1.12, 1.02]);
-  const plateAY = useTransform(p, [0, 1], [0, -260]);
-  const plateBY = useTransform(p, [0, 1], [0, -420]);
-  const plateBRot = useTransform(p, [0, 1], [4, -2]);
-  const crestY = useTransform(p, [0, 1], [0, wide ? -620 : -120]);
-  const crestO = useTransform(p, [0, 0.12, 0.3], [1, 1, wide ? 1 : 0]);
-  const crestRot = useTransform(p, [0, 1], [-8, 6]);
-  const copyY = useTransform(p, [0.55, 1], [0, -80]);
-  const copyO = useTransform(p, [0.6, 0.95], [1, 0]);
-  const scrim = useTransform(p, [0, 1], [0.85, 1]);
+  const farY = useTransform(p, ...span([0, 1], ["0%", "-8%"]));
+  const farScale = useTransform(p, ...span([0, 1], [1.12, 1.02]));
+  const plateAY = useTransform(p, ...span([0, 1], [0, -260]));
+  const plateBY = useTransform(p, ...span([0, 1], [0, -420]));
+  const plateBRot = useTransform(p, ...span([0, 1], [4, -2]));
+  const crestY = useTransform(p, ...span([0, 1], [0, wide ? -620 : -120]));
+  const crestO = useTransform(p, ...span([0, 0.12, 0.3], [1, 1, wide ? 1 : 0]));
+  const crestRot = useTransform(p, ...span([0, 1], [-8, 6]));
+  const copyY = useTransform(p, ...span([0.55, 1], [0, -80]));
+  const copyO = useTransform(p, ...span([0.6, 0.95], [1, 0]));
+  const scrim = useTransform(p, ...span([0, 1], [0.85, 1]));
 
   const farLX = useLean(sx, -10);
   const farLY = useLean(sy, -8);

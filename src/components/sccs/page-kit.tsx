@@ -194,8 +194,8 @@ export function IconCards({ items, cols = 4 }: { items: { title: string; text: s
     <ul className={cn("grid gap-4 sm:grid-cols-2", cols === 3 && "lg:grid-cols-3", cols === 4 && "lg:grid-cols-4")}>
       {items.map((it, i) => (
         <Reveal as="li" key={it.title} delay={i * 0.06} className="rounded-2xl border border-border bg-card p-6">
-          <span className="font-display text-sm font-semibold text-crimson-600">{String(i + 1).padStart(2, "0")}</span>
-          <h3 className="mt-3 font-semibold text-navy-900">{it.title}</h3>
+          <span className="block h-0.5 w-8 rounded-full bg-amber-500" aria-hidden="true" />
+          <h3 className="mt-4 font-semibold text-navy-900">{it.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-mist">{it.text}</p>
         </Reveal>
       ))}

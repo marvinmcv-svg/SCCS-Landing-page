@@ -33,6 +33,7 @@
 | 2 Proof | Confidence | Four real numbers land in a quiet band |
 | 3 Founding | Intimacy | Pinned: "Twenty-six students. One house." Lines arrive over a then-and-now photo |
 | 4 **Peak** | Pride / wonder | The crest splits: U.S. half travels left, Bolivian half right, each carrying its diploma; then they close into one shield and "One Unrivaled Future" |
+| 4b Values | Reassurance | Mission, Learner Profile and Safety & Wellness in calm flow: the exhale after the peak |
 | 5 Path | Clarity | Three chapters, each photo wiped in |
 | 6 World | Ambition | Dark map, gold pins spring in across five continents |
 | 7 Campus life | Delight | Vertical scroll becomes sideways travel through the Jaguar Experience |
@@ -76,3 +77,14 @@ Five device families. No family twice in a row. No scrub (no footage).
 ## Rules applied across the build
 
 No visible em dashes; no scroll cue; no `01/02` counters; at most one eyebrow per three sections on the home page; hero text limited to headline, one line of subtext, and the CTA pair; two font families (Fraunces display, Montserrat text, the brand's face); transforms and opacity only; everything degrades to a complete static page under reduced motion.
+
+## Feel check (after build)
+
+Walked at 1440×900, 390×844 and with reduced motion.
+
+- **Curve vs. build:** one change. Mission, values and Safety & Wellness moved from before the peak to directly after it (act 4b). The founding act already gives the peak its quiet run-up, and a calm administrative beat after the loudest moment reads as an exhale instead of a stall. The curve table above includes it.
+- **Peak:** it holds. The crest opens, both credentials are readable while it is open, and the seal ring flashes as the halves meet.
+- **Phones:** the open crest used to collide with the credential panels. Now it shrinks to half size and rises into the space the heading gives up.
+- **Founding:** the first line is already on stage when the act pins, so there is no empty frame. The last line stays as the act releases, so the hand-off to the crest is never blank.
+- **Pan rail:** travel is measured from the rail itself (2300px at 1440, 2208px at 390), so the section height matches the travel and no scroll is wasted.
+- **Reduced motion:** every act becomes a static section with the same copy and links.

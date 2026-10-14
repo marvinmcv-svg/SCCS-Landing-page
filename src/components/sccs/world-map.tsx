@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { MapPin, X } from "lucide-react";
 import { memo, useEffect, useMemo, useState } from "react";
 import { COUNTRIES, type MatriculationEntry } from "@/data/sccs-content";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { useLang } from "./i18n";
 
 const W = 1000;
@@ -84,7 +85,7 @@ const DotsLayer = memo(function DotsLayer({ dots }: { dots: [number, number][] }
 
 export function WorldMap({ entries }: { entries: MatriculationEntry[] }) {
   const { t, tr } = useLang();
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const dots = useMemo(buildDots, []);
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);

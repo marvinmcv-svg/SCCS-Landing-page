@@ -39,8 +39,8 @@ export function CurriculumPage() {
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {c.standards.map((s, i) => (
               <Reveal as="li" key={s.title.en} delay={i * 0.05} className="rounded-2xl border border-border bg-card p-6">
-                <span className="font-display text-sm font-semibold text-crimson-600">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 font-semibold text-navy-900">{tr(s.title)}</h3>
+                <span className="block h-0.5 w-8 rounded-full bg-amber-500" aria-hidden="true" />
+                <h3 className="mt-4 font-semibold text-navy-900">{tr(s.title)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-mist">{tr(s.text)}</p>
               </Reveal>
             ))}
@@ -232,8 +232,7 @@ export function DualDiplomaPage() {
           <ol className="mt-12 grid gap-4 md:grid-cols-4">
             {DUAL_DIPLOMA.roadmap.map((r, i) => (
               <Reveal as="li" key={r.grade.en} delay={i * 0.07} className="relative rounded-2xl border border-border bg-card p-6">
-                <span className="font-display text-sm text-crimson-600">{String(i + 1).padStart(2, "0")}</span>
-                <p className="font-display mt-2 text-2xl font-semibold text-navy-900">{tr(r.grade)}</p>
+                <p className="font-display text-2xl font-semibold text-navy-900">{tr(r.grade)}</p>
                 <p className="mt-2 text-sm leading-relaxed text-mist">{tr(r.text)}</p>
               </Reveal>
             ))}

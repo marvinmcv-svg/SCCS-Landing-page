@@ -271,7 +271,7 @@ export function Admissions() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
-            <SectionHeading kicker={a.kicker} title={a.title} intro={a.intro} />
+            <SectionHeading title={a.title} intro={a.intro} />
             <div className="mt-6">
               <TextLink href="/admissions">{a.more}</TextLink>
             </div>

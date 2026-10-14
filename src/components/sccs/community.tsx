@@ -198,7 +198,7 @@ export function Community() {
     <Section id="community">
       <Container>
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading kicker={c.kicker} title={c.title} intro={c.intro} />
+          <SectionHeading title={c.title} intro={c.intro} />
           <TextLink href="/community">{c.more}</TextLink>
         </div>
         <div className="mt-12">

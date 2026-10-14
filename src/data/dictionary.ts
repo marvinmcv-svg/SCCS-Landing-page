@@ -80,6 +80,16 @@ const en = {
     safetyCta: "How we keep every Jaguar safe",
     advantageCta: "Discover the SCCS Advantage",
   },
+  founding: {
+    aria: "How SCCS began",
+    lines: [
+      "1959. Twenty-six students. One house in Santa Cruz.",
+      "Families who wanted an American education for their children, without leaving Bolivia.",
+      "Today the house is an 8-acre campus. The promise has not changed.",
+    ],
+    cta: "Read our full story",
+    now: "today",
+  },
   dualDiploma: {
     kicker: "Learning & Outcomes",
     title: "The Dual-Diploma Advantage",
@@ -94,6 +104,9 @@ const en = {
     cta: "Explore the Academic Journey",
     more: "How the Dual Diploma works",
     hoverHint: "Hover a credential to see what it requires",
+    splitLead: "Two Diplomas. One Unrivaled Future.",
+    parallel: "Grade 7 to Grade 12, in parallel. No extra year.",
+    seal: "One shield. One future.",
     tapHint: "Tap a credential to see what it requires",
   },
   journey: {
@@ -418,6 +431,16 @@ const es: Dict = {
     safetyCta: "Cómo cuidamos a cada Jaguar",
     advantageCta: "Descubre la Ventaja SCCS",
   },
+  founding: {
+    aria: "Cómo nació SCCS",
+    lines: [
+      "1959. Veintiséis estudiantes. Una casa en Santa Cruz.",
+      "Familias que querían una educación americana para sus hijos, sin salir de Bolivia.",
+      "Hoy la casa es un campus de 8 acres. La promesa sigue siendo la misma.",
+    ],
+    cta: "Lee nuestra historia completa",
+    now: "hoy",
+  },
   dualDiploma: {
     kicker: "Aprendizaje y Resultados",
     title: "La Ventaja del Doble Diploma",
@@ -432,6 +455,9 @@ const es: Dict = {
     cta: "Explora el Camino Académico",
     more: "Cómo funciona el Doble Diploma",
     hoverHint: "Pasa el cursor sobre una credencial para ver sus requisitos",
+    splitLead: "Dos Diplomas. Un Futuro Inigualable.",
+    parallel: "De 7.º a 12.º grado, en paralelo. Sin año adicional.",
+    seal: "Un escudo. Un futuro.",
     tapHint: "Toca una credencial para ver sus requisitos",
   },
   journey: {

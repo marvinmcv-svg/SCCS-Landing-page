@@ -131,7 +131,7 @@ export function SafetyPage() {
       <Section>
         <Container className="space-y-20 lg:space-y-28">
           {SAFETY.pillars.map((p, i) => (
-            <Split key={p.title.en} photo={p.image} title={tr(p.title)} body={tr(p.body)} reverse={i % 2 === 1} kicker={`0${i + 1}`} />
+            <Split key={p.title.en} photo={p.image} title={tr(p.title)} body={tr(p.body)} reverse={i % 2 === 1} />
           ))}
         </Container>
       </Section>

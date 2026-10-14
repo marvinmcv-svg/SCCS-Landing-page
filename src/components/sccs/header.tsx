@@ -57,6 +57,8 @@ export function Header() {
       const m = document.getElementById("matriculation")?.getBoundingClientRect();
       const j = document.getElementById("journey")?.getBoundingClientRect();
       if ((m && m.top <= 140 && m.bottom > 140) || (j && j.top <= 140 && j.bottom > 140)) current = "learning";
+      const v = document.getElementById("values")?.getBoundingClientRect();
+      if (v && v.top <= 140 && v.bottom > 140) current = "discover";
       setActive(current);
     };
     onScroll();

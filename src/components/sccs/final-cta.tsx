@@ -4,7 +4,7 @@ import Link from "next/link";
 import { media } from "@/data/media";
 import { cn } from "@/lib/utils";
 import { useLang } from "./i18n";
-import { Container, JaguarMotif, Photo, Reveal, buttonStyles } from "./sccs-shared";
+import { Container, Crest, Photo, Reveal, buttonStyles } from "./sccs-shared";
 
 export function FinalCta() {
   const { t } = useLang();
@@ -12,8 +12,10 @@ export function FinalCta() {
     <section className="relative isolate overflow-hidden bg-navy-950 py-20 text-center sm:py-28">
       <Photo photo={media.pacFlags} className="absolute inset-0 -z-20 opacity-20" sizes="100vw" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(248,167,36,0.22),transparent_60%),linear-gradient(to_bottom,rgba(20,20,58,0.85),rgba(20,20,58,0.95))]" aria-hidden="true" />
-      <JaguarMotif className="absolute left-1/2 top-1/2 -z-10 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 text-amber-400/[0.07]" />
       <Container>
+        <Reveal>
+          <Crest className="mx-auto mb-8 h-24 w-24 drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)] sm:h-28 sm:w-28" />
+        </Reveal>
         <Reveal>
           <h2 className="font-display mx-auto max-w-3xl text-4xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl">{t.cta.title}</h2>
         </Reveal>

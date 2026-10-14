@@ -14,3 +14,22 @@ export function scrollToId(id: string) {
 }
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * Pads a scroll-progress mapping so its input range spans 0..1.
+ * Chrome's accelerated scroll timelines drop an animation's value once
+ * progress leaves the keyframe range, so every keyframe set must cover it.
+ */
+export function span<T>(input: number[], output: T[]): [number[], T[]] {
+  const i = [...input];
+  const o = [...output];
+  if (i[0] > 0) {
+    i.unshift(0);
+    o.unshift(o[0]);
+  }
+  if (i[i.length - 1] < 1) {
+    i.push(1);
+    o.push(o[o.length - 1]);
+  }
+  return [i, o];
+}
