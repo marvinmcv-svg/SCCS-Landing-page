@@ -112,7 +112,7 @@ export function Header() {
 
         {/* Main bar */}
         <div className={cn("flex items-center justify-between gap-4 transition-[height] duration-300", scrolled ? "h-[4.5rem]" : "h-20")}>
-          <Link href="/" aria-label="Santa Cruz Cooperative School — home" className="pressable shrink-0">
+          <Link href="/" aria-label="Santa Cruz Cooperative School, home" className="pressable shrink-0">
             <LogoLockup variant={light ? "light" : "dark"} />
           </Link>
 
@@ -182,7 +182,7 @@ export function Header() {
       </div>
     </header>
 
-      {/* Mobile drawer — rendered outside <header> so backdrop-filter doesn't become its containing block. */}
+      {/* Mobile drawer, rendered outside <header> so backdrop-filter doesn't become its containing block. */}
       <AnimatePresence>
         {open && (
           <>

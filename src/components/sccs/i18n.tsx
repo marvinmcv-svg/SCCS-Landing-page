@@ -26,7 +26,7 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved === "en" || saved === "es") setLangState(saved);
     } catch {
-      /* storage unavailable — stay on default */
+      /* storage unavailable, stay on default */
     }
   }, []);
 

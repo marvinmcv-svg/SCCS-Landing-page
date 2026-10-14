@@ -12,8 +12,8 @@ import { useLang } from "./i18n";
 /* ───────────────────────── Brand marks ───────────────────────── */
 
 /**
- * The official SCCS crest — shield, staggered "SCCS" letters, and the U.S. and
- * Bolivian flags — redrawn as vector from the school's published logo so it
+ * The official SCCS crest, shield, staggered "SCCS" letters, and the U.S. and
+ * Bolivian flags, redrawn as vector from the school's published logo so it
  * stays crisp at every size. `mono` renders a single-color version for dark grounds.
  */
 export function Crest({ className, mono }: { className?: string; mono?: boolean }) {

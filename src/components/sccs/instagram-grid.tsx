@@ -32,7 +32,7 @@ export function InstagramGrid() {
         <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {INSTAGRAM_POSTS.map((p, i) => (
             <Reveal as="li" key={p.photo.src} delay={(i % 4) * 0.05}>
-              <a href={p.url} target="_blank" rel="noopener noreferrer" className="group relative block aspect-square overflow-hidden rounded-2xl" aria-label={`${tr(p.caption)} — ${t.page.viewOnInstagram}`}>
+              <a href={p.url} target="_blank" rel="noopener noreferrer" className="group relative block aspect-square overflow-hidden rounded-2xl" aria-label={`${tr(p.caption)}, ${t.page.viewOnInstagram}`}>
                 <Photo photo={p.photo} className="absolute inset-0" sizes="(min-width:1024px) 25vw, 50vw" imgClassName="transition-transform duration-700 group-hover:scale-105" />
                 <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-navy-950/60 p-4 text-center text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                   <InstagramGlyph className="h-7 w-7" />

@@ -48,8 +48,8 @@ export function AdvantagePage() {
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-mist">
                 {tr({
-                  en: "Founded by visionary Bolivian families and international energy companies, SCCS grew from an enclave for expatriate families into the region's premier private, coeducational preparatory school — with a significant population of dual-national learners.",
-                  es: "Fundado por familias bolivianas visionarias y empresas energéticas internacionales, SCCS pasó de ser un enclave para familias extranjeras al principal colegio preparatorio privado y mixto de la región — con una importante población de estudiantes con doble nacionalidad.",
+                  en: "Founded by visionary Bolivian families and international energy companies, SCCS grew from an enclave for expatriate families into the region's premier private, coeducational preparatory school, with a significant population of dual-national learners.",
+                  es: "Fundado por familias bolivianas visionarias y empresas energéticas internacionales, SCCS pasó de ser un enclave para familias extranjeras al principal colegio preparatorio privado y mixto de la región, con una importante población de estudiantes con doble nacionalidad.",
                 })}
               </p>
             </Reveal>

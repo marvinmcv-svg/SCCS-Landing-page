@@ -40,7 +40,7 @@ export const PILLARS: NavPillar[] = [
       { href: "/learning/academic-journey", label: { en: "Academic Journey", es: "Camino Académico" }, blurb: { en: "Elementary, Middle, and High School", es: "Elementary, Middle y High School" } },
       { href: "/learning/dual-diploma", label: { en: "The Dual-Diploma Advantage", es: "La Ventaja del Doble Diploma" }, blurb: { en: "U.S. Diploma + Bolivian Bachillerato", es: "Diploma de EE. UU. + Bachillerato boliviano" } },
       { href: "/learning/student-support", label: { en: "Student Support & Counseling", es: "Apoyo y Orientación" }, blurb: { en: "SST, counseling, and college counseling", es: "SST, orientación y consejería universitaria" } },
-      { href: "/learning/university-matriculation", label: { en: "University Matriculation", es: "Matriculación Universitaria" }, blurb: { en: "Where our graduates go — on a live map", es: "A dónde van nuestros graduados — en un mapa interactivo" } },
+      { href: "/learning/university-matriculation", label: { en: "University Matriculation", es: "Matriculación Universitaria" }, blurb: { en: "Where our graduates go, on a live map", es: "A dónde van nuestros graduados, en un mapa interactivo" } },
     ],
   },
   {

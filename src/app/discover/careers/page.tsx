@@ -3,7 +3,7 @@ import { CareersPage } from "@/components/pages/discover-pages";
 
 export const metadata: Metadata = {
   title: "Work at SCCS",
-  description: "Teach where it matters — careers at Santa Cruz Cooperative School.",
+  description: "Teach where it matters, careers at Santa Cruz Cooperative School.",
 };
 
 export default function Page() {
