@@ -1,14 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { ACCEPTANCES } from "@/data/acceptances";
+import { ACCEPTANCES, PRESTIGE } from "@/data/acceptances";
 import { ACCREDITATIONS, MINISTRY } from "@/data/profile";
 import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useLang } from "./i18n";
 import { Photo } from "./sccs-shared";
+import { Marquee } from "../home/motion";
 
 /* ───────── Accreditations & memberships ───────── */
 
@@ -71,12 +72,22 @@ export function AcceptancePosters({ dark, className }: { dark?: boolean; classNa
   const current = open === null ? null : list[open];
   const step = (d: number) => setOpen((i) => (i === null ? i : (i + d + list.length) % list.length));
   const label = lang === "es" ? "Admisiones universitarias" : "University acceptances";
+  const rail = useRef<HTMLUListElement>(null);
+  const scrollBy = (d: number) => rail.current?.scrollBy({ left: d * rail.current.clientWidth * 0.8, behavior: "smooth" });
 
   return (
     <>
-      <ul className={cn("-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0", className)}>
+      <div className="mb-6 flex justify-end gap-2">
+        <button type="button" onClick={() => scrollBy(-1)} className={cn("pressable grid h-12 w-12 place-items-center rounded-full", dark ? "bg-white/10 text-white hover:bg-white/20" : "bg-white text-navy-900 hover:bg-navy-100")} aria-label={tr({ en: "Previous", es: "Anterior" })}>
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button type="button" onClick={() => scrollBy(1)} className={cn("pressable grid h-12 w-12 place-items-center rounded-full", dark ? "bg-white/10 text-white hover:bg-white/20" : "bg-navy-800 text-white hover:bg-navy-700")} aria-label={tr({ en: "Next", es: "Siguiente" })}>
+          <ChevronRight className="h-5 w-5" />
+        </button>
+      </div>
+      <ul ref={rail} className={cn("ios-scroll -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto scroll-smooth px-5 pb-6 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:gap-6", className)}>
         {list.map((a, i) => (
-          <li key={a.name + i} data-rise className="w-[72%] shrink-0 snap-start sm:w-[42%] lg:w-auto">
+          <li key={a.name + i} data-rise className="w-[72%] shrink-0 snap-start sm:w-[40%] lg:w-[calc((100%-4.5rem)/4)]">
             <button type="button" onClick={() => setOpen(i)} className="group block w-full text-left" aria-label={`${label}: ${a.name}`}>
               <div className="overflow-hidden rounded-[1.5rem] bg-white shadow-[0_20px_50px_rgba(10,10,30,0.18)]">
                 <Photo photo={a.photo} className="aspect-[4/5]" sizes="(min-width:1024px) 22vw, 70vw" imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]" />
@@ -115,5 +126,52 @@ export function AcceptancePosters({ dark, className }: { dark?: boolean; classNa
         </DialogContent>
       </Dialog>
     </>
+  );
+}
+
+/* ───────── The most selective universities that have admitted SCCS graduates ───────── */
+
+function Seal({ name, logo, size = "md" }: { name: string; logo: string; size?: "sm" | "md" }) {
+  return (
+    <figure className="group flex flex-col items-center text-center">
+      <span className={cn("grid place-items-center rounded-full bg-white shadow-[0_10px_30px_rgba(20,20,58,0.08)] ring-1 ring-navy-900/5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5", size === "sm" ? "h-24 w-24 p-4 sm:h-28 sm:w-28" : "h-28 w-28 p-5 sm:h-32 sm:w-32")}>
+        <span className="relative block h-full w-full">
+          <Image src={logo} alt="" fill sizes="128px" className="object-contain" />
+        </span>
+      </span>
+      <figcaption className="mt-3 max-w-[9rem] text-sm font-medium leading-snug text-navy-900/80">{name}</figcaption>
+    </figure>
+  );
+}
+
+/** All seals in a calm grid (matriculation and profile pages). */
+export function PrestigeWall({ className }: { className?: string }) {
+  return (
+    <ul className={cn("grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-4 lg:grid-cols-7", className)}>
+      {PRESTIGE.map((u) => (
+        <li key={u.name} data-rise>
+          <Seal name={u.name} logo={u.logo} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Two rows of seals drifting in opposite directions (home page). */
+export function PrestigeMarquee() {
+  const half = Math.ceil(PRESTIGE.length / 2);
+  const rows = [PRESTIGE.slice(0, half), PRESTIGE.slice(half)];
+  return (
+    <div className="space-y-10">
+      {rows.map((row, r) => (
+        <Marquee key={r} seconds={70} reverse={r === 1}>
+          {row.map((u) => (
+            <div key={u.name} className="w-40 shrink-0 px-4 sm:w-44">
+              <Seal name={u.name} logo={u.logo} size="sm" />
+            </div>
+          ))}
+        </Marquee>
+      ))}
+    </div>
   );
 }

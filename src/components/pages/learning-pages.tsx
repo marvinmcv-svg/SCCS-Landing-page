@@ -5,7 +5,7 @@ import { ArrowRight, Award, Check } from "lucide-react";
 import { media, type Photo as PhotoT } from "@/data/media";
 import { CURRICULUM, DUAL_DIPLOMA, SUPPORT } from "@/data/pages";
 import { PILLARS } from "@/data/nav";
-import { AcceptancePosters } from "@/components/sccs/credentials";
+import { AcceptancePosters, PrestigeWall } from "@/components/sccs/credentials";
 import { useLang } from "@/components/sccs/i18n";
 import { Container, Kicker, Photo, Reveal, Section, SectionHeading, buttonStyles } from "@/components/sccs/sccs-shared";
 import { IconCards, PageHero, RelatedLinks, Tabs } from "@/components/sccs/page-kit";
@@ -337,10 +337,16 @@ export function MatriculationPage() {
           <MatriculationExplorer />
         </Container>
       </Section>
+      <Section className="bg-ivory">
+        <Container>
+          <SectionHeading title={t.home.prestigeTitle} intro={t.home.prestigeIntro} />
+          <PrestigeWall className="mt-16" />
+        </Container>
+      </Section>
       <Section className="bg-cream">
         <Container>
           <SectionHeading title={t.home.acceptancesTitle} intro={t.home.acceptancesIntro} />
-          <div className="mt-12">
+          <div className="mt-10">
             <AcceptancePosters />
           </div>
           <Link href="/discover/school-profile#acceptances" className={cn(buttonStyles.outline, "mt-10")}>

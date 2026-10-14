@@ -8,12 +8,30 @@ import { PROFILE_PDF, SCHOOL_PROFILE as P } from "@/data/profile";
 import { cn } from "@/lib/utils";
 import { useLang } from "@/components/sccs/i18n";
 import { PageHero } from "@/components/sccs/page-kit";
-import { buttonStyles } from "@/components/sccs/sccs-shared";
-import { AcceptancePosters, AccreditationDetail } from "@/components/sccs/credentials";
-import { Aurora, Words } from "@/components/home/motion";
+import { Photo, buttonStyles } from "@/components/sccs/sccs-shared";
+import { AcceptancePosters, AccreditationDetail, PrestigeWall } from "@/components/sccs/credentials";
+import { Aurora, CountFigure, Words } from "@/components/home/motion";
 
 const wrap = "mx-auto w-full max-w-7xl px-5 sm:px-8";
 const h2 = "font-display text-balance text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl lg:text-6xl";
+
+function Flag({ kind }: { kind: "us" | "bo" }) {
+  return kind === "us" ? (
+    <svg viewBox="0 0 60 40" className="h-8 w-12 overflow-hidden rounded-md" aria-hidden="true">
+      <rect width="60" height="40" fill="#fff" />
+      {Array.from({ length: 7 }).map((_, i) => (
+        <rect key={i} y={i * 5.72} width="60" height="2.86" fill="#C8323A" />
+      ))}
+      <rect width="26" height="20" fill="#3A3D8C" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 60 40" className="h-8 w-12 overflow-hidden rounded-md" aria-hidden="true">
+      <rect width="60" height="13.4" fill="#D52B1E" />
+      <rect y="13.3" width="60" height="13.4" fill="#F4E400" />
+      <rect y="26.6" width="60" height="13.4" fill="#007934" />
+    </svg>
+  );
+}
 
 /* ───────── AP trend: two small charts on one baseline, never two axes ───────── */
 
@@ -22,7 +40,7 @@ function TrendBars({ title, values, format }: { title: string; values: { year: s
   return (
     <figure>
       <figcaption className="text-base font-semibold text-navy-900">{title}</figcaption>
-      <div className="mt-6 flex h-48 items-end gap-3 border-b border-navy-900/15 sm:gap-5" role="img" aria-label={`${title}: ${values.map((d) => `${d.year} ${format(d.v)}`).join(", ")}`}>
+      <div data-bars className="mt-6 flex h-48 items-end gap-3 border-b border-navy-900/15 sm:gap-5" role="img" aria-label={`${title}: ${values.map((d) => `${d.year} ${format(d.v)}`).join(", ")}`}>
         {values.map((d, i) => {
           const last = i === values.length - 1;
           return (
@@ -140,11 +158,24 @@ export function SchoolProfilePage() {
         <ul className={cn(wrap, "grid grid-cols-2 gap-x-8 gap-y-14 lg:grid-cols-4")}>
           {P.glance.map((g) => (
             <li key={g.value} data-rise>
-              <p className="font-display text-6xl font-semibold leading-none tracking-[-0.04em] text-navy-900 tabular-nums sm:text-7xl">{g.value}</p>
+              <p className="font-display text-6xl font-semibold leading-none tracking-[-0.04em] text-navy-900 tabular-nums sm:text-7xl"><CountFigure value={g.value} /></p>
               <p className="mt-4 text-lg text-navy-900/75">{tr(g.label)}</p>
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* A cinematic band: the campus, drifting slowly as the page moves */}
+      <section className="relative isolate h-[70svh] min-h-[26rem] overflow-hidden bg-navy-950" aria-label={tr(P.campusTitle)}>
+        <div data-parallax="10" className="absolute -inset-y-[12%] inset-x-0 -z-10">
+          <Photo photo={media.campusLawn} className="absolute inset-0" sizes="100vw" />
+        </div>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/75 via-transparent to-transparent" aria-hidden="true" />
+        <div className={cn(wrap, "flex h-full items-end pb-12 sm:pb-16")}>
+          <p data-rise className="font-display max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+            {lang === "es" ? "Barrio Las Palmas, Santa Cruz de la Sierra. Desde 1959." : "Barrio Las Palmas, Santa Cruz de la Sierra. Since 1959."}
+          </p>
+        </div>
       </section>
 
       {/* Our school + contacts */}
@@ -167,14 +198,17 @@ export function SchoolProfilePage() {
             </h3>
             <ul className="mt-6 space-y-3">
               {P.contacts.map((c) => (
-                <li key={c.email} data-rise>
-                  <a href={`mailto:${c.email}`} className="group flex items-center justify-between gap-4 rounded-2xl bg-white px-5 py-4 transition-colors hover:bg-navy-100">
-                    <span>
-                      <span className="block text-lg font-semibold text-navy-900">{c.name}</span>
-                      <span className="block text-sm text-navy-900/65">{tr(c.role)}</span>
-                    </span>
-                    <Mail className="h-5 w-5 shrink-0 text-navy-800 transition-transform group-hover:translate-x-0.5" aria-label={c.email} />
-                  </a>
+                <li key={c.email} data-rise className="flex items-center gap-4 rounded-2xl bg-white px-5 py-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy-100 text-navy-800" aria-hidden="true">
+                    <Mail className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-lg font-semibold text-navy-900">{c.name}</span>
+                    <span className="block text-sm text-navy-900/65">{tr(c.role)}</span>
+                    <a href={`mailto:${c.email}`} className="mt-1 inline-block break-all text-base font-semibold text-crimson-600 underline decoration-crimson-600/30 underline-offset-4 hover:decoration-crimson-600">
+                      {c.email}
+                    </a>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -198,16 +232,28 @@ export function SchoolProfilePage() {
       {/* Advanced Placement */}
       <section className="bg-ivory py-24 sm:py-32">
         <div className={wrap}>
-          <h2 className={cn(h2, "text-navy-900")}>
-            <Words text={tr(P.apTitle)} />
-          </h2>
-          <p data-rise className="mt-6 max-w-2xl text-xl leading-relaxed text-navy-900/80">
-            {tr(P.apLede)}
-          </p>
+          <div className="grid items-end gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <h2 className={cn(h2, "text-navy-900")}>
+                <Words text={tr(P.apTitle)} />
+              </h2>
+              <p data-rise className="mt-6 max-w-2xl text-xl leading-relaxed text-navy-900/80">
+                {tr(P.apLede)}
+              </p>
+            </div>
+            <div className="grid grid-cols-5 gap-4 lg:col-span-6">
+              <div data-clip className="col-span-3 overflow-hidden rounded-[1.5rem]">
+                <Photo photo={media.igMicroscope6} className="aspect-[4/5]" sizes="(min-width:1024px) 28vw, 60vw" />
+              </div>
+              <div data-parallax="14" className="col-span-2 self-end overflow-hidden rounded-[1.5rem]">
+                <Photo photo={media.collegeFair} className="aspect-[3/4]" sizes="(min-width:1024px) 18vw, 40vw" />
+              </div>
+            </div>
+          </div>
           <ul className="mt-16 grid gap-12 sm:grid-cols-3">
             {P.apHighlights.map((h) => (
               <li key={h.value} data-rise>
-                <p className="font-display text-6xl font-semibold leading-none tracking-[-0.04em] text-crimson-600 tabular-nums">{h.value}</p>
+                <p className="font-display text-6xl font-semibold leading-none tracking-[-0.04em] text-crimson-600 tabular-nums"><CountFigure value={h.value} /></p>
                 <p className="mt-4 text-lg text-navy-900/75">{tr(h.label)}</p>
               </li>
             ))}
@@ -250,7 +296,7 @@ export function SchoolProfilePage() {
               <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-10">
                 {P.apAwards.map((a) => (
                   <li key={a.label.en}>
-                    <p className="font-display text-5xl font-semibold leading-none text-navy-900">{a.value}</p>
+                    <p className="font-display text-5xl font-semibold leading-none text-navy-900"><CountFigure value={a.value} /></p>
                     <p className="mt-3 text-base text-navy-900/75">{tr(a.label)}</p>
                   </li>
                 ))}
@@ -279,7 +325,7 @@ export function SchoolProfilePage() {
           <ul className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
             {P.sat.map((s) => (
               <li key={s.label.en} data-rise>
-                <p className="font-display text-6xl font-semibold leading-none tracking-[-0.04em] text-navy-900 tabular-nums">{s.value}</p>
+                <p className="font-display text-6xl font-semibold leading-none tracking-[-0.04em] text-navy-900 tabular-nums"><CountFigure value={s.value} /></p>
                 <p className="mt-4 text-lg text-navy-900/75">{tr(s.label)}</p>
               </li>
             ))}
@@ -297,10 +343,11 @@ export function SchoolProfilePage() {
             {tr(P.diplomasLede)}
           </p>
           <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            {[P.usDiploma, P.boDiploma].map((d) => (
+            {[P.usDiploma, P.boDiploma].map((d, i) => (
               <div key={d.title.en} data-rise className="rounded-[1.75rem] bg-white p-7 sm:p-9">
+                <Flag kind={i === 0 ? "us" : "bo"} />
                 <table className="w-full text-left">
-                  <caption className="font-display pb-6 text-left text-2xl font-semibold text-navy-900">{tr(d.title)}</caption>
+                  <caption className="font-display pb-6 pt-5 text-left text-2xl font-semibold text-navy-900">{tr(d.title)}</caption>
                   <thead className="sr-only">
                     <tr>
                       <th scope="col">{lang === "es" ? "Materia" : "Subject"}</th>
@@ -349,6 +396,13 @@ export function SchoolProfilePage() {
 
       {/* Campus and values */}
       <section className="bg-ivory py-24 sm:py-32">
+        <div className={cn(wrap, "mb-20 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5")}>
+          {[media.innovationLab, media.library, media.gym, media.pacStage].map((ph, i) => (
+            <div key={ph.src} data-clip className={cn("overflow-hidden rounded-[1.5rem]", i % 2 === 1 && "sm:mt-12")}>
+              <Photo photo={ph} className="aspect-[3/4]" sizes="(min-width:640px) 25vw, 50vw" imgClassName="transition-transform duration-700 hover:scale-105" />
+            </div>
+          ))}
+        </div>
         <div className={cn(wrap, "grid gap-16 lg:grid-cols-2")}>
           <div>
             <h2 className={cn(h2, "text-navy-900")}>
@@ -386,7 +440,8 @@ export function SchoolProfilePage() {
           <p data-rise className="mt-6 text-xl text-navy-900/80">
             {tr(P.acceptancesLede)}
           </p>
-          <div className="mt-14">
+          <PrestigeWall className="mt-16" />
+          <div className="mt-24">
             <AcceptancePosters />
           </div>
           <div className="mt-20">

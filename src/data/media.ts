@@ -139,6 +139,10 @@ export const media = {
   acceptCastedo: p("acceptances/juan-enrique-castedo-diaz", 1080, 1350, "University acceptances: Juan Enrique Castedo Diaz", "Admisiones universitarias: Juan Enrique Castedo Diaz", "upload"),
   acceptLandivar: p("acceptances/francisco-landivar-gil", 1080, 1350, "University acceptances: Francisco Landivar Gil", "Admisiones universitarias: Francisco Landivar Gil", "upload"),
   acceptMatkovic: p("acceptances/milan-matkovic-barron", 1080, 1350, "University acceptances: Milan Matkovic Barron", "Admisiones universitarias: Milan Matkovic Barron", "upload"),
+  acceptMolina: p("acceptances/abigail-molina-vaca", 1080, 1350, "University acceptances: Abigail Molina Vaca", "Admisiones universitarias: Abigail Molina Vaca", "upload"),
+  acceptHurtado: p("acceptances/dominic-hurtado-hill", 1080, 1350, "University acceptances: Dominic Hurtado Hill", "Admisiones universitarias: Dominic Hurtado Hill", "upload"),
+  acceptRodriguez: p("acceptances/fabricio-rodriguez-marancenbaum", 1080, 1350, "University acceptances: Fabricio Rodriguez Marancenbaum", "Admisiones universitarias: Fabricio Rodriguez Marancenbaum", "upload"),
+  acceptSchrupp: p("acceptances/oscar-schrupp-velasco", 1080, 1350, "University acceptances: Oscar Schrupp Velasco", "Admisiones universitarias: Oscar Schrupp Velasco", "upload"),
 } satisfies Record<string, Photo>;
 
 export type MediaKey = keyof typeof media;

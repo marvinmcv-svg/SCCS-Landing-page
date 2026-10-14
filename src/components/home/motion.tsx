@@ -21,7 +21,8 @@ const MOTION_OK = "(prefers-reduced-motion: no-preference)";
  * - `data-rise`      rises 28px and fades in; siblings entering together stagger 80ms
  * - `data-clip`      a picture opens from an inset mask while settling from 1.15x
  * - `data-parallax`  drifts against the scroll; the value is the travel in percent
- * - `data-count`     counts from 0 to its own text when it enters
+ * - `data-count`     counts from 0 to its value when it enters (`data-decimals` for 3.15)
+ * - `data-bars`      the `data-bar-grow` children rise from the baseline in turn
  *
  * Nothing is hidden before hydration, and with reduced motion nothing moves at all.
  */
@@ -56,6 +57,17 @@ export function useScrollChoreography(scope: React.RefObject<HTMLElement | null>
           if (img) tl.from(img, { scale: 1.18, duration: 1.8, ease: EASE_OUT }, 0);
         });
 
+        q("[data-bars]").forEach((el) => {
+          gsap.from(el.querySelectorAll("[data-bar-grow]"), {
+            scaleY: 0,
+            transformOrigin: "50% 100%",
+            duration: 1.2,
+            ease: EASE_OUT,
+            stagger: 0.08,
+            scrollTrigger: { trigger: el, start: "top 85%", once: true },
+          });
+        });
+
         q("[data-parallax]").forEach((el) => {
           const amount = Number(el.getAttribute("data-parallax")) || 10;
           gsap.fromTo(
@@ -67,6 +79,7 @@ export function useScrollChoreography(scope: React.RefObject<HTMLElement | null>
 
         q("[data-count]").forEach((el) => {
           const target = Number(el.getAttribute("data-count"));
+          const decimals = Number(el.getAttribute("data-decimals") ?? 0);
           const state = { v: 0 };
           gsap.to(state, {
             v: target,
@@ -74,7 +87,7 @@ export function useScrollChoreography(scope: React.RefObject<HTMLElement | null>
             ease: "power3.out",
             scrollTrigger: { trigger: el, start: "top 90%", once: true },
             onUpdate: () => {
-              el.textContent = String(Math.round(state.v));
+              el.textContent = state.v.toFixed(decimals);
             },
           });
         });
@@ -142,7 +155,7 @@ export function Aurora({ className, tone = "night" }: { className?: string; tone
 }
 
 /** An endless horizontal row. Pauses under the pointer; becomes a wrapped list with reduced motion. */
-export function Marquee({ children, className, seconds = 40 }: { children: React.ReactNode; className?: string; seconds?: number }) {
+export function Marquee({ children, className, seconds = 40, reverse }: { children: React.ReactNode; className?: string; seconds?: number; reverse?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   useGSAP(
     () => {
@@ -150,7 +163,9 @@ export function Marquee({ children, className, seconds = 40 }: { children: React
       mm.add(MOTION_OK, () => {
         const track = ref.current?.querySelector<HTMLElement>("[data-track]");
         if (!track) return;
-        const tween = gsap.to(track, { xPercent: -50, duration: seconds, ease: "none", repeat: -1 });
+        const tween = reverse
+          ? gsap.fromTo(track, { xPercent: -50 }, { xPercent: 0, duration: seconds, ease: "none", repeat: -1 })
+          : gsap.to(track, { xPercent: -50, duration: seconds, ease: "none", repeat: -1 });
         const slow = () => gsap.to(tween, { timeScale: 0.15, duration: 0.6 });
         const resume = () => gsap.to(tween, { timeScale: 1, duration: 0.6 });
         ref.current?.addEventListener("pointerenter", slow);
@@ -162,7 +177,7 @@ export function Marquee({ children, className, seconds = 40 }: { children: React
       });
       return () => mm.revert();
     },
-    { scope: ref },
+    { scope: ref, dependencies: [reverse, seconds] },
   );
   return (
     <div ref={ref} className={cn("overflow-hidden motion-reduce:overflow-visible", className)}>
@@ -173,5 +188,24 @@ export function Marquee({ children, className, seconds = 40 }: { children: React
         </div>
       </div>
     </div>
+  );
+}
+
+/** A figure like "13%", "3.15" or "1959" whose number counts up as it enters; prefix and suffix stay put. */
+export function CountFigure({ value }: { value: string }) {
+  const m = value.match(/^([^0-9]*)([0-9]+(?:\.[0-9]+)?)(.*)$/);
+  if (!m) return <>{value}</>;
+  const [, pre, num, post] = m;
+  const decimals = num.includes(".") ? num.split(".")[1].length : 0;
+  // Years read as labels, not quantities: leave them still.
+  if (!decimals && /^(19|20)\d\d$/.test(num) && !pre && !post) return <>{value}</>;
+  return (
+    <>
+      {pre}
+      <span data-count={num} data-decimals={decimals}>
+        {num}
+      </span>
+      {post}
+    </>
   );
 }

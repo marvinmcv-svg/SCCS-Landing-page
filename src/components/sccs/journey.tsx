@@ -11,9 +11,9 @@ import { useLang } from "./i18n";
 import { Photo } from "./sccs-shared";
 
 export const DIVISION_PHOTOS: Record<string, PhotoT> = {
-  es: media.igMatter1,
-  ms: media.msLaptops,
-  hs: media.collegeFairPennant,
+  es: media.igMath4,
+  ms: media.maker3dPrinter,
+  hs: media.collegeFair,
 };
 
 export function JourneyTabs({ initial = 0 }: { initial?: number }) {

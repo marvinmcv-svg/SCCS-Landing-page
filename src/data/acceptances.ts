@@ -28,7 +28,62 @@ export const ACCEPTANCES: Acceptance[] = [
     photo: media.acceptCastedo,
     universities: ["Arizona State University", "Elon University", "High Point University", "Loyola University New Orleans", "Temple University", "UNC Charlotte", "University of Southern California", "Texas Christian University", "Purdue University"],
   },
+  {
+    name: "Oscar Schrupp Velasco",
+    photo: media.acceptSchrupp,
+    universities: ["University of Notre Dame", "Penn State University", "Arizona State University", "University of Tennessee, Knoxville", "Union College", "Santa Fe College"],
+  },
+  {
+    name: "Abigail Molina Vaca",
+    photo: media.acceptMolina,
+    universities: ["Tulane University", "Syracuse University", "Baylor University", "Loyola University Chicago", "Penn State University", "Texas Christian University", "University of Minnesota Twin Cities", "Florida International University", "Beloit College"],
+  },
+  {
+    name: "Dominic Hurtado Hill",
+    photo: media.acceptHurtado,
+    universities: ["American University", "The New School", "University of Iowa", "University of Alabama", "Texas Christian University", "University of Tennessee, Knoxville", "Arizona State University", "Loyola University New Orleans", "University of Tampa", "Texas State University", "Northwest Missouri State University", "York College of Pennsylvania"],
+  },
+  {
+    name: "Fabricio Rodriguez Marancenbaum",
+    photo: media.acceptRodriguez,
+    universities: ["American University", "Hult International Business School", "University of Kentucky", "University of Oklahoma", "Arizona State University", "Loyola University New Orleans", "Santa Fe College"],
+  },
 ];
+
+/**
+ * The most selective universities that have admitted SCCS graduates (from the
+ * acceptances below), shown with their official seals and crests.
+ */
+export const PRESTIGE: { name: string; logo: string }[] = [
+  ["Harvard University", "harvard-university"],
+  ["Stanford University", "stanford-university"],
+  ["Princeton University", "princeton-university"],
+  ["Columbia University", "columbia-university"],
+  ["University of Pennsylvania", "university-of-pennsylvania"],
+  ["Brown University", "brown-university"],
+  ["Cornell University", "cornell-university"],
+  ["Dartmouth College", "dartmouth-college"],
+  ["Duke University", "duke-university"],
+  ["Johns Hopkins University", "johns-hopkins-university"],
+  ["University of Chicago", "university-of-chicago"],
+  ["Northwestern University", "northwestern-university"],
+  ["UC Berkeley", "university-of-california-berkeley"],
+  ["UCLA", "university-of-california-los-angeles"],
+  ["University of Michigan", "university-of-michigan"],
+  ["University of Notre Dame", "university-of-notre-dame"],
+  ["Vanderbilt University", "vanderbilt-university"],
+  ["Rice University", "rice-university"],
+  ["Georgetown University", "georgetown-university"],
+  ["New York University", "new-york-university"],
+  ["Imperial College London", "imperial-college-london"],
+  ["King's College London", "king-s-college-london"],
+  ["University of Edinburgh", "university-of-edinburgh"],
+  ["University of St Andrews", "university-of-st-andrews"],
+  ["McGill University", "mcgill-university"],
+  ["Bocconi University", "bocconi-university"],
+  ["University of Amsterdam", "university-of-amsterdam"],
+  ["Universidade de São Paulo", "university-of-s-o-paulo"],
+].map(([name, slug]) => ({ name, logo: `/brand/universities/${slug}.png` }));
 
 /** University acceptances for the Classes of 2023, 2024 and 2025 (High School Profile 2025/26). */
 export const ACCEPTANCE_LIST = {

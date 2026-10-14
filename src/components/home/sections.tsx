@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { media } from "@/data/media";
@@ -16,7 +16,7 @@ import { JourneyTabs } from "../sccs/journey";
 import { MatriculationExplorer } from "../sccs/matriculation";
 import { CATEGORY_LABEL } from "../sccs/campus-life";
 import { InstagramGlyph } from "../sccs/footer";
-import { AcceptancePosters, AccreditationLogos } from "../sccs/credentials";
+import { AcceptancePosters, AccreditationLogos, PrestigeMarquee } from "../sccs/credentials";
 import { Aurora, Marquee, Words, gsap, useGSAP } from "./motion";
 
 /* ───────── Shared pieces ───────── */
@@ -323,34 +323,114 @@ export function ExperienceHome() {
   );
 }
 
-/* ───────── Beyond the Classroom: the traditions roll past ───────── */
+/* ───────── Beyond the Classroom: a large, browsable rail of every tradition ───────── */
+
+type TraditionTab = "all" | "academic" | "civic" | "family";
 
 export function TraditionsMarquee() {
   const { t, tr } = useLang();
+  const [tab, setTab] = useState<TraditionTab>("all");
+  const [progress, setProgress] = useState(0);
+  const rail = useRef<HTMLUListElement>(null);
+  const list = tab === "all" ? TRADITIONS : TRADITIONS.filter((x) => x.group === tab);
+  const tabs: TraditionTab[] = ["all", "academic", "civic", "family"];
+
+  const onScroll = () => {
+    const el = rail.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setProgress(max > 0 ? el.scrollLeft / max : 1);
+  };
+  const scrollBy = (d: number) => rail.current?.scrollBy({ left: d * rail.current.clientWidth * 0.75, behavior: "smooth" });
+  const choose = (next: TraditionTab) => {
+    setTab(next);
+    rail.current?.scrollTo({ left: 0 });
+    setProgress(0);
+  };
+
   return (
-    <section className="overflow-hidden bg-ivory py-24 sm:py-32" aria-labelledby="traditions-title">
-      <div className={cn(wrap, "flex flex-col justify-between gap-6 sm:flex-row sm:items-end")}>
-        <h2 id="traditions-title" className={cn(h2, "text-navy-900")}>
-          <Words text={t.home.traditionsTitle} />
-        </h2>
+    <section className="overflow-hidden bg-ivory py-28 sm:py-36" aria-labelledby="traditions-title">
+      <div className={cn(wrap, "flex flex-col justify-between gap-8 lg:flex-row lg:items-end")}>
+        <div className="max-w-3xl">
+          <h2 id="traditions-title" className={cn(h2, "text-navy-900")}>
+            <Words text={t.home.traditionsTitle} />
+          </h2>
+          <p data-rise className="mt-6 text-xl leading-relaxed text-navy-900/80">
+            {t.home.traditionsIntro}
+          </p>
+        </div>
         <div data-rise>
           <More href="/campus-life/beyond-the-classroom">{t.campusLife.beyondCta}</More>
         </div>
       </div>
-      <Marquee className="mt-14" seconds={55}>
+
+      <div className={cn(wrap, "mt-12 flex flex-wrap items-center justify-between gap-4")}>
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label={t.home.traditionsTitle}>
+          {tabs.map((k) => (
+            <button
+              key={k}
+              type="button"
+              role="tab"
+              aria-selected={tab === k}
+              onClick={() => choose(k)}
+              className={cn("pressable min-h-11 rounded-full px-5 text-sm font-semibold transition-colors", tab === k ? "bg-navy-800 text-white" : "bg-cream text-navy-900 hover:bg-navy-100")}
+            >
+              {t.home.traditionsTabs[k]}
+            </button>
+          ))}
+        </div>
+        <div className="hidden gap-2 sm:flex">
+          <button type="button" onClick={() => scrollBy(-1)} className="pressable grid h-12 w-12 place-items-center rounded-full bg-cream text-navy-900 hover:bg-navy-100" aria-label={tr({ en: "Previous", es: "Anterior" })}>
+            <ArrowRight className="h-5 w-5 rotate-180" aria-hidden="true" />
+          </button>
+          <button type="button" onClick={() => scrollBy(1)} className="pressable grid h-12 w-12 place-items-center rounded-full bg-navy-800 text-white hover:bg-navy-700" aria-label={tr({ en: "Next", es: "Siguiente" })}>
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+
+      <ul
+        ref={rail}
+        onScroll={onScroll}
+        // Cards start on the same edge as the heading above, however wide the window.
+        style={{ paddingInline: "calc(max(0px, (100% - 90rem) / 2) + var(--gutter))", scrollPaddingInline: "calc(max(0px, (100% - 90rem) / 2) + var(--gutter))" }}
+        className="ios-scroll mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [--gutter:1.25rem] [scrollbar-width:none] sm:[--gutter:2rem] lg:gap-6 lg:[--gutter:3rem] [&::-webkit-scrollbar]:hidden"
+      >
+        {list.map((tr_) => (
+          <li key={tr_.slug} className="w-[80%] shrink-0 snap-start sm:w-[46%] lg:w-[31%] xl:w-[27%]">
+            <Link href={`/campus-life/beyond-the-classroom/${tr_.slug}`} className="group relative isolate block aspect-[3/4] overflow-hidden rounded-[2rem] bg-navy-900">
+              <Photo
+                photo={tr_.image}
+                className="absolute inset-0 -z-10"
+                sizes="(min-width:1280px) 27vw, (min-width:1024px) 31vw, (min-width:640px) 46vw, 80vw"
+                imgClassName="transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
+              />
+              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent" aria-hidden="true" />
+              <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-navy-900 backdrop-blur-sm">{tr(tr_.when)}</span>
+              <span className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all duration-500 group-hover:rotate-45 group-hover:bg-amber-500 group-hover:text-navy-950" aria-hidden="true">
+                <ArrowUpRight className="h-5 w-5" />
+              </span>
+              <div className="flex h-full flex-col justify-end p-7">
+                <p className="text-sm font-semibold text-amber-400">{t.home.traditionsTabs[tr_.group]}</p>
+                <h3 className="font-display mt-1 text-3xl font-semibold leading-tight text-white sm:text-4xl">{tr(tr_.title)}</h3>
+                <p className="mt-3 text-base leading-relaxed text-white/85">{tr(tr_.tagline)}</p>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <div className={cn(wrap, "mt-6")} aria-hidden="true">
+        <div className="h-[3px] overflow-hidden rounded-full bg-navy-900/10">
+          <div className="h-full origin-left rounded-full bg-navy-800 transition-transform duration-300" style={{ transform: `scaleX(${Math.max(progress, 0.08)})` }} />
+        </div>
+      </div>
+
+      <Marquee className="mt-12 -mb-6" seconds={60}>
         {TRADITIONS.map((tr_) => (
-          <Link
-            key={tr_.slug}
-            href={`/campus-life/beyond-the-classroom/${tr_.slug}`}
-            className="group flex shrink-0 items-center gap-6 px-6 sm:gap-10 sm:px-10"
-          >
-            <span className="relative h-20 w-28 shrink-0 overflow-hidden rounded-2xl sm:h-24 sm:w-36">
-              <Photo photo={tr_.image} className="absolute inset-0" sizes="144px" imgClassName="transition-transform duration-700 group-hover:scale-110" />
-            </span>
-            <span className="font-display whitespace-nowrap text-5xl font-semibold tracking-[-0.03em] text-navy-900 transition-colors duration-300 group-hover:text-crimson-600 sm:text-7xl">
-              {tr(tr_.title)}
-            </span>
-          </Link>
+          <span key={tr_.slug} className="font-display shrink-0 whitespace-nowrap px-8 text-6xl font-semibold tracking-[-0.03em] text-navy-900/[0.07] sm:text-8xl">
+            {tr(tr_.title)}
+          </span>
         ))}
       </Marquee>
     </section>
@@ -394,22 +474,33 @@ export function MatriculationHome() {
 export function AcceptancesHome() {
   const { t } = useLang();
   return (
-    <section id="acceptances" className="scroll-mt-24 bg-cream py-28 sm:py-36">
+    <section id="acceptances" className="scroll-mt-24 overflow-hidden bg-cream py-28 sm:py-36">
       <div className={wrap}>
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
             <h2 className={cn(h2, "text-navy-900")}>
-              <Words text={t.home.acceptancesTitle} />
+              <Words text={t.home.prestigeTitle} />
             </h2>
             <p data-rise className="mt-6 text-xl text-navy-900/80">
-              {t.home.acceptancesIntro}
+              {t.home.prestigeIntro}
             </p>
           </div>
           <div data-rise>
             <More href="/discover/school-profile#acceptances">{t.home.acceptancesCta}</More>
           </div>
         </div>
-        <div className="mt-14">
+      </div>
+      <div data-rise className="mt-16">
+        <PrestigeMarquee />
+      </div>
+      <div className={cn(wrap, "mt-28")}>
+        <h3 data-rise className="font-display text-4xl font-semibold leading-tight text-navy-900 sm:text-5xl">
+          {t.home.acceptancesTitle}
+        </h3>
+        <p data-rise className="mt-4 text-lg text-navy-900/75">
+          {t.home.acceptancesIntro}
+        </p>
+        <div className="mt-8">
           <AcceptancePosters />
         </div>
       </div>

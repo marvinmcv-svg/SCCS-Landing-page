@@ -4,7 +4,7 @@
  */
 import { dictionaries } from "@/data/dictionary";
 import { HERO_SLIDES } from "@/data/home";
-import { ACCEPTANCES, ACCEPTANCE_LIST } from "@/data/acceptances";
+import { ACCEPTANCES, ACCEPTANCE_LIST, PRESTIGE } from "@/data/acceptances";
 import { ACCREDITATIONS, MINISTRY, SCHOOL_PROFILE } from "@/data/profile";
 import { media } from "@/data/media";
 import { PILLARS } from "@/data/nav";
@@ -76,6 +76,7 @@ export const COLLECTIONS: CollectionDef[] = [
     enums: { country: ["US", "CA", "GB", "ES", "NL", "IT", "BO", "CO", "CL", "MX", "AU"] },
   },
   { id: "acceptances", group: "Learning & Outcomes", label: "University acceptances", description: "Senior acceptance posters. Duplicate a card, then change the photo and name to add a new senior.", href: "/#acceptances", target: ACCEPTANCES, itemTitle: "name" },
+  { id: "prestige", group: "Learning & Outcomes", label: "University seals", description: "The seals shown under 'Admitted to the world's best'. Reorder or remove; each logo is a file in /brand/universities.", href: "/learning/university-matriculation", target: PRESTIGE, itemTitle: "name" },
   { id: "acceptanceList", group: "Learning & Outcomes", label: "Acceptances list", description: "Every university that admitted SCCS graduates, by region (School Profile page).", href: "/discover/school-profile#acceptances", target: ACCEPTANCE_LIST },
   { id: "classYears", group: "Learning & Outcomes", label: "Class years filter", description: "The years offered in the matriculation filter.", href: "/learning/university-matriculation", target: CLASS_YEARS },
 

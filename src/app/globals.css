@@ -189,3 +189,13 @@
     animation: none !important;
   }
 }
+
+/* Carlita's launcher: a soft ring that breathes outward every few seconds. */
+@keyframes carlita-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.45); opacity: 0; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+@utility carlita-pulse {
+  animation: carlita-pulse 2.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}

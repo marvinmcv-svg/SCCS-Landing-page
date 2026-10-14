@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUp, Square, X } from "lucide-react";
@@ -14,11 +15,13 @@ export function openCarlita() {
   window.dispatchEvent(new Event(OPEN_EVENT));
 }
 
-function CarlitaAvatar({ className }: { className?: string }) {
+const NUDGE_KEY = "sccs-carlita-nudged";
+
+function CarlitaAvatar({ className, online = true }: { className?: string; online?: boolean }) {
   return (
-    <span className={cn("font-display relative flex shrink-0 items-center justify-center rounded-full bg-navy-800 font-semibold text-amber-400 ring-2 ring-amber-500/80", className)} aria-hidden="true">
-      C
-      <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500" />
+    <span className={cn("relative block shrink-0 rounded-full ring-2 ring-amber-400", className)} aria-hidden="true">
+      <Image src="/brand/carlita/carlita.jpg" alt="" width={160} height={160} className="h-full w-full rounded-full object-cover" />
+      {online && <span className="absolute bottom-0 right-0 h-[28%] max-h-3.5 w-[28%] max-w-3.5 rounded-full border-2 border-white bg-emerald-500" />}
     </span>
   );
 }
@@ -68,6 +71,37 @@ export function Carlita() {
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
+  const [nudge, setNudge] = useState(false);
+
+  // A short greeting slides out once per visit, then tucks itself away.
+  useEffect(() => {
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem(NUDGE_KEY) === "1";
+    } catch {
+      /* storage unavailable */
+    }
+    if (seen) return;
+    const show = window.setTimeout(() => setNudge(true), 4500);
+    const hide = window.setTimeout(() => setNudge(false), 16000);
+    return () => {
+      window.clearTimeout(show);
+      window.clearTimeout(hide);
+    };
+  }, []);
+
+  const dismissNudge = useCallback(() => {
+    setNudge(false);
+    try {
+      sessionStorage.setItem(NUDGE_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    if (open) dismissNudge();
+  }, [open, dismissNudge]);
 
   useEffect(() => {
     const onOpen = () => setOpen(true);
@@ -139,23 +173,49 @@ export function Carlita() {
     <>
       <AnimatePresence>
         {!open && (
-          <motion.button
-            ref={launcherRef}
-            type="button"
-            onClick={() => setOpen(true)}
-            initial={reduce ? false : { opacity: 0, y: 12, scale: 0.95 }}
+          <motion.div
+            className="fixed bottom-4 right-4 z-[70] flex items-end gap-3 sm:bottom-6 sm:right-6"
+            initial={reduce ? false : { opacity: 0, y: 16, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            className="pressable fixed bottom-4 right-4 z-[70] flex min-h-14 items-center gap-3 rounded-full bg-white py-2 pl-2 pr-5 text-left shadow-[0_12px_40px_rgba(20,20,58,0.22)] ring-1 ring-navy-800/10 transition-shadow hover:shadow-[0_16px_48px_rgba(20,20,58,0.3)] sm:bottom-6 sm:right-6"
-            aria-label={c.open}
+            exit={{ opacity: 0, y: 8, scale: 0.9 }}
+            transition={{ type: "spring", bounce: 0.25, duration: 0.6 }}
           >
-            <CarlitaAvatar className="h-10 w-10 text-lg" />
-            <span className="leading-tight">
-              <span className="block text-sm font-bold text-navy-800">{c.launcher}</span>
-              <span className="block text-[0.7rem] text-mist">{c.role}</span>
-            </span>
-          </motion.button>
+            <AnimatePresence>
+              {nudge && (
+                <motion.div
+                  key="nudge"
+                  role="status"
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, x: 16, scale: 0.92 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, x: 12, scale: 0.95 }}
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                  style={{ transformOrigin: "100% 100%" }}
+                  className="relative mb-2 hidden max-w-[15rem] rounded-2xl rounded-br-md bg-white py-3 pl-4 pr-9 text-sm leading-snug text-navy-900 shadow-[0_12px_40px_rgba(20,20,58,0.2)] ring-1 ring-navy-800/10 sm:block"
+                >
+                  <button type="button" onClick={() => setOpen(true)} className="text-left">
+                    {c.nudge}
+                  </button>
+                  <button type="button" onClick={dismissNudge} className="absolute right-1.5 top-1.5 grid h-7 w-7 place-items-center rounded-full text-mist hover:bg-cream" aria-label={c.dismiss}>
+                    <X className="h-3.5 w-3.5" aria-hidden="true" />
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <motion.button
+              ref={launcherRef}
+              type="button"
+              onClick={() => setOpen(true)}
+              whileHover={reduce ? undefined : { scale: 1.07 }}
+              whileTap={reduce ? undefined : { scale: 0.94 }}
+              transition={{ type: "spring", bounce: 0.3, duration: 0.4 }}
+              className="group relative h-16 w-16 rounded-full shadow-[0_14px_40px_rgba(20,20,58,0.32)] sm:h-[4.5rem] sm:w-[4.5rem]"
+              aria-label={c.open}
+              title={c.launcher}
+            >
+              {!reduce && <span className="carlita-pulse absolute inset-0 rounded-full ring-2 ring-amber-400" aria-hidden="true" />}
+              <CarlitaAvatar className="h-full w-full ring-[3px]" />
+            </motion.button>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -171,7 +231,7 @@ export function Carlita() {
             className="tabbar-safe fixed inset-x-2 bottom-2 z-[70] flex max-h-[calc(100svh-1rem)] flex-col overflow-hidden rounded-3xl bg-ivory shadow-[0_30px_90px_rgba(20,20,58,0.35)] ring-1 ring-navy-800/10 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:h-[38rem] sm:w-[25rem]"
           >
             <header className="flex items-center gap-3 bg-navy-800 px-5 py-4 text-white">
-              <CarlitaAvatar className="h-11 w-11 text-xl ring-amber-400" />
+              <CarlitaAvatar className="h-12 w-12" />
               <div className="min-w-0 flex-1">
                 <h2 className="font-semibold">{c.title}</h2>
                 <p className="text-xs text-white/70">{c.subtitle}</p>
@@ -183,7 +243,7 @@ export function Carlita() {
 
             <div ref={listRef} className="ios-scroll flex-1 space-y-3 overflow-y-auto px-4 py-5" aria-live="polite">
               <div className="flex gap-2.5">
-                <CarlitaAvatar className="mt-0.5 h-7 w-7 text-xs" />
+                <CarlitaAvatar className="mt-0.5 h-8 w-8 ring-1" online={false} />
                 <p className="max-w-[85%] rounded-2xl rounded-tl-md bg-white px-4 py-3 text-sm leading-relaxed text-charcoal shadow-sm ring-1 ring-border">{c.greeting}</p>
               </div>
               {messages.length === 0 && (
@@ -204,7 +264,7 @@ export function Carlita() {
                   </p>
                 ) : (
                   <div key={i} className="flex gap-2.5">
-                    <CarlitaAvatar className="mt-0.5 h-7 w-7 text-xs" />
+                    <CarlitaAvatar className="mt-0.5 h-8 w-8 ring-1" online={false} />
                     <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tl-md bg-white px-4 py-3 text-sm leading-relaxed text-charcoal shadow-sm ring-1 ring-border">
                       {m.content ? (
                         <RichText text={m.content} />
