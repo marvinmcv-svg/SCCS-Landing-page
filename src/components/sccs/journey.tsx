@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef, useState } from "react";
 import { media, type Photo as PhotoT } from "@/data/media";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { cn, EASE } from "@/lib/utils";
 import { useLang } from "./i18n";
-import { Container, Photo, Section, SectionHeading, TextLink } from "./sccs-shared";
+import { Photo } from "./sccs-shared";
 
 export const DIVISION_PHOTOS: Record<string, PhotoT> = {
   es: media.igMatter1,
@@ -18,7 +19,7 @@ export const DIVISION_PHOTOS: Record<string, PhotoT> = {
 export function JourneyTabs({ initial = 0 }: { initial?: number }) {
   const { t } = useLang();
   const j = t.journey;
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const [active, setActive] = useState(initial);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const tab = j.tabs[active];
@@ -78,7 +79,7 @@ export function JourneyTabs({ initial = 0 }: { initial?: number }) {
           <div>
             <p className="font-display text-3xl font-medium italic leading-snug text-navy-900 sm:text-4xl">{tab.tagline}</p>
             <p className="mt-5 leading-relaxed text-mist">{tab.body}</p>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{j.highlightsLabel}</p>
+            <p className="mt-8 text-sm font-semibold text-crimson-600">{j.highlightsLabel}</p>
             <ul className="mt-3 flex flex-wrap gap-2">
               {tab.highlights.map((h) => (
                 <li key={h} className="rounded-full border border-navy-800/15 bg-navy-100 px-3.5 py-1.5 text-sm text-navy-800">
@@ -96,23 +97,5 @@ export function JourneyTabs({ initial = 0 }: { initial?: number }) {
         </motion.div>
       </AnimatePresence>
     </div>
-  );
-}
-
-export function Journey() {
-  const { t } = useLang();
-  const j = t.journey;
-  return (
-    <Section id="journey">
-      <Container>
-        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading kicker={j.kicker} title={j.title} intro={j.intro} />
-          <TextLink href="/learning/academic-journey">{j.more}</TextLink>
-        </div>
-        <div className="mt-12">
-          <JourneyTabs />
-        </div>
-      </Container>
-    </Section>
   );
 }

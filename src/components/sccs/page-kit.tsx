@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight, ChevronRight as Sep } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Photo as PhotoT } from "@/data/media";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { cn, EASE } from "@/lib/utils";
 import { useLang } from "./i18n";
 import { Container, Kicker, Photo, Reveal } from "./sccs-shared";
+import { EASE_OUT, Words, gsap, useGSAP } from "../home/motion";
 
 export type Crumb = { href: string; label: string };
 
@@ -57,32 +59,47 @@ export function PageHero({
   imgPosition?: string;
   tall?: boolean;
 }) {
-  const reduce = useReducedMotion();
-  const enter = (delay: number) => (reduce ? {} : { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.75, delay, ease: EASE } });
+  const root = useRef<HTMLElement>(null);
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from("[data-word]", { yPercent: 115, duration: 1.1, ease: EASE_OUT, stagger: 0.05, delay: 0.1 });
+        gsap.from("[data-page-rise]", { y: 22, autoAlpha: 0, duration: 0.9, ease: EASE_OUT, stagger: 0.08, delay: 0.35 });
+        gsap.fromTo("[data-page-media] img", { scale: 1.14 }, { scale: 1, duration: 2.4, ease: EASE_OUT });
+        gsap.to("[data-page-media]", { yPercent: 12, ease: "none", scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true } });
+      });
+      return () => mm.revert();
+    },
+    { scope: root },
+  );
   return (
-    <section className={cn("relative isolate flex items-end overflow-hidden bg-navy-950", tall ? "min-h-[88svh]" : "min-h-[68svh]")}>
-      <Photo photo={photo} priority className="absolute inset-0 -z-20" sizes="100vw" imgClassName={cn(!reduce && "sccs-kenburns", imgPosition)} />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-navy-950/85 via-navy-950/45 to-navy-950/90" aria-hidden="true" />
-      <div className="absolute inset-0 -z-10 bg-navy-800/20 mix-blend-multiply" aria-hidden="true" />
+    <section ref={root} className={cn("relative isolate flex items-end overflow-hidden bg-navy-950", tall ? "min-h-[88svh]" : "min-h-[72svh]")}>
+      <div data-page-media className="absolute inset-0 -z-20">
+        <Photo photo={photo} priority className="absolute inset-0" sizes="100vw" imgClassName={imgPosition} />
+      </div>
+      {/* The photograph keeps its own brightness; shade sits only under the navigation and the words. */}
+      <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-navy-950/60 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_95%_80%_at_0%_100%,rgba(20,20,58,0.85),rgba(20,20,58,0.45)_45%,transparent_75%)]" aria-hidden="true" />
       <Container className="pb-14 pt-40 sm:pb-20">
-        <motion.div {...enter(0.05)}>
+        <div data-page-rise>
           <Breadcrumbs items={crumbs} />
-        </motion.div>
-        <motion.div {...enter(0.15)} className="mt-6">
+        </div>
+        <div data-page-rise className="mt-6">
           <Kicker dark>{kicker}</Kicker>
-        </motion.div>
-        <motion.h1 {...enter(0.25)} className="font-display mt-4 max-w-4xl text-4xl font-semibold leading-[1.06] text-white sm:text-5xl lg:text-6xl">
-          {title}
-        </motion.h1>
+        </div>
+        <h1 className="font-display mt-3 max-w-5xl text-balance text-[2.6rem] font-semibold leading-[1] tracking-[-0.03em] text-white sm:text-6xl lg:text-7xl">
+          <Words text={title} />
+        </h1>
         {lede && (
-          <motion.p {...enter(0.4)} className="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+          <p data-page-rise className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
             {lede}
-          </motion.p>
+          </p>
         )}
         {children && (
-          <motion.div {...enter(0.55)} className="mt-8">
+          <div data-page-rise className="mt-8">
             {children}
-          </motion.div>
+          </div>
         )}
       </Container>
     </section>
@@ -176,13 +193,13 @@ export function Prose({ children, className }: { children: React.ReactNode; clas
 export function Split({ photo, title, body, reverse, kicker, children }: { photo: PhotoT; title: string; body: string; reverse?: boolean; kicker?: string; children?: React.ReactNode }) {
   return (
     <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-      <Reveal className={cn(reverse && "lg:order-2")}>
-        <Photo photo={photo} className="aspect-[4/3] rounded-2xl shadow-[0_24px_60px_rgba(20,20,58,0.12)]" sizes="(min-width:1024px) 50vw, 100vw" />
-      </Reveal>
+      <div data-clip className={cn("overflow-hidden rounded-[1.75rem]", reverse && "lg:order-2")}>
+        <Photo photo={photo} className="aspect-[4/3]" sizes="(min-width:1024px) 50vw, 100vw" />
+      </div>
       <Reveal delay={0.08}>
         {kicker && <Kicker>{kicker}</Kicker>}
-        <h2 className={cn("font-display text-3xl font-semibold leading-tight text-navy-900 sm:text-4xl", kicker && "mt-4")}>{title}</h2>
-        <p className="mt-5 text-base leading-relaxed text-mist sm:text-lg">{body}</p>
+        <h2 className={cn("font-display text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.025em] text-navy-900 sm:text-5xl", kicker && "mt-3")}>{title}</h2>
+        <p className="mt-5 text-lg leading-relaxed text-navy-900/75">{body}</p>
         {children}
       </Reveal>
     </div>
@@ -205,7 +222,7 @@ export function IconCards({ items, cols = 4 }: { items: { title: string; text: s
 
 export function Tabs({ tabs, label }: { tabs: { id: string; label: string; content: React.ReactNode }[]; label: string }) {
   const [active, setActive] = useState(0);
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const onKey = (e: React.KeyboardEvent, i: number) => {
     const n = e.key === "ArrowRight" ? (i + 1) % tabs.length : e.key === "ArrowLeft" ? (i - 1 + tabs.length) % tabs.length : null;
     if (n === null) return;

@@ -1,12 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Check, Globe2, GraduationCap, Landmark } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { media } from "@/data/media";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { cn, EASE } from "@/lib/utils";
 import { useLang } from "./i18n";
-import { Container, Photo, Reveal, Section, SectionHeading, TextLink } from "./sccs-shared";
+import { Reveal } from "./sccs-shared";
 
 function Credential({ title, points, icon: Icon, flag }: { title: string; points: string[]; icon: typeof GraduationCap; flag: string }) {
   const [open, setOpen] = useState(false);
@@ -60,7 +60,7 @@ function Credential({ title, points, icon: Icon, flag }: { title: string; points
 }
 
 function ConvergencePaths() {
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const draw = (delay: number) =>
     reduce
       ? {}
@@ -107,39 +107,5 @@ export function DualDiplomaDiagram() {
         <p className="mt-2 text-sm text-mist">{d.multiTrack}</p>
       </Reveal>
     </div>
-  );
-}
-
-export function DualDiploma() {
-  const { t } = useLang();
-  const d = t.dualDiploma;
-  return (
-    <Section id="learning" className="bg-gradient-to-b from-ivory to-cream/50">
-      <Container>
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <SectionHeading kicker={d.kicker} title={d.title} />
-            <Reveal delay={0.12}>
-              <p className="mt-6 text-base leading-relaxed text-mist sm:text-lg">{d.body}</p>
-            </Reveal>
-            <Reveal delay={0.18} className="mt-6 flex flex-wrap gap-x-6">
-              <TextLink href="/learning/dual-diploma">{d.more}</TextLink>
-              <TextLink href="#journey">{d.cta}</TextLink>
-            </Reveal>
-          </div>
-          <Reveal delay={0.1} className="relative">
-            <Photo photo={media.graduationPac} className="aspect-[4/3] rounded-2xl shadow-[0_24px_60px_rgba(20,20,58,0.18)]" sizes="(min-width:1024px) 45vw, 100vw" />
-            <Photo
-              photo={media.pacFlags}
-              className="absolute -bottom-8 -left-4 hidden aspect-[4/3] w-44 rounded-xl border-4 border-ivory shadow-xl sm:block lg:-left-10 lg:w-56"
-              sizes="240px"
-            />
-          </Reveal>
-        </div>
-        <div className="mt-20 lg:mt-24">
-          <DualDiplomaDiagram />
-        </div>
-      </Container>
-    </Section>
   );
 }

@@ -9,7 +9,7 @@ import { PORTALS } from "@/data/pages";
 import { TEAM, type TeamCategory } from "@/data/sccs-content";
 import { cn, EASE } from "@/lib/utils";
 import { useLang } from "./i18n";
-import { Container, JaguarMotif, Photo, Reveal, Section, SectionHeading, TextLink, buttonStyles } from "./sccs-shared";
+import { JaguarMotif, Photo, buttonStyles } from "./sccs-shared";
 
 type Cat = "ALL" | TeamCategory;
 type Div = "ALL" | "ES" | "MS" | "HS";
@@ -188,35 +188,5 @@ export function AlumniCard() {
         {c.alumniCta}
       </Link>
     </div>
-  );
-}
-
-export function Community() {
-  const { t } = useLang();
-  const c = t.community;
-  return (
-    <Section id="community">
-      <Container>
-        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading kicker={c.kicker} title={c.title} intro={c.intro} />
-          <TextLink href="/community">{c.more}</TextLink>
-        </div>
-        <div className="mt-12">
-          <TeamDirectory />
-        </div>
-        <div className="mt-16 grid gap-5 lg:grid-cols-3">
-          <Reveal>
-            <MothersClubCard />
-          </Reveal>
-          <Reveal delay={0.06} className="flex flex-col gap-5">
-            <ParentHubCard />
-            <AlumniCard />
-          </Reveal>
-          <Reveal delay={0.12}>
-            <PaletteCard />
-          </Reveal>
-        </div>
-      </Container>
-    </Section>
   );
 }

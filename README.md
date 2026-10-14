@@ -2,7 +2,7 @@
 
 A bilingual (EN/ES) website for **Santa Cruz Cooperative School (SCCS)**, built from the *SCCS Landing Page master build prompt* and the school's *Suggested Copy for Website* brief, and extended into a full multi-page site.
 
-**Stack:** Next.js 15 (App Router) · TypeScript strict · Tailwind CSS v4 · shadcn-style UI (Radix + cmdk) · framer-motion · react-hook-form + zod · date-fns
+**Stack:** Next.js 15 (App Router) · TypeScript strict · Tailwind CSS v4 · shadcn-style UI (Radix + cmdk) · GSAP + ScrollTrigger · framer-motion · react-hook-form + zod · date-fns · Vercel Blob
 
 ```bash
 npm install
@@ -69,6 +69,21 @@ The old site's stock photos (generic classroom images) were deliberately left ou
 - Event dates.
 - The 25-row university matriculation table.
 - Approximate tradition timings (e.g. "November") in `traditions.ts`.
+
+## Admin portal (`/admin`)
+
+Staff edit the site at **/admin**: every headline and sentence (English and Spanish side by side), the hero slideshow, navigation, every inner page, the Jaguar Experience and tradition pages, news, events, the team directory, the matriculation map, and the photo library (upload, replace, describe). Saving publishes immediately; **Reset** returns any section to the original content.
+
+**One-time setup in Vercel** (Project → Settings):
+1. **Storage → Create → Blob**, connect it to this project. This adds `BLOB_READ_WRITE_TOKEN`.
+2. **Environment Variables → `ADMIN_PASSWORD`**, at least 8 characters.
+3. Redeploy.
+
+How it works: the content in `src/data/*` is the default. Edits are stored as a small diff (`sccs-content/overrides.json` in Blob) and merged onto the live data on the server and in the browser (`src/lib/content/`). Saving revalidates the static pages, so the site stays fast. Photos are referenced by library key, so replacing a photo in the library changes it everywhere. Sign-in is a single shared password with an httpOnly signed cookie; admin writes require the same origin. In local development without Blob, edits are written to `.data/content.json`.
+
+## Design
+
+The home page follows two design skills installed in `.claude/skills/`: **taste-skill** (Leonxlnx, MIT) and **apple-design** (Emil Kowalski, MIT). Hero photographs run at their own brightness, with shade only under the words. Motion is GSAP: masked headline reveals, staggered section entrances, image mask reveals, parallax, count-ups, marquees and slow-moving navy gradient fields (`src/components/home/motion.tsx`). Everything is static under `prefers-reduced-motion`.
 
 ## Carlita, the AI receptionist
 

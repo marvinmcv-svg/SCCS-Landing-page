@@ -1,5 +1,8 @@
 "use client";
 
+import { useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useScrollChoreography } from "../home/motion";
 import { useLang } from "./i18n";
 import { Header } from "./header";
 import { Footer } from "./footer";
@@ -8,6 +11,12 @@ import { Carlita } from "./carlita";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const { t } = useLang();
+  const pathname = usePathname();
+  const main = useRef<HTMLElement>(null);
+  // Scroll choreography for every page; re-scanned when the route changes.
+  useScrollChoreography(main, [pathname]);
+  // The admin portal has its own chrome.
+  if (pathname?.startsWith("/admin")) return <>{children}</>;
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <a
@@ -17,7 +26,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         {t.misc.skipToContent}
       </a>
       <Header />
-      <main id="main" className="flex-1">
+      <main ref={main} id="main" className="flex-1">
         {children}
       </main>
       <Footer />

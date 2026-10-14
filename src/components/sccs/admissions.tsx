@@ -11,7 +11,7 @@ import { GRADE_VALUES, inquirySchema, type InquiryInput } from "@/lib/inquiry-sc
 import { cn, EASE } from "@/lib/utils";
 import { SITE } from "@/lib/site";
 import { useLang } from "./i18n";
-import { Container, Reveal, Section, SectionHeading, TextLink, buttonStyles } from "./sccs-shared";
+import { Reveal, buttonStyles } from "./sccs-shared";
 
 export function Stepper() {
   const { t } = useLang();
@@ -260,28 +260,5 @@ export function InquireBlock() {
         </Reveal>
       </div>
     </div>
-  );
-}
-
-export function Admissions() {
-  const { t } = useLang();
-  const a = t.admissions;
-  return (
-    <Section id="admissions" className="bg-cream/40">
-      <Container>
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-          <div>
-            <SectionHeading kicker={a.kicker} title={a.title} intro={a.intro} />
-            <div className="mt-6">
-              <TextLink href="/admissions">{a.more}</TextLink>
-            </div>
-          </div>
-          <Stepper />
-        </div>
-        <div className="mt-16">
-          <InquireBlock />
-        </div>
-      </Container>
-    </Section>
   );
 }

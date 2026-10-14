@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { EXPERIENCES, type Experience } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { sortedNews, upcomingEvents, type CampusEvent, type NewsCategory, type NewsPost } from "@/data/sccs-content";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { cn } from "@/lib/utils";
 import { useLang } from "./i18n";
-import { Container, Photo, Reveal, Section, SectionHeading, TextLink } from "./sccs-shared";
+import { Photo, Reveal } from "./sccs-shared";
 
 /* ───────── Jaguar Experience mosaic ───────── */
 
@@ -63,7 +64,7 @@ export function ExperienceMosaic() {
 
 export function BeyondChips() {
   const { tr } = useLang();
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   return (
     <ul className="flex flex-wrap gap-2.5">
       {TRADITIONS.map((tr_, i) => (
@@ -210,59 +211,5 @@ export function NewsPreview() {
         ))}
       </ul>
     </div>
-  );
-}
-
-export function CampusLife() {
-  const { t } = useLang();
-  const c = t.campusLife;
-  return (
-    <Section id="campus-life">
-      <Container>
-        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading kicker={c.kicker} title={c.title} intro={c.intro} />
-          <TextLink href="/campus-life/jaguar-experience">{c.exploreAll}</TextLink>
-        </div>
-        <div className="mt-12">
-          <ExperienceMosaic />
-        </div>
-
-        <div className="mt-20 grid gap-8 rounded-3xl bg-cream/70 p-7 sm:p-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-4">
-            <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{c.beyondTitle}</h3>
-            <p className="mt-3 text-mist">{c.beyondIntro}</p>
-            <TextLink href="/campus-life/beyond-the-classroom" className="mt-3">
-              {c.beyondCta}
-            </TextLink>
-          </div>
-          <div className="lg:col-span-8 lg:pt-1">
-            <BeyondChips />
-          </div>
-        </div>
-
-        <div id="events" className="mt-20 scroll-mt-28">
-          <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
-            <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{c.eventsTitle}</h3>
-            <p className="text-mist">{c.eventsIntro}</p>
-          </div>
-          <div className="mt-8">
-            <EventsGrid />
-          </div>
-        </div>
-
-        <div className="mt-20">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{c.newsTitle}</h3>
-              <p className="mt-2 text-mist">{c.newsIntro}</p>
-            </div>
-            <TextLink href="/news">{c.allNews}</TextLink>
-          </div>
-          <div className="mt-8">
-            <NewsPreview />
-          </div>
-        </div>
-      </Container>
-    </Section>
   );
 }

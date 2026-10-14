@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { animate, motion, useInView, useReducedMotion } from "framer-motion";
+import { animate, motion, useInView } from "framer-motion";
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { cn, EASE } from "@/lib/utils";
 import type { Photo } from "@/data/media";
 import { useLang } from "./i18n";
@@ -115,7 +116,7 @@ export function Reveal({
   className?: string;
   as?: "div" | "li" | "section" | "article";
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const Comp = motion[as];
   if (reduce) {
     const Static = as;
@@ -137,8 +138,8 @@ export function Reveal({
 export function CountUp({ value, duration = 1.8, className }: { value: number; duration?: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(reduce ? value : 0);
+  const reduce = useStaticMotion();
+  const [display, setDisplay] = useState(0);
   const prev = useRef(0);
 
   useEffect(() => {
@@ -188,16 +189,10 @@ export function Section({
 }
 
 export function Kicker({ children, dark, className }: { children: React.ReactNode; dark?: boolean; className?: string }) {
-  return (
-    <p className={cn("flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em]", dark ? "text-amber-400" : "text-crimson-600", className)}>
-      <span className="h-px w-8 bg-amber-500" aria-hidden="true" />
-      {children}
-    </p>
-  );
+  return <p className={cn("text-base font-semibold", dark ? "text-amber-400" : "text-crimson-600", className)}>{children}</p>;
 }
 
 export function SectionHeading({
-  kicker,
   title,
   intro,
   dark,
@@ -205,6 +200,7 @@ export function SectionHeading({
   align = "left",
   as: H = "h2",
 }: {
+  /** Accepted for older call sites; eyebrow labels are no longer rendered. */
   kicker?: string;
   title: string;
   intro?: string;
@@ -215,19 +211,14 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn(align === "center" && "mx-auto flex flex-col items-center text-center", className)}>
-      {kicker && (
-        <Reveal>
-          <Kicker dark={dark}>{kicker}</Kicker>
-        </Reveal>
-      )}
-      <Reveal delay={0.06}>
-        <H className={cn("font-display mt-4 text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[2.75rem]", dark ? "text-white" : "text-navy-900")}>
+      <Reveal>
+        <H className={cn("font-display text-balance text-4xl font-semibold leading-[1.04] tracking-[-0.025em] sm:text-5xl lg:text-6xl", dark ? "text-white" : "text-navy-900")}>
           {title}
         </H>
       </Reveal>
       {intro && (
         <Reveal delay={0.12}>
-          <p className={cn("mt-5 max-w-2xl text-base leading-relaxed sm:text-lg", dark ? "text-cream/75" : "text-mist")}>{intro}</p>
+          <p className={cn("mt-5 max-w-2xl text-lg leading-relaxed sm:text-xl", dark ? "text-cream/85" : "text-navy-900/75")}>{intro}</p>
         </Reveal>
       )}
     </div>
@@ -279,6 +270,7 @@ const buttonBase =
 
 export const buttonStyles = {
   gold: cn(buttonBase, "bg-amber-500 px-7 font-bold text-navy-950 shadow-[0_8px_32px_rgba(248,167,36,0.4)] hover:bg-amber-400 hover:shadow-[0_10px_40px_rgba(248,167,36,0.6)]"),
+  glass: cn(buttonBase, "bg-white/15 px-7 text-white ring-1 ring-inset ring-white/35 backdrop-blur-md backdrop-saturate-150 hover:bg-white/25"),
   outlineDark: cn(buttonBase, "border border-white/40 bg-white/5 px-7 text-white backdrop-blur-sm hover:bg-white/15"),
   outline: cn(buttonBase, "border border-navy-800/20 bg-white px-6 text-navy-900 hover:border-amber-500 hover:text-navy-700"),
   primary: cn(buttonBase, "bg-navy-800 px-7 text-ivory hover:bg-navy-700"),

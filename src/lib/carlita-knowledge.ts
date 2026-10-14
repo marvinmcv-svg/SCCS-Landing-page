@@ -4,17 +4,19 @@
  * dates, matriculation table) is deliberately excluded so Carlita never states
  * placeholder data as fact.
  *
- * The string is deterministic so the prompt cache stays warm across requests.
+ * The text is deterministic for a given version of the site content, so the prompt
+ * cache stays warm across requests and refreshes when the admin edits the facts.
  */
 import { ADMISSIONS_FAQ, CAMPUS, CURRICULUM, DUAL_DIPLOMA, HISTORY, LEADERSHIP, LEADERSHIP_HONORS, SAFETY, SUPPORT } from "@/data/pages";
 import { EXPERIENCES } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { dictionaries } from "@/data/dictionary";
 
-const en = dictionaries.en;
 const bullet = (lines: string[]) => lines.map((l) => `- ${l}`).join("\n");
 
-export const CARLITA_KNOWLEDGE = `
+export function carlitaKnowledge() {
+  const en = dictionaries.en;
+  return `
 # Santa Cruz Cooperative School (SCCS): verified facts
 
 ## Identity
@@ -90,3 +92,4 @@ ${HISTORY.chapters.map((c) => `- ${c.year}: ${c.body.en}`).join("\n")}
 ${LEADERSHIP.lede.en}
 - Board of Directors: ${LEADERSHIP.board.map((b) => `${b.name} (${b.role.en})`).join(", ")}.
 `.trim();
+}

@@ -4,8 +4,10 @@ import { EXPERIENCES } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { NEWS } from "@/data/sccs-content";
 import { SITE } from "@/lib/site";
+import { ensureContent } from "@/lib/content/store";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  await ensureContent();
   const paths = new Set<string>(["/", "/news", "/contact", "/campus-life/student-leadership"]);
   for (const p of PILLARS) {
     paths.add(p.href);

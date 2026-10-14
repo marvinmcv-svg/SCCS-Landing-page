@@ -3,6 +3,8 @@ import { Fraunces, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "@/components/sccs/i18n";
 import { SiteChrome } from "@/components/sccs/site-chrome";
+import { ContentProvider } from "@/components/sccs/content-provider";
+import { ensureContent } from "@/lib/content/store";
 import { SITE } from "@/lib/site";
 
 const fraunces = Fraunces({ subsets: ["latin", "latin-ext"], display: "swap", variable: "--font-fraunces" });
@@ -54,16 +56,19 @@ const jsonLd = {
   sameAs: [SITE.instagram, SITE.facebook],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const content = await ensureContent();
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable} ${montserrat.variable}`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>
-        <LangProvider>
-          <SiteChrome>{children}</SiteChrome>
-        </LangProvider>
+        <ContentProvider doc={content}>
+          <LangProvider>
+            <SiteChrome>{children}</SiteChrome>
+          </LangProvider>
+        </ContentProvider>
       </body>
     </html>
   );

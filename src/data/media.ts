@@ -11,7 +11,7 @@ export type Photo = {
   height: number;
   alt: L;
   /** Where the photo came from — shown nowhere, kept for the content team. */
-  source: "instagram" | "sccs.edu.bo";
+  source: "instagram" | "sccs.edu.bo" | "upload";
 };
 
 const p = (

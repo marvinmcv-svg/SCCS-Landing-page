@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { Compass, Cpu, HeartHandshake, Languages, Shield, ShieldCheck, Smile, Stethoscope, Users } from "lucide-react";
+import { Compass, Cpu, HeartHandshake, Languages, Shield, ShieldCheck, Smile, Stethoscope } from "lucide-react";
 import { media } from "@/data/media";
 import { useLang } from "./i18n";
-import { Container, JaguarMotif, Kicker, Photo, Reveal, Section, SectionHeading, TextLink } from "./sccs-shared";
+import { JaguarMotif, Kicker, Photo, Reveal, TextLink } from "./sccs-shared";
 
 const LEARNER_ICONS = [Languages, Compass, Cpu, Shield];
 const SAFETY_ICONS = [ShieldCheck, HeartHandshake, Smile, Stethoscope];
@@ -149,39 +148,5 @@ export function SafetyWellness({ withCta = true }: { withCta?: boolean }) {
         )}
       </div>
     </div>
-  );
-}
-
-export function Discover() {
-  const { t } = useLang();
-  const d = t.discover;
-  return (
-    <Section id="discover">
-      <Container>
-        <div className="grid items-end gap-10 lg:grid-cols-[1.2fr_1fr]">
-          <SectionHeading kicker={d.kicker} title={d.title} intro={d.intro} />
-          <Reveal delay={0.1} className="grid grid-cols-5 gap-3">
-            <Photo photo={media.campusLawn} className="col-span-3 aspect-[4/5] rounded-2xl" sizes="(min-width:1024px) 25vw, 60vw" />
-            <div className="col-span-2 flex flex-col gap-3">
-              <Photo photo={media.historyHalloween} className="aspect-square rounded-2xl" sizes="(min-width:1024px) 15vw, 40vw" imgClassName="object-[20%_50%]" />
-              <Link href="/discover" className="flex flex-1 flex-col justify-end rounded-2xl bg-navy-800 p-4 text-ivory transition-colors hover:bg-navy-700">
-                <Users className="h-5 w-5 text-amber-400" aria-hidden="true" />
-                <span className="mt-2 text-sm font-semibold leading-snug">{d.advantageCta}</span>
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 space-y-16 lg:mt-20 lg:space-y-24">
-          <MissionValues />
-          <LearnerProfile />
-          <JaguarSpirit />
-          <Timeline />
-          <div>
-            <SafetyWellness />
-          </div>
-        </div>
-      </Container>
-    </Section>
   );
 }

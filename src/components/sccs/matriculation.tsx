@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { CLASS_YEARS, COUNTRIES, MATRICULATION, type CountryCode } from "@/data/sccs-content";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLang } from "./i18n";
-import { Container, CountUp, Reveal, Section, SectionHeading, TextLink } from "./sccs-shared";
+import { CountUp, Reveal } from "./sccs-shared";
 import { WorldMap } from "./world-map";
 
 const darkTrigger = "rounded-full border-white/15 bg-navy-800 text-cream data-[placeholder]:text-cream/70 sm:w-56";
@@ -103,27 +103,5 @@ export function MatriculationExplorer() {
         </div>
       </Reveal>
     </div>
-  );
-}
-
-export function Matriculation({ withMore = true }: { withMore?: boolean }) {
-  const { t } = useLang();
-  const m = t.matriculation;
-  return (
-    <Section id="matriculation" dark>
-      <Container>
-        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading kicker={m.kicker} title={m.title} intro={m.intro} dark />
-          {withMore && (
-            <TextLink href="/learning/university-matriculation" dark>
-              {m.more}
-            </TextLink>
-          )}
-        </div>
-        <div className="mt-12">
-          <MatriculationExplorer />
-        </div>
-      </Container>
-    </Section>
   );
 }
