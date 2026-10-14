@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { useLang } from "./i18n";
-import { GoldDot, LogoLockup } from "./sccs-shared";
+import { LogoLockup } from "./sccs-shared";
+import { AccreditationLogos } from "./credentials";
 import { PORTALS } from "@/data/pages";
 import { SITE } from "@/lib/site";
 
@@ -35,7 +36,7 @@ export function Footer() {
     { href: "/learning/university-matriculation", label: lang === "en" ? "University Outcomes" : "Resultados Universitarios" },
     { href: "/campus-life/jaguar-experience", label: lang === "en" ? "The Jaguar Experience" : "La Experiencia Jaguar" },
     { href: "/discover/careers", label: lang === "en" ? "Work at SCCS" : "Trabaja en SCCS" },
-    { href: "/contact", label: lang === "en" ? "School Profile (on request)" : "School Profile (a solicitud)" },
+    { href: "/discover/school-profile", label: lang === "en" ? "School Profile" : "Perfil Escolar" },
   ];
   const families = [
     { href: "/news", label: "Jaguar News" },
@@ -54,16 +55,6 @@ export function Footer() {
               <LogoLockup />
             </Link>
             <p className="mt-6 max-w-xs text-sm leading-relaxed">{t.footer.tagline}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 px-3 py-1.5 text-[0.7rem] text-amber-100">
-                <GoldDot />
-                {t.footer.accreditation}
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 px-3 py-1.5 text-[0.7rem] text-amber-100">
-                <GoldDot />
-                {t.footer.founded}
-              </span>
-            </div>
             <div className="mt-6 flex gap-2">
               <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @sccsjaguars" className="pressable flex h-11 w-11 items-center justify-center rounded-full border border-white/15 hover:border-amber-400 hover:text-amber-400">
                 <InstagramGlyph className="h-5 w-5" />
@@ -139,7 +130,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-6 border-t border-white/10 pt-10 lg:flex-row lg:items-center lg:justify-between">
+          <p className="max-w-xs text-sm text-cream/70">{t.footer.accreditation}</p>
+          <AccreditationLogos size="sm" />
+        </div>
+
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {t.footer.rights}
           </p>

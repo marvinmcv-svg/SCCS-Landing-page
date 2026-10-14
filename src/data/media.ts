@@ -134,6 +134,11 @@ export const media = {
   spotlightFigueroa: p("ig-spotlight-figueroa", 640, 640, "Faculty spotlight: Elena Figueroa, 5th Grade Literacy", "Docente destacada: Elena Figueroa, Lectoescritura de 5.º grado", "instagram"),
   spotlightParada: p("ig-spotlight-parada", 640, 640, "Faculty spotlight: Alisha Parada, Assistant Teacher", "Docente destacada: Alisha Parada, Maestra Asistente", "instagram"),
   spotlightMoscon: p("ig-spotlight-moscon", 640, 640, "Faculty spotlight: Sofía Moscon, Assistant Teacher", "Docente destacada: Sofía Moscon, Maestra Asistente", "instagram"),
+  // University acceptance announcements shared by the school
+  acceptEcheverria: p("acceptances/analhya-echeverria-avila", 1080, 1350, "University acceptances: Analhya Echeverria Avila", "Admisiones universitarias: Analhya Echeverria Avila", "upload"),
+  acceptCastedo: p("acceptances/juan-enrique-castedo-diaz", 1080, 1350, "University acceptances: Juan Enrique Castedo Diaz", "Admisiones universitarias: Juan Enrique Castedo Diaz", "upload"),
+  acceptLandivar: p("acceptances/francisco-landivar-gil", 1080, 1350, "University acceptances: Francisco Landivar Gil", "Admisiones universitarias: Francisco Landivar Gil", "upload"),
+  acceptMatkovic: p("acceptances/milan-matkovic-barron", 1080, 1350, "University acceptances: Milan Matkovic Barron", "Admisiones universitarias: Milan Matkovic Barron", "upload"),
 } satisfies Record<string, Photo>;
 
 export type MediaKey = keyof typeof media;

@@ -7,6 +7,7 @@ import { Crest } from "@/components/sccs/sccs-shared";
 
 export function AdminLogin({ configured }: { configured: boolean }) {
   const router = useRouter();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -15,7 +16,7 @@ export function AdminLogin({ configured }: { configured: boolean }) {
     e.preventDefault();
     setBusy(true);
     setError("");
-    const res = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) });
+    const res = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username, password }) });
     const data = await res.json().catch(() => ({ ok: false }));
     setBusy(false);
     if (!data.ok) return setError(data.error ?? "Could not sign in.");
@@ -29,6 +30,19 @@ export function AdminLogin({ configured }: { configured: boolean }) {
         <h1 className="font-display mt-5 text-center text-3xl font-semibold text-navy-900">SCCS Admin</h1>
         {configured ? (
           <form onSubmit={submit} className="mt-6 space-y-4">
+            <label className="block text-sm font-semibold text-navy-900">
+              Username
+              <input
+                type="text"
+                autoComplete="username"
+                autoCapitalize="none"
+                spellCheck={false}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="mt-1.5 h-12 w-full rounded-xl px-4 ring-1 ring-inset ring-border outline-none focus:ring-2 focus:ring-amber-500"
+                required
+              />
+            </label>
             <label className="block text-sm font-semibold text-navy-900">
               Password
               <input
@@ -52,7 +66,7 @@ export function AdminLogin({ configured }: { configured: boolean }) {
           </form>
         ) : (
           <p className="mt-5 text-center text-sm leading-relaxed text-mist">
-            The admin portal is not switched on yet. Add an <strong>ADMIN_PASSWORD</strong> environment variable (at least 8 characters) to the project in Vercel, then redeploy.
+            The admin portal is not switched on yet. Add <strong>ADMIN_USERNAME</strong> and <strong>ADMIN_PASSWORD</strong> (at least 8 characters) as environment variables on the project in Vercel, then redeploy.
           </p>
         )}
       </div>

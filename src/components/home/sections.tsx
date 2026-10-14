@@ -16,6 +16,7 @@ import { JourneyTabs } from "../sccs/journey";
 import { MatriculationExplorer } from "../sccs/matriculation";
 import { CATEGORY_LABEL } from "../sccs/campus-life";
 import { InstagramGlyph } from "../sccs/footer";
+import { AcceptancePosters, AccreditationLogos } from "../sccs/credentials";
 import { Aurora, Marquee, Words, gsap, useGSAP } from "./motion";
 
 /* ───────── Shared pieces ───────── */
@@ -59,6 +60,10 @@ export function Stats() {
           </li>
         ))}
       </ul>
+      <div data-rise className={cn(wrap, "mt-24 sm:mt-28")}>
+        <p className="text-center text-base text-white/75">{t.home.accreditedLine}</p>
+        <AccreditationLogos className="mt-10" />
+      </div>
     </section>
   );
 }
@@ -378,6 +383,34 @@ export function MatriculationHome() {
         </div>
         <div data-rise className="mt-14">
           <MatriculationExplorer />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────── Recent university acceptances ───────── */
+
+export function AcceptancesHome() {
+  const { t } = useLang();
+  return (
+    <section id="acceptances" className="scroll-mt-24 bg-cream py-28 sm:py-36">
+      <div className={wrap}>
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <div className="max-w-3xl">
+            <h2 className={cn(h2, "text-navy-900")}>
+              <Words text={t.home.acceptancesTitle} />
+            </h2>
+            <p data-rise className="mt-6 text-xl text-navy-900/80">
+              {t.home.acceptancesIntro}
+            </p>
+          </div>
+          <div data-rise>
+            <More href="/discover/school-profile#acceptances">{t.home.acceptancesCta}</More>
+          </div>
+        </div>
+        <div className="mt-14">
+          <AcceptancePosters />
         </div>
       </div>
     </section>

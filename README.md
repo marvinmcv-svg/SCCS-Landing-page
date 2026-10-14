@@ -16,7 +16,7 @@ npm run typecheck && npm run lint
 | Pillar | Pages |
 |---|---|
 | Home `/` | All 13 sections from the master prompt. Every section links deeper. |
-| Discover SCCS | `/discover` (The SCCS Advantage) · `/discover/history` · `/discover/safety-wellness` · `/discover/campus` · `/discover/leadership` · `/discover/careers` |
+| Discover SCCS | `/discover` (The SCCS Advantage) · `/discover/school-profile` (High School Profile 2025–26: accreditation, AP/SAT results, graduation requirements, 211 university acceptances) · `/discover/history` · `/discover/safety-wellness` · `/discover/campus` · `/discover/leadership` · `/discover/careers` |
 | Admissions | `/admissions` (3-phase stepper, inquiry form, FAQ) |
 | Learning & Outcomes | `/learning` (curriculum, standards, assessment, honor roll) · `/learning/academic-journey` · `/learning/dual-diploma` · `/learning/student-support` · `/learning/university-matriculation` |
 | Campus Life | `/campus-life` · **`/campus-life/jaguar-experience`** + 6 deep pages (Innovation Hub, Performing Arts Center, Jaguar Athletics, Friendship Games, Science Labs, Library) · **`/campus-life/beyond-the-classroom`** + 9 tradition pages (Math Bowl, Knowledge Bowl, Spelling Bee, Book Fair, Family Reading Night, Santa Cruz Day, Fun Run, Grandparents' Day, Senior Welcome Dinner) · `/campus-life/student-leadership` · `/news` + 10 stories |
@@ -76,10 +76,10 @@ Staff edit the site at **/admin**: every headline and sentence (English and Span
 
 **One-time setup in Vercel** (Project → Settings):
 1. **Storage → Create → Blob**, connect it to this project. This adds `BLOB_READ_WRITE_TOKEN`.
-2. **Environment Variables → `ADMIN_PASSWORD`**, at least 8 characters.
+2. **Environment Variables → `ADMIN_USERNAME` and `ADMIN_PASSWORD`** (at least 8 characters). Change either one at any time and redeploy; that signs every session out.
 3. Redeploy.
 
-How it works: the content in `src/data/*` is the default. Edits are stored as a small diff (`sccs-content/overrides.json` in Blob) and merged onto the live data on the server and in the browser (`src/lib/content/`). Saving revalidates the static pages, so the site stays fast. Photos are referenced by library key, so replacing a photo in the library changes it everywhere. Sign-in is a single shared password with an httpOnly signed cookie; admin writes require the same origin. In local development without Blob, edits are written to `.data/content.json`.
+How it works: the content in `src/data/*` is the default. Edits are stored as a small diff (`sccs-content/overrides.json` in Blob) and merged onto the live data on the server and in the browser (`src/lib/content/`). Saving revalidates the static pages, so the site stays fast. Photos are referenced by library key, so replacing a photo in the library changes it everywhere. Sign-in is a username and password from the environment (never stored in the code), with an httpOnly signed cookie; admin writes require the same origin. In local development without Blob, edits are written to `.data/content.json`.
 
 ## Design
 

@@ -3,17 +3,20 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 
 /**
- * Admin sign-in. One shared password, set as ADMIN_PASSWORD in the hosting
- * environment. A successful sign-in sets an httpOnly cookie holding an expiry
- * time signed with that password, so changing the password signs everyone out.
+ * Admin sign-in. A username and password set as ADMIN_USERNAME and ADMIN_PASSWORD
+ * in the hosting environment (never in the code). A successful sign-in sets an
+ * httpOnly cookie holding an expiry time signed with those credentials, so changing
+ * either one signs everyone out.
  */
 export const ADMIN_COOKIE = "sccs_admin";
 const SESSION_HOURS = 12;
 
-export const adminConfigured = () => (process.env.ADMIN_PASSWORD ?? "").length >= 8;
+const username = () => (process.env.ADMIN_USERNAME ?? "").trim();
+
+export const adminConfigured = () => username().length > 0 && (process.env.ADMIN_PASSWORD ?? "").length >= 8;
 
 function sign(value: string) {
-  return createHmac("sha256", `sccs-admin:${process.env.ADMIN_PASSWORD}`).update(value).digest("base64url");
+  return createHmac("sha256", `sccs-admin:${username()}:${process.env.ADMIN_PASSWORD}`).update(value).digest("base64url");
 }
 
 function safeEqual(a: string, b: string) {
@@ -22,10 +25,12 @@ function safeEqual(a: string, b: string) {
   return x.length === y.length && timingSafeEqual(x, y);
 }
 
-export function passwordMatches(input: string) {
+export function credentialsMatch(user: string, password: string) {
   if (!adminConfigured()) return false;
   // Compare digests so the comparison takes the same time whatever the input length.
-  return safeEqual(sign(`pw:${input}`), sign(`pw:${process.env.ADMIN_PASSWORD}`));
+  const userOk = safeEqual(sign(`user:${user.trim().toLowerCase()}`), sign(`user:${username().toLowerCase()}`));
+  const passOk = safeEqual(sign(`pw:${password}`), sign(`pw:${process.env.ADMIN_PASSWORD}`));
+  return userOk && passOk;
 }
 
 export function newSessionToken() {

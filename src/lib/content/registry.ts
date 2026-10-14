@@ -4,6 +4,8 @@
  */
 import { dictionaries } from "@/data/dictionary";
 import { HERO_SLIDES } from "@/data/home";
+import { ACCEPTANCES, ACCEPTANCE_LIST } from "@/data/acceptances";
+import { ACCREDITATIONS, MINISTRY, SCHOOL_PROFILE } from "@/data/profile";
 import { media } from "@/data/media";
 import { PILLARS } from "@/data/nav";
 import { EXPERIENCES } from "@/data/experiences";
@@ -50,6 +52,9 @@ export const COLLECTIONS: CollectionDef[] = [
   { id: "history", group: "Discover SCCS", label: "Our History", description: "The founding story and the milestones timeline.", href: "/discover/history", target: HISTORY },
   { id: "safety", group: "Discover SCCS", label: "Safety & Wellness", description: "Child protection, SEL, restorative practices and the medical center.", href: "/discover/safety-wellness", target: SAFETY },
   { id: "campus", group: "Discover SCCS", label: "Campus & Facilities", description: "The campus page.", href: "/discover/campus", target: CAMPUS },
+  { id: "schoolProfile", group: "Discover SCCS", label: "School Profile", description: "Enrollment, contacts, AP and SAT results, graduation requirements, grade scale and campus facts.", href: "/discover/school-profile", target: SCHOOL_PROFILE },
+  { id: "accreditations", group: "Discover SCCS", label: "Accreditations & memberships", description: "Cognia, AMISA, AAIE and Yondr: the text and links shown with each badge.", href: "/discover/school-profile", target: ACCREDITATIONS },
+  { id: "ministry", group: "Discover SCCS", label: "Ministry of Education line", description: "The Bolivian Ministry of Education recognition shown with the badges.", href: "/discover/school-profile", target: MINISTRY },
   { id: "leadership", group: "Discover SCCS", label: "Leadership & Governance", description: "The Director's welcome and the Board of Directors.", href: "/discover/leadership", target: LEADERSHIP },
   { id: "careers", group: "Discover SCCS", label: "Work at SCCS", description: "The careers page.", href: "/discover/careers", target: CAREERS },
 
@@ -70,6 +75,8 @@ export const COLLECTIONS: CollectionDef[] = [
     itemTitle: "university",
     enums: { country: ["US", "CA", "GB", "ES", "NL", "IT", "BO", "CO", "CL", "MX", "AU"] },
   },
+  { id: "acceptances", group: "Learning & Outcomes", label: "University acceptances", description: "Senior acceptance posters. Duplicate a card, then change the photo and name to add a new senior.", href: "/#acceptances", target: ACCEPTANCES, itemTitle: "name" },
+  { id: "acceptanceList", group: "Learning & Outcomes", label: "Acceptances list", description: "Every university that admitted SCCS graduates, by region (School Profile page).", href: "/discover/school-profile#acceptances", target: ACCEPTANCE_LIST },
   { id: "classYears", group: "Learning & Outcomes", label: "Class years filter", description: "The years offered in the matriculation filter.", href: "/learning/university-matriculation", target: CLASS_YEARS },
 
   { id: "experiences", group: "Campus Life", label: "Jaguar Experience pages", description: "Innovation Hub, PAC, Athletics, Friendship Games, Science Labs and Library.", href: "/campus-life/jaguar-experience", target: EXPERIENCES },

@@ -15,6 +15,7 @@ export const PILLARS: NavPillar[] = [
       { href: "/discover/history", label: { en: "Our History", es: "Nuestra Historia" }, blurb: { en: "From 26 students to six decades of Jaguars", es: "De 26 estudiantes a seis décadas de Jaguars" } },
       { href: "/discover/safety-wellness", label: { en: "Safety & Wellness", es: "Seguridad y Bienestar" }, blurb: { en: "Child protection, SEL, and our medical center", es: "Protección infantil, SEL y centro médico" } },
       { href: "/discover/campus", label: { en: "Campus & Facilities", es: "Campus e Instalaciones" }, blurb: { en: "An 8-acre campus built as a third teacher", es: "Un campus de 8 acres pensado como tercer maestro" } },
+      { href: "/discover/school-profile", label: { en: "School Profile", es: "Perfil Escolar" }, blurb: { en: "Accreditation, AP results and acceptances", es: "Acreditación, resultados AP y admisiones" } },
       { href: "/discover/leadership", label: { en: "Leadership & Governance", es: "Liderazgo y Gobierno" }, blurb: { en: "Director, principals, and the Board", es: "Dirección, principales y Junta Directiva" } },
       { href: "/discover/careers", label: { en: "Work at SCCS", es: "Trabaja en SCCS" }, blurb: { en: "Join the people behind the Jaguars", es: "Únete al equipo detrás de los Jaguars" } },
     ],

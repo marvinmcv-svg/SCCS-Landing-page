@@ -5,6 +5,7 @@ import { ArrowRight, Award, Check } from "lucide-react";
 import { media, type Photo as PhotoT } from "@/data/media";
 import { CURRICULUM, DUAL_DIPLOMA, SUPPORT } from "@/data/pages";
 import { PILLARS } from "@/data/nav";
+import { AcceptancePosters } from "@/components/sccs/credentials";
 import { useLang } from "@/components/sccs/i18n";
 import { Container, Kicker, Photo, Reveal, Section, SectionHeading, buttonStyles } from "@/components/sccs/sccs-shared";
 import { IconCards, PageHero, RelatedLinks, Tabs } from "@/components/sccs/page-kit";
@@ -336,6 +337,17 @@ export function MatriculationPage() {
           <MatriculationExplorer />
         </Container>
       </Section>
+      <Section className="bg-cream">
+        <Container>
+          <SectionHeading title={t.home.acceptancesTitle} intro={t.home.acceptancesIntro} />
+          <div className="mt-12">
+            <AcceptancePosters />
+          </div>
+          <Link href="/discover/school-profile#acceptances" className={cn(buttonStyles.outline, "mt-10")}>
+            {t.home.acceptancesCta}
+          </Link>
+        </Container>
+      </Section>
       <Section>
         <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal className="grid grid-cols-2 gap-3">
@@ -355,8 +367,8 @@ export function MatriculationPage() {
                 </li>
               ))}
             </ul>
-            <Link href="/contact" className={cn(buttonStyles.primary, "mt-8")}>
-              {tr({ en: "Request the School Profile", es: "Solicita el School Profile" })}
+            <Link href="/discover/school-profile" className={cn(buttonStyles.primary, "mt-8")}>
+              {tr({ en: "Read the School Profile", es: "Lee el Perfil Escolar" })}
             </Link>
           </Reveal>
         </Container>

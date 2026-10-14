@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ADMIN_COOKIE, adminConfigured, newSessionToken, passwordMatches } from "@/lib/admin-auth";
+import { ADMIN_COOKIE, adminConfigured, credentialsMatch, newSessionToken } from "@/lib/admin-auth";
 import { sameOrigin } from "@/lib/admin-api";
 
 const attempts = new Map<string, number[]>();
@@ -16,13 +16,14 @@ function limited(ip: string) {
 
 export async function POST(req: Request) {
   if (!sameOrigin(req)) return NextResponse.json({ ok: false, error: "Bad origin" }, { status: 403 });
-  if (!adminConfigured()) return NextResponse.json({ ok: false, error: "The admin password has not been set up yet." }, { status: 503 });
+  if (!adminConfigured()) return NextResponse.json({ ok: false, error: "The admin sign-in has not been set up yet." }, { status: 503 });
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (limited(ip)) return NextResponse.json({ ok: false, error: "Too many attempts. Try again in 10 minutes." }, { status: 429 });
 
-  const body = (await req.json().catch(() => null)) as { password?: unknown } | null;
-  const password = typeof body?.password === "string" ? body.password : "";
-  if (!passwordMatches(password)) return NextResponse.json({ ok: false, error: "That password is not correct." }, { status: 401 });
+  const body = (await req.json().catch(() => null)) as { username?: unknown; password?: unknown } | null;
+  const username = typeof body?.username === "string" ? body.username.slice(0, 120) : "";
+  const password = typeof body?.password === "string" ? body.password.slice(0, 200) : "";
+  if (!credentialsMatch(username, password)) return NextResponse.json({ ok: false, error: "That username or password is not correct." }, { status: 401 });
 
   const token = newSessionToken();
   const res = NextResponse.json({ ok: true });
