@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { ArrowUp, CalendarDays, Compass, FileText, Globe, GraduationCap, Hash, MapPin, Newspaper, Send, Sparkles, User } from "lucide-react";
+import { ArrowUp, MessageCircle, CalendarDays, Compass, FileText, Globe, GraduationCap, Hash, MapPin, Newspaper, Send, Sparkles, User } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -11,6 +11,7 @@ import { EXPERIENCES } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { TEAM, sortedNews, upcomingEvents } from "@/data/sccs-content";
 import { useLang } from "./i18n";
+import { openCarlita } from "./carlita";
 
 const OPEN_EVENT = "sccs:open-palette";
 
@@ -77,23 +78,33 @@ export function CommandPalette() {
             <CommandGroup heading={t.palette.groups.jumpTo}>
               {jumpTo.map((j) => (
                 <CommandItem key={j.id} value={`jump ${j.label}`} onSelect={() => go(`/#${j.id}`)}>
-                  <Hash className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                  <Hash className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                   {j.label}
                 </CommandItem>
               ))}
             </CommandGroup>
 
             <CommandGroup heading={t.palette.groups.actions}>
+              <CommandItem
+                value={t.palette.actions.carlita}
+                onSelect={() => {
+                  setOpen(false);
+                  openCarlita();
+                }}
+              >
+                <MessageCircle className="h-4 w-4 text-crimson-600" aria-hidden="true" />
+                {t.palette.actions.carlita}
+              </CommandItem>
               <CommandItem value={t.palette.actions.apply} onSelect={() => go("/admissions#inquire")}>
-                <GraduationCap className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                <GraduationCap className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                 {t.palette.actions.apply}
               </CommandItem>
               <CommandItem value={t.palette.actions.tour} onSelect={() => go("/admissions#inquire")}>
-                <MapPin className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                <MapPin className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                 {t.palette.actions.tour}
               </CommandItem>
               <CommandItem value={t.palette.actions.inquire} onSelect={() => go("/admissions#inquire")}>
-                <Send className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                <Send className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                 {t.palette.actions.inquire}
               </CommandItem>
               <CommandItem
@@ -103,7 +114,7 @@ export function CommandPalette() {
                   setOpen(false);
                 }}
               >
-                <Globe className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                <Globe className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                 {lang === "en" ? t.palette.actions.langEs : t.palette.actions.langEn}
               </CommandItem>
               <CommandItem
@@ -113,7 +124,7 @@ export function CommandPalette() {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
               >
-                <ArrowUp className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                <ArrowUp className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                 {t.palette.actions.top}
               </CommandItem>
             </CommandGroup>
@@ -122,11 +133,11 @@ export function CommandPalette() {
               {pages.map((p) => (
                 <CommandItem key={p.href + p.label} value={`${p.label} ${p.hint}`} onSelect={() => go(p.href)}>
                   {p.href.includes("jaguar-experience") ? (
-                    <Sparkles className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                    <Sparkles className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                   ) : p.href.includes("beyond") ? (
-                    <Compass className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                    <Compass className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                   ) : (
-                    <FileText className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                    <FileText className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                   )}
                   <span className="flex-1">{p.label}</span>
                   <span className="text-xs text-mist">{p.hint}</span>
@@ -137,7 +148,7 @@ export function CommandPalette() {
             <CommandGroup heading={t.palette.groups.news}>
               {sortedNews().map((n) => (
                 <CommandItem key={n.slug} value={`news ${tr(n.title)}`} onSelect={() => go(`/news/${n.slug}`)}>
-                  <Newspaper className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                  <Newspaper className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                   {tr(n.title)}
                 </CommandItem>
               ))}
@@ -146,7 +157,7 @@ export function CommandPalette() {
             <CommandGroup heading={t.palette.groups.events}>
               {upcomingEvents().map((e) => (
                 <CommandItem key={e.date + e.title.en} value={`event ${tr(e.title)}`} onSelect={() => go(e.href)}>
-                  <CalendarDays className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                  <CalendarDays className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                   <span className="flex-1">{tr(e.title)}</span>
                   <span className="text-xs text-mist">{format(parseISO(e.date), "d MMM", { locale: dateLocale })}</span>
                 </CommandItem>
@@ -156,7 +167,7 @@ export function CommandPalette() {
             <CommandGroup heading={t.palette.groups.team}>
               {TEAM.map((m) => (
                 <CommandItem key={m.name} value={`team ${m.name} ${tr(m.role)}`} onSelect={() => go("/community#team")}>
-                  <User className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                  <User className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                   <span className="flex-1">{m.name}</span>
                   <span className="text-xs text-mist">{tr(m.role)}</span>
                 </CommandItem>

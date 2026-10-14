@@ -31,7 +31,7 @@ export function SelectContent({ className, children, position = "popper", ...pro
         position={position}
         sideOffset={6}
         className={cn(
-          "z-[80] max-h-[min(22rem,var(--radix-select-content-available-height))] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl border border-border bg-white text-charcoal shadow-[0_16px_48px_rgba(7,37,26,0.18)]",
+          "z-[80] max-h-[min(22rem,var(--radix-select-content-available-height))] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl border border-border bg-white text-charcoal shadow-[0_16px_48px_rgba(20,20,58,0.18)]",
           className,
         )}
         {...props}
@@ -46,14 +46,14 @@ export function SelectItem({ className, children, ...props }: React.ComponentPro
   return (
     <SelectPrimitive.Item
       className={cn(
-        "relative flex min-h-10 cursor-pointer select-none items-center rounded-lg py-2 pl-8 pr-3 text-sm outline-none data-[highlighted]:bg-jungle-100 data-[highlighted]:text-jungle-900",
+        "relative flex min-h-10 cursor-pointer select-none items-center rounded-lg py-2 pl-8 pr-3 text-sm outline-none data-[highlighted]:bg-navy-100 data-[highlighted]:text-navy-900",
         className,
       )}
       {...props}
     >
       <span className="absolute left-2.5 flex h-4 w-4 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <Check className="h-4 w-4 text-gold-600" aria-hidden="true" />
+          <Check className="h-4 w-4 text-crimson-600" aria-hidden="true" />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

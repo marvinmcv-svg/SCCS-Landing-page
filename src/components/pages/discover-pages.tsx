@@ -43,7 +43,7 @@ export function AdvantagePage() {
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
             <Reveal>
               <Kicker>{tr({ en: "A global classroom", es: "Un aula global" })}</Kicker>
-              <h2 className="font-display mt-4 text-3xl font-semibold text-jungle-900 sm:text-4xl">
+              <h2 className="font-display mt-4 text-3xl font-semibold text-navy-900 sm:text-4xl">
                 {tr({ en: "Built to mirror the universities our graduates attend.", es: "Pensado como las universidades a las que van nuestros graduados." })}
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-mist">
@@ -56,7 +56,7 @@ export function AdvantagePage() {
             <Reveal delay={0.1} className="grid gap-4 sm:grid-cols-3">
               {body.map((b) => (
                 <div key={b.value} className="rounded-2xl border border-border bg-card p-6 text-center">
-                  <p className="font-display text-4xl font-semibold text-gold-600">{b.value}</p>
+                  <p className="font-display text-4xl font-semibold text-crimson-600">{b.value}</p>
                   <p className="mt-2 text-sm text-mist">{tr(b.label)}</p>
                 </div>
               ))}
@@ -88,15 +88,15 @@ export function HistoryPage() {
       <Section>
         <Container>
           <ol className="relative space-y-20 lg:space-y-28">
-            <span className="absolute bottom-0 left-4 top-0 hidden w-px bg-gradient-to-b from-gold-500 via-gold-500/40 to-transparent lg:left-1/2 lg:block" aria-hidden="true" />
+            <span className="absolute bottom-0 left-4 top-0 hidden w-px bg-gradient-to-b from-amber-500 via-amber-500/40 to-transparent lg:left-1/2 lg:block" aria-hidden="true" />
             {HISTORY.chapters.map((c, i) => (
               <li key={c.year} className="relative grid items-center gap-8 lg:grid-cols-2 lg:gap-20">
                 <Reveal className={cn(i % 2 === 1 && "lg:order-2")}>
-                  <Photo photo={c.image} className="aspect-[16/10] rounded-2xl shadow-[0_24px_60px_rgba(7,37,26,0.14)]" sizes="(min-width:1024px) 45vw, 100vw" />
+                  <Photo photo={c.image} className="aspect-[16/10] rounded-2xl shadow-[0_24px_60px_rgba(20,20,58,0.14)]" sizes="(min-width:1024px) 45vw, 100vw" />
                 </Reveal>
                 <Reveal delay={0.1}>
-                  <p className="font-display text-6xl font-semibold text-gold-500/90 sm:text-7xl">{c.year}</p>
-                  <h2 className="font-display mt-3 text-3xl font-semibold text-jungle-900">{tr(c.title)}</h2>
+                  <p className="font-display text-6xl font-semibold text-amber-500/90 sm:text-7xl">{c.year}</p>
+                  <h2 className="font-display mt-3 text-3xl font-semibold text-navy-900">{tr(c.title)}</h2>
                   <p className="mt-4 text-lg leading-relaxed text-mist">{tr(c.body)}</p>
                 </Reveal>
               </li>
@@ -135,7 +135,7 @@ export function SafetyPage() {
           ))}
         </Container>
       </Section>
-      <Section className="bg-jungle-100/60">
+      <Section className="bg-navy-100/60">
         <Container>
           <SectionHeading kicker={tr({ en: "Child Protection", es: "Protección Infantil" })} title={tr({ en: "Revised every year. Shared by everyone.", es: "Revisada cada año. Compartida por todos." })} />
           <div className="mt-10">
@@ -146,7 +146,7 @@ export function SafetyPage() {
                 label: tr(tb.label),
                 content: (
                   <div className="rounded-2xl bg-white p-7 sm:p-10">
-                    <h3 className="font-display text-2xl font-semibold text-jungle-900">{tr(tb.title)}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-navy-900">{tr(tb.title)}</h3>
                     <div className="mt-4 space-y-4 leading-relaxed text-mist">
                       {tb.body.map((b, i) => (
                         <p key={i}>{tr(b)}</p>
@@ -157,12 +157,12 @@ export function SafetyPage() {
               }))}
             />
           </div>
-          <h3 className="font-display mt-16 text-2xl font-semibold text-jungle-900">{tr(SAFETY.promiseTitle)}</h3>
+          <h3 className="font-display mt-16 text-2xl font-semibold text-navy-900">{tr(SAFETY.promiseTitle)}</h3>
           <div className="mt-6">
             <IconCards items={SAFETY.promise.map((p) => ({ title: tr(p.title), text: tr(p.text) }))} />
           </div>
-          <div className="mt-10 flex flex-col items-start gap-5 rounded-2xl bg-jungle-950 p-7 text-cream sm:flex-row sm:items-center sm:p-10">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gold-500 text-jungle-950">
+          <div className="mt-10 flex flex-col items-start gap-5 rounded-2xl bg-navy-950 p-7 text-cream sm:flex-row sm:items-center sm:p-10">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-amber-500 text-navy-950">
               <Stethoscope className="h-6 w-6" aria-hidden="true" />
             </span>
             <div className="flex-1">
@@ -202,13 +202,13 @@ export function CampusPage() {
                 <>
                   <Photo photo={f.image} className="aspect-[4/3]" sizes="(min-width:1024px) 25vw, 50vw" imgClassName="transition-transform duration-700 group-hover:scale-105" />
                   <div className="flex flex-1 flex-col p-5">
-                    <h2 className="font-semibold text-jungle-900">{tr(f.title)}</h2>
+                    <h2 className="font-semibold text-navy-900">{tr(f.title)}</h2>
                     <p className="mt-1.5 flex-1 text-sm leading-relaxed text-mist">{tr(f.text)}</p>
-                    {"href" in f && f.href && <ArrowRight className="mt-3 h-4 w-4 text-gold-600 transition-transform group-hover:translate-x-1" aria-hidden="true" />}
+                    {"href" in f && f.href && <ArrowRight className="mt-3 h-4 w-4 text-crimson-600 transition-transform group-hover:translate-x-1" aria-hidden="true" />}
                   </div>
                 </>
               );
-              const cls = "group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-[0_18px_44px_rgba(7,37,26,0.1)]";
+              const cls = "group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-[0_18px_44px_rgba(20,20,58,0.1)]";
               return (
                 <Reveal as="li" key={f.title.en} delay={(i % 4) * 0.06}>
                   {"href" in f && f.href ? (
@@ -247,9 +247,9 @@ export function LeadershipPage() {
       <PageHero photo={media.board} kicker={tr(LEADERSHIP.kicker)} title={tr(LEADERSHIP.title)} lede={tr(LEADERSHIP.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/leadership", label: tr(LEADERSHIP.kicker) }]} imgPosition="object-[50%_30%]" />
       <Section>
         <Container>
-          <Reveal className="mx-auto max-w-4xl rounded-3xl bg-jungle-100/70 p-8 sm:p-12">
+          <Reveal className="mx-auto max-w-4xl rounded-3xl bg-navy-100/70 p-8 sm:p-12">
             <Kicker>{tr(LEADERSHIP.messageTitle)}</Kicker>
-            <p className="font-display mt-6 text-2xl leading-snug text-jungle-900 sm:text-3xl">“{tr(LEADERSHIP.message)}”</p>
+            <p className="font-display mt-6 text-2xl leading-snug text-navy-900 sm:text-3xl">“{tr(LEADERSHIP.message)}”</p>
           </Reveal>
           <div className="mt-20">
             <IconCards items={LEADERSHIP.blocks.map((b) => ({ title: tr(b.title), text: tr(b.text) }))} />
@@ -263,12 +263,12 @@ export function LeadershipPage() {
               <Photo photo={media.board} className="aspect-[16/10] rounded-2xl" sizes="(min-width:1024px) 55vw, 100vw" />
             </Reveal>
             <Reveal delay={0.1}>
-              <h2 className="font-display text-3xl font-semibold text-jungle-900">{tr(LEADERSHIP.boardTitle)}</h2>
+              <h2 className="font-display text-3xl font-semibold text-navy-900">{tr(LEADERSHIP.boardTitle)}</h2>
               <p className="mt-4 leading-relaxed text-mist">{tr(LEADERSHIP.boardBody)}</p>
               <ul className="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                 {LEADERSHIP.board.map((b) => (
                   <li key={b.name} className="border-b border-border pb-2">
-                    <p className="font-semibold text-jungle-900">{b.name}</p>
+                    <p className="font-semibold text-navy-900">{b.name}</p>
                     <p className="text-xs text-mist">{tr(b.role)}</p>
                   </li>
                 ))}
@@ -296,7 +296,7 @@ export function CareersPage() {
       <Section>
         <Container>
           <IconCards items={CAREERS.why.map((b) => ({ title: tr(b.title), text: tr(b.text) }))} />
-          <div className="mt-16 flex flex-col items-start gap-5 rounded-2xl bg-jungle-950 p-8 text-cream sm:flex-row sm:items-center sm:p-10">
+          <div className="mt-16 flex flex-col items-start gap-5 rounded-2xl bg-navy-950 p-8 text-cream sm:flex-row sm:items-center sm:p-10">
             <div className="flex-1">
               <h2 className="font-display text-2xl font-semibold text-white sm:text-3xl">{tr(CAREERS.applyTitle)}</h2>
               <p className="mt-2 max-w-2xl text-cream/75">{tr(CAREERS.applyBody)}</p>

@@ -14,11 +14,11 @@ export function InstagramGrid() {
       <Container>
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
-            <h2 id="ig-title" className="font-display text-3xl font-semibold text-jungle-900 sm:text-4xl">
+            <h2 id="ig-title" className="font-display text-3xl font-semibold text-navy-900 sm:text-4xl">
               {c.followTitle}
             </h2>
             <p className="mt-2 text-mist">
-              <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" className="font-semibold text-gold-600 hover:text-gold-500">
+              <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" className="font-semibold text-crimson-600 hover:text-amber-500">
                 {c.followHandle}
               </a>{" "}
               · {c.followCaption}
@@ -34,7 +34,7 @@ export function InstagramGrid() {
             <Reveal as="li" key={p.photo.src} delay={(i % 4) * 0.05}>
               <a href={p.url} target="_blank" rel="noopener noreferrer" className="group relative block aspect-square overflow-hidden rounded-2xl" aria-label={`${tr(p.caption)} — ${t.page.viewOnInstagram}`}>
                 <Photo photo={p.photo} className="absolute inset-0" sizes="(min-width:1024px) 25vw, 50vw" imgClassName="transition-transform duration-700 group-hover:scale-105" />
-                <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-jungle-950/60 p-4 text-center text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-navy-950/60 p-4 text-center text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                   <InstagramGlyph className="h-7 w-7" />
                   {tr(p.caption)}
                 </span>

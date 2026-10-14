@@ -20,7 +20,7 @@ function LangToggle({ light }: { light: boolean }) {
       aria-label={`${t.misc.localeLabel}: ${lang === "en" ? "English" : "Español"}`}
       className={cn(
         "pressable inline-flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-xs font-semibold tracking-wide transition-colors",
-        light ? "border-white/30 text-white/90 hover:border-white/60" : "border-border text-jungle-900 hover:border-gold-500",
+        light ? "border-white/30 text-white/90 hover:border-white/60" : "border-border text-navy-900 hover:border-amber-500",
       )}
     >
       <Globe className="h-3.5 w-3.5" aria-hidden="true" />
@@ -87,7 +87,7 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-500",
-        scrolled ? "border-b border-border bg-ivory/90 shadow-[0_1px_24px_rgba(7,37,26,0.06)] backdrop-blur-xl" : "border-b border-transparent bg-transparent",
+        scrolled ? "border-b border-border bg-ivory/90 shadow-[0_1px_24px_rgba(20,20,58,0.06)] backdrop-blur-xl" : "border-b border-transparent bg-transparent",
       )}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -99,11 +99,11 @@ export function Header() {
             light ? "text-white/75" : "text-mist",
           )}
         >
-          <Link href="/community#parent-hub" className="hover:text-gold-400">
+          <Link href="/community#parent-hub" className="hover:text-amber-400">
             {t.nav.families}
           </Link>
           <span className={cn("h-3 w-px", light ? "bg-white/30" : "bg-border")} aria-hidden="true" />
-          <button type="button" onClick={openPalette} className="inline-flex items-center gap-1.5 hover:text-gold-400">
+          <button type="button" onClick={openPalette} className="inline-flex items-center gap-1.5 hover:text-amber-400">
             <Search className="h-3 w-3" aria-hidden="true" />
             {t.nav.search}
             <kbd className={cn("rounded border px-1.5 py-px font-sans text-[0.62rem]", light ? "border-white/30" : "border-border")}>⌘K</kbd>
@@ -128,7 +128,7 @@ export function Header() {
                       aria-current={!isHome && isActive ? "page" : undefined}
                       className={cn(
                         "sccs-link-underline inline-flex min-h-11 items-center gap-1 whitespace-nowrap px-2.5 text-[0.875rem] font-medium transition-colors 2xl:px-3.5",
-                        isActive ? (light ? "text-gold-400" : "text-gold-600") : light ? "text-white/90 hover:text-white" : "text-jungle-900 hover:text-jungle-600",
+                        isActive ? (light ? "text-amber-400" : "text-crimson-600") : light ? "text-white/90 hover:text-white" : "text-navy-900 hover:text-navy-600",
                       )}
                     >
                       {tr(p.label)}
@@ -136,11 +136,11 @@ export function Header() {
                     </Link>
                     {/* Mega dropdown */}
                     <div className="invisible absolute left-1/2 top-full z-10 w-[22rem] -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                      <ul className="overflow-hidden rounded-2xl border border-border bg-ivory p-2 shadow-[0_24px_60px_rgba(7,37,26,0.18)]">
+                      <ul className="overflow-hidden rounded-2xl border border-border bg-ivory p-2 shadow-[0_24px_60px_rgba(20,20,58,0.18)]">
                         {p.children.map((c) => (
                           <li key={c.href}>
                             <Link href={c.href} className="block rounded-xl px-4 py-3 transition-colors hover:bg-cream focus-visible:bg-cream">
-                              <span className="block text-sm font-semibold text-jungle-900">{tr(c.label)}</span>
+                              <span className="block text-sm font-semibold text-navy-900">{tr(c.label)}</span>
                               <span className="mt-0.5 block text-xs text-mist">{tr(c.blurb)}</span>
                             </Link>
                           </li>
@@ -158,7 +158,7 @@ export function Header() {
               type="button"
               onClick={openPalette}
               aria-label={t.nav.search}
-              className={cn("pressable flex h-11 w-11 items-center justify-center rounded-full lg:hidden", light ? "text-white" : "text-jungle-900")}
+              className={cn("pressable flex h-11 w-11 items-center justify-center rounded-full lg:hidden", light ? "text-white" : "text-navy-900")}
             >
               <Search className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -173,7 +173,7 @@ export function Header() {
               onClick={() => setOpen(true)}
               aria-label={t.misc.openMenu}
               aria-expanded={open}
-              className={cn("pressable flex h-11 w-11 items-center justify-center rounded-full xl:hidden", light ? "text-white" : "text-jungle-900")}
+              className={cn("pressable flex h-11 w-11 items-center justify-center rounded-full xl:hidden", light ? "text-white" : "text-navy-900")}
             >
               <Menu className="h-6 w-6" aria-hidden="true" />
             </button>
@@ -187,7 +187,7 @@ export function Header() {
         {open && (
           <>
             <motion.div
-              className="fixed inset-0 z-[60] bg-jungle-950/50 backdrop-blur-sm xl:hidden"
+              className="fixed inset-0 z-[60] bg-navy-950/50 backdrop-blur-sm xl:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -205,7 +205,7 @@ export function Header() {
             >
               <div className="flex h-20 items-center justify-between border-b border-border px-5">
                 <LogoLockup />
-                <button type="button" onClick={() => setOpen(false)} aria-label={t.nav.close} className="pressable flex h-11 w-11 items-center justify-center rounded-full text-jungle-900 hover:bg-cream">
+                <button type="button" onClick={() => setOpen(false)} aria-label={t.nav.close} className="pressable flex h-11 w-11 items-center justify-center rounded-full text-navy-900 hover:bg-cream">
                   <X className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
@@ -220,7 +220,7 @@ export function Header() {
                       transition={{ delay: 0.08 + i * 0.06, duration: 0.5, ease: EASE }}
                     >
                       <div className="flex items-center justify-between">
-                        <Link href={p.href} className={cn("font-display flex min-h-14 flex-1 items-center text-2xl", activeId === p.id ? "text-gold-600" : "text-jungle-900")}>
+                        <Link href={p.href} className={cn("font-display flex min-h-14 flex-1 items-center text-2xl", activeId === p.id ? "text-crimson-600" : "text-navy-900")}>
                           {tr(p.label)}
                         </Link>
                         <button
@@ -228,7 +228,7 @@ export function Header() {
                           aria-label={`${t.nav.explore} ${tr(p.label)}`}
                           aria-expanded={expanded === p.id}
                           onClick={() => setExpanded((e) => (e === p.id ? null : p.id))}
-                          className="pressable flex h-11 w-11 items-center justify-center rounded-full text-jungle-800 hover:bg-cream"
+                          className="pressable flex h-11 w-11 items-center justify-center rounded-full text-navy-800 hover:bg-cream"
                         >
                           <ChevronDown className={cn("h-5 w-5 transition-transform duration-300", expanded === p.id && "rotate-180")} aria-hidden="true" />
                         </button>
@@ -244,7 +244,7 @@ export function Header() {
                           >
                             {p.children.map((c) => (
                               <li key={c.href}>
-                                <Link href={c.href} className="flex min-h-11 items-center pb-2 pl-1 text-[0.95rem] text-mist hover:text-jungle-800">
+                                <Link href={c.href} className="flex min-h-11 items-center pb-2 pl-1 text-[0.95rem] text-mist hover:text-navy-800">
                                   {tr(c.label)}
                                 </Link>
                               </li>
@@ -263,11 +263,11 @@ export function Header() {
                 </div>
               </nav>
               <div className="border-t border-border px-5 py-4 text-xs text-mist">
-                <a href="tel:+59133530808" className="hover:text-jungle-800">
+                <a href="tel:+59133530808" className="hover:text-navy-800">
                   +591 3 3530808
                 </a>{" "}
                 ·{" "}
-                <a href="mailto:contactus@sccs.edu.bo" className="hover:text-jungle-800">
+                <a href="mailto:contactus@sccs.edu.bo" className="hover:text-navy-800">
                   contactus@sccs.edu.bo
                 </a>
               </div>

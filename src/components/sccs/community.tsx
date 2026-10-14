@@ -35,7 +35,7 @@ function FilterRow<T extends string>({ label, options, value, onChange }: { labe
           onClick={() => onChange(k)}
           className={cn(
             "pressable min-h-10 rounded-full border px-4 text-sm transition-colors",
-            value === k ? "border-jungle-800 bg-jungle-800 text-ivory" : "border-border bg-white text-jungle-900 hover:border-gold-500",
+            value === k ? "border-navy-800 bg-navy-800 text-ivory" : "border-border bg-white text-navy-900 hover:border-amber-500",
           )}
         >
           {l}
@@ -56,7 +56,7 @@ export function TeamDirectory() {
 
   return (
     <div id="team" className="scroll-mt-28">
-      <h3 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{c.teamTitle}</h3>
+      <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{c.teamTitle}</h3>
       <p className="mt-2 text-mist">{c.teamIntro}</p>
       <div className="mt-6 space-y-3">
         <FilterRow<Cat> label={c.teamTitle} value={cat} onChange={setCat} options={(Object.keys(c.categories) as Cat[]).map((k) => [k, c.categories[k]])} />
@@ -72,23 +72,23 @@ export function TeamDirectory() {
                 <span
                   className={cn(
                     "font-display flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-lg font-semibold",
-                    i % 2 === 0 ? "bg-jungle-800 text-gold-400" : "bg-gold-500 text-jungle-950",
+                    i % 2 === 0 ? "bg-navy-800 text-amber-400" : "bg-amber-500 text-navy-950",
                   )}
                   aria-hidden="true"
                 >
                   {initials(m.name)}
                 </span>
                 <div className="min-w-0">
-                  <p className="font-semibold text-jungle-900">{m.name}</p>
+                  <p className="font-semibold text-navy-900">{m.name}</p>
                   <p className="text-sm text-mist">{tr(m.role)}</p>
-                  <span className="mt-1 inline-block rounded-full bg-cream px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-jungle-800">{c.categories[m.category]}</span>
+                  <span className="mt-1 inline-block rounded-full bg-cream px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-navy-800">{c.categories[m.category]}</span>
                 </div>
               </div>
               <button
                 type="button"
                 aria-expanded={isOpen}
                 onClick={() => setOpenBio(isOpen ? null : m.name)}
-                className="mt-3 min-h-10 text-sm font-semibold text-jungle-600 hover:text-jungle-800"
+                className="mt-3 min-h-10 text-sm font-semibold text-navy-600 hover:text-navy-800"
               >
                 {isOpen ? c.hideBio : c.readBio}
               </button>
@@ -118,14 +118,14 @@ export function ParentHubCard() {
   const c = t.community;
   return (
     <div id="parent-hub" className="scroll-mt-28 rounded-2xl border border-border bg-card p-7">
-      <BookOpen className="h-6 w-6 text-gold-600" aria-hidden="true" />
-      <h3 className="font-display mt-4 text-2xl font-semibold text-jungle-900">{c.parentHubTitle}</h3>
+      <BookOpen className="h-6 w-6 text-crimson-600" aria-hidden="true" />
+      <h3 className="font-display mt-4 text-2xl font-semibold text-navy-900">{c.parentHubTitle}</h3>
       <p className="mt-2 text-mist">{c.parentHubIntro}</p>
-      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">{c.portalsTitle}</p>
+      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{c.portalsTitle}</p>
       <ul className="mt-3 flex flex-wrap gap-2">
         {PORTALS.map((p) => (
           <li key={p.name}>
-            <a href={p.href} target="_blank" rel="noopener noreferrer" className="pressable inline-flex min-h-10 items-center gap-1.5 rounded-full border border-border px-3.5 text-sm text-jungle-900 hover:border-gold-500">
+            <a href={p.href} target="_blank" rel="noopener noreferrer" className="pressable inline-flex min-h-10 items-center gap-1.5 rounded-full border border-border px-3.5 text-sm text-navy-900 hover:border-amber-500">
               {p.name}
               <ExternalLink className="h-3 w-3 text-mist" aria-hidden="true" />
             </a>
@@ -144,8 +144,8 @@ export function MothersClubCard() {
     <div id="mothers-club" className="scroll-mt-28 overflow-hidden rounded-2xl border border-border bg-card">
       <Photo photo={media.mothersClubTeam} className="aspect-[16/9]" sizes="(min-width:1024px) 33vw, 100vw" />
       <div className="p-7">
-        <HeartHandshake className="h-6 w-6 text-gold-600" aria-hidden="true" />
-        <h3 className="font-display mt-4 text-2xl font-semibold text-jungle-900">{c.mothersTitle}</h3>
+        <HeartHandshake className="h-6 w-6 text-crimson-600" aria-hidden="true" />
+        <h3 className="font-display mt-4 text-2xl font-semibold text-navy-900">{c.mothersTitle}</h3>
         <p className="mt-2 leading-relaxed text-mist">{c.mothersBody}</p>
       </div>
     </div>
@@ -156,17 +156,17 @@ export function PaletteCard() {
   const { t } = useLang();
   const c = t.community;
   return (
-    <div id="dining" className="scroll-mt-28 rounded-2xl bg-jungle-100 p-7">
-      <UtensilsCrossed className="h-6 w-6 text-jungle-800" aria-hidden="true" />
-      <h3 className="font-display mt-4 text-2xl font-semibold text-jungle-900">{c.paletteTitle}</h3>
+    <div id="dining" className="scroll-mt-28 rounded-2xl bg-navy-100 p-7">
+      <UtensilsCrossed className="h-6 w-6 text-navy-800" aria-hidden="true" />
+      <h3 className="font-display mt-4 text-2xl font-semibold text-navy-900">{c.paletteTitle}</h3>
       <p className="mt-2 leading-relaxed text-mist">{c.paletteBody}</p>
-      <ul className="mt-5 divide-y divide-jungle-800/10 rounded-xl bg-white/70">
+      <ul className="mt-5 divide-y divide-navy-800/10 rounded-xl bg-white/70">
         {c.palettePrices.map((p) => {
           const [label, price] = p.split(" · ");
           return (
             <li key={p} className="flex items-center justify-between px-4 py-3 text-sm">
-              <span className="text-jungle-900">{label}</span>
-              <span className="font-display font-semibold text-gold-600">{price}</span>
+              <span className="text-navy-900">{label}</span>
+              <span className="font-display font-semibold text-crimson-600">{price}</span>
             </li>
           );
         })}
@@ -180,11 +180,11 @@ export function AlumniCard() {
   const { t } = useLang();
   const c = t.community;
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-jungle-950 p-7 text-cream">
-      <JaguarMotif className="absolute -bottom-6 -right-6 h-40 w-40 text-gold-400/15" />
+    <div className="relative overflow-hidden rounded-2xl bg-navy-950 p-7 text-cream">
+      <JaguarMotif className="absolute -bottom-6 -right-6 h-40 w-40 text-amber-400/15" />
       <h3 className="font-display text-2xl font-semibold text-white">{c.alumniTitle}</h3>
       <p className="relative mt-2 leading-relaxed text-cream/75">{c.alumniBody}</p>
-      <Link href="/contact" className={cn(buttonStyles.outlineGold, "relative mt-6 text-gold-400")}>
+      <Link href="/contact" className={cn(buttonStyles.outlineGold, "relative mt-6 text-amber-400")}>
         {c.alumniCta}
       </Link>
     </div>

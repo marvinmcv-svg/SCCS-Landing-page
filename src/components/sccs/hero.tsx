@@ -33,7 +33,7 @@ export function Hero() {
     reduce ? {} : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, delay, ease: EASE } };
 
   return (
-    <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center overflow-hidden bg-jungle-950">
+    <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center overflow-hidden bg-navy-950">
       <div className="absolute inset-0" aria-hidden="true">
         <AnimatePresence initial={false}>
           <motion.div
@@ -56,15 +56,15 @@ export function Hero() {
         </AnimatePresence>
       </div>
       <motion.div
-        className="absolute inset-0 bg-gradient-to-b from-jungle-950/90 via-jungle-950/55 to-jungle-950/85"
+        className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/55 to-navy-950/85"
         style={{ opacity: reduce ? 0.8 : overlay }}
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-jungle-800/25 mix-blend-multiply" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(201,162,39,0.18),transparent_55%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-navy-800/25 mix-blend-multiply" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(248,167,36,0.18),transparent_55%)]" aria-hidden="true" />
 
       <motion.div style={reduce ? undefined : { y, opacity: fade }} className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-28 pt-36 sm:px-8 lg:pb-32 lg:pt-40">
-        <motion.p {...enter(0.15)} className="flex max-w-3xl items-start gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-gold-400 sm:items-center sm:text-xs">
+        <motion.p {...enter(0.15)} className="flex max-w-3xl items-start gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-amber-400 sm:items-center sm:text-xs">
           <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
           {t.hero.badge}
         </motion.p>
@@ -84,8 +84,8 @@ export function Hero() {
         </motion.div>
         <motion.ul {...enter(0.85)} className="mt-10 flex flex-wrap gap-2.5">
           {t.hero.credentials.map((c) => (
-            <li key={c} className="inline-flex items-center gap-2 rounded-full border border-gold-400/60 bg-jungle-950/30 px-3.5 py-1.5 text-xs font-medium text-gold-100 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold-400" aria-hidden="true" />
+            <li key={c} className="inline-flex items-center gap-2 rounded-full border border-amber-400/60 bg-navy-950/30 px-3.5 py-1.5 text-xs font-medium text-amber-100 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" aria-hidden="true" />
               {c}
             </li>
           ))}
@@ -97,7 +97,7 @@ export function Hero() {
         <span className="text-[0.68rem] uppercase tracking-[0.2em] text-white/60">{t.hero.slides[index]}</span>
         <div className="flex gap-1.5">
           {SLIDES.map((s, i) => (
-            <span key={s.src} className={cn("h-0.5 rounded-full transition-all duration-700", i === index ? "w-8 bg-gold-400" : "w-3 bg-white/35")} />
+            <span key={s.src} className={cn("h-0.5 rounded-full transition-all duration-700", i === index ? "w-8 bg-amber-400" : "w-3 bg-white/35")} />
           ))}
         </div>
       </div>
@@ -106,7 +106,7 @@ export function Hero() {
       <button
         type="button"
         onClick={() => scrollToId("stats")}
-        className="absolute bottom-7 left-1/2 z-10 flex min-h-11 -translate-x-1/2 flex-col items-center gap-1 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/70 hover:text-gold-400"
+        className="absolute bottom-7 left-1/2 z-10 flex min-h-11 -translate-x-1/2 flex-col items-center gap-1 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/70 hover:text-amber-400"
       >
         {t.hero.scrollCue}
         <ChevronDown className="sccs-scroll-cue h-5 w-5" aria-hidden="true" />

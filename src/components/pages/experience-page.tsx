@@ -38,7 +38,7 @@ export function ExperiencePage({ exp }: { exp: Experience }) {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
             <Reveal>
-              <p className="font-display text-2xl leading-snug text-jungle-900 sm:text-3xl">{tr(exp.lede)}</p>
+              <p className="font-display text-2xl leading-snug text-navy-900 sm:text-3xl">{tr(exp.lede)}</p>
             </Reveal>
             <Reveal delay={0.1}>
               <dl className="divide-y divide-border rounded-2xl border border-border bg-card">
@@ -47,7 +47,7 @@ export function ExperiencePage({ exp }: { exp: Experience }) {
                 </div>
                 {exp.facts.map((f) => (
                   <div key={f.value + f.label.en} className="flex items-baseline gap-5 px-6 py-5">
-                    <dt className="font-display w-24 shrink-0 text-3xl font-semibold text-gold-600">{f.value}</dt>
+                    <dt className="font-display w-24 shrink-0 text-3xl font-semibold text-crimson-600">{f.value}</dt>
                     <dd className="text-sm text-mist">{tr(f.label)}</dd>
                   </div>
                 ))}
@@ -75,15 +75,15 @@ export function ExperiencePage({ exp }: { exp: Experience }) {
           </Reveal>
           <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {exp.pillars.map((p, i) => (
-              <Reveal as="li" key={p.title.en} delay={i * 0.07} className="bg-jungle-950 p-7">
-                <span className="font-display text-sm text-gold-400">{String(i + 1).padStart(2, "0")}</span>
+              <Reveal as="li" key={p.title.en} delay={i * 0.07} className="bg-navy-950 p-7">
+                <span className="font-display text-sm text-amber-400">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 text-lg font-semibold text-white">{tr(p.title)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-cream/70">{tr(p.text)}</p>
               </Reveal>
             ))}
           </ul>
           <Reveal delay={0.1} className="mx-auto mt-20 max-w-3xl text-center">
-            <Quote className="mx-auto h-8 w-8 text-gold-400" aria-hidden="true" />
+            <Quote className="mx-auto h-8 w-8 text-amber-400" aria-hidden="true" />
             <p className="font-display mt-6 text-3xl font-medium italic leading-snug text-white sm:text-4xl">{tr(exp.quote)}</p>
           </Reveal>
         </Container>
@@ -119,12 +119,12 @@ export function ExperiencePage({ exp }: { exp: Experience }) {
               href={`/campus-life/jaguar-experience/${e.slug}`}
               className={cn("group flex min-h-28 flex-col justify-center gap-1 py-8", i === 1 && "sm:items-end sm:text-right")}
             >
-              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">
                 {i === 0 && <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" aria-hidden="true" />}
                 {i === 0 ? t.page.previous : t.page.next}
                 {i === 1 && <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />}
               </span>
-              <span className="font-display text-2xl font-semibold text-jungle-900 group-hover:text-jungle-600">{tr(e.title)}</span>
+              <span className="font-display text-2xl font-semibold text-navy-900 group-hover:text-navy-600">{tr(e.title)}</span>
             </Link>
           ))}
         </Container>
@@ -132,7 +132,7 @@ export function ExperiencePage({ exp }: { exp: Experience }) {
 
       <Section>
         <Container>
-          <h2 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{t.page.related}</h2>
+          <h2 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{t.page.related}</h2>
           <ul className="ios-scroll mt-8 flex snap-x gap-4 overflow-x-auto pb-4">
             {others.map((e) => (
               <li key={e.slug} className="w-[78vw] shrink-0 snap-start sm:w-80">
@@ -168,26 +168,26 @@ export function JaguarExperienceHub() {
             <Reveal key={e.slug}>
               <Link
                 href={`/campus-life/jaguar-experience/${e.slug}`}
-                className="group grid overflow-hidden rounded-3xl border border-border bg-card transition-shadow duration-500 hover:shadow-[0_30px_70px_rgba(7,37,26,0.12)] lg:grid-cols-2"
+                className="group grid overflow-hidden rounded-3xl border border-border bg-card transition-shadow duration-500 hover:shadow-[0_30px_70px_rgba(20,20,58,0.12)] lg:grid-cols-2"
               >
                 <div className={cn("relative min-h-72 overflow-hidden lg:min-h-[26rem]", i % 2 === 1 && "lg:order-2")}>
                   <Photo photo={e.hero} className="absolute inset-0" sizes="(min-width:1024px) 50vw, 100vw" imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105" />
                 </div>
                 <div className="flex flex-col justify-center p-8 sm:p-12">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-600">
                     {String(i + 1).padStart(2, "0")} · {tr(e.kicker)}
                   </p>
-                  <h2 className="font-display mt-3 text-3xl font-semibold text-jungle-900 sm:text-4xl">{tr(e.title)}</h2>
-                  <p className="font-display mt-3 text-lg italic text-jungle-700">{tr(e.tagline)}</p>
+                  <h2 className="font-display mt-3 text-3xl font-semibold text-navy-900 sm:text-4xl">{tr(e.title)}</h2>
+                  <p className="font-display mt-3 text-lg italic text-navy-700">{tr(e.tagline)}</p>
                   <p className="mt-4 line-clamp-4 leading-relaxed text-mist">{tr(e.lede)}</p>
                   <ul className="mt-6 flex flex-wrap gap-2">
                     {e.facts.map((f) => (
-                      <li key={f.value + f.label.en} className="rounded-full bg-cream px-3 py-1 text-xs text-jungle-800">
-                        <span className="font-semibold text-gold-600">{f.value}</span> · {tr(f.label)}
+                      <li key={f.value + f.label.en} className="rounded-full bg-cream px-3 py-1 text-xs text-navy-800">
+                        <span className="font-semibold text-crimson-600">{f.value}</span> · {tr(f.label)}
                       </li>
                     ))}
                   </ul>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-jungle-600 group-hover:text-jungle-800">
+                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-navy-600 group-hover:text-navy-800">
                     {t.campusLife.explore} · {tr(e.title)}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </span>

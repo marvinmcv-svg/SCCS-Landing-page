@@ -42,7 +42,7 @@ export function AdmissionsPage() {
           <div>
             <Reveal>
               <Kicker>{tr({ en: "A Tier-1 education", es: "Una educación de primer nivel" })}</Kicker>
-              <h2 className="font-display mt-4 text-3xl font-semibold leading-tight text-jungle-900 sm:text-4xl">
+              <h2 className="font-display mt-4 text-3xl font-semibold leading-tight text-navy-900 sm:text-4xl">
                 {tr({ en: "The gateway to global opportunity.", es: "La puerta a las oportunidades globales." })}
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-mist">
@@ -75,8 +75,8 @@ export function AdmissionsPage() {
               return (
                 <li key={f.q.en}>
                   <button type="button" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? null : i)} className="flex min-h-16 w-full items-center justify-between gap-6 py-4 text-left">
-                    <span className="font-display text-lg font-semibold text-jungle-900 sm:text-xl">{tr(f.q)}</span>
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-gold-600">
+                    <span className="font-display text-lg font-semibold text-navy-900 sm:text-xl">{tr(f.q)}</span>
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-crimson-600">
                       {isOpen ? <Minus className="h-4 w-4" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}
                     </span>
                   </button>
@@ -191,13 +191,13 @@ export function StudentLeadershipPage() {
           <SectionHeading kicker="NJHS · NHS" title={tr({ en: "Honor societies", es: "Sociedades de honor" })} dark />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {L.societies.map((s, i) => (
-              <Reveal key={s.title.en} delay={i * 0.08} className="rounded-2xl border border-white/10 bg-jungle-900/70 p-7 sm:p-9">
+              <Reveal key={s.title.en} delay={i * 0.08} className="rounded-2xl border border-white/10 bg-navy-900/70 p-7 sm:p-9">
                 <h3 className="font-display text-2xl font-semibold text-white">{tr(s.title)}</h3>
                 <p className="mt-3 text-cream/75">{tr(s.body)}</p>
                 <ul className="mt-6 space-y-3">
                   {s.points.map((p) => (
                     <li key={p.en} className="flex gap-3 text-sm text-cream/90">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
                       {tr(p)}
                     </li>
                   ))}
@@ -240,7 +240,7 @@ export function NewsIndex() {
                 type="button"
                 aria-pressed={cat === c}
                 onClick={() => setCat(c)}
-                className={cn("pressable min-h-10 rounded-full border px-4 text-sm", cat === c ? "border-jungle-800 bg-jungle-800 text-ivory" : "border-border bg-white text-jungle-900 hover:border-gold-500")}
+                className={cn("pressable min-h-10 rounded-full border px-4 text-sm", cat === c ? "border-navy-800 bg-navy-800 text-ivory" : "border-border bg-white text-navy-900 hover:border-amber-500")}
               >
                 {c === "ALL" ? t.community.categories.ALL : tr(CATEGORY_LABEL[c])}
               </button>
@@ -275,7 +275,7 @@ export function NewsArticle({ post }: { post: NewsPost }) {
       <Section>
         <Container>
           <article className="mx-auto max-w-3xl">
-            <p className="font-display text-2xl leading-snug text-jungle-900 sm:text-3xl">{tr(post.excerpt)}</p>
+            <p className="font-display text-2xl leading-snug text-navy-900 sm:text-3xl">{tr(post.excerpt)}</p>
             <div className="mt-10 space-y-6 text-lg leading-relaxed text-mist">
               {post.body.map((b, i) => (
                 <p key={i}>{tr(b)}</p>
@@ -284,7 +284,7 @@ export function NewsArticle({ post }: { post: NewsPost }) {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <span className={cn("rounded-full px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider", CATEGORY_CHIP[post.category])}>{tr(CATEGORY_LABEL[post.category])}</span>
               {post.instagramUrl && (
-                <a href={post.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-jungle-600 hover:text-jungle-800">
+                <a href={post.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-navy-600 hover:text-navy-800">
                   {t.page.viewOnInstagram}
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
@@ -297,7 +297,7 @@ export function NewsArticle({ post }: { post: NewsPost }) {
             </div>
           )}
           <div className="mt-16">
-            <Link href="/news" className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-jungle-600">
+            <Link href="/news" className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-navy-600">
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
               {t.campusLife.allNews}
             </Link>
@@ -306,7 +306,7 @@ export function NewsArticle({ post }: { post: NewsPost }) {
       </Section>
       <Section className="border-t border-border bg-cream/50">
         <Container>
-          <h2 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{t.page.related}</h2>
+          <h2 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{t.page.related}</h2>
           <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {more.map((n) => (
               <li key={n.slug}>
@@ -377,13 +377,13 @@ export function ContactPage() {
           <ul className="grid gap-5 lg:grid-cols-3">
             {C.groups.map((g, i) => (
               <Reveal as="li" key={g.title.en} delay={i * 0.07} className="rounded-2xl border border-border bg-card p-7">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">{tr(g.note)}</p>
-                <h2 className="font-display mt-2 text-2xl font-semibold text-jungle-900">{tr(g.title)}</h2>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{tr(g.note)}</p>
+                <h2 className="font-display mt-2 text-2xl font-semibold text-navy-900">{tr(g.title)}</h2>
                 <ul className="mt-5 space-y-3">
                   {g.lines.map((l) => (
                     <li key={l.label.en} className="border-t border-border pt-3">
                       <p className="text-sm text-mist">{tr(l.label)}</p>
-                      <Link href={l.href} className="text-sm font-semibold text-jungle-700 hover:text-jungle-900">
+                      <Link href={l.href} className="text-sm font-semibold text-navy-700 hover:text-navy-900">
                         {typeof l.value === "string" ? l.value : tr(l.value)}
                       </Link>
                     </li>
@@ -396,30 +396,30 @@ export function ContactPage() {
       </Section>
       <Section className="pt-0 sm:pt-0 lg:pt-0">
         <Container>
-          <div className="relative isolate grid overflow-hidden rounded-3xl bg-jungle-950 text-cream lg:grid-cols-2">
+          <div className="relative isolate grid overflow-hidden rounded-3xl bg-navy-950 text-cream lg:grid-cols-2">
             <Photo photo={media.campusLawn} className="min-h-72" sizes="(min-width:1024px) 50vw, 100vw" />
             <div className="relative p-8 sm:p-12">
-              <JaguarMotif className="absolute -right-8 -top-8 h-48 w-48 text-gold-400/10" />
+              <JaguarMotif className="absolute -right-8 -top-8 h-48 w-48 text-amber-400/10" />
               <h2 className="font-display text-3xl font-semibold text-white">{tr(C.visitTitle)}</h2>
               <ul className="mt-6 space-y-4 text-sm">
                 <li className="flex gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
                   {t.footer.address}
                 </li>
                 <li className="flex gap-3">
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
-                  <a href={SITE.phoneHref} className="hover:text-gold-400">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
+                  <a href={SITE.phoneHref} className="hover:text-amber-400">
                     {SITE.phone}
                   </a>
                 </li>
                 <li className="flex gap-3">
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
-                  <a href={`mailto:${SITE.email}`} className="hover:text-gold-400">
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
+                  <a href={`mailto:${SITE.email}`} className="hover:text-amber-400">
                     {SITE.email}
                   </a>
                 </li>
                 <li className="flex gap-3">
-                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
                   {t.footer.hours}
                 </li>
               </ul>
@@ -444,11 +444,11 @@ export function ContactPage() {
 export function NotFoundView() {
   const { t } = useLang();
   return (
-    <section className="relative isolate flex min-h-[80svh] items-center overflow-hidden bg-jungle-950 text-center text-cream">
+    <section className="relative isolate flex min-h-[80svh] items-center overflow-hidden bg-navy-950 text-center text-cream">
       <Photo photo={media.historyPond} className="absolute inset-0 -z-20 opacity-25" sizes="100vw" />
       <Container className="pt-28">
-        <JaguarMotif className="mx-auto h-24 w-24 text-gold-400" />
-        <p className="font-display mt-6 text-7xl font-semibold text-gold-400">404</p>
+        <JaguarMotif className="mx-auto h-24 w-24 text-amber-400" />
+        <p className="font-display mt-6 text-7xl font-semibold text-amber-400">404</p>
         <h1 className="font-display mt-4 text-4xl font-semibold text-white sm:text-5xl">{t.page.notFoundTitle}</h1>
         <p className="mx-auto mt-4 max-w-md text-cream/75">{t.page.notFoundBody}</p>
         <Link href="/" className={cn(buttonStyles.gold, "mt-8")}>

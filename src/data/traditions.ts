@@ -190,7 +190,7 @@ export const TRADITIONS: Tradition[] = [
     where: { en: "Classrooms & Performing Arts Center", es: "Aulas y Performing Arts Center" },
     body: [
       { en: "Grandparents walk the campus with their grandchildren — coffee, open classrooms, student performances, and more than a few proud tears.", es: "Los abuelos recorren el campus con sus nietos — café, aulas abiertas, presentaciones estudiantiles y más de una lágrima de orgullo." },
-      { en: "For some families it's a homecoming — grandparents who once wore the green themselves. It's our multigenerational legacy, in one morning.", es: "Para algunas familias es un regreso a casa — abuelos que alguna vez también vistieron el verde. Es nuestro legado multigeneracional, en una sola mañana." },
+      { en: "For some families it's a homecoming — grandparents who once wore the Jaguar colors themselves. It's our multigenerational legacy, in one morning.", es: "Para algunas familias es un regreso a casa — abuelos que alguna vez también vistieron los colores Jaguar. Es nuestro legado multigeneracional, en una sola mañana." },
     ],
     expect: [
       { en: "Open classrooms and student-led tours", es: "Aulas abiertas y recorridos guiados por estudiantes" },

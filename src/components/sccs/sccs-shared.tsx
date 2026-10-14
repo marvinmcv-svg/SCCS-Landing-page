@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { animate, motion, useInView, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { cn, EASE } from "@/lib/utils";
 import type { Photo } from "@/data/media";
@@ -11,20 +11,47 @@ import { useLang } from "./i18n";
 
 /* ───────────────────────── Brand marks ───────────────────────── */
 
-export function Crest({ className }: { className?: string }) {
+/**
+ * The official SCCS crest — shield, staggered "SCCS" letters, and the U.S. and
+ * Bolivian flags — redrawn as vector from the school's published logo so it
+ * stays crisp at every size. `mono` renders a single-color version for dark grounds.
+ */
+export function Crest({ className, mono }: { className?: string; mono?: boolean }) {
+  const id = useId().replace(/:/g, "");
+  const ink = mono ? "#FFFFFF" : "#292963";
+  const shield = "M50 62 Q256 -4 462 62 L452 300 Q440 420 256 500 Q72 420 60 300 Z";
   return (
-    <svg viewBox="0 0 48 56" className={className} aria-hidden="true">
-      <path d="M24 2 L44 8 V26 C44 40 35 49 24 54 C13 49 4 40 4 26 V8 Z" fill="#0F3D2E" stroke="#C9A227" strokeWidth="2" />
-      <path d="M24 6.5 L40 11.3 V26 C40 37.6 32.7 45.2 24 49.4 C15.3 45.2 8 37.6 8 26 V11.3 Z" fill="none" stroke="#C9A227" strokeOpacity="0.55" strokeWidth="0.8" />
-      <g fill="none" stroke="#C9A227" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M15.5 21 L17 15.5 L20.5 18.5" />
-        <path d="M32.5 21 L31 15.5 L27.5 18.5" />
-        <path d="M17 18.5 C19.5 16.8 28.5 16.8 31 18.5 C33.5 22 33.2 28.5 29.5 32.5 C27.5 34.6 25.8 35.5 24 35.5 C22.2 35.5 20.5 34.6 18.5 32.5 C14.8 28.5 14.5 22 17 18.5 Z" />
-        <path d="M19.8 24.2 C20.8 23.4 22 23.5 22.6 24.4" />
-        <path d="M28.2 24.2 C27.2 23.4 26 23.5 25.4 24.4" />
-        <path d="M22.4 29 L24 30.4 L25.6 29" />
+    <svg viewBox="0 0 512 512" className={className} role="img" aria-label="SCCS crest">
+      <defs>
+        <clipPath id={`shield-${id}`}>
+          <path d={shield} />
+        </clipPath>
+      </defs>
+      <path d={shield} fill={mono ? "transparent" : "#FFFFFF"} />
+      <g clipPath={`url(#shield-${id})`}>
+        {/* U.S. flag */}
+        <g>
+          {Array.from({ length: 9 }).map((_, i) => (
+            <rect key={i} x={40} y={285 + i * 13} width={212} height={6.5} fill={mono ? "#FFFFFF" : "#C8323A"} opacity={mono ? 0.85 : 1} />
+          ))}
+          <rect x={40} y={285} width={116} height={58} fill={mono ? "#FFFFFF" : "#3A3D8C"} />
+          {!mono &&
+            Array.from({ length: 4 }).flatMap((_, r) =>
+              Array.from({ length: 6 }).map((__, c) => <circle key={`${r}-${c}`} cx={58 + c * 17 + (r % 2) * 8} cy={295 + r * 13} r={2.2} fill="#FFFFFF" opacity={0.85} />),
+            )}
+        </g>
+        {/* Bolivian flag */}
+        <rect x={262} y={285} width={230} height={39} fill={mono ? "#FFFFFF" : "#D52B1E"} />
+        <rect x={262} y={324} width={230} height={38} fill={mono ? "transparent" : "#F4E400"} stroke={mono ? "#FFFFFF" : "none"} strokeWidth={mono ? 4 : 0} />
+        <rect x={262} y={362} width={230} height={39} fill={mono ? "#FFFFFF" : "#007934"} />
       </g>
-      <path d="M21 42 L24 44.5 L27 42" fill="none" stroke="#C9A227" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d={shield} fill="none" stroke={ink} strokeWidth={13} strokeLinejoin="round" />
+      <g fill={ink} fontFamily="var(--font-brand), 'Century Gothic', 'Montserrat', sans-serif" fontWeight={500} fontSize={96}>
+        <text x={82} y={160}>S</text>
+        <text x={158} y={196}>C</text>
+        <text x={258} y={226}>C</text>
+        <text x={352} y={254}>S</text>
+      </g>
     </svg>
   );
 }
@@ -66,12 +93,10 @@ export function LogoLockup({ variant = "dark", className }: { variant?: "dark" |
   const light = variant === "light";
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
-      <Crest className={cn("h-11 w-9 shrink-0", light && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]")} />
-      <span className="flex flex-col leading-none">
-        <span className={cn("font-display text-xl font-semibold", light ? "text-white" : "text-jungle-900")}>SCCS</span>
-        <span className={cn("mt-1 text-[0.6rem] uppercase tracking-[0.18em]", light ? "text-white/70" : "text-mist")}>
-          Santa Cruz Cooperative School
-        </span>
+      <Crest mono={light} className={cn("h-12 w-12 shrink-0 transition-[filter] duration-500", light && "drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]")} />
+      <span className={cn("font-brand flex flex-col font-bold uppercase leading-[1.05] tracking-[0.02em]", light ? "text-white" : "text-navy-800")}>
+        <span className="text-[0.98rem]">Santa Cruz</span>
+        <span className="text-[0.7rem] tracking-[0.04em]">Cooperative School</span>
       </span>
     </span>
   );
@@ -156,7 +181,7 @@ export function Section({
   dark?: boolean;
 }) {
   return (
-    <section id={id} className={cn("scroll-mt-28 py-16 sm:py-20 lg:py-28", dark && "bg-jungle-950 text-cream", className)}>
+    <section id={id} className={cn("scroll-mt-28 py-16 sm:py-20 lg:py-28", dark && "bg-navy-950 text-cream", className)}>
       {children}
     </section>
   );
@@ -164,8 +189,8 @@ export function Section({
 
 export function Kicker({ children, dark, className }: { children: React.ReactNode; dark?: boolean; className?: string }) {
   return (
-    <p className={cn("flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em]", dark ? "text-gold-400" : "text-gold-600", className)}>
-      <span className="h-px w-8 bg-gold-500" aria-hidden="true" />
+    <p className={cn("flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em]", dark ? "text-amber-400" : "text-crimson-600", className)}>
+      <span className="h-px w-8 bg-amber-500" aria-hidden="true" />
       {children}
     </p>
   );
@@ -196,7 +221,7 @@ export function SectionHeading({
         </Reveal>
       )}
       <Reveal delay={0.06}>
-        <H className={cn("font-display mt-4 text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[2.75rem]", dark ? "text-white" : "text-jungle-900")}>
+        <H className={cn("font-display mt-4 text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[2.75rem]", dark ? "text-white" : "text-navy-900")}>
           {title}
         </H>
       </Reveal>
@@ -250,14 +275,14 @@ export function Photo({
 /* ───────────────────────── Actions ───────────────────────── */
 
 const buttonBase =
-  "pressable inline-flex min-h-11 items-center justify-center gap-2 rounded-full text-sm font-semibold transition-[background-color,box-shadow,color,border-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500";
+  "pressable inline-flex min-h-11 items-center justify-center gap-2 rounded-full text-sm font-semibold transition-[background-color,box-shadow,color,border-color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500";
 
 export const buttonStyles = {
-  gold: cn(buttonBase, "bg-gold-500 px-7 font-bold text-jungle-950 shadow-[0_8px_32px_rgba(201,162,39,0.4)] hover:bg-gold-400 hover:shadow-[0_10px_40px_rgba(201,162,39,0.6)]"),
+  gold: cn(buttonBase, "bg-amber-500 px-7 font-bold text-navy-950 shadow-[0_8px_32px_rgba(248,167,36,0.4)] hover:bg-amber-400 hover:shadow-[0_10px_40px_rgba(248,167,36,0.6)]"),
   outlineDark: cn(buttonBase, "border border-white/40 bg-white/5 px-7 text-white backdrop-blur-sm hover:bg-white/15"),
-  outline: cn(buttonBase, "border border-jungle-800/20 bg-white px-6 text-jungle-900 hover:border-gold-500 hover:text-jungle-700"),
-  primary: cn(buttonBase, "bg-jungle-800 px-7 text-ivory hover:bg-jungle-700"),
-  outlineGold: cn(buttonBase, "border border-gold-500 px-6 text-gold-600 hover:bg-gold-500 hover:text-jungle-950"),
+  outline: cn(buttonBase, "border border-navy-800/20 bg-white px-6 text-navy-900 hover:border-amber-500 hover:text-navy-700"),
+  primary: cn(buttonBase, "bg-navy-800 px-7 text-ivory hover:bg-navy-700"),
+  outlineGold: cn(buttonBase, "border border-amber-500 px-6 text-amber-400 hover:bg-amber-500 hover:text-navy-950"),
 };
 
 export function TextLink({ href, children, dark, className }: { href: string; children: React.ReactNode; dark?: boolean; className?: string }) {
@@ -269,7 +294,7 @@ export function TextLink({ href, children, dark, className }: { href: string; ch
       rel={external ? "noopener noreferrer" : undefined}
       className={cn(
         "group inline-flex min-h-11 items-center gap-2 text-sm font-semibold",
-        dark ? "text-gold-400 hover:text-gold-100" : "text-jungle-600 hover:text-jungle-800",
+        dark ? "text-amber-400 hover:text-amber-100" : "text-crimson-600 hover:text-crimson-700",
         className,
       )}
     >
@@ -280,5 +305,5 @@ export function TextLink({ href, children, dark, className }: { href: string; ch
 }
 
 export function GoldDot() {
-  return <span className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gold-500" aria-hidden="true" />;
+  return <span className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" aria-hidden="true" />;
 }

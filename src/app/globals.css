@@ -1,31 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  --color-jungle-950: #07251a;
-  --color-jungle-900: #0b3326;
-  --color-jungle-800: #0f3d2e;
-  --color-jungle-700: #14543f;
-  --color-jungle-600: #1b6b52;
-  --color-jungle-500: #2a8266;
-  --color-jungle-100: #e4f0eb;
-  --color-gold-600: #a67c00;
-  --color-gold-500: #c9a227;
-  --color-gold-400: #d9b44a;
-  --color-gold-100: #fbf3d9;
-  --color-ivory: #fbf8f1;
-  --color-cream: #f4efe3;
+  --color-navy-950: #14143A;
+  --color-navy-900: #1B1B4D;
+  --color-navy-800: #292963;
+  --color-navy-700: #34347A;
+  --color-navy-600: #3D3D8F;
+  --color-navy-500: #6868B8;
+  --color-navy-100: #E9E9F4;
+  --color-crimson-700: #961A2A;
+  --color-crimson-600: #B72034;
+  --color-crimson-100: #F8E3E6;
+  --color-amber-600: #E08F0B;
+  --color-amber-500: #F8A724;
+  --color-amber-400: #FBBD4D;
+  --color-amber-100: #FEF1D8;
+  --color-ivory: #fbfaf7;
+  --color-cream: #f5f4ef;
   --color-charcoal: #1a1a1a;
-  --color-mist: #5b6b66;
+  --color-mist: #5d5f72;
 
-  --color-background: #fbf8f1;
+  --color-background: #fbfaf7;
   --color-foreground: #1a1a1a;
-  --color-primary: #0f3d2e;
-  --color-primary-foreground: #fbf8f1;
-  --color-muted: #f4efe3;
-  --color-muted-foreground: #5b6b66;
-  --color-border: #e6dfd0;
-  --color-input: #e6dfd0;
-  --color-ring: #c9a227;
+  --color-primary: #292963;
+  --color-primary-foreground: #fbfaf7;
+  --color-muted: #f5f4ef;
+  --color-muted-foreground: #5d5f72;
+  --color-border: #e2e0d8;
+  --color-input: #e2e0d8;
+  --color-ring: #F8A724;
   --color-card: #ffffff;
 
   --radius: 0.75rem;
@@ -52,8 +55,8 @@
     -webkit-font-smoothing: antialiased;
   }
   ::selection {
-    background: #c9a227;
-    color: #07251a;
+    background: #F8A724;
+    color: #14143A;
   }
   :focus-visible {
     outline: 2px solid var(--color-ring);
@@ -64,6 +67,10 @@
 @utility font-display {
   font-family: var(--font-fraunces), Georgia, serif;
   letter-spacing: -0.02em;
+}
+
+@utility font-brand {
+  font-family: var(--font-brand), "Century Gothic", ui-sans-serif, sans-serif;
 }
 
 @utility pressable {
@@ -80,12 +87,12 @@
 @utility ios-scroll {
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgb(91 107 102 / 0.4) transparent;
+  scrollbar-color: rgb(93 95 114 / 0.4) transparent;
   &::-webkit-scrollbar {
     width: 3px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgb(91 107 102 / 0.4);
+    background: rgb(93 95 114 / 0.4);
     border-radius: 999px;
   }
 }
@@ -99,7 +106,7 @@
     right: 0;
     bottom: -4px;
     height: 1.5px;
-    background: #c9a227;
+    background: #F8A724;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 250ms var(--ease-signature);

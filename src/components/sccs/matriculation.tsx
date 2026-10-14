@@ -7,7 +7,7 @@ import { useLang } from "./i18n";
 import { Container, CountUp, Reveal, Section, SectionHeading, TextLink } from "./sccs-shared";
 import { WorldMap } from "./world-map";
 
-const darkTrigger = "rounded-full border-white/15 bg-jungle-800 text-cream data-[placeholder]:text-cream/70 sm:w-56";
+const darkTrigger = "rounded-full border-white/15 bg-navy-800 text-cream data-[placeholder]:text-cream/70 sm:w-56";
 
 export function MatriculationExplorer() {
   const { t, tr } = useLang();
@@ -33,7 +33,7 @@ export function MatriculationExplorer() {
 
   return (
     <div className="grid gap-5 lg:grid-cols-12">
-      <Reveal className="rounded-2xl border border-white/10 bg-jungle-900/70 p-4 sm:p-6 lg:col-span-8">
+      <Reveal className="rounded-2xl border border-white/10 bg-navy-900/70 p-4 sm:p-6 lg:col-span-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <Select value={country} onValueChange={(v) => setCountry(v as "ALL" | CountryCode)}>
             <SelectTrigger className={darkTrigger} aria-label={m.countryFilter}>
@@ -62,7 +62,7 @@ export function MatriculationExplorer() {
             </SelectContent>
           </Select>
           <p className="flex items-baseline gap-2 sm:ml-auto" aria-live="polite">
-            <CountUp value={total} duration={1.2} className="font-display text-2xl font-semibold text-gold-400" />
+            <CountUp value={total} duration={1.2} className="font-display text-2xl font-semibold text-amber-400" />
             <span className="text-xs uppercase tracking-[0.16em] text-cream/60">{m.totalLabel}</span>
           </p>
         </div>
@@ -72,8 +72,8 @@ export function MatriculationExplorer() {
         <p className="mt-4 text-xs text-cream/50">{m.caption}</p>
       </Reveal>
 
-      <Reveal delay={0.1} className="rounded-2xl border border-white/10 bg-jungle-900/70 p-5 sm:p-6 lg:col-span-4">
-        <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">{m.listTitle}</h3>
+      <Reveal delay={0.1} className="rounded-2xl border border-white/10 bg-navy-900/70 p-5 sm:p-6 lg:col-span-4">
+        <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">{m.listTitle}</h3>
         <div className="ios-scroll mt-4 max-h-[430px] pr-2">
           {groups.length === 0 ? (
             <p className="py-8 text-center text-sm text-cream/60">{t.palette.noResults}</p>
@@ -84,7 +84,7 @@ export function MatriculationExplorer() {
                   <span>
                     {COUNTRIES[g.code].flag} {tr(COUNTRIES[g.code].name)}
                   </span>
-                  <span className="font-display text-gold-400">{g.total}</span>
+                  <span className="font-display text-amber-400">{g.total}</span>
                 </p>
                 <ul>
                   {g.list.map((e) => (

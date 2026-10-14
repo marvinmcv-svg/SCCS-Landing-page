@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { useLang } from "./i18n";
-import { Crest, GoldDot } from "./sccs-shared";
+import { GoldDot, LogoLockup } from "./sccs-shared";
 import { PORTALS } from "@/data/pages";
 import { SITE } from "@/lib/site";
 
@@ -46,44 +46,40 @@ export function Footer() {
   ];
 
   return (
-    <footer id="footer" className="tabbar-safe mt-auto bg-jungle-950 text-cream/80">
+    <footer id="footer" className="tabbar-safe mt-auto bg-navy-950 text-cream/80">
       <div className="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-8 lg:pt-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
           <div>
-            <Link href="/" className="inline-flex items-center gap-3" aria-label="SCCS home">
-              <Crest className="h-14 w-12" />
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-2xl font-semibold text-white">SCCS</span>
-                <span className="mt-1.5 text-[0.62rem] uppercase tracking-[0.18em] text-cream/60">Santa Cruz Cooperative School</span>
-              </span>
+            <Link href="/" className="inline-flex items-center rounded-2xl bg-white px-4 py-3" aria-label="SCCS home">
+              <LogoLockup />
             </Link>
             <p className="mt-6 max-w-xs text-sm leading-relaxed">{t.footer.tagline}</p>
             <div className="mt-5 flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-3 py-1.5 text-[0.7rem] text-gold-100">
+              <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 px-3 py-1.5 text-[0.7rem] text-amber-100">
                 <GoldDot />
                 {t.footer.accreditation}
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 px-3 py-1.5 text-[0.7rem] text-gold-100">
+              <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 px-3 py-1.5 text-[0.7rem] text-amber-100">
                 <GoldDot />
                 {t.footer.founded}
               </span>
             </div>
             <div className="mt-6 flex gap-2">
-              <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @sccsjaguars" className="pressable flex h-11 w-11 items-center justify-center rounded-full border border-white/15 hover:border-gold-400 hover:text-gold-400">
+              <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @sccsjaguars" className="pressable flex h-11 w-11 items-center justify-center rounded-full border border-white/15 hover:border-amber-400 hover:text-amber-400">
                 <InstagramGlyph className="h-5 w-5" />
               </a>
-              <a href={SITE.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="pressable flex h-11 w-11 items-center justify-center rounded-full border border-white/15 hover:border-gold-400 hover:text-gold-400">
+              <a href={SITE.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="pressable flex h-11 w-11 items-center justify-center rounded-full border border-white/15 hover:border-amber-400 hover:text-amber-400">
                 <FacebookGlyph className="h-5 w-5" />
               </a>
             </div>
           </div>
 
           <nav aria-label={t.footer.explore}>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">{t.footer.explore}</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">{t.footer.explore}</h2>
             <ul className="mt-5 space-y-1">
               {explore.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="inline-flex min-h-9 items-center text-sm hover:text-gold-400">
+                  <Link href={l.href} className="inline-flex min-h-9 items-center text-sm hover:text-amber-400">
                     {l.label}
                   </Link>
                 </li>
@@ -92,11 +88,11 @@ export function Footer() {
           </nav>
 
           <nav aria-label={t.footer.familiesCol}>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">{t.footer.familiesCol}</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">{t.footer.familiesCol}</h2>
             <ul className="mt-5 space-y-1">
               {families.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="inline-flex min-h-9 items-center text-sm hover:text-gold-400">
+                  <Link href={l.href} className="inline-flex min-h-9 items-center text-sm hover:text-amber-400">
                     {l.label}
                   </Link>
                 </li>
@@ -105,28 +101,28 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">{t.footer.contactCol}</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">{t.footer.contactCol}</h2>
             <ul className="mt-5 space-y-3 text-sm">
               <li className="flex gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
-                <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-gold-400">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
+                <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-amber-400">
                   {t.footer.address}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
-                <a href={SITE.phoneHref} className="hover:text-gold-400">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
+                <a href={SITE.phoneHref} className="hover:text-amber-400">
                   {t.footer.phone}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
-                <a href={`mailto:${SITE.email}`} className="hover:text-gold-400">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
+                <a href={`mailto:${SITE.email}`} className="hover:text-amber-400">
                   {t.footer.email}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
                 {t.footer.hours}
               </li>
             </ul>
@@ -134,7 +130,7 @@ export function Footer() {
             <ul className="mt-3 flex flex-wrap gap-2">
               {PORTALS.slice(0, 4).map((p) => (
                 <li key={p.name}>
-                  <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center rounded-full border border-white/15 px-3 text-xs hover:border-gold-400 hover:text-gold-400">
+                  <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center rounded-full border border-white/15 px-3 text-xs hover:border-amber-400 hover:text-amber-400">
                     {p.name}
                   </a>
                 </li>
@@ -150,7 +146,7 @@ export function Footer() {
           <ul className="flex gap-5" aria-label={t.footer.quickLinksLabel}>
             {t.footer.legal.map((l) => (
               <li key={l}>
-                <Link href="/contact" className="hover:text-gold-400">
+                <Link href="/contact" className="hover:text-amber-400">
                   {l}
                 </Link>
               </li>

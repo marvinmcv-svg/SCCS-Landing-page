@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "@/components/sccs/i18n";
 import { SiteChrome } from "@/components/sccs/site-chrome";
@@ -7,22 +7,17 @@ import { SITE } from "@/lib/site";
 
 const fraunces = Fraunces({ subsets: ["latin", "latin-ext"], display: "swap", variable: "--font-fraunces" });
 const inter = Inter({ subsets: ["latin", "latin-ext"], display: "swap", variable: "--font-inter" });
+const montserrat = Montserrat({ subsets: ["latin", "latin-ext"], display: "swap", variable: "--font-brand", weight: ["500", "700"] });
 
 const description =
   "Two Diplomas. One Unrivaled Future. Santa Cruz Cooperative School is the premier PK–12 American international school in Bolivia — dual U.S. and Bolivian diplomas, Cognia-accredited, 99% university matriculation.";
-
-const favicon =
-  "data:image/svg+xml," +
-  encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0F3D2E"/><path d="M32 40 L14 44 V30 L32 34 L50 30 V44 Z" fill="#FBF8F1"/><path d="M32 14 L6 24 L32 34 L58 24 Z" fill="#C9A227"/><path d="M50 26 V36" stroke="#C9A227" stroke-width="2.5" stroke-linecap="round"/></svg>`,
-  );
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: "Santa Cruz Cooperative School — The Gold Standard of Global Education", template: "%s · SCCS" },
   description,
   keywords: ["Santa Cruz Cooperative School", "SCCS", "American school Bolivia", "international school Santa Cruz", "dual diploma", "Cognia accredited", "AP program Bolivia", "Jaguars"],
-  icons: { icon: favicon },
+  icons: { icon: "/brand/sccs-crest.png", apple: "/brand/sccs-crest-180.png" },
   openGraph: {
     type: "website",
     siteName: "Santa Cruz Cooperative School",
@@ -61,7 +56,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${montserrat.variable}`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>

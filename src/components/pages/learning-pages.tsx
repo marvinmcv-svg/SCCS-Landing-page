@@ -39,8 +39,8 @@ export function CurriculumPage() {
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {c.standards.map((s, i) => (
               <Reveal as="li" key={s.title.en} delay={i * 0.05} className="rounded-2xl border border-border bg-card p-6">
-                <span className="font-display text-sm font-semibold text-gold-600">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 font-semibold text-jungle-900">{tr(s.title)}</h3>
+                <span className="font-display text-sm font-semibold text-crimson-600">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-3 font-semibold text-navy-900">{tr(s.title)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-mist">{tr(s.text)}</p>
               </Reveal>
             ))}
@@ -74,7 +74,7 @@ export function CurriculumPage() {
                 label: tr(a.label),
                 content: (
                   <div className="rounded-2xl border border-border bg-card p-7 sm:p-10">
-                    <h3 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{tr(a.title)}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{tr(a.title)}</h3>
                     <p className="mt-4 max-w-3xl text-lg leading-relaxed text-mist">{tr(a.body)}</p>
                   </div>
                 ),
@@ -88,9 +88,9 @@ export function CurriculumPage() {
           <SectionHeading kicker={tr({ en: "Honor Roll · Grades 6–12", es: "Cuadro de Honor · 6.º a 12.º" })} title={tr(c.honorsTitle)} intro={tr(c.honorsIntro)} />
           <ul className="mt-10 grid gap-4 md:grid-cols-3">
             {c.honors.map((h, i) => (
-              <Reveal as="li" key={h.title.en} delay={i * 0.07} className={cn("rounded-2xl p-7", i === 0 ? "bg-jungle-950 text-cream" : "border border-border bg-card")}>
-                <Award className={cn("h-7 w-7", i === 0 ? "text-gold-400" : "text-gold-600")} aria-hidden="true" />
-                <h3 className={cn("font-display mt-4 text-2xl font-semibold", i === 0 ? "text-white" : "text-jungle-900")}>{tr(h.title)}</h3>
+              <Reveal as="li" key={h.title.en} delay={i * 0.07} className={cn("rounded-2xl p-7", i === 0 ? "bg-navy-950 text-cream" : "border border-border bg-card")}>
+                <Award className={cn("h-7 w-7", i === 0 ? "text-amber-400" : "text-crimson-600")} aria-hidden="true" />
+                <h3 className={cn("font-display mt-4 text-2xl font-semibold", i === 0 ? "text-white" : "text-navy-900")}>{tr(h.title)}</h3>
                 <p className={cn("mt-2 text-sm", i === 0 ? "text-cream/75" : "text-mist")}>{tr(h.text)}</p>
               </Reveal>
             ))}
@@ -145,8 +145,8 @@ export function AcademicJourneyPage() {
         <ul className="flex flex-wrap gap-2">
           {j.tabs.map((tb) => (
             <li key={tb.id}>
-              <a href={`#${tb.id}`} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/30 px-4 text-sm text-white/90 backdrop-blur-sm hover:border-gold-400 hover:text-gold-400">
-                {tb.label} <span className="text-gold-400">{tb.grades}</span>
+              <a href={`#${tb.id}`} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/30 px-4 text-sm text-white/90 backdrop-blur-sm hover:border-amber-400 hover:text-amber-400">
+                {tb.label} <span className="text-amber-400">{tb.grades}</span>
               </a>
             </li>
           ))}
@@ -171,15 +171,15 @@ export function AcademicJourneyPage() {
                   <Kicker>
                     {tb.label} · {tb.grades}
                   </Kicker>
-                  <h2 className="font-display mt-4 text-3xl font-semibold italic leading-tight text-jungle-900 sm:text-4xl">{tb.tagline}</h2>
+                  <h2 className="font-display mt-4 text-3xl font-semibold italic leading-tight text-navy-900 sm:text-4xl">{tb.tagline}</h2>
                   <p className="mt-5 text-lg leading-relaxed text-mist">{tb.body}</p>
-                  <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">{tr({ en: "Subjects", es: "Materias" })}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-jungle-800">{tr(extra.subjects)}</p>
-                  <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">{j.highlightsLabel}</p>
+                  <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{tr({ en: "Subjects", es: "Materias" })}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-navy-800">{tr(extra.subjects)}</p>
+                  <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{j.highlightsLabel}</p>
                   <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                     {tb.highlights.map((h) => (
-                      <li key={h} className="flex items-center gap-2 text-sm text-jungle-900">
-                        <Check className="h-4 w-4 text-gold-600" aria-hidden="true" />
+                      <li key={h} className="flex items-center gap-2 text-sm text-navy-900">
+                        <Check className="h-4 w-4 text-crimson-600" aria-hidden="true" />
                         {h}
                       </li>
                     ))}
@@ -219,7 +219,7 @@ export function DualDiplomaPage() {
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-3xl text-center">
-            <p className="font-display text-2xl leading-snug text-jungle-900 sm:text-3xl">{d.body}</p>
+            <p className="font-display text-2xl leading-snug text-navy-900 sm:text-3xl">{d.body}</p>
           </Reveal>
           <div className="mt-16">
             <DualDiplomaDiagram />
@@ -232,8 +232,8 @@ export function DualDiplomaPage() {
           <ol className="mt-12 grid gap-4 md:grid-cols-4">
             {DUAL_DIPLOMA.roadmap.map((r, i) => (
               <Reveal as="li" key={r.grade.en} delay={i * 0.07} className="relative rounded-2xl border border-border bg-card p-6">
-                <span className="font-display text-sm text-gold-600">{String(i + 1).padStart(2, "0")}</span>
-                <p className="font-display mt-2 text-2xl font-semibold text-jungle-900">{tr(r.grade)}</p>
+                <span className="font-display text-sm text-crimson-600">{String(i + 1).padStart(2, "0")}</span>
+                <p className="font-display mt-2 text-2xl font-semibold text-navy-900">{tr(r.grade)}</p>
                 <p className="mt-2 text-sm leading-relaxed text-mist">{tr(r.text)}</p>
               </Reveal>
             ))}
@@ -246,7 +246,7 @@ export function DualDiplomaPage() {
             <Photo photo={media.graduationPac} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-display text-3xl font-semibold text-jungle-900 sm:text-4xl">{tr(DUAL_DIPLOMA.transferTitle)}</h2>
+            <h2 className="font-display text-3xl font-semibold text-navy-900 sm:text-4xl">{tr(DUAL_DIPLOMA.transferTitle)}</h2>
             <p className="mt-5 text-lg leading-relaxed text-mist">{tr(DUAL_DIPLOMA.transferBody)}</p>
             <Link href="/contact" className={cn(buttonStyles.primary, "mt-8")}>
               {tr(DUAL_DIPLOMA.ctaRoadmap)}
@@ -275,13 +275,13 @@ export function SupportPage() {
         <Container className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
           <Reveal>
             <Kicker>MTSS · UDL</Kicker>
-            <h2 className="font-display mt-4 text-3xl font-semibold text-jungle-900 sm:text-4xl">{tr(s.sstTitle)}</h2>
+            <h2 className="font-display mt-4 text-3xl font-semibold text-navy-900 sm:text-4xl">{tr(s.sstTitle)}</h2>
             <p className="mt-5 text-lg leading-relaxed text-mist">{tr(s.sstBody)}</p>
           </Reveal>
           <IconCards cols={2} items={s.sst.map((x) => ({ title: tr(x.title), text: tr(x.text) }))} />
         </Container>
       </Section>
-      <Section className="bg-jungle-100/60">
+      <Section className="bg-navy-100/60">
         <Container>
           <SectionHeading kicker={tr({ en: "Counseling", es: "Orientación" })} title={tr({ en: "Support that grows with your child.", es: "Un apoyo que crece con tu hijo." })} />
           <div className="mt-10">
@@ -293,14 +293,14 @@ export function SupportPage() {
                 content: (
                   <div className="grid gap-8 rounded-2xl bg-white p-7 sm:p-10 lg:grid-cols-2">
                     <div>
-                      <h3 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{tr(c.title)}</h3>
+                      <h3 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{tr(c.title)}</h3>
                       <p className="mt-4 text-lg leading-relaxed text-mist">{tr(c.body)}</p>
                     </div>
                     <ul className="space-y-3 self-center">
                       {c.points.map((p) => (
-                        <li key={p.en} className="flex gap-3 text-jungle-900">
-                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-100">
-                            <Check className="h-3 w-3 text-gold-600" aria-hidden="true" />
+                        <li key={p.en} className="flex gap-3 text-navy-900">
+                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-100">
+                            <Check className="h-3 w-3 text-crimson-600" aria-hidden="true" />
                           </span>
                           {tr(p)}
                         </li>
@@ -345,12 +345,12 @@ export function MatriculationPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <Kicker>{tr(college.label)}</Kicker>
-            <h2 className="font-display mt-4 text-3xl font-semibold text-jungle-900 sm:text-4xl">{tr(college.title)}</h2>
+            <h2 className="font-display mt-4 text-3xl font-semibold text-navy-900 sm:text-4xl">{tr(college.title)}</h2>
             <p className="mt-5 text-lg leading-relaxed text-mist">{tr(college.body)}</p>
             <ul className="mt-6 space-y-3">
               {college.points.map((p) => (
-                <li key={p.en} className="flex gap-3 text-jungle-900">
-                  <Check className="mt-1 h-4 w-4 shrink-0 text-gold-600" aria-hidden="true" />
+                <li key={p.en} className="flex gap-3 text-navy-900">
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-crimson-600" aria-hidden="true" />
                   {tr(p)}
                 </li>
               ))}

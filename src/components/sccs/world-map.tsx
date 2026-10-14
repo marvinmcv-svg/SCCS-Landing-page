@@ -74,7 +74,7 @@ function buildDots(): [number, number][] {
 
 const DotsLayer = memo(function DotsLayer({ dots }: { dots: [number, number][] }) {
   return (
-    <g fill="#2a8266" opacity={0.55}>
+    <g fill="#6868B8" opacity={0.55}>
       {dots.map(([x, y]) => (
         <circle key={`${x}-${y}`} cx={x} cy={y} r={2.1} />
       ))}
@@ -105,7 +105,7 @@ export function WorldMap({ entries }: { entries: MatriculationEntry[] }) {
     <div className="relative">
       <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={m.mapAria}>
         <DotsLayer dots={dots} />
-        <line x1={0} x2={W} y1={equatorY} y2={equatorY} stroke="#C9A227" strokeOpacity={0.12} strokeDasharray="3 8" strokeWidth={1} />
+        <line x1={0} x2={W} y1={equatorY} y2={equatorY} stroke="#F8A724" strokeOpacity={0.12} strokeDasharray="3 8" strokeWidth={1} />
         {entries.map((e, i) => {
           const [x, y] = project(e.lat, e.lng);
           const r = 4 + Math.sqrt(e.count) * 1.5;
@@ -134,11 +134,11 @@ export function WorldMap({ entries }: { entries: MatriculationEntry[] }) {
                   }
                 }}
               >
-                {e.count >= 5 && !reduce && <circle r={r} fill="#C9A227" className="sccs-pin-pulse" />}
+                {e.count >= 5 && !reduce && <circle r={r} fill="#F8A724" className="sccs-pin-pulse" />}
                 <circle r={r + 6} fill="transparent" />
-                <circle r={r} fill="#C9A227" stroke="#07251A" strokeWidth={1.4} />
-                <circle r={r * 0.38} fill="#FBF3D9" opacity={0.9} />
-                {selected === e.university && <circle r={r + 4} fill="none" stroke="#FBF3D9" strokeWidth={1.5} />}
+                <circle r={r} fill="#F8A724" stroke="#14143A" strokeWidth={1.4} />
+                <circle r={r * 0.38} fill="#FEF1D8" opacity={0.9} />
+                {selected === e.university && <circle r={r + 4} fill="none" stroke="#FEF1D8" strokeWidth={1.5} />}
               </motion.g>
             </g>
           );
@@ -147,7 +147,7 @@ export function WorldMap({ entries }: { entries: MatriculationEntry[] }) {
 
       {hoveredEntry && (
         <div
-          className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-xl border border-white/10 bg-jungle-950/95 px-3.5 py-2.5 text-xs shadow-xl backdrop-blur"
+          className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-xl border border-white/10 bg-navy-950/95 px-3.5 py-2.5 text-xs shadow-xl backdrop-blur"
           style={{
             left: `${(project(hoveredEntry.lat, hoveredEntry.lng)[0] / W) * 100}%`,
             top: `calc(${(project(hoveredEntry.lat, hoveredEntry.lng)[1] / H) * 100}% - 14px)`,
@@ -155,14 +155,14 @@ export function WorldMap({ entries }: { entries: MatriculationEntry[] }) {
         >
           <p className="whitespace-nowrap font-semibold text-white">{hoveredEntry.university}</p>
           <p className="mt-0.5 whitespace-nowrap text-cream/70">
-            {COUNTRIES[hoveredEntry.country].flag} {tr(COUNTRIES[hoveredEntry.country].name)} · <span className="text-gold-400">{grads(hoveredEntry.count)}</span>
+            {COUNTRIES[hoveredEntry.country].flag} {tr(COUNTRIES[hoveredEntry.country].name)} · <span className="text-amber-400">{grads(hoveredEntry.count)}</span>
           </p>
         </div>
       )}
 
       {selectedEntry && (
-        <div className="absolute bottom-2 left-2 z-10 flex max-w-[calc(100%-1rem)] items-start gap-3 rounded-xl border border-gold-400/30 bg-jungle-950/95 p-3.5 pr-12 text-xs shadow-2xl backdrop-blur sm:bottom-4 sm:left-4">
-          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
+        <div className="absolute bottom-2 left-2 z-10 flex max-w-[calc(100%-1rem)] items-start gap-3 rounded-xl border border-amber-400/30 bg-navy-950/95 p-3.5 pr-12 text-xs shadow-2xl backdrop-blur sm:bottom-4 sm:left-4">
+          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" aria-hidden="true" />
           <div>
             <p className="text-sm font-semibold text-white">{selectedEntry.university}</p>
             <p className="mt-0.5 text-cream/70">

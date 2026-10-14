@@ -51,12 +51,12 @@ export function JourneyTabs({ initial = 0 }: { initial?: number }) {
             tabIndex={active === i ? 0 : -1}
             onClick={() => setActive(i)}
             onKeyDown={(e) => onKey(e, i)}
-            className={cn("relative min-h-14 shrink-0 px-3 pb-3 pt-2 text-left transition-colors", active === i ? "text-jungle-900" : "text-mist hover:text-jungle-800")}
+            className={cn("relative min-h-14 shrink-0 px-3 pb-3 pt-2 text-left transition-colors", active === i ? "text-navy-900" : "text-mist hover:text-navy-800")}
           >
             <span className="block text-sm font-semibold sm:text-base">{tb.label}</span>
-            <span className="block text-xs text-gold-600">{tb.grades}</span>
+            <span className="block text-xs text-crimson-600">{tb.grades}</span>
             {active === i && (
-              <motion.span layoutId="journey-underline" className="absolute inset-x-0 -bottom-px h-0.5 bg-gold-500" transition={{ type: "spring", stiffness: 420, damping: 36 }} />
+              <motion.span layoutId="journey-underline" className="absolute inset-x-0 -bottom-px h-0.5 bg-amber-500" transition={{ type: "spring", stiffness: 420, damping: 36 }} />
             )}
           </button>
         ))}
@@ -76,17 +76,17 @@ export function JourneyTabs({ initial = 0 }: { initial?: number }) {
         >
           <Photo photo={DIVISION_PHOTOS[tab.id]} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
           <div>
-            <p className="font-display text-3xl font-medium italic leading-snug text-jungle-900 sm:text-4xl">{tab.tagline}</p>
+            <p className="font-display text-3xl font-medium italic leading-snug text-navy-900 sm:text-4xl">{tab.tagline}</p>
             <p className="mt-5 leading-relaxed text-mist">{tab.body}</p>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">{j.highlightsLabel}</p>
+            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{j.highlightsLabel}</p>
             <ul className="mt-3 flex flex-wrap gap-2">
               {tab.highlights.map((h) => (
-                <li key={h} className="rounded-full border border-jungle-800/15 bg-jungle-100 px-3.5 py-1.5 text-sm text-jungle-800">
+                <li key={h} className="rounded-full border border-navy-800/15 bg-navy-100 px-3.5 py-1.5 text-sm text-navy-800">
                   {h}
                 </li>
               ))}
             </ul>
-            <Link href="/admissions#inquire" className="group mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-jungle-600 hover:text-jungle-800">
+            <Link href="/admissions#inquire" className="group mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-navy-600 hover:text-navy-800">
               <span className="sccs-link-underline">
                 {j.ctaLabel} {tab.label}
               </span>

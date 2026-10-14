@@ -23,11 +23,11 @@ export function Breadcrumbs({ items, dark = true }: { items: Crumb[]; dark?: boo
           <li key={c.href + i} className="flex items-center gap-1.5">
             {i > 0 && <Sep className="h-3 w-3 opacity-60" aria-hidden="true" />}
             {i === all.length - 1 ? (
-              <span aria-current="page" className={dark ? "text-gold-400" : "text-jungle-800"}>
+              <span aria-current="page" className={dark ? "text-amber-400" : "text-navy-800"}>
                 {c.label}
               </span>
             ) : (
-              <Link href={c.href} className="hover:text-gold-400">
+              <Link href={c.href} className="hover:text-amber-400">
                 {c.label}
               </Link>
             )}
@@ -60,10 +60,10 @@ export function PageHero({
   const reduce = useReducedMotion();
   const enter = (delay: number) => (reduce ? {} : { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.75, delay, ease: EASE } });
   return (
-    <section className={cn("relative isolate flex items-end overflow-hidden bg-jungle-950", tall ? "min-h-[88svh]" : "min-h-[68svh]")}>
+    <section className={cn("relative isolate flex items-end overflow-hidden bg-navy-950", tall ? "min-h-[88svh]" : "min-h-[68svh]")}>
       <Photo photo={photo} priority className="absolute inset-0 -z-20" sizes="100vw" imgClassName={cn(!reduce && "sccs-kenburns", imgPosition)} />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-jungle-950/85 via-jungle-950/45 to-jungle-950/90" aria-hidden="true" />
-      <div className="absolute inset-0 -z-10 bg-jungle-800/20 mix-blend-multiply" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-navy-950/85 via-navy-950/45 to-navy-950/90" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-navy-800/20 mix-blend-multiply" aria-hidden="true" />
       <Container className="pb-14 pt-40 sm:pb-20">
         <motion.div {...enter(0.05)}>
           <Breadcrumbs items={crumbs} />
@@ -108,7 +108,7 @@ export function Gallery({ photos, title }: { photos: PhotoT[]; title?: string })
   const current = open !== null ? photos[open] : null;
   return (
     <div>
-      {title && <h2 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{title}</h2>}
+      {title && <h2 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{title}</h2>}
       <ul className={cn("grid grid-cols-2 gap-3 sm:gap-4", photos.length !== 4 && "lg:grid-cols-3", title && "mt-8")}>
         {photos.map((p, i) => (
           <Reveal as="li" key={p.src + i} delay={(i % 3) * 0.06} className={cn(i === 0 && photos.length > 4 && "col-span-2 row-span-2", i === 0 && photos.length === 3 && "col-span-2 lg:col-span-1")}>
@@ -120,7 +120,7 @@ export function Gallery({ photos, title }: { photos: PhotoT[]; title?: string })
         ))}
       </ul>
       <Dialog open={open !== null} onOpenChange={(o) => !o && setOpen(null)}>
-        <DialogContent closeLabel={t.nav.close} aria-describedby={undefined} className="top-1/2 max-w-5xl -translate-y-1/2 border-white/10 bg-jungle-950 p-0" overlayClassName="bg-jungle-950/90">
+        <DialogContent closeLabel={t.nav.close} aria-describedby={undefined} className="top-1/2 max-w-5xl -translate-y-1/2 border-white/10 bg-navy-950 p-0" overlayClassName="bg-navy-950/90">
           <DialogTitle className="sr-only">{t.page.gallery}</DialogTitle>
           {current && (
             <figure>
@@ -150,17 +150,17 @@ export function RelatedLinks({ items, title }: { items: { href: string; label: s
   const { t } = useLang();
   return (
     <div>
-      <h2 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{title ?? t.page.related}</h2>
+      <h2 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{title ?? t.page.related}</h2>
       <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((it, i) => (
           <Reveal as="li" key={it.href} delay={i * 0.06}>
-            <Link href={it.href} className="group flex h-full items-center gap-4 rounded-2xl border border-border bg-card p-4 transition-shadow hover:shadow-[0_14px_36px_rgba(7,37,26,0.08)]">
+            <Link href={it.href} className="group flex h-full items-center gap-4 rounded-2xl border border-border bg-card p-4 transition-shadow hover:shadow-[0_14px_36px_rgba(20,20,58,0.08)]">
               {it.photo && <Photo photo={it.photo} className="aspect-square w-20 shrink-0 rounded-xl" sizes="80px" />}
               <span className="min-w-0 flex-1">
-                <span className="block font-semibold text-jungle-900 group-hover:text-jungle-600">{it.label}</span>
+                <span className="block font-semibold text-navy-900 group-hover:text-navy-600">{it.label}</span>
                 {it.blurb && <span className="mt-0.5 block text-sm text-mist">{it.blurb}</span>}
               </span>
-              <ArrowRight className="h-4 w-4 shrink-0 text-gold-600 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              <ArrowRight className="h-4 w-4 shrink-0 text-crimson-600 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </Reveal>
         ))}
@@ -177,11 +177,11 @@ export function Split({ photo, title, body, reverse, kicker, children }: { photo
   return (
     <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
       <Reveal className={cn(reverse && "lg:order-2")}>
-        <Photo photo={photo} className="aspect-[4/3] rounded-2xl shadow-[0_24px_60px_rgba(7,37,26,0.12)]" sizes="(min-width:1024px) 50vw, 100vw" />
+        <Photo photo={photo} className="aspect-[4/3] rounded-2xl shadow-[0_24px_60px_rgba(20,20,58,0.12)]" sizes="(min-width:1024px) 50vw, 100vw" />
       </Reveal>
       <Reveal delay={0.08}>
         {kicker && <Kicker>{kicker}</Kicker>}
-        <h2 className={cn("font-display text-3xl font-semibold leading-tight text-jungle-900 sm:text-4xl", kicker && "mt-4")}>{title}</h2>
+        <h2 className={cn("font-display text-3xl font-semibold leading-tight text-navy-900 sm:text-4xl", kicker && "mt-4")}>{title}</h2>
         <p className="mt-5 text-base leading-relaxed text-mist sm:text-lg">{body}</p>
         {children}
       </Reveal>
@@ -194,8 +194,8 @@ export function IconCards({ items, cols = 4 }: { items: { title: string; text: s
     <ul className={cn("grid gap-4 sm:grid-cols-2", cols === 3 && "lg:grid-cols-3", cols === 4 && "lg:grid-cols-4")}>
       {items.map((it, i) => (
         <Reveal as="li" key={it.title} delay={i * 0.06} className="rounded-2xl border border-border bg-card p-6">
-          <span className="font-display text-sm font-semibold text-gold-600">{String(i + 1).padStart(2, "0")}</span>
-          <h3 className="mt-3 font-semibold text-jungle-900">{it.title}</h3>
+          <span className="font-display text-sm font-semibold text-crimson-600">{String(i + 1).padStart(2, "0")}</span>
+          <h3 className="mt-3 font-semibold text-navy-900">{it.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-mist">{it.text}</p>
         </Reveal>
       ))}
@@ -228,7 +228,7 @@ export function Tabs({ tabs, label }: { tabs: { id: string; label: string; conte
             onKeyDown={(e) => onKey(e, i)}
             className={cn(
               "pressable min-h-11 shrink-0 rounded-full border px-5 text-sm font-semibold transition-colors",
-              active === i ? "border-jungle-800 bg-jungle-800 text-ivory" : "border-border bg-white text-jungle-900 hover:border-gold-500",
+              active === i ? "border-navy-800 bg-navy-800 text-ivory" : "border-border bg-white text-navy-900 hover:border-amber-500",
             )}
           >
             {tb.label}

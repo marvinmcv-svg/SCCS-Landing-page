@@ -130,7 +130,7 @@ export const EXPERIENCES: Experience[] = [
     slug: "athletics",
     kicker: { en: "Jaguar Athletics", es: "Atletismo Jaguar" },
     title: { en: "Jaguar Athletics", es: "Atletismo Jaguar" },
-    tagline: { en: "Grit, teamwork, and green-and-white pride.", es: "Garra, trabajo en equipo y orgullo verde y blanco." },
+    tagline: { en: "Grit, teamwork, and Jaguar pride.", es: "Garra, trabajo en equipo y orgullo Jaguar." },
     note: { en: "Soccer · basketball · volleyball · track", es: "Fútbol · básquet · vóleibol · atletismo" },
     hero: media.fgBasketballAcs,
     lede: {

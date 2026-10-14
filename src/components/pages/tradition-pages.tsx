@@ -14,16 +14,16 @@ import { FinalCta } from "@/components/sccs/final-cta";
 function TraditionCard({ tr_ }: { tr_: Tradition }) {
   const { tr, t } = useLang();
   return (
-    <Link href={`/campus-life/beyond-the-classroom/${tr_.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-shadow duration-300 hover:shadow-[0_20px_48px_rgba(7,37,26,0.1)]">
+    <Link href={`/campus-life/beyond-the-classroom/${tr_.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-shadow duration-300 hover:shadow-[0_20px_48px_rgba(20,20,58,0.1)]">
       <Photo photo={tr_.image} className="aspect-[4/3]" sizes="(min-width:1024px) 33vw, 100vw" imgClassName="transition-transform duration-700 group-hover:scale-105" />
       <div className="flex flex-1 flex-col p-6">
-        <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-gold-600">
+        <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-crimson-600">
           <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
           {tr(tr_.when)}
         </p>
-        <h3 className="font-display mt-2 text-2xl font-semibold text-jungle-900">{tr(tr_.title)}</h3>
+        <h3 className="font-display mt-2 text-2xl font-semibold text-navy-900">{tr(tr_.title)}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-mist">{tr(tr_.tagline)}</p>
-        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-jungle-600 group-hover:text-jungle-800">
+        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-600 group-hover:text-navy-800">
           {t.campusLife.explore}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
         </span>
@@ -50,7 +50,7 @@ export function BeyondHub() {
         <ul className="flex flex-wrap gap-2">
           {groups.map((g) => (
             <li key={g}>
-              <a href={`#${g}`} className="inline-flex min-h-10 items-center rounded-full border border-white/30 px-4 text-sm text-white/90 backdrop-blur-sm hover:border-gold-400 hover:text-gold-400">
+              <a href={`#${g}`} className="inline-flex min-h-10 items-center rounded-full border border-white/30 px-4 text-sm text-white/90 backdrop-blur-sm hover:border-amber-400 hover:text-amber-400">
                 {tr(TRADITION_GROUPS[g].title)}
               </a>
             </li>
@@ -77,12 +77,12 @@ export function BeyondHub() {
         <Container>
           <div className="grid gap-8 lg:grid-cols-[1fr_2fr]">
             <div>
-              <h2 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{t.page.moreTitle}</h2>
+              <h2 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{t.page.moreTitle}</h2>
               <p className="mt-3 text-mist">{t.page.moreIntro}</p>
             </div>
             <ul className="flex flex-wrap gap-2.5">
               {MORE_TRADITIONS.map((m) => (
-                <li key={m.en} className="rounded-full border border-border bg-white px-4 py-2 text-sm text-jungle-900">
+                <li key={m.en} className="rounded-full border border-border bg-white px-4 py-2 text-sm text-navy-900">
                   {tr(m)}
                 </li>
               ))}
@@ -90,7 +90,7 @@ export function BeyondHub() {
           </div>
           <div id="calendar" className="mt-20 scroll-mt-28">
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
-              <h2 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{t.campusLife.eventsTitle}</h2>
+              <h2 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{t.campusLife.eventsTitle}</h2>
               <p className="text-mist">{t.campusLife.eventsIntro}</p>
             </div>
             <div className="mt-8">
@@ -134,18 +134,18 @@ export function TraditionPage({ tradition }: { tradition: Tradition }) {
             <div>
               <Reveal className="space-y-6">
                 {tradition.body.map((p, i) => (
-                  <p key={i} className={i === 0 ? "font-display text-2xl leading-snug text-jungle-900 sm:text-3xl" : "text-lg leading-relaxed text-mist"}>
+                  <p key={i} className={i === 0 ? "font-display text-2xl leading-snug text-navy-900 sm:text-3xl" : "text-lg leading-relaxed text-mist"}>
                     {tr(p)}
                   </p>
                 ))}
               </Reveal>
-              <Reveal delay={0.1} className="mt-12 rounded-2xl bg-jungle-100 p-7">
+              <Reveal delay={0.1} className="mt-12 rounded-2xl bg-navy-100 p-7">
                 <Kicker>{t.page.whatToExpect}</Kicker>
                 <ul className="mt-5 space-y-3">
                   {tradition.expect.map((e) => (
-                    <li key={e.en} className="flex gap-3 text-jungle-900">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-500">
-                        <Check className="h-3 w-3 text-jungle-950" aria-hidden="true" />
+                    <li key={e.en} className="flex gap-3 text-navy-900">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500">
+                        <Check className="h-3 w-3 text-navy-950" aria-hidden="true" />
                       </span>
                       {tr(e)}
                     </li>
@@ -158,10 +158,10 @@ export function TraditionPage({ tradition }: { tradition: Tradition }) {
                 <dl className="divide-y divide-border rounded-2xl border border-border bg-card">
                   {facts.map((f) => (
                     <div key={f.label} className="flex items-start gap-4 p-5">
-                      <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" aria-hidden="true" />
+                      <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-crimson-600" aria-hidden="true" />
                       <div>
                         <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-mist">{f.label}</dt>
-                        <dd className="mt-1 font-semibold text-jungle-900">{f.value}</dd>
+                        <dd className="mt-1 font-semibold text-navy-900">{f.value}</dd>
                       </div>
                     </div>
                   ))}
@@ -186,7 +186,7 @@ export function TraditionPage({ tradition }: { tradition: Tradition }) {
       </Section>
       <Section className="border-t border-border bg-cream/50">
         <Container>
-          <h2 className="font-display text-2xl font-semibold text-jungle-900 sm:text-3xl">{t.page.related}</h2>
+          <h2 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">{t.page.related}</h2>
           <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((x) => (
               <li key={x.slug}>
