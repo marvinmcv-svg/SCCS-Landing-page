@@ -10,7 +10,8 @@ import { media } from "@/data/media";
 import { PILLARS } from "@/data/nav";
 import { EXPERIENCES } from "@/data/experiences";
 import { MORE_TRADITIONS, TRADITIONS, TRADITION_GROUPS } from "@/data/traditions";
-import { CLASS_YEARS, EVENTS, INSTAGRAM_POSTS, MATRICULATION, NEWS, SPOTLIGHTS, TEAM } from "@/data/sccs-content";
+import { EVENTS, INSTAGRAM_POSTS, NEWS, SPOTLIGHTS, TEAM } from "@/data/sccs-content";
+import { DESTINATIONS } from "@/data/destinations";
 import {
   ADMISSIONS_FAQ,
   CAMPUS,
@@ -66,22 +67,21 @@ export const COLLECTIONS: CollectionDef[] = [
   { id: "dualDiploma", group: "Learning & Outcomes", label: "Dual Diploma page", description: "How the two diplomas work.", href: "/learning/dual-diploma", target: DUAL_DIPLOMA },
   { id: "support", group: "Learning & Outcomes", label: "Student Support", description: "SST, counseling and college counseling.", href: "/learning/student-support", target: SUPPORT },
   {
-    id: "matriculation",
+    id: "destinations",
     group: "Learning & Outcomes",
-    label: "University matriculation",
-    description: "Each university on the map: country, coordinates, number of graduates and class years.",
+    label: "University destinations (globe)",
+    description: "Where graduates enrolled: each university on the globe with its city, country, region and map coordinates.",
     href: "/learning/university-matriculation",
-    target: MATRICULATION,
-    itemTitle: "university",
-    enums: { country: ["US", "CA", "GB", "ES", "NL", "IT", "BO", "CO", "CL", "MX", "AU"] },
+    target: DESTINATIONS,
+    itemTitle: "name",
+    enums: { region: ["us", "europe", "bolivia"] },
   },
   { id: "acceptances", group: "Learning & Outcomes", label: "University acceptances", description: "Senior acceptance posters. Duplicate a card, then change the photo and name to add a new senior.", href: "/#acceptances", target: ACCEPTANCES, itemTitle: "name" },
   { id: "prestige", group: "Learning & Outcomes", label: "University seals", description: "The seals shown under 'Admitted to the world's best'. Reorder or remove; each logo is a file in /brand/universities.", href: "/learning/university-matriculation", target: PRESTIGE, itemTitle: "name" },
   { id: "acceptanceList", group: "Learning & Outcomes", label: "Acceptances list", description: "Every university that admitted SCCS graduates, by region (School Profile page).", href: "/discover/school-profile#acceptances", target: ACCEPTANCE_LIST },
-  { id: "classYears", group: "Learning & Outcomes", label: "Class years filter", description: "The years offered in the matriculation filter.", href: "/learning/university-matriculation", target: CLASS_YEARS },
 
   { id: "experiences", group: "Campus Life", label: "Jaguar Experience pages", description: "Innovation Hub, PAC, Athletics, Friendship Games, Science Labs and Library.", href: "/campus-life/jaguar-experience", target: EXPERIENCES },
-  { id: "traditions", group: "Campus Life", label: "Beyond the Classroom pages", description: "Math Bowl, Spelling Bee, Book Fair and every tradition page.", href: "/campus-life/beyond-the-classroom", target: TRADITIONS, enums: { group: ["academic", "civic", "family"] } },
+  { id: "traditions", group: "Campus Life", label: "Beyond the Classroom pages", description: "Math Bowl, Spelling Bee, Book Fair and every tradition page.", href: "/campus-life/beyond-the-classroom", target: TRADITIONS, enums: { group: ["clubs", "academic", "civic", "family"] } },
   { id: "traditionGroups", group: "Campus Life", label: "Tradition groups", description: "The headings that group the traditions.", href: "/campus-life/beyond-the-classroom", target: TRADITION_GROUPS },
   { id: "moreTraditions", group: "Campus Life", label: "More traditions list", description: "The extra traditions listed at the end of the page.", href: "/campus-life/beyond-the-classroom", target: MORE_TRADITIONS },
   { id: "leadershipHonors", group: "Campus Life", label: "Leadership & Honors", description: "STUCO, NHS/NJHS, Honor Roll and service.", href: "/campus-life/student-leadership", target: LEADERSHIP_HONORS },

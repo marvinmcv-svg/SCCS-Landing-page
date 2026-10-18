@@ -36,7 +36,7 @@ export function AdvantagePage() {
   ];
   return (
     <>
-      <PageHero photo={media.campusLawn} kicker={d.kicker} title={d.title} lede={d.intro} crumbs={[useDiscoverCrumb()]} />
+      <PageHero photo={media.dCampusFieldGroup} kicker={d.kicker} title={d.title} lede={d.intro} crumbs={[useDiscoverCrumb()]} imgPosition="object-[50%_60%]" />
       <Section>
         <Container className="space-y-20 lg:space-y-28">
           <MissionValues />

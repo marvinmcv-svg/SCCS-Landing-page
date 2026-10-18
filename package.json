@@ -25,6 +25,7 @@
     "next": "15.5.27",
     "react": "19.1.1",
     "react-dom": "19.1.1",
+    "react-globe.gl": "2.38.0",
     "react-hook-form": "7.63.0",
     "server-only": "0.0.1",
     "tailwind-merge": "3.3.1",

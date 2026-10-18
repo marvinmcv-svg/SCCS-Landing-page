@@ -11,8 +11,8 @@ import { useLang } from "./i18n";
 import { Photo } from "./sccs-shared";
 
 export const DIVISION_PHOTOS: Record<string, PhotoT> = {
-  es: media.igMath4,
-  ms: media.maker3dPrinter,
+  es: media.dEsBoysLaughing,
+  ms: media.dStemCupChallenge,
   hs: media.collegeFair,
 };
 

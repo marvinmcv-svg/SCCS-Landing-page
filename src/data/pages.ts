@@ -59,7 +59,7 @@ export const HISTORY = {
         en: "Our boldest investment yet opens its doors: a home for robotics, makerspaces, and design thinking — the same Jaguar Spirit of innovation, built for the next sixty years.",
         es: "Abre sus puertas nuestra inversión más audaz: un hogar para la robótica, los makerspaces y el pensamiento de diseño — el mismo Espíritu Jaguar de innovación, construido para los próximos sesenta años.",
       },
-      image: media.computerLabHs,
+      image: media.dCampusTower,
     },
   ],
   thenNow: { en: "Then & now", es: "Antes y ahora" },
@@ -153,7 +153,7 @@ export const CAMPUS = {
   facilities: [
     { title: { en: "Digital Classrooms", es: "Aulas Digitales" }, text: { en: "Climate-controlled spaces with multimedia technology and campus-wide high-speed connectivity.", es: "Espacios climatizados con tecnología multimedia y conectividad de alta velocidad en todo el campus." }, image: media.esClassroom },
     { title: { en: "Specialized Laboratories", es: "Laboratorios Especializados" }, text: { en: "Four science labs plus language (ESL/SSL) and computer labs built for technical mastery.", es: "Cuatro laboratorios de ciencias más laboratorios de idiomas (ESL/SSL) y computación." }, image: media.scienceLab, href: "/campus-life/jaguar-experience/science-labs" },
-    { title: { en: "Innovation Hub", es: "Innovation Hub" }, text: { en: "Robotics, sustainable design, and digital media — opened 2025.", es: "Robótica, diseño sostenible y medios digitales — inaugurado en 2025." }, image: media.computerLabHs, href: "/campus-life/jaguar-experience/innovation-hub" },
+    { title: { en: "Innovation Hub", es: "Innovation Hub" }, text: { en: "Robotics, sustainable design, and digital media — opened 2025.", es: "Robótica, diseño sostenible y medios digitales — inaugurado en 2025." }, image: media.dCampusTower, href: "/campus-life/jaguar-experience/innovation-hub" },
     { title: { en: "Performing Arts Center", es: "Performing Arts Center" }, text: { en: "The nexus of creative expression — and the stage for commencement.", es: "El centro de la expresión creativa — y el escenario de la graduación." }, image: media.pacFlags, href: "/campus-life/jaguar-experience/performing-arts-center" },
     { title: { en: "Athletic Complex", es: "Complejo Deportivo" }, text: { en: "A covered gymnasium, lit fields, and modern playgrounds.", es: "Un coliseo techado, canchas iluminadas y parques infantiles modernos." }, image: media.gym, href: "/campus-life/jaguar-experience/athletics" },
     { title: { en: "Library Media Center", es: "Library Media Center" }, text: { en: "Bilingual collections and research spaces for every age.", es: "Colecciones bilingües y espacios de investigación para cada edad." }, image: media.libraryLounge, href: "/campus-life/jaguar-experience/library" },

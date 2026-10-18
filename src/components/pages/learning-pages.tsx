@@ -11,7 +11,7 @@ import { Container, Kicker, Photo, Reveal, Section, SectionHeading, buttonStyles
 import { IconCards, PageHero, RelatedLinks, Tabs } from "@/components/sccs/page-kit";
 import { DualDiplomaDiagram } from "@/components/sccs/dual-diploma";
 import { DIVISION_PHOTOS } from "@/components/sccs/journey";
-import { MatriculationExplorer } from "@/components/sccs/matriculation";
+import { GlobeExplorer } from "@/components/sccs/globe-explorer";
 import { FinalCta } from "@/components/sccs/final-cta";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ function useLearningCrumb() {
 
 function LearningRelated({ exclude }: { exclude: string }) {
   const { tr } = useLang();
-  const photos = [media.computerLabHs, media.igMath1, media.graduationPac, media.esFriends2, media.collegeFairPennant];
+  const photos = [media.dVexWorldsTeam, media.igMath1, media.graduationPac, media.esFriends2, media.collegeFairPennant];
   const items = PILLARS[2].children.map((c, i) => ({ href: c.href, label: tr(c.label), blurb: tr(c.blurb), photo: photos[i] })).filter((c) => c.href !== exclude);
   return <RelatedLinks items={items} />;
 }
@@ -120,7 +120,7 @@ const DIVISION_EXTRA: Record<string, { photos: PhotoT[]; cta: { en: string; es: 
     },
   },
   ms: {
-    photos: [media.igMicroscope2, media.msClassroom, media.maker3dPrinter],
+    photos: [media.igMicroscope2, media.msClassroom, media.dStemTowerBuild],
     cta: { en: "Explore our Middle School STEAM labs", es: "Explora los laboratorios STEAM de Middle School" },
     subjects: {
       en: "Common Core ELA and Mathematics, NGSS Science, Social Studies, Spanish, STEAM & Robotics, Fine Arts, and Physical Education.",
@@ -128,7 +128,7 @@ const DIVISION_EXTRA: Record<string, { photos: PhotoT[]; cta: { en: string; es: 
     },
   },
   hs: {
-    photos: [media.computerLabHs, media.collegeFairReading, media.graduationPac],
+    photos: [media.dVexWorldsField, media.collegeFairReading, media.graduationPac],
     cta: { en: "View the University Matriculation map", es: "Ver el mapa de Matriculación Universitaria" },
     subjects: {
       en: "AP and Pre-AP courses, Innovation electives and advanced coding, NGSS lab sciences, Bolivian Bachillerato humanities, Fine Arts, and SHAPE-aligned PE.",
@@ -334,7 +334,7 @@ export function MatriculationPage() {
       <PageHero photo={media.collegeFairPennant} kicker={m.kicker} title={m.title} lede={m.intro} crumbs={[useLearningCrumb(), { href: "/learning/university-matriculation", label: m.title }]} imgPosition="object-[50%_30%]" />
       <Section dark>
         <Container>
-          <MatriculationExplorer />
+          <GlobeExplorer />
         </Container>
       </Section>
       <Section className="bg-ivory">

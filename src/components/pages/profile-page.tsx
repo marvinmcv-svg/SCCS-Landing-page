@@ -397,7 +397,7 @@ export function SchoolProfilePage() {
       {/* Campus and values */}
       <section className="bg-ivory py-24 sm:py-32">
         <div className={cn(wrap, "mb-20 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5")}>
-          {[media.innovationLab, media.library, media.gym, media.pacStage].map((ph, i) => (
+          {[media.dCampusTower, media.library, media.dSoccerAction, media.dFgFolkDance].map((ph, i) => (
             <div key={ph.src} data-clip className={cn("overflow-hidden rounded-[1.5rem]", i % 2 === 1 && "sm:mt-12")}>
               <Photo photo={ph} className="aspect-[3/4]" sizes="(min-width:640px) 25vw, 50vw" imgClassName="transition-transform duration-700 hover:scale-105" />
             </div>

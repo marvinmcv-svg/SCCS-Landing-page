@@ -48,6 +48,11 @@ export const ACCEPTANCES: Acceptance[] = [
     photo: media.acceptRodriguez,
     universities: ["American University", "Hult International Business School", "University of Kentucky", "University of Oklahoma", "Arizona State University", "Loyola University New Orleans", "Santa Fe College"],
   },
+  {
+    name: "Santiago Nacif Bruun",
+    photo: media.dAcceptSantiagoNacifBruun,
+    universities: ["Purdue University", "Penn State University", "Louisiana State University", "University of Arizona", "University of Arkansas", "University of Kentucky", "University of Nebraska-Lincoln", "Oklahoma State University", "Missouri State University"],
+  },
 ];
 
 /**

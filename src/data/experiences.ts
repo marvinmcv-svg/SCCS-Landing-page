@@ -26,7 +26,7 @@ export const EXPERIENCES: Experience[] = [
     title: { en: "The Innovation Hub", es: "El Innovation Hub" },
     tagline: { en: "Where Jaguars build what doesn't exist yet.", es: "Donde los Jaguars construyen lo que aún no existe." },
     note: { en: "Opened 2025 · robotics & design thinking", es: "Inaugurado en 2025 · robótica y pensamiento de diseño" },
-    hero: media.computerLabHs,
+    hero: media.dCampusTower,
     lede: {
       en: "The Innovation Hub is the boldest investment in SCCS history — a state-of-the-art ecosystem where students stop reading about technology and start making it. Robotics, sustainable design, digital media, and advanced coding, all under one roof, open to every division.",
       es: "El Innovation Hub es la inversión más audaz en la historia de SCCS — un ecosistema de última generación donde los estudiantes dejan de leer sobre tecnología y comienzan a crearla. Robótica, diseño sostenible, medios digitales y programación avanzada, bajo un mismo techo y abierto a todas las divisiones.",
@@ -43,7 +43,7 @@ export const EXPERIENCES: Experience[] = [
           en: "We retired the traditional computer class. In its place: an immersive STEAM curriculum of robotics, coding, and engineering design challenges that forces students to apply science, math, and art to real problems — and to fail, iterate, and try again.",
           es: "Retiramos la clase tradicional de computación. En su lugar: un currículo STEAM inmersivo de robótica, programación y desafíos de diseño de ingeniería que obliga a los estudiantes a aplicar ciencia, matemáticas y arte a problemas reales — y a fallar, iterar y volver a intentarlo.",
         },
-        image: media.maker3dPrinter,
+        image: media.dStemTowerBuild,
       },
       {
         title: { en: "Built for every age", es: "Pensado para cada edad" },
@@ -51,7 +51,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Elementary classes visit for design challenges that start with a question, not an answer. Middle schoolers prototype and program competition robots. High schoolers take specialized Innovation electives and advanced coding that feed straight into their university portfolios.",
           es: "Las clases de Elementary lo visitan para desafíos de diseño que comienzan con una pregunta, no con una respuesta. Los estudiantes de Middle School prototipan y programan robots de competencia. Los de High School toman electivas especializadas de Innovación y programación avanzada que alimentan directamente su portafolio universitario.",
         },
-        image: media.innovationLab,
+        image: media.dVexWorldsField,
       },
       {
         title: { en: "Ambassadors of change", es: "Embajadores del cambio" },
@@ -59,7 +59,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Our Innovation courses train students to spot opportunities for scientific, economic, and social growth — and to design the strategies to seize them, alone and in teams. It's the Technological Agency in our Learner Profile, made physical.",
           es: "Nuestros cursos de Innovación entrenan a los estudiantes para detectar oportunidades de crecimiento científico, económico y social — y para diseñar las estrategias que las aprovechen, solos y en equipo. Es la Agencia Tecnológica de nuestro Perfil del Estudiante, hecha realidad.",
         },
-        image: media.msLaptops,
+        image: media.dScienceCircuitsTeam,
       },
     ],
     pillarsTitle: { en: "Inside the Hub", es: "Dentro del Hub" },
@@ -70,7 +70,7 @@ export const EXPERIENCES: Experience[] = [
       { title: { en: "Sustainable Design & Media", es: "Diseño Sostenible y Medios" }, text: { en: "Projects that tackle real local challenges and tell their story digitally.", es: "Proyectos que enfrentan desafíos locales reales y cuentan su historia en digital." } },
     ],
     quote: { en: "Creators of technology, not consumers of it.", es: "Creadores de tecnología, no consumidores." },
-    gallery: [media.computerLabHs, media.maker3dPrinter, media.innovationLab, media.msLaptops],
+    gallery: [media.dVexWorldsTeam, media.dStemTowerBuild, media.dVexWorldsBoliviaFlag, media.dStemCupChallenge, media.dScienceCircuits, media.dStemSpaghettiTower],
     cta: { label: { en: "See the Hub on a campus tour", es: "Conoce el Hub en una visita al campus" }, href: "/admissions#inquire" },
   },
   {
@@ -79,7 +79,7 @@ export const EXPERIENCES: Experience[] = [
     title: { en: "Performing Arts Center", es: "Performing Arts Center" },
     tagline: { en: "The stage where every Jaguar finds their voice.", es: "El escenario donde cada Jaguar encuentra su voz." },
     note: { en: "Band, choir, theater", es: "Banda, coro y teatro" },
-    hero: media.graduationPac,
+    hero: media.dFgFolkDance,
     lede: {
       en: "The SCCS Performing Arts Center is the nexus of creative life on campus — home to the annual musical, band and choir concerts, art exhibitions, award ceremonies, and the commencement where every senior crosses the stage with two diplomas.",
       es: "El Performing Arts Center de SCCS es el centro de la vida creativa del campus — hogar del musical anual, los conciertos de banda y coro, las exposiciones de arte, las ceremonias de premiación y la graduación donde cada estudiante de último año cruza el escenario con dos diplomas.",
@@ -96,7 +96,7 @@ export const EXPERIENCES: Experience[] = [
           en: "At SCCS the arts aren't electives on the side — they're part of how a leader thinks. Students learn to synthesize complex ideas through performance and visual media, and to make intentional choices that communicate a point of view.",
           es: "En SCCS las artes no son electivas al margen — son parte de cómo piensa un líder. Los estudiantes aprenden a sintetizar ideas complejas a través de la interpretación y los medios visuales, y a tomar decisiones intencionales que comunican un punto de vista.",
         },
-        image: media.pacStage,
+        image: media.dStageSinger,
       },
       {
         title: { en: "A stage from the very first year", es: "Un escenario desde el primer año" },
@@ -123,7 +123,7 @@ export const EXPERIENCES: Experience[] = [
       { title: { en: "Performance Excellence", es: "Excelencia Escénica" }, text: { en: "A real stage to refine presence and the discipline of mastery.", es: "Un escenario real para pulir la presencia y la disciplina de la maestría." } },
     ],
     quote: { en: "Innovation and visual literacy are the languages of influence. We teach both.", es: "La innovación y la alfabetización visual son los idiomas de la influencia. Enseñamos ambos." },
-    gallery: [media.graduationPac, media.pacStage, media.esAwardsStage, media.pacFlags],
+    gallery: [media.dFgFolkDance, media.dStageSinger, media.graduationPac, media.dBandTvStage, media.dBandPlaza, media.esAwardsStage],
     cta: { label: { en: "See what's on stage next", es: "Mira lo próximo en escena" }, href: "/campus-life#events" },
   },
   {
@@ -132,7 +132,7 @@ export const EXPERIENCES: Experience[] = [
     title: { en: "Jaguar Athletics", es: "Atletismo Jaguar" },
     tagline: { en: "Grit, teamwork, and Jaguar pride.", es: "Garra, trabajo en equipo y orgullo Jaguar." },
     note: { en: "Soccer · basketball · volleyball · track", es: "Fútbol · básquet · vóleibol · atletismo" },
-    hero: media.fgBasketballAcs,
+    hero: media.dSoccerAction,
     lede: {
       en: "Lit fields, a covered gymnasium, and coaches who know every name. Jaguar Athletics develops the physical resilience, strategic teamwork, and competitive grit of a true student-athlete — from first PE class to the Friendship Games final.",
       es: "Canchas iluminadas, un coliseo techado y entrenadores que conocen cada nombre. El Atletismo Jaguar desarrolla la resiliencia física, el trabajo en equipo estratégico y la garra competitiva de un verdadero estudiante-atleta — desde la primera clase de educación física hasta la final de los Friendship Games.",
@@ -149,7 +149,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Our Physical Education curriculum is aligned with SHAPE America standards — health, fitness, and teamwork for every student, every year. From there, Middle and High School Jaguars can try out for competitive teams in soccer, basketball, volleyball, and track.",
           es: "Nuestro currículo de Educación Física está alineado con los estándares SHAPE America — salud, condición física y trabajo en equipo para cada estudiante, cada año. A partir de ahí, los Jaguars de Middle y High School pueden integrar equipos competitivos de fútbol, básquet, vóleibol y atletismo.",
         },
-        image: media.fgHsTeam,
+        image: media.dVolleyballTeam,
       },
       {
         title: { en: "Facilities built for the game", es: "Instalaciones pensadas para el juego" },
@@ -157,7 +157,7 @@ export const EXPERIENCES: Experience[] = [
           en: "A covered gymnasium with packed bleachers on game days, lit athletic fields for evening play, and open green space across all 8 acres. The court in the gym has seen decades of Friendship Games finals.",
           es: "Un coliseo techado con graderías llenas en días de partido, canchas iluminadas para jugar de noche y amplias áreas verdes en los 8 acres. La cancha del coliseo ha visto décadas de finales de los Friendship Games.",
         },
-        image: media.gym,
+        image: media.dHighJump,
       },
       {
         title: { en: "Spirit on the sidelines", es: "Espíritu desde la tribuna" },
@@ -165,7 +165,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Our cheer squad builds three-high pyramids, the student section never sits down, and every game ends with a handshake. Sportsmanship isn't a rule here — it's the Jaguar way.",
           es: "Nuestro equipo de porristas arma pirámides de tres niveles, la barra estudiantil nunca se sienta y cada partido termina con un apretón de manos. La deportividad no es una regla aquí — es el estilo Jaguar.",
         },
-        image: media.fgCheer,
+        image: media.dTrackMedal,
       },
     ],
     pillarsTitle: { en: "What athletes build", es: "Lo que construyen nuestros atletas" },
@@ -176,7 +176,7 @@ export const EXPERIENCES: Experience[] = [
       { title: { en: "Character", es: "Carácter" }, text: { en: "Respect for opponents, officials, and the game itself.", es: "Respeto por los rivales, los árbitros y el propio juego." } },
     ],
     quote: { en: "True victory lives where high performance meets mutual respect.", es: "La verdadera victoria vive donde el alto rendimiento se encuentra con el respeto mutuo." },
-    gallery: [media.fgBasketballAcs, media.fgMsBasketball, media.fgBasketball2, media.fgHsTeam, media.fgCheer2, media.gym],
+    gallery: [media.dSoccerAction, media.dVolleyballTeam, media.dHighJump, media.dGirlsSoccerChampions, media.dSoccerLeagueChampions, media.dVolleyballChampions, media.dTrackMedal, media.fgHsTeam],
     cta: { label: { en: "The Friendship Games", es: "Los Friendship Games" }, href: "/campus-life/jaguar-experience/friendship-games" },
   },
   {
@@ -185,7 +185,7 @@ export const EXPERIENCES: Experience[] = [
     title: { en: "The Friendship Games", es: "Los Friendship Games" },
     tagline: { en: "Four schools. One rivalry. Forty-plus years of friendship.", es: "Cuatro colegios. Una rivalidad. Más de cuarenta años de amistad." },
     note: { en: "A tradition since 1980", es: "Una tradición desde 1980" },
-    hero: media.fgPepRally,
+    hero: media.dCheerSquad,
     lede: {
       en: "Since 1980, SCCS, ACS, CCS, and AISB have met every year for the region's oldest interschool tradition. Modeled on international sports festivals, the Friendship Games are part tournament, part reunion, and entirely Jaguar — a training ground for character disguised as the best week of the year.",
       es: "Desde 1980, SCCS, ACS, CCS y AISB se reúnen cada año en la tradición interescolar más antigua de la región. Inspirados en los festivales deportivos internacionales, los Friendship Games son en parte torneo, en parte reencuentro y completamente Jaguar — una escuela de carácter disfrazada de la mejor semana del año.",
@@ -202,7 +202,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Soccer, basketball, volleyball, and track and field — played hard, refereed fairly, and closed with handshakes. The Games challenge our Jaguars to show resilience, integrity, and the collaborative spirit it takes to lead on a diverse world stage.",
           es: "Fútbol, básquet, vóleibol y atletismo — jugados con intensidad, arbitrados con justicia y cerrados con un apretón de manos. Los Juegos desafían a nuestros Jaguars a demostrar resiliencia, integridad y el espíritu colaborativo que se necesita para liderar en un escenario mundial diverso.",
         },
-        image: media.fgBasketballAcs,
+        image: media.dFgTeamJackets,
       },
       {
         title: { en: "Not just athletes", es: "No solo atletas" },
@@ -218,7 +218,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Hosting rotates between the four schools, so every Jaguar both welcomes guests and travels as one — a cultural exchange inside Bolivia. When the Games come to Santa Cruz, the whole campus becomes the venue: pep rally in the gym, water games on the lawn, finals under the lights.",
           es: "La sede rota entre los cuatro colegios, así que cada Jaguar recibe visitantes y también viaja como visitante — un intercambio cultural dentro de Bolivia. Cuando los Juegos llegan a Santa Cruz, todo el campus se convierte en sede: pep rally en el coliseo, juegos acuáticos en el prado y finales bajo las luces.",
         },
-        image: media.fgWaterGames,
+        image: media.dVolleyballChampions,
       },
     ],
     pillarsTitle: { en: "The arena", es: "La arena" },
@@ -229,7 +229,7 @@ export const EXPERIENCES: Experience[] = [
       { title: { en: "School Spirit", es: "Espíritu Escolar" }, text: { en: "Pep rallies, cheer, and a student section that never sits.", es: "Pep rallies, porras y una barra que nunca se sienta." } },
     ],
     quote: { en: "Once a Jaguar, always a Jaguar — and the Games are where that begins.", es: "Una vez Jaguar, siempre Jaguar — y los Juegos son donde eso comienza." },
-    gallery: [media.fgPepRally, media.fgBasketballAcs, media.fgCheer, media.fgWaterGames, media.fgDunk, media.fgBull, media.fgWaterSlide, media.fgHandshake, media.fgMsBasketball],
+    gallery: [media.dCheerSquad, media.dFgFolkDance, media.dFgCheerFriends, media.dVolleyballChampions, media.dFgTeamJackets, media.fgPepRally, media.fgWaterGames, media.dFgCeremony, media.fgDunk],
     cta: { label: { en: "Follow the Jaguars on Instagram", es: "Sigue a los Jaguars en Instagram" }, href: "https://www.instagram.com/sccsjaguars/" },
   },
   {
@@ -238,7 +238,7 @@ export const EXPERIENCES: Experience[] = [
     title: { en: "Science Laboratories", es: "Laboratorios de Ciencias" },
     tagline: { en: "Science you can see for yourself.", es: "Ciencia que puedes ver con tus propios ojos." },
     note: { en: "Four labs · NGSS inquiry", es: "Cuatro laboratorios · indagación NGSS" },
-    hero: media.igMicroscope4,
+    hero: media.dScienceCircuitsTeam,
     lede: {
       en: "Four specialized laboratories put the three-dimensional NGSS framework into students' hands — microscopes, lab benches, and real data from Grade 1 to AP. Our scientists don't memorize the cell; they find it.",
       es: "Cuatro laboratorios especializados ponen el marco tridimensional NGSS en manos de los estudiantes — microscopios, mesones de laboratorio y datos reales desde 1.º grado hasta AP. Nuestros científicos no memorizan la célula; la encuentran.",
@@ -255,7 +255,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Science instruction follows the NGSS framework through HMH resources: students ask questions, design investigations, and argue from evidence. The textbook comes after the experiment, not instead of it.",
           es: "La enseñanza de ciencias sigue el marco NGSS con recursos HMH: los estudiantes formulan preguntas, diseñan investigaciones y argumentan con evidencia. El libro viene después del experimento, no en su lugar.",
         },
-        image: media.igMicroscope1,
+        image: media.dScienceTestTubes,
       },
       {
         title: { en: "It starts young", es: "Empieza temprano" },
@@ -263,7 +263,7 @@ export const EXPERIENCES: Experience[] = [
           en: "Our second graders study changes of matter by watching popsicles melt in the Santa Cruz sun — observing, predicting, and recording like real scientists before enjoying the results.",
           es: "Nuestros estudiantes de segundo grado estudian los cambios de la materia viendo derretirse paletas bajo el sol de Santa Cruz — observando, prediciendo y registrando como verdaderos científicos antes de disfrutar el resultado.",
         },
-        image: media.igMatter1,
+        image: media.dScienceVolcanoes,
       },
       {
         title: { en: "Lab-grade preparation", es: "Preparación de laboratorio" },
@@ -271,7 +271,7 @@ export const EXPERIENCES: Experience[] = [
           en: "By High School, Jaguars run full lab protocols in Chemistry and Biology, with AP sciences that earn university credit — preparation that shows the day they walk into a university lab.",
           es: "En High School, los Jaguars realizan protocolos completos de laboratorio en Química y Biología, con ciencias AP que otorgan créditos universitarios — una preparación que se nota el día que entran a un laboratorio universitario.",
         },
-        image: media.scienceLab,
+        image: media.igMicroscope1,
       },
     ],
     pillarsTitle: { en: "How we teach science", es: "Cómo enseñamos ciencias" },
@@ -282,7 +282,7 @@ export const EXPERIENCES: Experience[] = [
       { title: { en: "Connect", es: "Conectar" }, text: { en: "Linking science to math, engineering, and the world.", es: "Vincular la ciencia con las matemáticas, la ingeniería y el mundo." } },
     ],
     quote: { en: "Sometimes the best way to learn science is to see it for yourself.", es: "A veces la mejor manera de aprender ciencia es verla por ti mismo." },
-    gallery: [media.igMicroscope4, media.igMicroscope2, media.igMicroscope3, media.igMicroscope5, media.igMatter2, media.scienceLab],
+    gallery: [media.dScienceCircuitsTeam, media.dScienceTestTubes, media.dScienceVolcanoes, media.dScienceCircuits, media.igMicroscope3, media.igMicroscope5],
     cta: { label: { en: "Explore the curriculum", es: "Explora el currículo" }, href: "/learning" },
   },
   {

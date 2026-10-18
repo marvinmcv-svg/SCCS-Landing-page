@@ -199,6 +199,8 @@ export function CountFigure({ value }: { value: string }) {
   const decimals = num.includes(".") ? num.split(".")[1].length : 0;
   // Years read as labels, not quantities: leave them still.
   if (!decimals && /^(19|20)\d\d$/.test(num) && !pre && !post) return <>{value}</>;
+  // Ranges like "PK–12" are labels too.
+  if (/[A-Za-z]/.test(pre)) return <>{value}</>;
   return (
     <>
       {pre}

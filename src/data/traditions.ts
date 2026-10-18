@@ -1,7 +1,7 @@
 import { media, type Photo } from "./media";
 import type { L } from "@/lib/i18n-types";
 
-export type TraditionGroup = "academic" | "civic" | "family";
+export type TraditionGroup = "clubs" | "academic" | "civic" | "family";
 
 export type Tradition = {
   slug: string;
@@ -18,6 +18,13 @@ export type Tradition = {
 };
 
 export const TRADITION_GROUPS: Record<TraditionGroup, { title: L; intro: L }> = {
+  clubs: {
+    title: { en: "Clubs & Teams", es: "Clubes y Equipos" },
+    intro: {
+      en: "Where Jaguars lead: debating world affairs at MUN, building robots for the world stage, serving the community, and running the student government.",
+      es: "Donde los Jaguars lideran: debatiendo asuntos mundiales en el MUN, construyendo robots para el escenario mundial, sirviendo a la comunidad y dirigiendo el gobierno estudiantil.",
+    },
+  },
   academic: {
     title: { en: "Academic & Intellectual Showcases", es: "Vitrinas Académicas e Intelectuales" },
     intro: {
@@ -42,6 +49,46 @@ export const TRADITION_GROUPS: Record<TraditionGroup, { title: L; intro: L }> = 
 };
 
 export const TRADITIONS: Tradition[] = [
+  {
+    slug: "model-united-nations",
+    group: "clubs",
+    title: { en: "Model United Nations", es: "Model United Nations" },
+    tagline: { en: "Suits on, placards up: Jaguars debate the world's hardest questions.", es: "Traje puesto, placa en alto: los Jaguars debaten las preguntas más difíciles del mundo." },
+    image: media.dMunDelegatesGarden,
+    gallery: [media.dMunDelegatesPac, media.dMunDais, media.dMunBoys, media.dMunWallOfFame, media.dMunPodium],
+    when: { en: "All year, with a three-day SCCS conference", es: "Todo el año, con una conferencia SCCS de tres días" },
+    who: { en: "Middle and High School delegates", es: "Delegados de Middle y High School" },
+    where: { en: "Performing Arts Center and committee rooms", es: "Performing Arts Center y salas de comité" },
+    body: [
+      { en: "SCCS MUN turns students into delegates. Each one represents a country, researches its position, writes resolutions and negotiates with other delegations, in English, under formal parliamentary procedure.", es: "SCCS MUN convierte a los estudiantes en delegados. Cada uno representa a un país, investiga su postura, redacta resoluciones y negocia con otras delegaciones, en inglés y bajo procedimiento parlamentario formal." },
+      { en: "Students chair the committees themselves, and the school hosts its own three-day conference in the Performing Arts Center, alongside internal MUN events that bring new delegates into the program.", es: "Los propios estudiantes presiden los comités, y el colegio organiza su propia conferencia de tres días en el Performing Arts Center, además de eventos internos de MUN que incorporan nuevos delegados al programa." },
+    ],
+    expect: [
+      { en: "Research, position papers and public speaking", es: "Investigación, documentos de posición y oratoria" },
+      { en: "Student-run committees and chairs", es: "Comités y mesas dirigidos por estudiantes" },
+      { en: "Formal dress and diplomatic protocol", es: "Vestimenta formal y protocolo diplomático" },
+    ],
+  },
+  {
+    slug: "robotics-vex",
+    group: "clubs",
+    title: { en: "Robotics & VEX", es: "Robótica y VEX" },
+    tagline: { en: "From the Innovation Hub to the VEX Robotics World Championship.", es: "Del Innovation Hub al Campeonato Mundial de Robótica VEX." },
+    image: media.dVexWorldsTeam,
+    gallery: [media.dVexWorldsBoliviaFlag, media.dVexWorldsField, media.dVexWorldsMatch, media.dVexRobotProud, media.dVexWorldsTeamCoaches, media.dVexTeamDallas],
+    when: { en: "After school, all year", es: "Después de clases, todo el año" },
+    who: { en: "Elementary and Middle School teams", es: "Equipos de Elementary y Middle School" },
+    where: { en: "The Innovation Hub", es: "El Innovation Hub" },
+    body: [
+      { en: "Jaguar robotics teams design, build and program their own VEX robots, then put them on the field against the clock and against other teams. Engineering notebooks, driver practice and judges' interviews are all part of the work.", es: "Los equipos de robótica Jaguar diseñan, construyen y programan sus propios robots VEX y luego los ponen a competir contra el reloj y contra otros equipos. El cuaderno de ingeniería, la práctica de manejo y las entrevistas con los jueces son parte del trabajo." },
+      { en: "In 2025 our teams reached the VEX Robotics World Championship in Dallas, Texas, carrying the Bolivian flag onto the world stage alongside thousands of students from around the globe.", es: "En 2025 nuestros equipos llegaron al Campeonato Mundial de Robótica VEX en Dallas, Texas, llevando la bandera de Bolivia al escenario mundial junto a miles de estudiantes de todo el planeta." },
+    ],
+    expect: [
+      { en: "Build, code and drive competition robots", es: "Construir, programar y manejar robots de competencia" },
+      { en: "Regional events and the World Championship", es: "Torneos regionales y el Campeonato Mundial" },
+      { en: "Teamwork, engineering notebooks and judges' interviews", es: "Trabajo en equipo, cuadernos de ingeniería y entrevistas con jueces" },
+    ],
+  },
   {
     slug: "math-bowl",
     group: "academic",

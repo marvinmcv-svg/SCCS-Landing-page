@@ -13,11 +13,11 @@ import { cn } from "@/lib/utils";
 import { useLang } from "../sccs/i18n";
 import { Crest, Photo, buttonStyles } from "../sccs/sccs-shared";
 import { JourneyTabs } from "../sccs/journey";
-import { MatriculationExplorer } from "../sccs/matriculation";
+import { GlobeExplorer } from "../sccs/globe-explorer";
 import { CATEGORY_LABEL } from "../sccs/campus-life";
 import { InstagramGlyph } from "../sccs/footer";
 import { AcceptancePosters, AccreditationLogos, PrestigeMarquee } from "../sccs/credentials";
-import { Aurora, Marquee, Words, gsap, useGSAP } from "./motion";
+import { Aurora, CountFigure, Marquee, Words, gsap, useGSAP } from "./motion";
 
 /* ───────── Shared pieces ───────── */
 
@@ -70,32 +70,54 @@ export function Stats() {
 
 /* ───────── The SCCS Advantage ───────── */
 
+const REASON_PHOTOS = [media.graduationPac, media.collegeFair, media.dPalapaClass, media.dVexWorldsBoliviaFlag, media.dFgFolkDance, media.dCampusTower];
+
 export function Advantage() {
   const { t } = useLang();
   const h = t.home;
   return (
     <section id="discover" className="scroll-mt-24 bg-ivory py-28 sm:py-36">
-      <div className={cn(wrap, "grid items-center gap-14 lg:grid-cols-12")}>
-        <div className="lg:col-span-6">
+      <div className={cn(wrap, "grid items-end gap-10 lg:grid-cols-12")}>
+        <div className="lg:col-span-7">
           <h2 className={cn(h2, "text-navy-900")}>
             <Words text={h.advantageTitle} />
           </h2>
-          <p data-rise className="mt-8 max-w-xl text-xl leading-relaxed text-navy-900/85 sm:text-2xl">
+          <p data-rise className="mt-8 max-w-2xl text-xl leading-relaxed text-navy-900/85 sm:text-2xl">
             {h.advantageBody}
           </p>
-          <div data-rise className="mt-8">
-            <More href="/discover">{h.advantageCta}</More>
-          </div>
         </div>
-        <div className="relative lg:col-span-6">
-          <div data-clip className="overflow-hidden rounded-[2rem]">
-            <Photo photo={media.campusLawn} className="aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]" sizes="(min-width:1024px) 45vw, 100vw" />
-          </div>
-          <div data-parallax="18" className="absolute -bottom-10 -left-4 w-[42%] overflow-hidden rounded-[1.5rem] ring-8 ring-ivory sm:-left-10">
-            <Photo photo={media.historyHalloween} className="aspect-square" sizes="(min-width:1024px) 20vw, 40vw" imgClassName="object-[20%_50%]" />
-          </div>
+        <div data-rise className="lg:col-span-5 lg:text-right">
+          <More href="/discover">{h.advantageCta}</More>
         </div>
       </div>
+
+      <ul className={cn(wrap, "mt-16 grid auto-rows-[22rem] gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[20rem] lg:gap-5")}>
+        {h.reasons.map((r, i) => (
+          <li
+            key={r.label}
+            data-rise
+            className={cn(
+              "group relative isolate overflow-hidden rounded-[1.75rem] bg-navy-900",
+              ["lg:col-span-7 lg:row-span-2", "lg:col-span-5", "lg:col-span-5", "lg:col-span-4", "lg:col-span-4", "lg:col-span-4"][i],
+            )}
+          >
+            <Photo
+              photo={REASON_PHOTOS[i]}
+              className="absolute inset-0 -z-10"
+              sizes={i === 0 ? "(min-width:1024px) 58vw, 100vw" : "(min-width:1024px) 34vw, 100vw"}
+              imgClassName="transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+            />
+            <div className="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-gradient-to-t from-navy-950/90 via-navy-950/40 to-transparent" aria-hidden="true" />
+            <div className="flex h-full flex-col justify-end p-6 text-white sm:p-8">
+              <p className={cn("font-display font-semibold leading-none tracking-[-0.03em]", i === 0 ? "text-7xl sm:text-8xl" : "text-5xl sm:text-6xl")}>
+                <CountFigure value={r.stat} />
+              </p>
+              <p className="mt-2 text-lg font-semibold text-amber-400">{r.label}</p>
+              <p className="mt-2 max-w-md text-base leading-relaxed text-white/85">{r.line}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
 
       <div className={cn(wrap, "mt-28 sm:mt-36")}>
         <p data-rise className="text-lg font-semibold text-crimson-600">
@@ -120,22 +142,41 @@ export function Safety() {
   const { t } = useLang();
   const h = t.home;
   return (
-    <section className="relative isolate flex min-h-[85svh] items-end overflow-hidden bg-navy-950 text-white">
-      <div data-parallax="8" className="absolute -inset-y-[10%] inset-x-0 -z-20">
-        <Photo photo={media.esLunchTrio} className="absolute inset-0" sizes="100vw" imgClassName="object-[50%_65%]" />
-      </div>
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(20,20,58,0.92),rgba(20,20,58,0.35)_50%,transparent_75%)]" aria-hidden="true" />
-      <div className={cn(wrap, "py-16 sm:py-24")}>
-        <h2 className={cn(h2, "max-w-4xl")}>
-          <Words text={h.safetyTitle} />
-        </h2>
-        <p data-rise className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
-          {h.safetyBody}
-        </p>
-        <div data-rise className="mt-8">
-          <More href="/discover/safety-wellness" dark>
-            {h.safetyCta}
-          </More>
+    <section className="overflow-hidden bg-navy-950 py-28 text-white sm:py-36">
+      <div className={cn(wrap, "grid items-center gap-14 lg:grid-cols-12")}>
+        <div className="lg:col-span-5">
+          <h2 className={h2}>
+            <Words text={h.safetyTitle} />
+          </h2>
+          <p data-rise className="mt-8 max-w-xl text-xl leading-relaxed text-white/85">
+            {h.safetyBody}
+          </p>
+          <ul data-rise className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 text-base text-white/85">
+            {t.discover.safety.map((x) => (
+              <li key={x.title} className="flex items-center gap-2.5">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" aria-hidden="true" />
+                {x.title}
+              </li>
+            ))}
+          </ul>
+          <div data-rise className="mt-10">
+            <More href="/discover/safety-wellness" dark>
+              {h.safetyCta}
+            </More>
+          </div>
+        </div>
+        <div className="relative grid grid-cols-6 gap-4 lg:col-span-7">
+          <div data-clip className="col-span-6 overflow-hidden rounded-[2rem] sm:col-span-4">
+            <Photo photo={media.dEsFriendsHall} className="aspect-[4/3] sm:aspect-[4/5]" sizes="(min-width:1024px) 38vw, 100vw" />
+          </div>
+          <div className="col-span-6 grid grid-cols-2 gap-4 sm:col-span-2 sm:grid-cols-1 sm:content-end">
+            <div data-parallax="12" className="overflow-hidden rounded-[1.5rem]">
+              <Photo photo={media.dEsBoysLaughing} className="aspect-square" sizes="(min-width:1024px) 18vw, 50vw" />
+            </div>
+            <div data-parallax="18" className="overflow-hidden rounded-[1.5rem]">
+              <Photo photo={media.dPalapaClass2} className="aspect-square" sizes="(min-width:1024px) 18vw, 50vw" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -325,7 +366,7 @@ export function ExperienceHome() {
 
 /* ───────── Beyond the Classroom: a large, browsable rail of every tradition ───────── */
 
-type TraditionTab = "all" | "academic" | "civic" | "family";
+type TraditionTab = "all" | "clubs" | "academic" | "civic" | "family";
 
 export function TraditionsMarquee() {
   const { t, tr } = useLang();
@@ -333,7 +374,7 @@ export function TraditionsMarquee() {
   const [progress, setProgress] = useState(0);
   const rail = useRef<HTMLUListElement>(null);
   const list = tab === "all" ? TRADITIONS : TRADITIONS.filter((x) => x.group === tab);
-  const tabs: TraditionTab[] = ["all", "academic", "civic", "family"];
+  const tabs: TraditionTab[] = ["all", "clubs", "academic", "civic", "family"];
 
   const onScroll = () => {
     const el = rail.current;
@@ -462,7 +503,7 @@ export function MatriculationHome() {
           </div>
         </div>
         <div data-rise className="mt-14">
-          <MatriculationExplorer />
+          <GlobeExplorer />
         </div>
       </div>
     </section>

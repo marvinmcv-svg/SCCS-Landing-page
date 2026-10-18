@@ -30,8 +30,6 @@ export type CampusEvent = { date: string; division: Division; title: L; desc: L;
 export type TeamCategory = "LEADERSHIP" | "FACULTY" | "SPECIALIST" | "SST" | "ADMIN";
 export type TeamMember = { name: string; role: L; division: "ALL" | "ES" | "MS" | "HS"; category: TeamCategory; bio: L };
 
-export type CountryCode = "US" | "CA" | "GB" | "ES" | "NL" | "IT" | "BO" | "CO" | "CL" | "MX" | "AU";
-export type MatriculationEntry = { university: string; country: CountryCode; lat: number; lng: number; count: number; years: string };
 
 export const NEWS: NewsPost[] = [
   {
@@ -73,8 +71,8 @@ export const NEWS: NewsPost[] = [
     category: "ACADEMICS",
     date: "2026-09-28",
     featured: false,
-    image: media.innovationLab,
-    gallery: [media.maker3dPrinter, media.computerLabHs],
+    image: media.dVexWorldsTeam,
+    gallery: [media.dVexWorldsBoliviaFlag, media.dVexWorldsField],
     title: { en: "Middle School Robotics Advances to National Finals", es: "Robótica de Middle School avanza a la final nacional" },
     excerpt: {
       en: "Grade 7 engineers designed, built, and programmed their way to the national stage in our STEAM ecosystem.",
@@ -185,8 +183,8 @@ export const NEWS: NewsPost[] = [
     category: "ACADEMICS",
     date: "2026-08-15",
     featured: true,
-    image: media.computerLabHs,
-    gallery: [media.maker3dPrinter, media.innovationLab, media.msLaptops],
+    image: media.dCampusTower,
+    gallery: [media.dStemTowerBuild, media.dScienceCircuits, media.dStemCupChallenge],
     title: { en: "Innovation Hub Opens Its Doors", es: "El Innovation Hub abre sus puertas" },
     excerpt: {
       en: "Our new 2025 Innovation Hub puts robotics, maker education, and design thinking at the heart of the SCCS experience.",
@@ -254,49 +252,8 @@ export const SPOTLIGHTS: { photo: Photo; url: string }[] = [
   { photo: media.spotlightMoscon, url: "https://www.instagram.com/p/DcRYIAoH2R6/" },
 ];
 
-export const MATRICULATION: MatriculationEntry[] = [
-  { university: "Harvard University", country: "US", lat: 42.38, lng: -71.12, count: 2, years: "2022,2025" },
-  { university: "Massachusetts Institute of Technology", country: "US", lat: 42.36, lng: -71.09, count: 1, years: "2024" },
-  { university: "Stanford University", country: "US", lat: 37.43, lng: -122.17, count: 1, years: "2023" },
-  { university: "Columbia University", country: "US", lat: 40.81, lng: -73.96, count: 2, years: "2021,2026" },
-  { university: "New York University", country: "US", lat: 40.73, lng: -73.99, count: 3, years: "2022,2023,2025" },
-  { university: "University of Florida", country: "US", lat: 29.65, lng: -82.35, count: 4, years: "2021,2023,2024,2026" },
-  { university: "Texas A&M University", country: "US", lat: 30.62, lng: -96.34, count: 5, years: "2021,2022,2023,2025,2026" },
-  { university: "Pennsylvania State University", country: "US", lat: 40.8, lng: -77.86, count: 3, years: "2022,2024,2026" },
-  { university: "University of Miami", country: "US", lat: 25.72, lng: -80.27, count: 6, years: "2021,2022,2023,2024,2025,2026" },
-  { university: "Universidad de los Andes", country: "CO", lat: 4.6, lng: -74.07, count: 1, years: "2025" },
-  { university: "Pontificia Universidad Católica de Chile", country: "CL", lat: -33.44, lng: -70.65, count: 1, years: "2024" },
-  { university: "Tec de Monterrey", country: "MX", lat: 25.67, lng: -100.31, count: 2, years: "2023,2025" },
-  { university: "Universidad del Valle", country: "BO", lat: -17.79, lng: -63.15, count: 12, years: "2021,2022,2023,2024,2025,2026" },
-  { university: "Universidad Privada de Santa Cruz (UPB)", country: "BO", lat: -17.78, lng: -63.18, count: 38, years: "2021,2022,2023,2024,2025,2026" },
-  { university: "Universidad Mayor de San Simón", country: "BO", lat: -17.98, lng: -65.28, count: 5, years: "2021,2022,2023,2024,2025" },
-  { university: "University of Toronto", country: "CA", lat: 43.66, lng: -79.4, count: 2, years: "2023,2026" },
-  { university: "McGill University", country: "CA", lat: 45.5, lng: -73.58, count: 1, years: "2024" },
-  { university: "University of Edinburgh", country: "GB", lat: 55.95, lng: -3.19, count: 1, years: "2025" },
-  { university: "King's College London", country: "GB", lat: 51.51, lng: -0.11, count: 1, years: "2022" },
-  { university: "University of Manchester", country: "GB", lat: 53.47, lng: -2.23, count: 2, years: "2024,2026" },
-  { university: "IE University", country: "ES", lat: 40.42, lng: -3.7, count: 1, years: "2025" },
-  { university: "Universitat de Barcelona", country: "ES", lat: 41.39, lng: 2.17, count: 1, years: "2023" },
-  { university: "TU Delft", country: "NL", lat: 51.99, lng: 4.37, count: 1, years: "2026" },
-  { university: "Bocconi University", country: "IT", lat: 45.45, lng: 9.18, count: 1, years: "2024" },
-  { university: "University of Melbourne", country: "AU", lat: -37.8, lng: 144.96, count: 1, years: "2025" },
-];
 
-export const COUNTRIES: Record<CountryCode, { flag: string; name: L }> = {
-  US: { flag: "🇺🇸", name: { en: "United States", es: "Estados Unidos" } },
-  CA: { flag: "🇨🇦", name: { en: "Canada", es: "Canadá" } },
-  GB: { flag: "🇬🇧", name: { en: "United Kingdom", es: "Reino Unido" } },
-  ES: { flag: "🇪🇸", name: { en: "Spain", es: "España" } },
-  NL: { flag: "🇳🇱", name: { en: "Netherlands", es: "Países Bajos" } },
-  IT: { flag: "🇮🇹", name: { en: "Italy", es: "Italia" } },
-  BO: { flag: "🇧🇴", name: { en: "Bolivia", es: "Bolivia" } },
-  CO: { flag: "🇨🇴", name: { en: "Colombia", es: "Colombia" } },
-  CL: { flag: "🇨🇱", name: { en: "Chile", es: "Chile" } },
-  MX: { flag: "🇲🇽", name: { en: "Mexico", es: "México" } },
-  AU: { flag: "🇦🇺", name: { en: "Australia", es: "Australia" } },
-};
 
-export const CLASS_YEARS = ["2021", "2022", "2023", "2024", "2025", "2026"];
 
 /** Instagram grid — real posts, linked to their originals. */
 export const INSTAGRAM_POSTS: { photo: Photo; url: string; caption: L }[] = [
