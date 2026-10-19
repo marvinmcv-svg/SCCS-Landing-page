@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Check, MapPin, Users } from "lucide-react";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { MORE_TRADITIONS, TRADITIONS, TRADITION_GROUPS, type Tradition, type TraditionGroup } from "@/data/traditions";
 import { EVENTS } from "@/data/sccs-content";
 import { useLang } from "@/components/sccs/i18n";
@@ -38,7 +38,7 @@ export function BeyondHub() {
   return (
     <>
       <PageHero
-        photo={media.igReadingNight1}
+        photo={PAGE_PHOTOS.beyondTheClassroom.hero}
         kicker={t.nav.campusLife}
         title={t.campusLife.beyondTitle}
         lede={t.campusLife.beyondIntro}

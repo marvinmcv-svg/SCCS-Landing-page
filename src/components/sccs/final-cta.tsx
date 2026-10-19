@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { cn } from "@/lib/utils";
 import { useLang } from "./i18n";
 import { Container, Photo, SchoolJaguar, Reveal, buttonStyles } from "./sccs-shared";
@@ -10,7 +10,7 @@ export function FinalCta() {
   const { t } = useLang();
   return (
     <section className="relative isolate overflow-hidden bg-navy-950 py-20 text-center sm:py-28">
-      <Photo photo={media.pacFlags} className="absolute inset-0 -z-20 opacity-20" sizes="100vw" />
+      <Photo photo={PAGE_PHOTOS.siteWide.closingBannerBackground} className="absolute inset-0 -z-20 opacity-20" sizes="100vw" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(248,167,36,0.22),transparent_60%),linear-gradient(to_bottom,rgba(20,20,58,0.85),rgba(20,20,58,0.95))]" aria-hidden="true" />
       <Container>
         <Reveal>

@@ -58,17 +58,24 @@ export function PhotoPicker({
   onPick,
   onClose,
   onUploaded,
+  title,
+  defaultAlt,
 }: {
   library: Library;
   onPick: (key: string) => void;
   onClose: () => void;
   onUploaded: (key: string, photo: PhotoValue) => void;
+  /** What the photo is for, shown under the heading. */
+  title?: string;
+  /** Used as the description when none is typed. */
+  defaultAlt?: string;
 }) {
   const [query, setQuery] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [altEn, setAltEn] = useState("");
   const [altEs, setAltEs] = useState("");
+  const [preview, setPreview] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   const entries = useMemo(() => {
@@ -81,10 +88,11 @@ export function PhotoPicker({
   async function upload() {
     const file = fileRef.current?.files?.[0];
     if (!file) return setError("Choose an image first.");
-    if (!altEn.trim()) return setError("Describe the photo in English (for screen readers and search).");
+    const en = altEn.trim() || defaultAlt || "";
+    if (!en) return setError("Describe the photo in English (for screen readers and search).");
     setBusy(true);
     setError("");
-    const res = await uploadImage(file, { mode: "library", altEn, altEs });
+    const res = await uploadImage(file, { mode: "library", altEn: en, altEs: altEs.trim() || en });
     setBusy(false);
     if (!res.ok || !res.key || !res.photo) return setError(res.ok ? "Upload failed." : res.error);
     onUploaded(res.key, res.photo);
@@ -95,7 +103,10 @@ export function PhotoPicker({
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-navy-950/50 p-0 backdrop-blur-sm sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-label="Choose a photo">
       <div className="flex max-h-[92svh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl">
         <div className="flex items-center gap-3 border-b border-border p-4 sm:p-5">
-          <h2 className="font-display text-xl font-semibold text-navy-900">Choose a photo</h2>
+          <div className="min-w-0">
+            <h2 className="font-display text-xl font-semibold text-navy-900">Choose a photo</h2>
+            {title && <p className="truncate text-sm text-mist">For: {title}</p>}
+          </div>
           <label className="relative ml-auto flex-1 sm:max-w-xs">
             <span className="sr-only">Search photos</span>
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-mist" aria-hidden="true" />
@@ -106,26 +117,41 @@ export function PhotoPicker({
           </button>
         </div>
 
-        <div className="grid gap-3 border-b border-border bg-cream/60 p-4 sm:grid-cols-[1fr_1fr_1fr_auto] sm:items-end sm:p-5">
+        <div className="grid gap-3 border-b border-border bg-cream/60 p-4 sm:grid-cols-[auto_1fr_1fr_1fr_auto] sm:items-end sm:p-5">
+          <p className="text-sm font-bold text-navy-900 sm:col-span-5">Upload a new photo</p>
+          {preview ? <img src={preview} alt="" className="h-16 w-20 rounded-lg object-cover" /> : <span className="hidden h-16 w-20 rounded-lg bg-white ring-1 ring-inset ring-border sm:block" aria-hidden="true" />}
           <label className="text-sm font-medium text-navy-900">
-            New photo
-            <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/avif" className="mt-1 block w-full text-sm file:mr-3 file:rounded-full file:border-0 file:bg-navy-800 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white" />
+            Photo file
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/avif"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                setPreview((old) => {
+                  if (old) URL.revokeObjectURL(old);
+                  return f ? URL.createObjectURL(f) : "";
+                });
+              }}
+              className="mt-1 block w-full text-sm file:mr-3 file:rounded-full file:border-0 file:bg-navy-800 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
+            />
           </label>
           <label className="text-sm font-medium text-navy-900">
-            Description (English)
+            Description (English){defaultAlt ? <span className="font-normal text-mist"> · optional</span> : null}
             <input value={altEn} onChange={(e) => setAltEn(e.target.value)} className="mt-1 h-10 w-full rounded-xl bg-white px-3 text-sm ring-1 ring-border outline-none focus:ring-2 focus:ring-amber-500" />
           </label>
           <label className="text-sm font-medium text-navy-900">
-            Descripción (Español)
+            Descripción (Español) <span className="font-normal text-mist">· optional</span>
             <input value={altEs} onChange={(e) => setAltEs(e.target.value)} className="mt-1 h-10 w-full rounded-xl bg-white px-3 text-sm ring-1 ring-border outline-none focus:ring-2 focus:ring-amber-500" />
           </label>
           <button type="button" onClick={upload} disabled={busy} className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-amber-500 px-5 text-sm font-bold text-navy-950 hover:bg-amber-400 disabled:opacity-60">
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImagePlus className="h-4 w-4" />}
             Upload & use
           </button>
-          {error && <p className="text-sm font-medium text-crimson-600 sm:col-span-4">{error}</p>}
+          {error && <p className="text-sm font-medium text-crimson-600 sm:col-span-5">{error}</p>}
         </div>
 
+        <p className="px-4 pt-4 text-sm font-bold text-navy-900 sm:px-5">Or choose one from the library <span className="font-normal text-mist">({entries.length})</span></p>
         <ul className="grid flex-1 grid-cols-2 gap-3 overflow-y-auto p-4 sm:grid-cols-4 sm:p-5 lg:grid-cols-5">
           {entries.map(([key, photo]) => (
             <li key={key}>

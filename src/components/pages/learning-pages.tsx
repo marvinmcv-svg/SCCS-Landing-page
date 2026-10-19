@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { ArrowRight, Award, Check } from "lucide-react";
-import { media, type Photo as PhotoT } from "@/data/media";
+import type { Photo as PhotoT } from "@/data/media";
 import { CURRICULUM, DUAL_DIPLOMA, SUPPORT } from "@/data/pages";
 import { PILLARS } from "@/data/nav";
 import { AcceptancePosters, PrestigeWall } from "@/components/sccs/credentials";
@@ -22,7 +23,7 @@ function useLearningCrumb() {
 
 function LearningRelated({ exclude }: { exclude: string }) {
   const { tr } = useLang();
-  const photos = [media.dVexWorldsTeam, media.igMath1, media.graduationPac, media.esFriends2, media.collegeFairPennant];
+  const photos = Object.values(PAGE_PHOTOS.learningLinks);
   const items = PILLARS[2].children.map((c, i) => ({ href: c.href, label: tr(c.label), blurb: tr(c.blurb), photo: photos[i] })).filter((c) => c.href !== exclude);
   return <RelatedLinks items={items} />;
 }
@@ -33,7 +34,7 @@ export function CurriculumPage() {
   const c = CURRICULUM;
   return (
     <>
-      <PageHero photo={media.igMicroscope4} kicker={tr(c.kicker)} title={tr(c.title)} lede={tr(c.lede)} crumbs={[useLearningCrumb()]} />
+      <PageHero photo={PAGE_PHOTOS.learning.hero} kicker={tr(c.kicker)} title={tr(c.title)} lede={tr(c.lede)} crumbs={[useLearningCrumb()]} />
       <Section>
         <Container>
           <SectionHeading kicker="CCSS · NGSS · AP" title={tr(c.standardsTitle)} />
@@ -51,7 +52,7 @@ export function CurriculumPage() {
       <Section dark>
         <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <Photo photo={media.collegeFair} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
+            <Photo photo={PAGE_PHOTOS.learning.collegeCounseling} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
           </Reveal>
           <Reveal delay={0.1}>
             <Kicker dark>SAT · AP · AP International Diploma</Kicker>
@@ -112,7 +113,9 @@ export function CurriculumPage() {
 /* ───────── /learning/academic-journey ───────── */
 const DIVISION_EXTRA: Record<string, { photos: PhotoT[]; cta: { en: string; es: string }; subjects: { en: string; es: string } }> = {
   es: {
-    photos: [media.igMath2, media.esClassroom, media.igReadingNight5],
+    get photos() {
+      return PAGE_PHOTOS.academicJourney.elementaryGallery;
+    },
     cta: { en: "Schedule a private classroom observation", es: "Agenda una observación privada de clase" },
     subjects: {
       en: "Reading, Writing, Phonics, Math, Social Studies, Science, STEAM, Music, Art, Spanish, and Physical Education.",
@@ -120,7 +123,9 @@ const DIVISION_EXTRA: Record<string, { photos: PhotoT[]; cta: { en: string; es: 
     },
   },
   ms: {
-    photos: [media.igMicroscope2, media.msClassroom, media.dStemTowerBuild],
+    get photos() {
+      return PAGE_PHOTOS.academicJourney.middleSchoolGallery;
+    },
     cta: { en: "Explore our Middle School STEAM labs", es: "Explora los laboratorios STEAM de Middle School" },
     subjects: {
       en: "Common Core ELA and Mathematics, NGSS Science, Social Studies, Spanish, STEAM & Robotics, Fine Arts, and Physical Education.",
@@ -128,7 +133,9 @@ const DIVISION_EXTRA: Record<string, { photos: PhotoT[]; cta: { en: string; es: 
     },
   },
   hs: {
-    photos: [media.dVexWorldsField, media.collegeFairReading, media.graduationPac],
+    get photos() {
+      return PAGE_PHOTOS.academicJourney.highSchoolGallery;
+    },
     cta: { en: "View the University Matriculation map", es: "Ver el mapa de Matriculación Universitaria" },
     subjects: {
       en: "AP and Pre-AP courses, Innovation electives and advanced coding, NGSS lab sciences, Bolivian Bachillerato humanities, Fine Arts, and SHAPE-aligned PE.",
@@ -142,7 +149,7 @@ export function AcademicJourneyPage() {
   const j = t.journey;
   return (
     <>
-      <PageHero photo={media.igMatter2} kicker={j.kicker} title={j.title} lede={j.intro} crumbs={[useLearningCrumb(), { href: "/learning/academic-journey", label: tr(PILLARS[2].children[1].label) }]}>
+      <PageHero photo={PAGE_PHOTOS.academicJourney.hero} kicker={j.kicker} title={j.title} lede={j.intro} crumbs={[useLearningCrumb(), { href: "/learning/academic-journey", label: tr(PILLARS[2].children[1].label) }]}>
         <ul className="flex flex-wrap gap-2">
           {j.tabs.map((tb) => (
             <li key={tb.id}>
@@ -216,7 +223,7 @@ export function DualDiplomaPage() {
   const d = t.dualDiploma;
   return (
     <>
-      <PageHero photo={media.pacFlags} kicker={d.kicker} title={d.title} lede={tr(DUAL_DIPLOMA.lede)} crumbs={[useLearningCrumb(), { href: "/learning/dual-diploma", label: d.title }]} />
+      <PageHero photo={PAGE_PHOTOS.dualDiploma.hero} kicker={d.kicker} title={d.title} lede={tr(DUAL_DIPLOMA.lede)} crumbs={[useLearningCrumb(), { href: "/learning/dual-diploma", label: d.title }]} />
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-3xl text-center">
@@ -244,7 +251,7 @@ export function DualDiplomaPage() {
       <Section>
         <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <Photo photo={media.graduationPac} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
+            <Photo photo={PAGE_PHOTOS.dualDiploma.twoDiplomas} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display text-3xl font-semibold text-navy-900 sm:text-4xl">{tr(DUAL_DIPLOMA.transferTitle)}</h2>
@@ -271,7 +278,7 @@ export function SupportPage() {
   const s = SUPPORT;
   return (
     <>
-      <PageHero photo={media.esFriends2} kicker={tr(s.kicker)} title={tr(s.title)} lede={tr(s.lede)} crumbs={[useLearningCrumb(), { href: "/learning/student-support", label: tr(s.kicker) }]} />
+      <PageHero photo={PAGE_PHOTOS.studentSupport.hero} kicker={tr(s.kicker)} title={tr(s.title)} lede={tr(s.lede)} crumbs={[useLearningCrumb(), { href: "/learning/student-support", label: tr(s.kicker) }]} />
       <Section>
         <Container className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
           <Reveal>
@@ -331,7 +338,7 @@ export function MatriculationPage() {
   const college = SUPPORT.counseling.find((c) => c.id === "college")!;
   return (
     <>
-      <PageHero photo={media.collegeFairPennant} kicker={m.kicker} title={m.title} lede={m.intro} crumbs={[useLearningCrumb(), { href: "/learning/university-matriculation", label: m.title }]} imgPosition="object-[50%_30%]" />
+      <PageHero photo={PAGE_PHOTOS.matriculation.hero} kicker={m.kicker} title={m.title} lede={m.intro} crumbs={[useLearningCrumb(), { href: "/learning/university-matriculation", label: m.title }]} imgPosition="object-[50%_30%]" />
       <Section dark>
         <Container>
           <GlobeExplorer />
@@ -357,9 +364,9 @@ export function MatriculationPage() {
       <Section>
         <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal className="grid grid-cols-2 gap-3">
-            <Photo photo={media.collegeFair} className="col-span-2 aspect-[16/9] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
-            <Photo photo={media.collegeFairFamilies} className="aspect-[4/3] rounded-2xl" sizes="25vw" />
-            <Photo photo={media.collegeFairReading} className="aspect-[4/3] rounded-2xl" sizes="25vw" />
+            <Photo photo={PAGE_PHOTOS.matriculation.collegeFairWide} className="col-span-2 aspect-[16/9] rounded-2xl" sizes="(min-width:1024px) 50vw, 100vw" />
+            <Photo photo={PAGE_PHOTOS.matriculation.collegeFairLeft} className="aspect-[4/3] rounded-2xl" sizes="25vw" />
+            <Photo photo={PAGE_PHOTOS.matriculation.collegeFairRight} className="aspect-[4/3] rounded-2xl" sizes="25vw" />
           </Reveal>
           <Reveal delay={0.1}>
             <Kicker>{tr(college.label)}</Kicker>

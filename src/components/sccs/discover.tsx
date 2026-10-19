@@ -1,7 +1,7 @@
 "use client";
 
 import { Compass, Cpu, HeartHandshake, Languages, Shield, ShieldCheck, Smile, Stethoscope } from "lucide-react";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { useLang } from "./i18n";
 import { Kicker, SchoolJaguar, Photo, Reveal, TextLink } from "./sccs-shared";
 
@@ -42,7 +42,7 @@ export function LearnerProfile() {
   return (
     <Reveal className="overflow-hidden rounded-3xl bg-navy-100">
       <div className="grid lg:grid-cols-[1fr_1.4fr]">
-        <Photo photo={media.esFriends2} className="min-h-64 lg:min-h-full" sizes="(min-width:1024px) 40vw, 100vw" />
+        <Photo photo={PAGE_PHOTOS.advantage.learnerProfile} className="min-h-64 lg:min-h-full" sizes="(min-width:1024px) 40vw, 100vw" />
         <div className="p-7 sm:p-10">
           <Kicker>{d.learnerTitle}</Kicker>
           <p className="font-display mt-4 text-2xl font-semibold text-navy-900 sm:text-3xl">{d.learnerIntro}</p>
@@ -72,7 +72,7 @@ export function JaguarSpirit() {
   const { t } = useLang();
   return (
     <Reveal className="relative isolate overflow-hidden rounded-3xl bg-navy-950 px-7 py-12 text-cream sm:px-12 sm:py-16">
-      <Photo photo={media.fgCheer} className="absolute inset-0 -z-20 opacity-30" sizes="100vw" />
+      <Photo photo={PAGE_PHOTOS.advantage.jaguarSpiritBackground} className="absolute inset-0 -z-20 opacity-30" sizes="100vw" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40" aria-hidden="true" />
       <div className="grid items-center gap-10 md:grid-cols-[auto_1fr]">
         <SchoolJaguar />
@@ -121,7 +121,7 @@ export function SafetyWellness({ withCta = true }: { withCta?: boolean }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.05fr_1fr]">
       <Reveal className="relative isolate min-h-[22rem] overflow-hidden rounded-3xl">
-        <Photo photo={media.esLunchTrio} className="absolute inset-0 -z-10" sizes="(min-width:1024px) 50vw, 100vw" imgClassName="object-[50%_70%]" />
+        <Photo photo={PAGE_PHOTOS.advantage.safetyCard} className="absolute inset-0 -z-10" sizes="(min-width:1024px) 50vw, 100vw" imgClassName="object-[50%_70%]" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/90 via-navy-950/30 to-transparent" aria-hidden="true" />
         <div className="flex h-full flex-col justify-end p-7 sm:p-10">
           <Kicker dark>{d.safetyTitle}</Kicker>

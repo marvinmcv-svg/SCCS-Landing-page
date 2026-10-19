@@ -1,19 +1,26 @@
 "use client";
 
 import Link from "next/link";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef, useState } from "react";
-import { media, type Photo as PhotoT } from "@/data/media";
+import type { Photo as PhotoT } from "@/data/media";
 import { useStaticMotion } from "@/lib/use-static-motion";
 import { cn, EASE } from "@/lib/utils";
 import { useLang } from "./i18n";
 import { Photo } from "./sccs-shared";
 
 export const DIVISION_PHOTOS: Record<string, PhotoT> = {
-  es: media.dEsBoysLaughing,
-  ms: media.dStemCupChallenge,
-  hs: media.collegeFair,
+  get es() {
+    return PAGE_PHOTOS.journey.elementarySchool;
+  },
+  get ms() {
+    return PAGE_PHOTOS.journey.middleSchool;
+  },
+  get hs() {
+    return PAGE_PHOTOS.journey.highSchool;
+  },
 };
 
 export function JourneyTabs({ initial = 0 }: { initial?: number }) {

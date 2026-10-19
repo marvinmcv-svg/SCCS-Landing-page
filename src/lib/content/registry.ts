@@ -12,6 +12,7 @@ import { EXPERIENCES } from "@/data/experiences";
 import { MORE_TRADITIONS, TRADITIONS, TRADITION_GROUPS } from "@/data/traditions";
 import { EVENTS, INSTAGRAM_POSTS, NEWS, SPOTLIGHTS, TEAM } from "@/data/sccs-content";
 import { DESTINATIONS } from "@/data/destinations";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import {
   ADMISSIONS_FAQ,
   CAMPUS,
@@ -41,6 +42,8 @@ export type CollectionDef = {
   enums?: Record<string, string[]>;
   /** The field that names each item in a list (shown as the item's title). */
   itemTitle?: string;
+  /** Edited elsewhere (the Photos hub), so left out of the menus. */
+  hidden?: boolean;
 };
 
 const DIVISIONS = ["ES", "MS", "HS", "COMMUNITY"];
@@ -102,5 +105,6 @@ export const COLLECTIONS: CollectionDef[] = [
   },
   { id: "spotlights", group: "People", label: "Faculty spotlights", description: "The 'Meet the People Behind the Jaguars' series.", href: "/community", target: SPOTLIGHTS },
 
+  { id: "pagePhotos", group: "Photos", label: "Page photos", description: "The photos built into each page's layout: banners, side photos and galleries. Easiest to change from Photos, page by page.", href: "/", target: PAGE_PHOTOS, hidden: true },
   { id: "media", group: "Photos", label: "Photo library", description: "Every photograph on the site. Replace one here and it changes everywhere it appears.", href: "/", target: media, enums: { source: ["instagram", "sccs.edu.bo", "upload"] } },
 ];

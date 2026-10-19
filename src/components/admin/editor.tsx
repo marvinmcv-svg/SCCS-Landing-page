@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Check, ExternalLink, Loader2, RotateCcw, Save } from "lucide-react";
+import { Check, ExternalLink, ImagePlus, Loader2, RotateCcw, Save, Search } from "lucide-react";
 import type { Json } from "@/lib/content/engine";
 import { cn } from "@/lib/utils";
 import { EditorContext, Field, Fields, PhotoOwn } from "./fields";
@@ -18,11 +18,23 @@ export type CollectionMeta = {
   bilingualPair?: boolean;
   enums?: Record<string, string[]>;
   itemTitle?: string;
+  hidden?: boolean;
 };
 
 type Status = { kind: "idle" | "saving" | "saved" | "error"; message?: string };
 
-export function CollectionEditor({ meta, initial, library: initialLibrary }: { meta: CollectionMeta; initial: Json; library: Library }) {
+export function CollectionEditor({
+  meta,
+  initial,
+  library: initialLibrary,
+  usage,
+}: {
+  meta: CollectionMeta;
+  initial: Json;
+  library: Library;
+  /** For the photo library: where each photo appears on the site. */
+  usage?: Record<string, string[]>;
+}) {
   const toEditable = useCallback(
     (v: Json) => (meta.bilingualPair && isObj(v) ? zipLanguages(v.en, v.es) : v),
     [meta.bilingualPair],
@@ -32,6 +44,8 @@ export function CollectionEditor({ meta, initial, library: initialLibrary }: { m
   const [library, setLibrary] = useState<Library>(initialLibrary);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const [picker, setPicker] = useState<null | ((key: string) => void)>(null);
+  const [query, setQuery] = useState("");
+  const [unusedOnly, setUnusedOnly] = useState(false);
 
   const dirty = JSON.stringify(value) !== baseline;
   const isLibrary = meta.id === "media";
@@ -136,22 +150,64 @@ export function CollectionEditor({ meta, initial, library: initialLibrary }: { m
       <div className="py-8">
         {isLibrary && isObj(value) ? (
           <>
-          <button
-            type="button"
-            onClick={() => setPicker(() => () => undefined)}
-            className="mb-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-amber-500 px-5 text-sm font-bold text-navy-950 hover:bg-amber-400"
-          >
-            Upload a new photo
-          </button>
-          <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {Object.entries(value)
-              .reverse()
-              .map(([key, photo]) => (
-                <li key={key}>
-                  <PhotoOwn value={photo as PhotoValue} path={[key]} name={humanize(key)} />
-                </li>
-              ))}
-          </ul>
+            <div className="mb-6 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setPicker(() => () => undefined)}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-amber-500 px-5 text-sm font-bold text-navy-950 hover:bg-amber-400"
+              >
+                <ImagePlus className="h-4 w-4" aria-hidden="true" />
+                Upload a new photo
+              </button>
+              <label className="relative min-w-0 flex-1 sm:max-w-sm">
+                <span className="sr-only">Search the library</span>
+                <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-mist" aria-hidden="true" />
+                <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search by description or page" className="h-11 w-full rounded-full bg-white pl-10 pr-4 text-sm ring-1 ring-inset ring-border outline-none focus:ring-2 focus:ring-amber-500" />
+              </label>
+              <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-sm font-semibold text-navy-900">
+                <input type="checkbox" checked={unusedOnly} onChange={(e) => setUnusedOnly(e.target.checked)} className="h-4 w-4 accent-navy-800" />
+                Only photos not used on the site
+              </label>
+            </div>
+            <p className="mb-4 text-sm text-mist">
+              Replacing a photo here changes it everywhere it appears. To change the photo in just one spot, use{" "}
+              <Link href="/admin/photos" className="font-semibold text-navy-800 underline">
+                Photos by page
+              </Link>
+              .
+            </p>
+            <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {Object.entries(value)
+                .reverse()
+                .filter(([key, photo]) => {
+                  const used = usage?.[key] ?? [];
+                  if (unusedOnly && used.length) return false;
+                  const q = query.trim().toLowerCase();
+                  if (!q) return true;
+                  const p = photo as PhotoValue;
+                  return [key, p.alt?.en ?? "", p.alt?.es ?? "", ...used].some((t) => t.toLowerCase().includes(q));
+                })
+                .map(([key, photo]) => {
+                  const used = usage?.[key] ?? [];
+                  return (
+                    <li key={key} className="flex flex-col gap-2">
+                      <PhotoOwn value={photo as PhotoValue} path={[key]} name={(photo as PhotoValue).alt?.en || humanize(key)} />
+                      {usage && (
+                        <details className="rounded-2xl bg-cream/70 px-3 py-2 text-xs text-navy-900">
+                          <summary className="cursor-pointer font-semibold">{used.length ? `Used in ${used.length} ${used.length === 1 ? "place" : "places"}` : "Not used on the site yet"}</summary>
+                          {used.length > 0 && (
+                            <ul className="mt-1.5 space-y-1 text-mist">
+                              {used.map((u) => (
+                                <li key={u}>{u}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </details>
+                      )}
+                    </li>
+                  );
+                })}
+            </ul>
           </>
         ) : isObj(value) && !Array.isArray(value) ? (
           <div className="space-y-4">

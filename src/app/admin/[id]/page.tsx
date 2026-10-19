@@ -6,6 +6,7 @@ import type { Library } from "@/components/admin/photos";
 import { adminConfigured, isAdmin } from "@/lib/admin-auth";
 import { collectionMetas } from "@/lib/admin-data";
 import { currentOf } from "@/lib/content/engine";
+import { photoUsage } from "@/lib/content/photo-spots";
 import { readContentFresh, storageStatus } from "@/lib/content/store";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +20,7 @@ export default async function AdminCollection({ params }: { params: Promise<{ id
   const doc = await readContentFresh();
   return (
     <AdminShell collections={metas} storage={storageStatus()}>
-      <CollectionEditor key={id} meta={meta} initial={currentOf(id, doc)} library={currentOf("media", doc) as unknown as Library} />
+      <CollectionEditor key={id} meta={meta} initial={currentOf(id, doc)} library={currentOf("media", doc) as unknown as Library} usage={id === "media" ? photoUsage(doc) : undefined} />
     </AdminShell>
   );
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { BookOpen, ExternalLink, HeartHandshake, UtensilsCrossed } from "lucide-react";
 import { useMemo, useState } from "react";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { PORTALS } from "@/data/pages";
 import { TEAM, type TeamCategory } from "@/data/sccs-content";
 import { cn, EASE } from "@/lib/utils";
@@ -142,7 +142,7 @@ export function MothersClubCard() {
   const c = t.community;
   return (
     <div id="mothers-club" className="scroll-mt-28 overflow-hidden rounded-2xl border border-border bg-card">
-      <Photo photo={media.mothersClubTeam} className="aspect-[16/9]" sizes="(min-width:1024px) 33vw, 100vw" />
+      <Photo photo={PAGE_PHOTOS.community.mothersClub} className="aspect-[16/9]" sizes="(min-width:1024px) 33vw, 100vw" />
       <div className="p-7">
         <HeartHandshake className="h-6 w-6 text-crimson-600" aria-hidden="true" />
         <h3 className="font-display mt-4 text-2xl font-semibold text-navy-900">{c.mothersTitle}</h3>

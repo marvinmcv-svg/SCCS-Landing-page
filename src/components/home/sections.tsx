@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { format, parseISO } from "date-fns";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { EXPERIENCES } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { INSTAGRAM_POSTS, sortedNews, upcomingEvents } from "@/data/sccs-content";
@@ -70,7 +70,11 @@ export function Stats() {
 
 /* ───────── The SCCS Advantage ───────── */
 
-const REASON_PHOTOS = [media.graduationPac, media.collegeFair, media.dPalapaClass, media.dVexWorldsBoliviaFlag, media.dFgFolkDance, media.dCampusTower];
+// Read at render time: admin edits replace these photos after the module loads.
+const reasonPhoto = (i: number) => {
+  const h = PAGE_PHOTOS.home;
+  return [h.whySccsTile1, h.whySccsTile2, h.whySccsTile3, h.whySccsTile4, h.whySccsTile5, h.whySccsTile6][i];
+};
 
 export function Advantage() {
   const { t } = useLang();
@@ -102,7 +106,7 @@ export function Advantage() {
             )}
           >
             <Photo
-              photo={REASON_PHOTOS[i]}
+              photo={reasonPhoto(i)}
               className="absolute inset-0 -z-10"
               sizes={i === 0 ? "(min-width:1024px) 58vw, 100vw" : "(min-width:1024px) 34vw, 100vw"}
               imgClassName="transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
@@ -167,14 +171,14 @@ export function Safety() {
         </div>
         <div className="relative grid grid-cols-6 gap-4 lg:col-span-7">
           <div data-clip className="col-span-6 overflow-hidden rounded-[2rem] sm:col-span-4">
-            <Photo photo={media.dEsFriendsHall} className="aspect-[4/3] sm:aspect-[4/5]" sizes="(min-width:1024px) 38vw, 100vw" />
+            <Photo photo={PAGE_PHOTOS.home.safetyLarge} className="aspect-[4/3] sm:aspect-[4/5]" sizes="(min-width:1024px) 38vw, 100vw" />
           </div>
           <div className="col-span-6 grid grid-cols-2 gap-4 sm:col-span-2 sm:grid-cols-1 sm:content-end">
             <div data-parallax="12" className="overflow-hidden rounded-[1.5rem]">
-              <Photo photo={media.dEsBoysLaughing} className="aspect-square" sizes="(min-width:1024px) 18vw, 50vw" />
+              <Photo photo={PAGE_PHOTOS.home.safetySmallLeft} className="aspect-square" sizes="(min-width:1024px) 18vw, 50vw" />
             </div>
             <div data-parallax="18" className="overflow-hidden rounded-[1.5rem]">
-              <Photo photo={media.dPalapaClass2} className="aspect-square" sizes="(min-width:1024px) 18vw, 50vw" />
+              <Photo photo={PAGE_PHOTOS.home.safetySmallRight} className="aspect-square" sizes="(min-width:1024px) 18vw, 50vw" />
             </div>
           </div>
         </div>

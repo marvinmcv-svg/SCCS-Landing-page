@@ -2,15 +2,18 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ExternalLink, LayoutGrid, LogOut } from "lucide-react";
+import { ExternalLink, Images, LayoutGrid, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Crest } from "@/components/sccs/sccs-shared";
 import type { CollectionMeta } from "./editor";
 
-export function AdminShell({ collections, storage, children }: { collections: CollectionMeta[]; storage: "blob" | "local" | "none"; children: React.ReactNode }) {
+export function AdminShell({ collections: all, storage, children }: { collections: CollectionMeta[]; storage: "blob" | "local" | "none"; children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  // Photos have their own hub; the menu lists the text sections.
+  const collections = all.filter((c) => !c.hidden && c.group !== "Photos");
   const groups = [...new Set(collections.map((c) => c.group))];
+  const link = (active: boolean) => cn("flex min-h-10 items-center gap-2 rounded-xl px-3 text-sm font-semibold", active ? "bg-navy-800 text-white" : "text-navy-900 hover:bg-cream");
 
   async function signOut() {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -28,10 +31,20 @@ export function AdminShell({ collections, storage, children }: { collections: Co
           </div>
         </div>
         <nav className="px-3 pb-6" aria-label="Sections">
-          <Link href="/admin" className={cn("flex min-h-10 items-center gap-2 rounded-xl px-3 text-sm font-semibold", pathname === "/admin" ? "bg-navy-800 text-white" : "text-navy-900 hover:bg-cream")}>
+          <Link href="/admin" className={link(pathname === "/admin")}>
             <LayoutGrid className="h-4 w-4" aria-hidden="true" />
             Overview
           </Link>
+          <p className="mt-5 px-3 pb-1 text-xs font-bold text-mist">Photos</p>
+          <Link href="/admin/photos" className={link(pathname === "/admin/photos")}>
+            <Images className="h-4 w-4" aria-hidden="true" />
+            Photos by page
+          </Link>
+          <Link href="/admin/media" className={link(pathname === "/admin/media")}>
+            <Images className="h-4 w-4" aria-hidden="true" />
+            Photo library
+          </Link>
+          <p className="mt-5 px-3 text-xs font-bold text-mist max-lg:hidden">Text &amp; sections</p>
           <div className="mt-2 max-lg:flex max-lg:gap-2 max-lg:overflow-x-auto max-lg:pb-2">
             {groups.map((g) => (
               <div key={g} className="mt-4 max-lg:mt-0 max-lg:shrink-0">

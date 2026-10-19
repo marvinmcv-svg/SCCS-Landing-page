@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Download, Mail, Search } from "lucide-react";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { ACCEPTANCE_LIST } from "@/data/acceptances";
 import { PROFILE_PDF, SCHOOL_PROFILE as P } from "@/data/profile";
 import { cn } from "@/lib/utils";
@@ -143,7 +143,7 @@ export function SchoolProfilePage() {
 
   return (
     <>
-      <PageHero photo={media.graduationPac} kicker={tr(P.kicker)} title={tr(P.title)} lede={tr(P.lede)} crumbs={crumbs}>
+      <PageHero photo={PAGE_PHOTOS.schoolProfile.hero} kicker={tr(P.kicker)} title={tr(P.title)} lede={tr(P.lede)} crumbs={crumbs}>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <a href={PROFILE_PDF} target="_blank" rel="noopener noreferrer" className={cn(buttonStyles.gold, "h-14 px-8 text-base")}>
             <Download className="h-5 w-5" aria-hidden="true" />
@@ -168,7 +168,7 @@ export function SchoolProfilePage() {
       {/* A cinematic band: the campus, drifting slowly as the page moves */}
       <section className="relative isolate h-[70svh] min-h-[26rem] overflow-hidden bg-navy-950" aria-label={tr(P.campusTitle)}>
         <div data-parallax="10" className="absolute -inset-y-[12%] inset-x-0 -z-10">
-          <Photo photo={media.campusLawn} className="absolute inset-0" sizes="100vw" />
+          <Photo photo={PAGE_PHOTOS.schoolProfile.campusBand} className="absolute inset-0" sizes="100vw" />
         </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/75 via-transparent to-transparent" aria-hidden="true" />
         <div className={cn(wrap, "flex h-full items-end pb-12 sm:pb-16")}>
@@ -243,10 +243,10 @@ export function SchoolProfilePage() {
             </div>
             <div className="grid grid-cols-5 gap-4 lg:col-span-6">
               <div data-clip className="col-span-3 overflow-hidden rounded-[1.5rem]">
-                <Photo photo={media.igMicroscope6} className="aspect-[4/5]" sizes="(min-width:1024px) 28vw, 60vw" />
+                <Photo photo={PAGE_PHOTOS.schoolProfile.apResultsLarge} className="aspect-[4/5]" sizes="(min-width:1024px) 28vw, 60vw" />
               </div>
               <div data-parallax="14" className="col-span-2 self-end overflow-hidden rounded-[1.5rem]">
-                <Photo photo={media.collegeFair} className="aspect-[3/4]" sizes="(min-width:1024px) 18vw, 40vw" />
+                <Photo photo={PAGE_PHOTOS.schoolProfile.apResultsSmall} className="aspect-[3/4]" sizes="(min-width:1024px) 18vw, 40vw" />
               </div>
             </div>
           </div>
@@ -397,7 +397,7 @@ export function SchoolProfilePage() {
       {/* Campus and values */}
       <section className="bg-ivory py-24 sm:py-32">
         <div className={cn(wrap, "mb-20 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5")}>
-          {[media.dCampusTower, media.library, media.dSoccerAction, media.dFgFolkDance].map((ph, i) => (
+          {PAGE_PHOTOS.schoolProfile.campusMosaic.map((ph, i) => (
             <div key={ph.src} data-clip className={cn("overflow-hidden rounded-[1.5rem]", i % 2 === 1 && "sm:mt-12")}>
               <Photo photo={ph} className="aspect-[3/4]" sizes="(min-width:640px) 25vw, 50vw" imgClassName="transition-transform duration-700 hover:scale-105" />
             </div>

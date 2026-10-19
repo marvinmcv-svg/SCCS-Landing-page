@@ -5,7 +5,7 @@ import { format, parseISO } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Clock, ExternalLink, Mail, MapPin, Minus, Phone, Plus } from "lucide-react";
 import { useMemo, useState } from "react";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { ADMISSIONS_FAQ, CONTACT, LEADERSHIP_HONORS } from "@/data/pages";
 import { PILLARS } from "@/data/nav";
 import { SPOTLIGHTS, sortedNews, type NewsCategory, type NewsPost } from "@/data/sccs-content";
@@ -27,7 +27,7 @@ export function AdmissionsPage() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <>
-      <PageHero photo={media.campusLawn} kicker={a.kicker} title={a.title} lede={a.intro} crumbs={[{ href: "/admissions", label: t.nav.admissions }]}>
+      <PageHero photo={PAGE_PHOTOS.admissions.hero} kicker={a.kicker} title={a.title} lede={a.intro} crumbs={[{ href: "/admissions", label: t.nav.admissions }]}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href="#inquire" className={cn(buttonStyles.gold, "h-13 px-8")}>
             {t.hero.ctaPrimary}
@@ -53,7 +53,7 @@ export function AdmissionsPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1} className="mt-8">
-              <Photo photo={media.esLunchTrio} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 40vw, 100vw" />
+              <Photo photo={PAGE_PHOTOS.admissions.besideIntro} className="aspect-[4/3] rounded-2xl" sizes="(min-width:1024px) 40vw, 100vw" />
             </Reveal>
           </div>
           <div className="lg:pt-4">
@@ -102,10 +102,10 @@ export function AdmissionsPage() {
 export function CampusLifeHub() {
   const { t, tr } = useLang();
   const c = t.campusLife;
-  const photos = [media.fgPepRally, media.igReadingNight1, media.stuco3, media.pacStage];
+  const photos = PAGE_PHOTOS.campusLife.sectionCards;
   return (
     <>
-      <PageHero tall photo={media.fgCheer} kicker={c.kicker} title={tr({ en: "Life as a Jaguar.", es: "La vida de un Jaguar." })} lede={c.intro} crumbs={[{ href: "/campus-life", label: t.nav.campusLife }]} />
+      <PageHero tall photo={PAGE_PHOTOS.campusLife.hero} kicker={c.kicker} title={tr({ en: "Life as a Jaguar.", es: "La vida de un Jaguar." })} lede={c.intro} crumbs={[{ href: "/campus-life", label: t.nav.campusLife }]} />
       <Section>
         <Container>
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
@@ -166,14 +166,14 @@ export function StudentLeadershipPage() {
   const L = LEADERSHIP_HONORS;
   return (
     <>
-      <PageHero photo={media.stuco3} kicker={tr(L.kicker)} title={tr(L.title)} lede={tr(L.lede)} crumbs={[{ href: "/campus-life", label: t.nav.campusLife }, { href: "/campus-life/student-leadership", label: tr(L.kicker) }]} />
+      <PageHero photo={PAGE_PHOTOS.studentLeadership.hero} kicker={tr(L.kicker)} title={tr(L.title)} lede={tr(L.lede)} crumbs={[{ href: "/campus-life", label: t.nav.campusLife }, { href: "/campus-life/student-leadership", label: tr(L.kicker) }]} />
       <Section>
         <Container>
           <SectionHeading kicker="STUCO" title={tr(L.stuco.title)} />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {[
-              { label: "Middle School", body: L.stuco.ms, photo: media.stuco },
-              { label: "High School", body: L.stuco.hs, photo: media.stuco2 },
+              { label: "Middle School", body: L.stuco.ms, photo: PAGE_PHOTOS.studentLeadership.middleSchoolStuco },
+              { label: "High School", body: L.stuco.hs, photo: PAGE_PHOTOS.studentLeadership.highSchoolStuco },
             ].map((s, i) => (
               <Reveal key={s.label} delay={i * 0.08} className="overflow-hidden rounded-2xl border border-border bg-card">
                 <Photo photo={s.photo} className="aspect-[16/8]" sizes="(min-width:1024px) 50vw, 100vw" />
@@ -212,8 +212,8 @@ export function StudentLeadershipPage() {
       </Section>
       <Section>
         <Container className="space-y-16">
-          <Split photo={media.serviceTecho} title={tr(L.serviceTitle)} body={tr(L.serviceBody)} kicker="TECHO" />
-          <Gallery photos={[media.serviceTechoBuild, media.serviceTechoTeam, media.serviceTecho]} />
+          <Split photo={PAGE_PHOTOS.studentLeadership.service} title={tr(L.serviceTitle)} body={tr(L.serviceBody)} kicker="TECHO" />
+          <Gallery photos={PAGE_PHOTOS.studentLeadership.serviceGallery} />
         </Container>
       </Section>
       <FinalCta />
@@ -230,7 +230,7 @@ export function NewsIndex() {
   const cats: ("ALL" | NewsCategory)[] = ["ALL", "ACADEMICS", "ARTS", "ATHLETICS", "COMMUNITY"];
   return (
     <>
-      <PageHero photo={media.fgBasketballAcs} kicker={t.nav.campusLife} title={t.campusLife.newsTitle} lede={t.campusLife.newsIntro} crumbs={[{ href: "/campus-life", label: t.nav.campusLife }, { href: "/news", label: t.campusLife.newsTitle }]} />
+      <PageHero photo={PAGE_PHOTOS.news.hero} kicker={t.nav.campusLife} title={t.campusLife.newsTitle} lede={t.campusLife.newsIntro} crumbs={[{ href: "/campus-life", label: t.nav.campusLife }, { href: "/news", label: t.campusLife.newsTitle }]} />
       <Section>
         <Container>
           <div role="group" aria-label={t.campusLife.newsTitle} className="flex flex-wrap gap-2">
@@ -326,7 +326,7 @@ export function CommunityPage() {
   const c = t.community;
   return (
     <>
-      <PageHero photo={media.mothersClubGroup} kicker={c.kicker} title={c.title} lede={c.intro} crumbs={[{ href: "/community", label: t.nav.community }]} />
+      <PageHero photo={PAGE_PHOTOS.community.hero} kicker={c.kicker} title={c.title} lede={c.intro} crumbs={[{ href: "/community", label: t.nav.community }]} />
       <Section>
         <Container>
           <TeamDirectory />
@@ -371,7 +371,7 @@ export function ContactPage() {
   const C = CONTACT;
   return (
     <>
-      <PageHero photo={media.campusGardens} kicker={tr(C.kicker)} title={tr(C.title)} lede={tr(C.lede)} crumbs={[{ href: "/contact", label: tr(C.kicker) }]} />
+      <PageHero photo={PAGE_PHOTOS.contact.hero} kicker={tr(C.kicker)} title={tr(C.title)} lede={tr(C.lede)} crumbs={[{ href: "/contact", label: tr(C.kicker) }]} />
       <Section>
         <Container>
           <ul className="grid gap-5 lg:grid-cols-3">
@@ -397,7 +397,7 @@ export function ContactPage() {
       <Section className="pt-0 sm:pt-0 lg:pt-0">
         <Container>
           <div className="relative isolate grid overflow-hidden rounded-3xl bg-navy-950 text-cream lg:grid-cols-2">
-            <Photo photo={media.campusLawn} className="min-h-72" sizes="(min-width:1024px) 50vw, 100vw" />
+            <Photo photo={PAGE_PHOTOS.contact.visitUs} className="min-h-72" sizes="(min-width:1024px) 50vw, 100vw" />
             <div className="relative p-8 sm:p-12">
               <JaguarMotif className="absolute -right-8 -top-8 h-48 w-48 text-amber-400/10" />
               <h2 className="font-display text-3xl font-semibold text-white">{tr(C.visitTitle)}</h2>
@@ -445,7 +445,7 @@ export function NotFoundView() {
   const { t } = useLang();
   return (
     <section className="relative isolate flex min-h-[80svh] items-center overflow-hidden bg-navy-950 text-center text-cream">
-      <Photo photo={media.historyPond} className="absolute inset-0 -z-20 opacity-25" sizes="100vw" />
+      <Photo photo={PAGE_PHOTOS.siteWide.notFoundBackground} className="absolute inset-0 -z-20 opacity-25" sizes="100vw" />
       <Container className="pt-28">
         <JaguarMotif className="mx-auto h-24 w-24 text-amber-400" />
         <p className="font-display mt-6 text-7xl font-semibold text-amber-400">404</p>

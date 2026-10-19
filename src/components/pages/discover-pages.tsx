@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Mail, Stethoscope } from "lucide-react";
-import { media } from "@/data/media";
+import { PAGE_PHOTOS } from "@/data/page-photos";
 import { CAMPUS, CAREERS, HISTORY, LEADERSHIP, SAFETY } from "@/data/pages";
 import { PILLARS } from "@/data/nav";
 import { SPOTLIGHTS } from "@/data/sccs-content";
@@ -20,7 +20,7 @@ function useDiscoverCrumb() {
 
 function DiscoverRelated({ exclude }: { exclude: string }) {
   const { tr } = useLang();
-  const photos = [media.campusLawn, media.historyHalloween, media.esLunchTrio, media.campusGardens, media.board, media.teacherEs];
+  const photos = Object.values(PAGE_PHOTOS.discoverLinks);
   const items = PILLARS[0].children.map((c, i) => ({ href: c.href, label: tr(c.label), blurb: tr(c.blurb), photo: photos[i] })).filter((c) => c.href !== exclude);
   return <RelatedLinks items={items} />;
 }
@@ -36,7 +36,7 @@ export function AdvantagePage() {
   ];
   return (
     <>
-      <PageHero photo={media.dCampusFieldGroup} kicker={d.kicker} title={d.title} lede={d.intro} crumbs={[useDiscoverCrumb()]} imgPosition="object-[50%_60%]" />
+      <PageHero photo={PAGE_PHOTOS.advantage.hero} kicker={d.kicker} title={d.title} lede={d.intro} crumbs={[useDiscoverCrumb()]} imgPosition="object-[50%_60%]" />
       <Section>
         <Container className="space-y-20 lg:space-y-28">
           <MissionValues />
@@ -84,7 +84,7 @@ export function HistoryPage() {
   const { tr } = useLang();
   return (
     <>
-      <PageHero photo={media.historySoccer} kicker={tr(HISTORY.kicker)} title={tr(HISTORY.title)} lede={tr(HISTORY.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/history", label: tr(HISTORY.kicker) }]} />
+      <PageHero photo={PAGE_PHOTOS.history.hero} kicker={tr(HISTORY.kicker)} title={tr(HISTORY.title)} lede={tr(HISTORY.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/history", label: tr(HISTORY.kicker) }]} />
       <Section>
         <Container>
           <ol className="relative space-y-20 lg:space-y-28">
@@ -127,7 +127,7 @@ export function SafetyPage() {
   const { tr } = useLang();
   return (
     <>
-      <PageHero photo={media.esFriends} kicker={tr(SAFETY.kicker)} title={tr(SAFETY.title)} lede={tr(SAFETY.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/safety-wellness", label: tr(SAFETY.kicker) }]} imgPosition="object-[50%_35%]" />
+      <PageHero photo={PAGE_PHOTOS.safety.hero} kicker={tr(SAFETY.kicker)} title={tr(SAFETY.title)} lede={tr(SAFETY.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/safety-wellness", label: tr(SAFETY.kicker) }]} imgPosition="object-[50%_35%]" />
       <Section>
         <Container className="space-y-20 lg:space-y-28">
           {SAFETY.pillars.map((p, i) => (
@@ -193,7 +193,7 @@ export function CampusPage() {
   const { tr } = useLang();
   return (
     <>
-      <PageHero photo={media.campusGardens} kicker={tr(CAMPUS.kicker)} title={tr(CAMPUS.title)} lede={tr(CAMPUS.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/campus", label: tr(CAMPUS.kicker) }]} tall />
+      <PageHero photo={PAGE_PHOTOS.campus.hero} kicker={tr(CAMPUS.kicker)} title={tr(CAMPUS.title)} lede={tr(CAMPUS.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/campus", label: tr(CAMPUS.kicker) }]} tall />
       <Section>
         <Container>
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -226,7 +226,7 @@ export function CampusPage() {
       </Section>
       <Section className="bg-cream/50">
         <Container>
-          <Gallery photos={[media.campusGardens, media.campusLawn, media.campusPlayground, media.campusPatio, media.gym, media.libraryLounge, media.pacFlags]} title={tr({ en: "Around campus", es: "Por el campus" })} />
+          <Gallery photos={PAGE_PHOTOS.campus.aroundCampus} title={tr({ en: "Around campus", es: "Por el campus" })} />
         </Container>
       </Section>
       <Section>
@@ -244,7 +244,7 @@ export function LeadershipPage() {
   const { tr } = useLang();
   return (
     <>
-      <PageHero photo={media.board} kicker={tr(LEADERSHIP.kicker)} title={tr(LEADERSHIP.title)} lede={tr(LEADERSHIP.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/leadership", label: tr(LEADERSHIP.kicker) }]} imgPosition="object-[50%_30%]" />
+      <PageHero photo={PAGE_PHOTOS.leadership.hero} kicker={tr(LEADERSHIP.kicker)} title={tr(LEADERSHIP.title)} lede={tr(LEADERSHIP.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/leadership", label: tr(LEADERSHIP.kicker) }]} imgPosition="object-[50%_30%]" />
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-4xl rounded-3xl bg-navy-100/70 p-8 sm:p-12">
@@ -260,7 +260,7 @@ export function LeadershipPage() {
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <Reveal>
-              <Photo photo={media.board} className="aspect-[16/10] rounded-2xl" sizes="(min-width:1024px) 55vw, 100vw" />
+              <Photo photo={PAGE_PHOTOS.leadership.boardPhoto} className="aspect-[16/10] rounded-2xl" sizes="(min-width:1024px) 55vw, 100vw" />
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="font-display text-3xl font-semibold text-navy-900">{tr(LEADERSHIP.boardTitle)}</h2>
@@ -292,7 +292,7 @@ export function CareersPage() {
   const { tr, t } = useLang();
   return (
     <>
-      <PageHero photo={media.teacherEs} kicker={tr(CAREERS.kicker)} title={tr(CAREERS.title)} lede={tr(CAREERS.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/careers", label: tr(CAREERS.kicker) }]} imgPosition="object-[50%_40%]" />
+      <PageHero photo={PAGE_PHOTOS.careers.hero} kicker={tr(CAREERS.kicker)} title={tr(CAREERS.title)} lede={tr(CAREERS.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/careers", label: tr(CAREERS.kicker) }]} imgPosition="object-[50%_40%]" />
       <Section>
         <Container>
           <IconCards items={CAREERS.why.map((b) => ({ title: tr(b.title), text: tr(b.text) }))} />
