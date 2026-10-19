@@ -3,9 +3,9 @@
 import { Compass, Cpu, HeartHandshake, Languages, Shield, ShieldCheck, Smile, Stethoscope } from "lucide-react";
 import { media } from "@/data/media";
 import { useLang } from "./i18n";
-import { JaguarMotif, Kicker, Photo, Reveal, TextLink } from "./sccs-shared";
+import { Kicker, SchoolJaguar, Photo, Reveal, TextLink } from "./sccs-shared";
 
-const LEARNER_ICONS = [Languages, Compass, Cpu, Shield];
+const LEARNER_ICONS = [Compass, Shield, Languages, Cpu];
 const SAFETY_ICONS = [ShieldCheck, HeartHandshake, Smile, Stethoscope];
 
 export function MissionValues() {
@@ -15,19 +15,19 @@ export function MissionValues() {
     <div className="grid gap-5 lg:grid-cols-3">
       <Reveal className="rounded-2xl border border-border bg-card p-7 lg:p-8">
         <h3 className="font-display text-2xl font-semibold text-navy-900">{d.missionTitle}</h3>
-        <p className="mt-4 leading-relaxed text-mist">{d.mission}</p>
+        <p className="mt-4 text-lg leading-relaxed text-navy-900/80">{d.mission}</p>
       </Reveal>
       <Reveal delay={0.08} className="rounded-2xl border border-border bg-card p-7 lg:p-8">
         <h3 className="font-display text-2xl font-semibold text-navy-900">{d.visionTitle}</h3>
-        <p className="mt-4 leading-relaxed text-mist">{d.vision}</p>
+        <p className="mt-4 text-lg leading-relaxed text-navy-900/80">{d.vision}</p>
+        <p className="mt-5 border-l-2 border-amber-500 pl-4 text-sm italic text-mist">“{d.motto}”</p>
       </Reveal>
       <Reveal delay={0.16} className="rounded-2xl border border-border bg-card p-7 lg:p-8">
         <h3 className="font-display text-2xl font-semibold text-navy-900">{d.valuesTitle}</h3>
-        <ul className="mt-4 space-y-3">
+        <ul className="mt-5 flex flex-wrap gap-2">
           {d.values.map((v) => (
-            <li key={v.name}>
-              <p className="font-semibold text-navy-800">{v.name}</p>
-              <p className="text-sm text-mist">{v.line}</p>
+            <li key={v.name} className="rounded-full bg-navy-100 px-4 py-2 font-semibold text-navy-800">
+              {v.name}
             </li>
           ))}
         </ul>
@@ -75,7 +75,7 @@ export function JaguarSpirit() {
       <Photo photo={media.fgCheer} className="absolute inset-0 -z-20 opacity-30" sizes="100vw" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40" aria-hidden="true" />
       <div className="grid items-center gap-10 md:grid-cols-[auto_1fr]">
-        <JaguarMotif className="h-28 w-28 text-amber-400 sm:h-40 sm:w-40" />
+        <SchoolJaguar />
         <div>
           <Kicker dark>{t.discover.jaguarKicker}</Kicker>
           <h3 className="font-display mt-4 text-3xl font-semibold text-white sm:text-4xl">{t.discover.jaguarTitle}</h3>

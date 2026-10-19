@@ -11,7 +11,7 @@ import { INSTAGRAM_POSTS, sortedNews, upcomingEvents } from "@/data/sccs-content
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { useLang } from "../sccs/i18n";
-import { Crest, Photo, buttonStyles } from "../sccs/sccs-shared";
+import { Photo, SchoolJaguar, buttonStyles } from "../sccs/sccs-shared";
 import { JourneyTabs } from "../sccs/journey";
 import { GlobeExplorer } from "../sccs/globe-explorer";
 import { CATEGORY_LABEL } from "../sccs/campus-life";
@@ -126,8 +126,8 @@ export function Advantage() {
         <ul className="mt-8 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {t.discover.learner.map((l) => (
             <li key={l.title} data-rise>
-              <p className="font-display text-3xl font-semibold leading-tight text-navy-900 sm:text-4xl">{l.title}</p>
-              <p className="mt-3 text-base leading-relaxed text-navy-900/75">{l.line}</p>
+              <p className="font-display text-2xl font-semibold leading-tight text-navy-900 sm:text-[1.7rem]">{l.title}</p>
+              <p className="mt-3 text-sm leading-relaxed text-navy-900/70">{l.line}</p>
             </li>
           ))}
         </ul>
@@ -684,8 +684,8 @@ export function FinalCtaHome() {
     <section className="relative isolate overflow-hidden py-32 text-center text-white sm:py-44">
       <Aurora />
       <div className={wrap}>
-        <div data-rise className="mx-auto w-24 sm:w-28">
-          <Crest className="h-auto w-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]" />
+        <div data-rise>
+          <SchoolJaguar />
         </div>
         <h2 className={cn(h2, "mx-auto mt-10 max-w-5xl")}>
           <Words text={t.cta.title} />

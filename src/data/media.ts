@@ -207,6 +207,23 @@ export const media = {
   dBandDirectorAward: p("drive/band-director-award", 720, 720, "Band director Lic. Alejandro Ortiz Suárez receives an award", "El director de banda Lic. Alejandro Ortiz Suárez recibe un reconocimiento"),
   dJaguarsAirport: p("drive/jaguars-airport", 1080, 810, "Jaguars travel together to a tournament", "Los Jaguars viajan juntos a un torneo"),
   dAlumniSoccer: p("drive/alumni-soccer", 1008, 671, "The Jaguar alumni soccer team", "El equipo de fútbol de exalumnos Jaguar"),
+  // Club photos from @sccsjaguars on Instagram
+  clubOsVolunteers: p("clubs/os-07-sccs-volunteers-2024", 1080, 1080, "SCCS Operation Smile volunteers in their club shirts", "Voluntarios de Operation Smile de SCCS con sus poleras del club", "instagram"),
+  clubOsChefs: p("clubs/os-02-student-chefs-four", 1080, 720, "Student chefs serving at the La Sonrisa la Pongo Yo charity cooking event", "Estudiantes chefs sirviendo en el evento benéfico La Sonrisa la Pongo Yo", "instagram"),
+  clubOsTwoChefs: p("clubs/os-04-two-chefs", 1080, 1440, "Two student chefs in Operation Smile aprons", "Dos estudiantes chefs con delantales de Operation Smile", "instagram"),
+  clubOsHearts: p("clubs/os-05-heart-hands", 1080, 720, "Student chefs making heart hands for Operation Smile", "Estudiantes chefs haciendo corazones con las manos por Operation Smile", "instagram"),
+  clubOsGroup: p("clubs/os-01-volunteers-group", 1080, 720, "Operation Smile student volunteers together at the charity event", "Voluntarios estudiantiles de Operation Smile juntos en el evento benéfico", "instagram"),
+  clubManitosGirl: p("clubs/manitos-01-valentine-cookie-girl", 1080, 1080, "An elementary student with her Manitos Valentine cookie", "Una estudiante de primaria con su galleta de San Valentín de Manitos", "instagram"),
+  clubManitosHero: p("clubs/manitos-hero", 1080, 620, "An elementary student with her Manitos Valentine cookie", "Una estudiante de primaria con su galleta de San Valentín de Manitos", "instagram"),
+  clubManitosClass: p("clubs/manitos-03-class-with-cookies", 640, 640, "An elementary class holding up their Manitos Valentine cookies", "Una clase de primaria mostrando sus galletas de San Valentín de Manitos", "instagram"),
+  clubManitosBoy: p("clubs/manitos-02-boy-heart-cookie", 640, 640, "A smiling boy with a heart cookie from the Manitos campaign", "Un niño sonriente con una galleta de corazón de la campaña Manitos", "instagram"),
+  clubManitosTeam: p("clubs/manitos-05-members-at-table", 640, 640, "Manitos members preparing the Valentine campaign", "Integrantes de Manitos preparando la campaña de San Valentín", "instagram"),
+  clubStucoHogar: p("clubs/stuco-02-hogar-activity-group", 960, 960, "StuCo members leading an activity with children at Hogar San Lorenzo", "Integrantes del StuCo dirigiendo una actividad con niños en el Hogar San Lorenzo", "instagram"),
+  clubStucoReading: p("clubs/stuco-01-hogar-reading", 640, 640, "A StuCo member reading with a child at Hogar San Lorenzo", "Una integrante del StuCo leyendo con un niño en el Hogar San Lorenzo", "instagram"),
+  clubStucoBakeSale: p("clubs/stuco-04-bake-sale-team", 960, 1280, "The elementary StuCo bake-sale team with their advisor", "El equipo de venta de repostería del StuCo de primaria con su asesora", "instagram"),
+  clubStucoTrio: p("clubs/stuco-06-es-stuco-trio", 768, 768, "Three elementary StuCo members at their fundraiser", "Tres integrantes del StuCo de primaria en su recaudación", "instagram"),
+  clubMunDelegates: p("clubs/mun-01-delegates-outdoors", 1080, 1080, "SCCSMUN 2026 delegates on campus", "Delegados de SCCSMUN 2026 en el campus", "instagram"),
+  clubMunCommittee: p("clubs/mun-04-committee-room", 640, 640, "A committee session in progress at SCCSMUN 2026", "Una sesión de comité en SCCSMUN 2026", "instagram"),
 } satisfies Record<string, Photo>;
 
 export type MediaKey = keyof typeof media;

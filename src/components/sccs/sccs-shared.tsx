@@ -57,6 +57,20 @@ export function Crest({ className, mono }: { className?: string; mono?: boolean 
   );
 }
 
+/** The SCCS Jaguar: the school's jaguar head above the red JAGUARS wordmark. */
+export function SchoolJaguar({ className, withWordmark = true }: { className?: string; withWordmark?: boolean }) {
+  return (
+    <div className={cn("flex flex-col items-center", className)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/brand/jaguar-head.png" alt="SCCS Jaguar" width={215} height={215} className="h-auto w-28 drop-shadow-[0_18px_40px_rgba(0,0,0,0.5)] sm:w-32" />
+      {withWordmark && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src="/brand/jaguars-wordmark.png" alt="Jaguars" width={1107} height={242} className="mt-4 h-auto w-44 sm:w-52" />
+      )}
+    </div>
+  );
+}
+
 export function JaguarMotif({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 96 96" className={className} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
