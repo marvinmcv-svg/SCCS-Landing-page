@@ -4,6 +4,9 @@
  * dates, matriculation table) is deliberately excluded so Carlita never states
  * placeholder data as fact.
  *
+ * The detailed secondary schedule (which section and teacher is where, block by
+ * block) is only included for signed-in staff; visitors get the bell times.
+ *
  * The text is deterministic for a given version of the site content, so the prompt
  * cache stays warm across requests and refreshes when the admin edits the facts.
  */
@@ -11,10 +14,11 @@ import { ADMISSIONS_FAQ, CAMPUS, CURRICULUM, DUAL_DIPLOMA, HISTORY, LEADERSHIP, 
 import { EXPERIENCES } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { dictionaries } from "@/data/dictionary";
+import { BELL_SCHEDULE, SCHEDULE_YEAR, SECONDARY_SCHEDULE } from "@/data/schedule";
 
 const bullet = (lines: string[]) => lines.map((l) => `- ${l}`).join("\n");
 
-export function carlitaKnowledge() {
+export function carlitaKnowledge({ staff = false }: { staff?: boolean } = {}) {
   const en = dictionaries.en;
   return `
 # Santa Cruz Cooperative School (SCCS): verified facts
@@ -91,5 +95,9 @@ ${HISTORY.chapters.map((c) => `- ${c.year}: ${c.body.en}`).join("\n")}
 ## Governance
 ${LEADERSHIP.lede.en}
 - Board of Directors: ${LEADERSHIP.board.map((b) => `${b.name} (${b.role.en})`).join(", ")}.
+
+# Secondary schedule ${SCHEDULE_YEAR} (Grades 6-12, official)
+${BELL_SCHEDULE}
+${staff ? SECONDARY_SCHEDULE : "- Section-by-section class schedules and teacher schedules are shared with enrolled families and staff, not on the public website. Families who need their child's schedule can ask the school at contactus@sccs.edu.bo."}
 `.trim();
 }

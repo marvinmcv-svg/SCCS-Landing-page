@@ -33,6 +33,11 @@ const INTENTS: Intent[] = [
     es: "La enseñanza es en inglés de PK a 12.º grado, con Lenguaje según los estándares del Ministerio de Educación. El apoyo ELL/SLL ayuda a los nuevos estudiantes a alcanzar fluidez plena.",
   },
   {
+    keys: ["schedule", "bell", "block", "bloque", "class time", "horario de clase", "recreo", "advisory", "dismiss", "salida"],
+    en: "Secondary classes (Grades 6-12) run in six blocks, A to F, from 7:45 AM to 3:10 PM. Middle School: break 8:45-9:10, advisory 10:10-10:35, lunch 12:35-1:10. High School: advisory 8:45-9:10, break 10:10-10:35, lunch 1:35-2:15. For your child's own class schedule, ask the school at contactus@sccs.edu.bo.",
+    es: "Secundaria (6.º a 12.º) tiene seis bloques, de la A a la F, de 7:45 a 15:10. Middle School: recreo 8:45-9:10, advisory 10:10-10:35, almuerzo 12:35-13:10. High School: advisory 8:45-9:10, recreo 10:10-10:35, almuerzo 13:35-14:15. Para el horario de tu hijo, escribe a contactus@sccs.edu.bo.",
+  },
+  {
     keys: ["lunch", "food", "cafeter", "menu", "almuerzo", "comida", "palette", "comedor"],
     en: "La Palette Catering Français serves daily meals: Kinder Bs. 22, Primary Bs. 25, Secondary Bs. 32, with a 10% benefit for early payment. Dietary accommodations with 24-hour notice. Catering: +591 75311615.",
     es: "La Palette Catering Français ofrece almuerzo diario: Kínder Bs. 22, Primaria Bs. 25, Secundaria Bs. 32, con 10% de beneficio por pago anticipado. Dietas especiales con 24 horas de aviso. Catering: +591 75311615.",

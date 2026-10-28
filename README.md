@@ -91,6 +91,7 @@ The "Ask Carlita" button (also in ⌘K) opens a bilingual chat. `POST /api/carli
 
 - **To turn on full AI mode:** set `ANTHROPIC_API_KEY` in Vercel (Project → Settings → Environment Variables) and redeploy.
 - **Without the key:** Carlita answers from a keyword FAQ (`src/lib/carlita-offline.ts`).
+- **Secondary schedule 2026-27** (`src/data/schedule.ts`, converted from the official Word schedule): every visitor gets the bell times. Staff signed in at **/admin** can also ask about any grade, section or teacher ("Where is Kreller on Tuesday C block?", "What does 10B have Friday?", "Who is free during E block on Wednesday?"). Teacher schedules are never shown to the public. When the schedule changes, replace the text in that file.
 
 ## Notes for review
 
