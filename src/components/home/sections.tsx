@@ -450,8 +450,8 @@ export function TraditionsMarquee() {
                 sizes="(min-width:1280px) 27vw, (min-width:1024px) 31vw, (min-width:640px) 46vw, 80vw"
                 imgClassName="transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
               />
-              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent" aria-hidden="true" />
-              <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-navy-900 backdrop-blur-sm">{tr(tr_.when)}</span>
+              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/95 via-navy-950/45 via-50% to-transparent" aria-hidden="true" />
+              <span className="absolute left-5 top-5 max-w-[calc(100%-6.25rem)] rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-navy-900 backdrop-blur-sm">{tr(tr_.when)}</span>
               <span className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all duration-500 group-hover:rotate-45 group-hover:bg-amber-500 group-hover:text-navy-950" aria-hidden="true">
                 <ArrowUpRight className="h-5 w-5" />
               </span>

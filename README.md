@@ -22,9 +22,9 @@ npm run typecheck && npm run lint
 | Campus Life | `/campus-life` · **`/campus-life/jaguar-experience`** + 6 deep pages (Innovation Hub, Performing Arts Center, Jaguar Athletics, Friendship Games, Science Labs, Library) · **`/campus-life/beyond-the-classroom`** + 9 tradition pages (Math Bowl, Knowledge Bowl, Spelling Bee, Book Fair, Family Reading Night, Santa Cruz Day, Fun Run, Grandparents' Day, Senior Welcome Dinner) · `/campus-life/student-leadership` · `/news` + 10 stories |
 | Community | `/community` (team directory, faculty spotlights, Parent Hub, Mother's Club, La Palette, alumni) · `/contact` |
 
-Also: ⌘K / Ctrl+K command palette (searches every page, story, event, and team member in the active language), `sitemap.xml`, `robots.txt`, JSON-LD, custom 404.
+Also: `/legal` (privacy, terms of use, accessibility), ⌘K / Ctrl+K command palette (searches every page, story, event, and team member in the active language), `sitemap.xml`, `robots.txt`, JSON-LD, custom 404.
 
-**API:** `POST /api/inquiries` checks the input with zod, limits each IP to 5 requests per 10 minutes, and treats a filled honeypot field as success without storing anything. It returns `201` for a valid inquiry and `400` for invalid input. Inquiries live only in memory; sending email and saving them durably have to be set up when the site is deployed.
+**API:** `POST /api/inquiries` checks the input with zod, limits each IP to 5 requests per 10 minutes, and treats a filled honeypot field as success without storing anything. It returns `201` for a valid inquiry and `400` for invalid input. Each inquiry is saved to the Vercel Blob store (or `.data/inquiries.json` in local development) and listed for staff at **/admin/inquiries**. Email notification is not set up yet.
 
 ## Where content lives
 

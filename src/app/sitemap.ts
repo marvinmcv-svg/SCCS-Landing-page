@@ -8,7 +8,7 @@ import { ensureContent } from "@/lib/content/store";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   await ensureContent();
-  const paths = new Set<string>(["/", "/news", "/contact", "/campus-life/student-leadership"]);
+  const paths = new Set<string>(["/", "/news", "/contact", "/campus-life/student-leadership", "/legal"]);
   for (const p of PILLARS) {
     paths.add(p.href);
     for (const c of p.children) paths.add(c.href.split("#")[0]);

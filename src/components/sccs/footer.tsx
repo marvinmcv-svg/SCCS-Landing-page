@@ -8,6 +8,9 @@ import { AccreditationLogos } from "./credentials";
 import { PORTALS } from "@/data/pages";
 import { SITE } from "@/lib/site";
 
+/** Anchors on /legal, in the order of the footer's legal labels (Privacy, Terms, Accessibility). */
+const LEGAL_ANCHORS = ["privacy", "terms", "accessibility"];
+
 function InstagramGlyph({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
@@ -135,14 +138,15 @@ export function Footer() {
           <AccreditationLogos size="sm" />
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
+        {/* Extra room on phones so the Carlita button never sits on top of the last line. */}
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pb-20 pt-6 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between sm:pb-0">
           <p>
             © {year} {t.footer.rights}
           </p>
           <ul className="flex gap-5" aria-label={t.footer.quickLinksLabel}>
-            {t.footer.legal.map((l) => (
+            {t.footer.legal.map((l, i) => (
               <li key={l}>
-                <Link href="/contact" className="hover:text-amber-400">
+                <Link href={`/legal#${LEGAL_ANCHORS[i] ?? "privacy"}`} className="hover:text-amber-400">
                   {l}
                 </Link>
               </li>

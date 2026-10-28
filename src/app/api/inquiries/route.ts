@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import { inquirySchema } from "@/lib/inquiry-schema";
+import { saveInquiry } from "@/lib/inquiries";
 
-type StoredInquiry = { id: string; receivedAt: string; name: string; email: string; phone?: string; grade: string; tourDate?: string; message?: string };
-
-// In-memory store and rate limiter. Email delivery / durable storage is a deployment-layer concern.
-const store: StoredInquiry[] = [];
+// In-memory per-IP rate limiter. Inquiries themselves are saved durably (see lib/inquiries).
 const hits = new Map<string, number[]>();
 const WINDOW_MS = 10 * 60 * 1000;
 const LIMIT = 5;
@@ -43,6 +41,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, id });
   }
 
-  store.push({ id, receivedAt: new Date().toISOString(), ...data });
+  try {
+    await saveInquiry({ id, receivedAt: new Date().toISOString(), ...data });
+  } catch (err) {
+    console.error("[inquiry] could not be saved", err);
+    return NextResponse.json({ ok: false, error: "Could not save inquiry" }, { status: 500 });
+  }
   return NextResponse.json({ ok: true, id }, { status: 201 });
 }

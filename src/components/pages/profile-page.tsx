@@ -265,29 +265,32 @@ export function SchoolProfilePage() {
               <TrendBars title={lang === "es" ? "Estudiantes que rindieron AP" : "Students taking AP exams"} values={P.apTrend.map((d) => ({ year: d.year, v: d.students }))} format={(n) => String(n)} />
               <TrendBars title={lang === "es" ? "Puntaje promedio AP (escala de 1 a 5)" : "Mean AP score (out of 5)"} values={P.apTrend.map((d) => ({ year: d.year, v: d.mean }))} format={(n) => n.toFixed(2)} />
             </div>
-            <table className="sr-only">
-              <caption>{tr(P.apTrendTitle)}</caption>
-              <thead>
-                <tr>
-                  <th>Year</th>
-                  <th>AP students</th>
-                  <th>Exams</th>
-                  <th>Students scoring 3+</th>
-                  <th>Mean score</th>
-                </tr>
-              </thead>
-              <tbody>
-                {P.apTrend.map((d) => (
-                  <tr key={d.year}>
-                    <td>{d.year}</td>
-                    <td>{d.students}</td>
-                    <td>{d.exams}</td>
-                    <td>{d.threePlus}</td>
-                    <td>{d.mean}</td>
+            {/* A wrapper carries sr-only: a table ignores the 1px width and would widen the page on phones. */}
+            <div className="sr-only">
+              <table>
+                <caption>{tr(P.apTrendTitle)}</caption>
+                <thead>
+                  <tr>
+                    <th>{lang === "es" ? "Año" : "Year"}</th>
+                    <th>{lang === "es" ? "Estudiantes AP" : "AP students"}</th>
+                    <th>{lang === "es" ? "Exámenes" : "Exams"}</th>
+                    <th>{lang === "es" ? "Estudiantes con 3 o más" : "Students scoring 3+"}</th>
+                    <th>{lang === "es" ? "Puntaje promedio" : "Mean score"}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {P.apTrend.map((d) => (
+                    <tr key={d.year}>
+                      <td>{d.year}</td>
+                      <td>{d.students}</td>
+                      <td>{d.exams}</td>
+                      <td>{d.threePlus}</td>
+                      <td>{d.mean}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div className="mt-24 grid gap-16 lg:grid-cols-2">

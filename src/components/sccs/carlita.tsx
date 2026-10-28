@@ -173,8 +173,9 @@ export function Carlita() {
     <>
       <AnimatePresence>
         {!open && (
+          // Above the header (z-50), below the mobile menu (z-60) so it never covers the drawer.
           <motion.div
-            className="fixed bottom-4 right-4 z-[70] flex items-end gap-3 sm:bottom-6 sm:right-6"
+            className="fixed bottom-4 right-4 z-[55] flex items-end gap-3 sm:bottom-6 sm:right-6"
             initial={reduce ? false : { opacity: 0, y: 16, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.9 }}

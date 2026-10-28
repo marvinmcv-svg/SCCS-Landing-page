@@ -59,9 +59,9 @@ export function JourneyTabs({ initial = 0 }: { initial?: number }) {
             tabIndex={active === i ? 0 : -1}
             onClick={() => setActive(i)}
             onKeyDown={(e) => onKey(e, i)}
-            className={cn("relative min-h-14 shrink-0 px-3 pb-3 pt-2 text-left transition-colors", active === i ? "text-navy-900" : "text-mist hover:text-navy-800")}
+            className={cn("relative min-h-14 shrink-0 px-2 pb-3 pt-2 text-left transition-colors sm:px-3", active === i ? "text-navy-900" : "text-mist hover:text-navy-800")}
           >
-            <span className="block text-sm font-semibold sm:text-base">{tb.label}</span>
+            <span className="block text-[0.8125rem] font-semibold sm:text-base">{tb.label}</span>
             <span className="block text-xs text-crimson-600">{tb.grades}</span>
             {active === i && (
               <motion.span layoutId="journey-underline" className="absolute inset-x-0 -bottom-px h-0.5 bg-amber-500" transition={{ type: "spring", stiffness: 420, damping: 36 }} />

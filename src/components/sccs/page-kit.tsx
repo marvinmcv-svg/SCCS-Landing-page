@@ -78,10 +78,12 @@ export function PageHero({
       <div data-page-media className="absolute inset-0 -z-20">
         <Photo photo={photo} priority className="absolute inset-0" sizes="100vw" imgClassName={imgPosition} />
       </div>
-      {/* The photograph keeps its own brightness; shade sits only under the navigation and the words. */}
-      <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-navy-950/60 to-transparent" aria-hidden="true" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_95%_80%_at_0%_100%,rgba(20,20,58,0.85),rgba(20,20,58,0.45)_45%,transparent_75%)]" aria-hidden="true" />
-      <Container className="pb-14 pt-40 sm:pb-20">
+      {/* The photograph keeps its own brightness; shade sits only under the navigation and the words.
+          On phones the words cover most of the photo, so the shade rises from the bottom instead. */}
+      <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-navy-950/70 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/95 via-navy-950/70 via-55% to-navy-950/10 sm:hidden" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 hidden bg-[radial-gradient(ellipse_110%_95%_at_0%_100%,rgba(20,20,58,0.92),rgba(20,20,58,0.62)_45%,rgba(20,20,58,0.12)_80%)] sm:block" aria-hidden="true" />
+      <Container className="pb-14 pt-40 [text-shadow:0_1px_18px_rgba(20,20,58,0.45)] sm:pb-20">
         <div data-page-rise>
           <Breadcrumbs items={crumbs} />
         </div>
