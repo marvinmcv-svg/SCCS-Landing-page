@@ -87,12 +87,12 @@ The home page follows two design skills installed in `.claude/skills/`: **taste-
 
 ## Carlita, the AI receptionist
 
-The "Ask Carlita" button (also in ⌘K) opens a bilingual chat. `POST /api/carlita` streams answers grounded in the verified school facts and site map (`src/lib/carlita-knowledge.ts`) plus the full **Secondary Student / Family Handbook 2025-26** (`src/data/handbook.ts`).
+The "Ask Carlita" button (also in ⌘K) opens a bilingual chat. `POST /api/carlita` streams answers grounded in the verified school facts and site map (`src/lib/carlita-knowledge.ts`) plus the full **Secondary Student / Family Handbook 2025-26** (`src/data/handbook.ts`) and the **Official Secondary Schedule 2026-27** (`src/data/schedule.ts`: grade timetables, teacher timetables, advisory groups and a class index).
 
-- **NVIDIA (preferred):** set `NVIDIA_API_KEY` (from build.nvidia.com) in Vercel (Project → Settings → Environment Variables) and redeploy. Optional: `NVIDIA_MODEL` (default `nvidia/nemotron-3-ultra-550b-a55b`), `NVIDIA_THINKING=on` to enable reasoning (slower).
+- **NVIDIA (preferred):** set `NVIDIA_API_KEY` (from build.nvidia.com) in Vercel (Project → Settings → Environment Variables) and redeploy. Optional: `NVIDIA_MODEL` (default `nvidia/nemotron-3-ultra-550b-a55b`), `NVIDIA_THINKING=off` to turn off reasoning (faster, but less accurate on schedule lookups).
 - **Claude (alternative):** used when only `ANTHROPIC_API_KEY` is set.
 - **Without a key:** Carlita answers from a keyword FAQ (`src/lib/carlita-offline.ts`).
-- **New handbook year:** replace the text in `src/data/handbook.ts` with the new edition. Never commit API keys; for local dev put them in `.env.local` (gitignored).
+- **New handbook or schedule year:** replace the text in `src/data/handbook.ts` or `src/data/schedule.ts` with the new edition (the schedule is written out day by day and block by block, which keeps her lookups accurate). Never commit API keys; for local dev put them in `.env.local` (gitignored).
 
 ## Notes for review
 

@@ -13,6 +13,7 @@ import { TRADITIONS } from "@/data/traditions";
 import { dictionaries } from "@/data/dictionary";
 import { PILLARS } from "@/data/nav";
 import { HANDBOOK_TEXT, HANDBOOK_TITLE } from "@/data/handbook";
+import { SCHEDULE_TEXT, SCHEDULE_TITLE } from "@/data/schedule";
 
 const bullet = (lines: string[]) => lines.map((l) => `- ${l}`).join("\n");
 
@@ -111,4 +112,20 @@ This is the official handbook for Middle School and High School (Grades 6-12). I
 <handbook>
 ${HANDBOOK_TEXT}
 </handbook>`;
+}
+
+/** The official secondary class schedule: grade master schedules, teacher schedules and advisory groups. */
+export function carlitaSchedule() {
+  return `# ${SCHEDULE_TITLE}
+This is the official class timetable for the 2026-27 school year. It contains:
+- Master schedules for Grades 6, 7 and 8 (sections A and B) and Grades 9, 10, 11 and 12.
+- Individual weekly schedules for each Middle School and High School teacher, listed under the teacher's name.
+- Middle School and High School advisory teacher lists by grade.
+How to read it: each section lists Monday to Friday, then every block of that day with its time. Blocks run A to F, plus break, advisory and lunch. In Middle School lines, "7A: Art; 7B: Social Studies" means section 7A has Art while 7B has Social Studies. In High School lines, classes running at the same time are separated by ";" and "(teacher: Name)" or a name after the class is the teacher. "free (no class)" means the teacher has no class in that block.
+At the end, the "Class index" lists every meeting of each class with its teacher. For "when does this class meet" or "who teaches it", use the class index; for "what does this grade or teacher have on this day", use that grade or teacher section.
+Middle School and High School have different break, advisory and lunch times, so always use the timetable for the right division.
+
+<schedule>
+${SCHEDULE_TEXT}
+</schedule>`;
 }
