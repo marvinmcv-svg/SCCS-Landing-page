@@ -26,6 +26,25 @@ function CarlitaAvatar({ className, online = true }: { className?: string; onlin
   );
 }
 
+/** Render **bold** spans and drop markdown heading marks; everything else goes through RichText. */
+function FormattedText({ text }: { text: string }) {
+  const clean = text.replace(/^#{1,6}\s+/gm, "");
+  const parts = clean.split(/\*\*([^*\n]+)\*\*/g);
+  return (
+    <>
+      {parts.map((p, i) =>
+        i % 2 ? (
+          <strong key={i} className="font-semibold text-navy-900">
+            <RichText text={p} />
+          </strong>
+        ) : (
+          <RichText key={i} text={p} />
+        ),
+      )}
+    </>
+  );
+}
+
 /** Turn emails, phone numbers and on-site paths into links; keep everything else as text. */
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(\/[a-z-]+(?:\/[a-z-]+)*(?:#[a-z-]+)?|[\w.+-]+@[\w-]+\.[\w.]+|\+591[\d\s]{7,13}\d)/g);
@@ -268,7 +287,7 @@ export function Carlita() {
                     <CarlitaAvatar className="mt-0.5 h-8 w-8 ring-1" online={false} />
                     <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tl-md bg-white px-4 py-3 text-sm leading-relaxed text-charcoal shadow-sm ring-1 ring-border">
                       {m.content ? (
-                        <RichText text={m.content} />
+                        <FormattedText text={m.content} />
                       ) : (
                         <span className="flex gap-1 py-1" aria-label={c.typing}>
                           {[0, 1, 2].map((d) => (

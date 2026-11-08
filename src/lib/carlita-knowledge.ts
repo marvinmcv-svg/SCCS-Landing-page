@@ -11,6 +11,8 @@ import { ADMISSIONS_FAQ, CAMPUS, CURRICULUM, DUAL_DIPLOMA, HISTORY, LEADERSHIP, 
 import { EXPERIENCES } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { dictionaries } from "@/data/dictionary";
+import { PILLARS } from "@/data/nav";
+import { HANDBOOK_TEXT, HANDBOOK_TITLE } from "@/data/handbook";
 
 const bullet = (lines: string[]) => lines.map((l) => `- ${l}`).join("\n");
 
@@ -91,5 +93,22 @@ ${HISTORY.chapters.map((c) => `- ${c.year}: ${c.body.en}`).join("\n")}
 ## Governance
 ${LEADERSHIP.lede.en}
 - Board of Directors: ${LEADERSHIP.board.map((b) => `${b.name} (${b.role.en})`).join(", ")}.
+
+## Website map (link families to the right page)
+${PILLARS.map((p) => p.children.map((c) => `- ${c.href}: ${c.label.en} (${c.blurb.en})`).join("\n")).join("\n")}
+- /contact: Contact Us (every office, one page)
 `.trim();
+}
+
+/**
+ * The full Secondary handbook. Kept as its own block so it can be cached separately
+ * from the site facts (it only changes once a school year).
+ */
+export function carlitaHandbook() {
+  return `# ${HANDBOOK_TITLE}
+This is the official handbook for Middle School and High School (Grades 6-12). It is the authoritative source for school rules, schedules, academic policies, attendance, dress code, discipline, technology, extracurriculars, and procedures for secondary students and families.
+
+<handbook>
+${HANDBOOK_TEXT}
+</handbook>`;
 }

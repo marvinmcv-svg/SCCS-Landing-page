@@ -87,10 +87,12 @@ The home page follows two design skills installed in `.claude/skills/`: **taste-
 
 ## Carlita, the AI receptionist
 
-The "Ask Carlita" button (also in ⌘K) opens a bilingual chat. `POST /api/carlita` streams answers from Claude, grounded only in verified school facts (`src/lib/carlita-knowledge.ts`).
+The "Ask Carlita" button (also in ⌘K) opens a bilingual chat. `POST /api/carlita` streams answers grounded in the verified school facts and site map (`src/lib/carlita-knowledge.ts`) plus the full **Secondary Student / Family Handbook 2025-26** (`src/data/handbook.ts`).
 
-- **To turn on full AI mode:** set `ANTHROPIC_API_KEY` in Vercel (Project → Settings → Environment Variables) and redeploy.
-- **Without the key:** Carlita answers from a keyword FAQ (`src/lib/carlita-offline.ts`).
+- **NVIDIA (preferred):** set `NVIDIA_API_KEY` (from build.nvidia.com) in Vercel (Project → Settings → Environment Variables) and redeploy. Optional: `NVIDIA_MODEL` (default `nvidia/nemotron-3-ultra-550b-a55b`), `NVIDIA_THINKING=on` to enable reasoning (slower).
+- **Claude (alternative):** used when only `ANTHROPIC_API_KEY` is set.
+- **Without a key:** Carlita answers from a keyword FAQ (`src/lib/carlita-offline.ts`).
+- **New handbook year:** replace the text in `src/data/handbook.ts` with the new edition. Never commit API keys; for local dev put them in `.env.local` (gitignored).
 
 ## Notes for review
 
