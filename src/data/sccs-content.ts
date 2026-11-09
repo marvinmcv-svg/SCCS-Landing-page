@@ -33,6 +33,27 @@ export type TeamMember = { name: string; role: L; division: "ALL" | "ES" | "MS" 
 
 export const NEWS: NewsPost[] = [
   {
+    slug: "coded-steam-orlando-league-nasa",
+    category: "ACADEMICS",
+    date: "2026-11-08",
+    featured: true,
+    source: "instagram",
+    instagramUrl: "https://www.instagram.com/p/DfhjBHrIOUo/",
+    image: media.codedRocketGardenTeam,
+    gallery: [media.codedPitchBoliviaFlag, media.codedFlagGuest, media.codedPitchJaguarFlag, media.codedLaptopsRockets, media.codedKennedyThumbsUp, media.codedTeamwork, media.codedRobots],
+    title: { en: "Our Jaguars at NASA: Team Bolivia at the Coded STEAM Orlando League", es: "Nuestros Jaguars en la NASA: el Team Bolivia en la Coded STEAM Orlando League" },
+    excerpt: {
+      en: "15 SCCS students represented Bolivia at an international STEAM league in Orlando, designed a sustainable space colony, and pitched it to a panel of NASA judges.",
+      es: "15 estudiantes de SCCS representaron a Bolivia en una liga STEAM internacional en Orlando, diseñaron una colonia espacial sostenible y la presentaron ante un panel de jueces de la NASA.",
+    },
+    body: [
+      { en: "Fifteen Jaguars traveled to Florida for the Coded: STEAM Orlando League, the first SCCS team ever to take part in this international experience. They joined more than 500 students from over 10 countries, all working on the same challenge: design a sustainable space colony.", es: "Quince Jaguars viajaron a Florida para la Coded: STEAM Orlando League, el primer equipo de SCCS en participar en esta experiencia internacional. Se unieron a más de 500 estudiantes de más de 10 países, todos trabajando en el mismo desafío: diseñar una colonia espacial sostenible." },
+      { en: "Over the week, our students learned from industry professionals, including experts connected to NASA and Walt Disney Imagineering. They coded, sketched, tested and rethought their ideas in hands-on workshops, the project-based way Coded teaches STEAM.", es: "Durante la semana, nuestros estudiantes aprendieron de profesionales de la industria, incluidos expertos vinculados a la NASA y a Walt Disney Imagineering. Programaron, bosquejaron, probaron y replantearon sus ideas en talleres prácticos, con el aprendizaje basado en proyectos con el que Coded enseña STEAM." },
+      { en: "The highlight was NASA itself. The team visited the space center, stood beneath the rockets with the flags of Bolivia, Santa Cruz and the Jaguars, and then pitched their space colony project to a panel of NASA judges.", es: "El momento cumbre fue la propia NASA. El equipo visitó el centro espacial, posó bajo los cohetes con las banderas de Bolivia, Santa Cruz y los Jaguars, y luego presentó su proyecto de colonia espacial ante un panel de jueces de la NASA." },
+      { en: "We are incredibly proud of our Jaguars for dreaming big and representing SCCS and Bolivia on an international stage. The future belongs to those who dare to explore.", es: "Estamos muy orgullosos de nuestros Jaguars por soñar en grande y representar a SCCS y a Bolivia en un escenario internacional. El futuro pertenece a quienes se atreven a explorar." },
+    ],
+  },
+  {
     slug: "friendship-games-2026",
     category: "ATHLETICS",
     date: "2026-10-04",

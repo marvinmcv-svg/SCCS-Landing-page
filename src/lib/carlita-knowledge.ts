@@ -83,6 +83,9 @@ ${bullet(TRADITIONS.map((t) => `${t.title.en}: ${t.body[0].en}`))}
 - Student leadership: ${LEADERSHIP_HONORS.stuco.ms.en} ${LEADERSHIP_HONORS.stuco.hs.en}
 ${bullet(LEADERSHIP_HONORS.societies.map((s) => `${s.title.en}: ${s.body.en} ${s.points.map((p) => p.en).join("; ")}.`))}
 
+## Recent news
+- November 2026, Coded: STEAM Orlando League (Coding Education, codingeducation.us): 15 SCCS students represented Bolivia as the first SCCS team in this international STEAM program in Orlando, Florida. They joined 500+ students from 10+ countries, learned from industry professionals including experts connected to NASA and Walt Disney Imagineering, designed a sustainable space colony, visited NASA, and pitched their project to a panel of NASA judges. Full story: /news/coded-steam-orlando-league-nasa
+
 ## Community and dining
 - ${en.community.mothersBody}
 - La Palette Catering Français: ${en.community.paletteBody} Daily prices: Kinder Bs. 22, Primary Bs. 25, Secondary Bs. 32. 10% benefit for payment in the first two weeks of each term. Catering phone: +591 75311615.
