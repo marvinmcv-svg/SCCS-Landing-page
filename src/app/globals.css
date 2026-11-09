@@ -199,3 +199,48 @@
 @utility carlita-pulse {
   animation: carlita-pulse 2.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
+
+/* ── Carlita, the animated character (carlita-character.tsx) ─────────────── */
+.carlita-char * { transform-box: fill-box; }
+.carlita-char .cc-body { transform-origin: 50% 100%; }
+.carlita-char .cc-head { transform-origin: 50% 90%; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.carlita-char .cc-eye { transform-origin: 50% 50%; }
+.carlita-char .cc-pupil { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.carlita-char .cc-brows { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.carlita-char .cc-earring { transform-origin: 50% 0%; }
+.carlita-char .cc-talk { opacity: 0; transform-origin: 50% 20%; }
+.carlita-char .cc-hand { opacity: 0; transform-origin: 60% 100%; transform: translateY(30px); transition: opacity 0.3s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* Thinking: glance up, lift brows, tilt */
+.carlita-char[data-mood="thinking"] .cc-pupil { transform: translate(1.2px, -1.3px); }
+.carlita-char[data-mood="thinking"] .cc-brows { transform: translateY(-1.6px); }
+.carlita-char[data-mood="thinking"] .cc-head { transform: rotate(-5deg); }
+
+/* Talking: swap the smile for a moving mouth */
+.carlita-char[data-mood="talking"] .cc-smile { opacity: 0; }
+.carlita-char[data-mood="talking"] .cc-talk { opacity: 1; }
+
+/* Waving: raise the hand */
+.carlita-char[data-mood="wave"] .cc-hand { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .carlita-char .cc-body { animation: cc-breathe 4.2s ease-in-out infinite; }
+  .carlita-char .cc-eye { animation: cc-blink 5.5s infinite; }
+  .carlita-char .cc-earring-l { animation: cc-sway 3.2s ease-in-out infinite; }
+  .carlita-char .cc-earring-r { animation: cc-sway 3.2s ease-in-out -1.6s infinite; }
+  .carlita-char[data-mood="idle"] .cc-head,
+  .carlita-char[data-mood="wave"] .cc-head { animation: cc-nod 6s ease-in-out infinite; }
+  .carlita-char[data-mood="thinking"] .cc-head { animation: cc-ponder 2.4s ease-in-out infinite; }
+  .carlita-char[data-mood="talking"] .cc-talk { animation: cc-talk 0.32s ease-in-out infinite alternate; }
+  .carlita-char[data-mood="talking"] .cc-head { animation: cc-chat 1.6s ease-in-out infinite; }
+  .carlita-char[data-mood="wave"] .cc-hand > g { transform-origin: 50% 100%; animation: cc-wave 0.9s ease-in-out 4; }
+}
+
+@keyframes cc-breathe { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-0.8px) scale(1.012); } }
+@keyframes cc-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.08); } }
+@keyframes cc-sway { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+@keyframes cc-nod { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(-2.5deg); } 65% { transform: rotate(2deg); } }
+@keyframes cc-ponder { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(-2.5deg) translateY(-0.6px); } }
+@keyframes cc-chat { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(1.8deg); } 75% { transform: rotate(-1.8deg); } }
+@keyframes cc-talk { 0% { transform: scaleY(0.35); } 100% { transform: scaleY(1.05); } }
+@keyframes cc-wave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(16deg); } 75% { transform: rotate(-12deg); } }

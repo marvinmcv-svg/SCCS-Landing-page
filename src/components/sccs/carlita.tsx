@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUp, Square, X } from "lucide-react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { cn, EASE } from "@/lib/utils";
 import { useLang } from "./i18n";
+import { CarlitaCharacter, type CarlitaMood } from "./carlita-character";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -17,10 +17,10 @@ export function openCarlita() {
 
 const NUDGE_KEY = "sccs-carlita-nudged";
 
-function CarlitaAvatar({ className, online = true }: { className?: string; online?: boolean }) {
+function CarlitaAvatar({ className, online = true, mood = "idle" }: { className?: string; online?: boolean; mood?: CarlitaMood }) {
   return (
     <span className={cn("relative block shrink-0 rounded-full ring-2 ring-amber-400", className)} aria-hidden="true">
-      <Image src="/brand/carlita/carlita.jpg" alt="" width={160} height={160} className="h-full w-full rounded-full object-cover" />
+      <CarlitaCharacter mood={mood} className="h-full w-full rounded-full" />
       {online && <span className="absolute bottom-0 right-0 h-[28%] max-h-3.5 w-[28%] max-w-3.5 rounded-full border-2 border-white bg-emerald-500" />}
     </span>
   );
@@ -188,6 +188,10 @@ export function Carlita() {
 
   const stop = () => abortRef.current?.abort();
 
+  // The header character thinks while waiting for the first words, then talks as they stream in.
+  const last = messages[messages.length - 1];
+  const headerMood: CarlitaMood = busy ? (last?.content ? "talking" : "thinking") : messages.length === 0 ? "wave" : "idle";
+
   return (
     <>
       <AnimatePresence>
@@ -233,7 +237,7 @@ export function Carlita() {
               title={c.launcher}
             >
               {!reduce && <span className="carlita-pulse absolute inset-0 rounded-full ring-2 ring-amber-400" aria-hidden="true" />}
-              <CarlitaAvatar className="h-full w-full ring-[3px]" />
+              <CarlitaAvatar className="h-full w-full ring-[3px]" mood={nudge ? "wave" : "idle"} />
             </motion.button>
           </motion.div>
         )}
@@ -251,7 +255,7 @@ export function Carlita() {
             className="tabbar-safe fixed inset-x-2 bottom-2 z-[70] flex max-h-[calc(100svh-1rem)] flex-col overflow-hidden rounded-3xl bg-ivory shadow-[0_30px_90px_rgba(20,20,58,0.35)] ring-1 ring-navy-800/10 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:h-[38rem] sm:w-[25rem]"
           >
             <header className="flex items-center gap-3 bg-navy-800 px-5 py-4 text-white">
-              <CarlitaAvatar className="h-12 w-12" />
+              <CarlitaAvatar className="h-12 w-12" mood={headerMood} />
               <div className="min-w-0 flex-1">
                 <h2 className="font-semibold">{c.title}</h2>
                 <p className="text-xs text-white/70">{c.subtitle}</p>
@@ -284,7 +288,7 @@ export function Carlita() {
                   </p>
                 ) : (
                   <div key={i} className="flex gap-2.5">
-                    <CarlitaAvatar className="mt-0.5 h-8 w-8 ring-1" online={false} />
+                    <CarlitaAvatar className="mt-0.5 h-8 w-8 ring-1" online={false} mood={busy && i === messages.length - 1 ? (m.content ? "talking" : "thinking") : "idle"} />
                     <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tl-md bg-white px-4 py-3 text-sm leading-relaxed text-charcoal shadow-sm ring-1 ring-border">
                       {m.content ? (
                         <FormattedText text={m.content} />
