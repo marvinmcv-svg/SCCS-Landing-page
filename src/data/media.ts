@@ -162,6 +162,9 @@ export const media = {
   codedTeamwork: p("drive/coded-teamwork", 900, 900, "Two students sketch ideas together beside a laptop", "Dos estudiantes bosquejan ideas juntos junto a una laptop", "instagram"),
   codedLaptopsRockets: p("drive/coded-laptops-rockets", 1186, 1186, "Students work on laptops outdoors with rockets in the background", "Estudiantes trabajan en laptops al aire libre con cohetes de fondo", "instagram"),
   codedRobots: p("drive/coded-robots", 1186, 1186, "Rows of small coding robots glowing green on their charging dock", "Filas de pequeños robots programables brillando en verde en su base de carga", "instagram"),
+  // Solaria renewable energy talk, November 2026
+  solariaGroup: p("drive/solaria-group", 1080, 526, "High school students gather with the Solaria team after the clean energy talk, 'Clean energy from the sun' on the screen behind them", "Estudiantes de secundaria junto al equipo de Solaria tras la charla de energía limpia, con 'Clean energy from the sun' en la pantalla", "instagram"),
+  solariaStudent: p("drive/solaria-student", 1186, 1186, "A smiling student holds up a card during the Solaria visit as a classmate leans in", "Un estudiante sonriente muestra una tarjeta durante la visita de Solaria mientras un compañero se asoma", "instagram"),
   dSoccerLeagueChampions: p("drive/soccer-league-champions", 1080, 810, "The 2024 league champion soccer team with their trophy", "El equipo de fútbol campeón de liga 2024 con su trofeo"),
   dGirlsSoccerChampions: p("drive/girls-soccer-champions", 1170, 945, "8th-grade girls, first-ever champions, with their trophy", "Las chicas de 8.º grado, primeras campeonas de la historia, con su trofeo"),
   dAthletesDuo: p("drive/athletes-duo", 2400, 1602, "Two Jaguar athletes on sports day", "Dos atletas Jaguar en el día deportivo"),

@@ -54,6 +54,26 @@ export const NEWS: NewsPost[] = [
     ],
   },
   {
+    slug: "solaria-clean-energy-from-the-sun",
+    category: "ACADEMICS",
+    date: "2026-11-04",
+    featured: false,
+    source: "instagram",
+    instagramUrl: "https://www.instagram.com/p/DfUsaStDl2q/",
+    image: media.solariaGroup,
+    gallery: [media.solariaStudent],
+    title: { en: "Clean Energy from the Sun: Solaria Visits SCCS", es: "Energía limpia del sol: Solaria visita SCCS" },
+    excerpt: {
+      en: "Our students learned about renewable energy and the role the sun plays in shaping Bolivia's energy future, in a special talk from Solaria.",
+      es: "Nuestros estudiantes aprendieron sobre energías renovables y el rol del sol en el futuro energético de Bolivia, en una charla especial de Solaria.",
+    },
+    body: [
+      { en: "Solaria, a Bolivian solar energy company, came to SCCS for a learning experience on solar power with our students. Esteban Justiniano, Solaria's Commercial Manager, led a talk on renewable energy and the important role the sun plays in shaping Bolivia's energy future.", es: "Solaria, empresa boliviana de energía solar, visitó SCCS para compartir una experiencia de aprendizaje sobre energía solar con nuestros estudiantes. Esteban Justiniano, Gerente Comercial de Solaria, ofreció una charla sobre energías renovables y el rol que cumple el sol en el futuro energético del país." },
+      { en: "Experiences like these connect classroom learning with real-world innovation, and inspire our Jaguars to think critically about the challenges and opportunities of tomorrow, from cleaner energy to a more efficient Bolivia.", es: "Experiencias como esta conectan lo aprendido en el aula con la innovación del mundo real e inspiran a nuestros Jaguars a pensar críticamente sobre los desafíos y oportunidades del mañana, desde una energía más limpia hasta una Bolivia más eficiente." },
+      { en: "Thank you, Solaria (@solariabo), for sharing your knowledge and inspiring our students!", es: "¡Gracias, Solaria (@solariabo), por compartir su conocimiento e inspirar a nuestros estudiantes!" },
+    ],
+  },
+  {
     slug: "friendship-games-2026",
     category: "ATHLETICS",
     date: "2026-10-04",

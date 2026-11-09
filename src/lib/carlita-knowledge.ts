@@ -85,6 +85,7 @@ ${bullet(LEADERSHIP_HONORS.societies.map((s) => `${s.title.en}: ${s.body.en} ${s
 
 ## Recent news
 - November 2026, Coded: STEAM Orlando League (Coding Education, codingeducation.us): 15 SCCS students represented Bolivia as the first SCCS team in this international STEAM program in Orlando, Florida. They joined 500+ students from 10+ countries, learned from industry professionals including experts connected to NASA and Walt Disney Imagineering, designed a sustainable space colony, visited NASA, and pitched their project to a panel of NASA judges. Full story: /news/coded-steam-orlando-league-nasa
+- November 2026, Solaria visit: Solaria, a Bolivian solar energy company, gave SCCS students a talk on renewable energy and the sun's role in Bolivia's energy future, led by its Commercial Manager Esteban Justiniano. Full story: /news/solaria-clean-energy-from-the-sun
 
 ## Community and dining
 - ${en.community.mothersBody}
