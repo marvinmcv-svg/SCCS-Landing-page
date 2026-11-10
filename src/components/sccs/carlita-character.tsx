@@ -6,13 +6,13 @@ import { cn } from "@/lib/utils";
 export type CarlitaMood = "idle" | "wave" | "thinking" | "talking";
 
 /**
- * Marvz AI, the site's assistant, as an animated character: an illustrated bust in SVG,
+ * Mr. Marvin, the site's assistant, as an animated character: an illustrated bust in SVG,
  * modelled on his portrait (short black hair swept up with loose strands on the
- * forehead, strong straight brows, calm closed-mouth smile, red SCCS polo with the
+ * forehead, strong straight brows, straight serious brows, heavy-lidded eyes, a firm mouth with a slight smirk, stubble, red SCCS polo with the
  * white paw print and the SCCS crest, ink outlines on a red background).
  * Animations are pure CSS (see `.carlita-char` in globals.css) and switch with `mood`:
  * - idle: breathing, blinking, a slow nod
- * - wave: idle + a friendly wave
+ * - wave: a cool chin-up nod with a raised brow (his greeting)
  * - thinking: eyes glance up, head tilts, brows lift
  * - talking: mouth opens and closes while he answers
  * Everything is static under prefers-reduced-motion.
@@ -76,64 +76,60 @@ export function CarlitaCharacter({ mood = "idle", className }: { mood?: CarlitaM
             <path d="M85 51 C91 49 92 61 88 66 C86 68 84 67 83.5 65" fill="#C68E63" stroke={ink} strokeWidth="1" />
             {/* Face: broad, slightly square jaw */}
             <path d="M35.5 46 C35 62 37 74 46 81 C51 85 56 86.5 60 86.5 C64 86.5 69 85 74 81 C83 74 85 62 84.5 46 C84 32 74 26 60 26 C46 26 36 32 35.5 46 Z" fill={`url(#${skin})`} stroke={ink} strokeWidth="1.1" />
-            {/* Short black hair: full on top, swept up, tapered sides, loose forehead strands */}
-            <path d="M34.5 52 C32 40 34 27 44 21 C52 16 66 15 75 19 C83 22 88 30 86.5 41 L85.5 52 C84.5 46 83.5 41 81 38 C79 34 76 33 73 34 C68 30 60 31 55 33 C50 32 45 34 43 38 C40 41 37 45 34.5 52 Z" fill="#1A1210" stroke={ink} strokeWidth="0.8" />
-            <path d="M43 22 C47 18 53 16.5 58 17" fill="none" stroke="#4A3A33" strokeWidth="1" strokeLinecap="round" opacity="0.8" />
-            <path d="M64 17 C70 17.5 76 20 80 24" fill="none" stroke="#4A3A33" strokeWidth="1" strokeLinecap="round" opacity="0.8" />
-            <path d="M55 33 C53 36 51.5 38 49 39.5" fill="none" stroke="#1A1210" strokeWidth="1.3" strokeLinecap="round" />
-            <path d="M58 32.5 C58 35.5 56.5 38 55 39" fill="none" stroke="#1A1210" strokeWidth="1" strokeLinecap="round" />
-            <path d="M62 33 C64 35 64.5 37.5 64 39" fill="none" stroke="#1A1210" strokeWidth="0.9" strokeLinecap="round" />
+            {/* Black hair: swept up and back with volume on top, deep corners at the temples,
+                tapered sides, a few strands falling forward */}
+            <path d="M35 53 C33 40 35 26 45 18 C53 12 68 10.5 77.5 15.5 C85.5 20.5 88.5 31 86.5 44 L85.4 53 C84.6 48 83.4 44.5 81 42.5 C79.6 37.5 77.4 32.6 73.4 31.2 C69.6 31.8 66.4 33.4 63.4 34.6 C60.4 35.8 57.4 36.6 55.2 36.1 C52 35.2 49.4 33.4 47.2 33.4 C45 35.2 43.6 39.2 41.6 43 C39.4 45.4 37.2 48.6 35 53 Z" fill="#140D0B" stroke="#2B1712" strokeWidth="0.8" />
+            {/* tapered sides */}
+            <path d="M35 53 C35.4 48.6 37.4 45.6 39.8 43.6 L41 45.6 C39 47.8 37.2 50.4 36.4 53.6 Z" fill="#3A2A23" opacity="0.9" />
+            <path d="M85.4 53 C85 48.6 83.4 45.4 81.2 43.4 L80 45.4 C81.8 47.6 83.4 50.4 84.2 53.6 Z" fill="#3A2A23" opacity="0.9" />
+            {/* volume swept up and back */}
+            <path d="M44 22 C50 15.6 60 13.6 69 15 M47 27 C54 20.6 64 19.4 73 21.6 M52 31.4 C58 26.6 66 25.6 74 27.4" fill="none" stroke="#3E302A" strokeWidth="0.9" strokeLinecap="round" opacity="0.9" />
+            <path d="M40 23.5 C41 18.5 44.5 14.6 49 13.4 C47 15.6 45.8 18 45.5 20.6 M70 12.6 C76 12.8 81.6 16 84.4 21.4 C81.4 19.2 77.6 18.2 74.4 18.4" fill="#140D0B" stroke="#140D0B" strokeWidth="1.2" strokeLinejoin="round" />
+            {/* strands falling forward over the forehead */}
+            <path d="M56 35.8 C53.6 38 51.8 40.6 51 43.6" fill="none" stroke="#140D0B" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M59.6 35 C59.6 38.2 58.2 40.8 56.4 42.4" fill="none" stroke="#140D0B" strokeWidth="1.1" strokeLinecap="round" />
+            <path d="M53 35.4 C50.6 36.8 48.8 38.8 48 41" fill="none" stroke="#140D0B" strokeWidth="1" strokeLinecap="round" />
 
-            {/* Strong, straight brows */}
-            <g className="cc-brows" fill="none" stroke="#1A1210" strokeWidth="2.6" strokeLinecap="round">
-              <path d="M41.5 47 Q47 44.6 53.5 46" />
-              <path d="M66.5 46 Q73 44.6 78.5 47" />
+            {/* Thick brows, low and angled in: a serious, tough look */}
+            <g className="cc-brows" fill="#140D0B" stroke="#140D0B" strokeWidth="0.6" strokeLinejoin="round">
+              <path d="M40.5 46.6 Q46.5 44.4 54.5 47.6 L54 49.4 Q47 47.2 41 48.6 Z" />
+              <path d="M79.5 46.6 Q73.5 44.4 65.5 47.6 L66 49.4 Q73 47.2 79 48.6 Z" />
             </g>
 
-            {/* Almond eyes, a slight squint (blink + glance) */}
+            {/* Narrow, heavy-lidded eyes (blink + glance) */}
             <g className="cc-eyes">
               <g className="cc-eye">
-                <path d="M42.5 52.5 Q47.5 49 53 52.3 Q47.5 54.6 42.5 52.5 Z" fill="#FFFFFF" stroke={ink} strokeWidth="0.7" />
-                <circle className="cc-pupil" cx="48" cy="52.2" r="1.9" fill="#24150F" />
-                <path d="M42.2 52.4 Q47.5 48.4 53.3 52" fill="none" stroke={ink} strokeWidth="1.3" strokeLinecap="round" />
+                <path d="M42.8 53.4 Q47.8 51.2 52.8 53 Q47.8 55.2 42.8 53.4 Z" fill="#F4ECE6" stroke="#2B1712" strokeWidth="0.6" />
+                <circle className="cc-pupil" cx="48.2" cy="53.4" r="1.75" fill="#1C100B" />
+                <path d="M42.4 53.2 Q47.8 50.3 53.2 52.7" fill="none" stroke="#2B1712" strokeWidth="1.7" strokeLinecap="round" />
+                <path d="M43.5 51.2 Q48 49.6 52.5 51" fill="none" stroke="#A9714C" strokeWidth="0.8" strokeLinecap="round" />
               </g>
               <g className="cc-eye">
-                <path d="M67 52.3 Q72.5 49 77.5 52.5 Q72.5 54.6 67 52.3 Z" fill="#FFFFFF" stroke={ink} strokeWidth="0.7" />
-                <circle className="cc-pupil" cx="72" cy="52.2" r="1.9" fill="#24150F" />
-                <path d="M66.7 52 Q72.5 48.4 77.8 52.4" fill="none" stroke={ink} strokeWidth="1.3" strokeLinecap="round" />
+                <path d="M67.2 53 Q72.2 51.2 77.2 53.4 Q72.2 55.2 67.2 53 Z" fill="#F4ECE6" stroke="#2B1712" strokeWidth="0.6" />
+                <circle className="cc-pupil" cx="71.8" cy="53.4" r="1.75" fill="#1C100B" />
+                <path d="M66.8 52.7 Q72.2 50.3 77.6 53.2" fill="none" stroke="#2B1712" strokeWidth="1.7" strokeLinecap="round" />
+                <path d="M67.5 51 Q72 49.6 76.5 51.2" fill="none" stroke="#A9714C" strokeWidth="0.8" strokeLinecap="round" />
               </g>
             </g>
 
-            {/* Broad nose, cheeks, light stubble shadow */}
-            <path d="M58.5 55 L57.5 63" fill="none" stroke="#A9714C" strokeWidth="0.9" strokeLinecap="round" />
-            <path d="M54.5 64.5 Q56 67.2 58.5 66.3 Q60 67.6 61.5 66.3 Q64 67.2 65.5 64.5" fill="none" stroke={ink} strokeWidth="1.1" strokeLinecap="round" />
-            <ellipse cx="44" cy="63" rx="4.5" ry="2.6" fill="#D96E5A" opacity="0.22" />
-            <ellipse cx="76" cy="63" rx="4.5" ry="2.6" fill="#D96E5A" opacity="0.22" />
-            <path d="M48 76 Q60 85 72 76 Q66 82 60 82.5 Q54 82 48 76 Z" fill="#8C5A3C" opacity="0.18" />
+            <path d="M43.5 55.6 Q48 57.4 52.5 55.6 M67.5 55.6 Q72 57.4 76.5 55.6" fill="none" stroke="#9A6343" strokeWidth="0.8" strokeLinecap="round" opacity="0.8" />
+            {/* Broad nose, hard smile lines, stubble shadow */}
+            <path d="M58.5 55.5 L57.4 63.2" fill="none" stroke="#A9714C" strokeWidth="0.9" strokeLinecap="round" />
+            <path d="M54 64.6 Q55.6 67.6 58.4 66.5 Q60 67.8 61.6 66.5 Q64.4 67.6 66 64.6" fill="none" stroke="#2B1712" strokeWidth="1.2" strokeLinecap="round" />
+            <path d="M51.5 66.5 Q49.5 70 50.2 73.5 M68.5 66.5 Q70.5 70 69.8 73.5" fill="none" stroke="#A3694A" strokeWidth="0.8" strokeLinecap="round" />
+            <path d="M42 70 C44 79 51 85.5 60 85.8 C69 85.5 76 79 78 70 C75 77 68 81.5 60 81.8 C52 81.5 45 77 42 70 Z" fill="#5B3A2A" opacity="0.2" />
+            <path d="M52 69.4 Q60 67.6 68 69.4 L67.2 70.6 Q60 69 52.8 70.6 Z" fill="#5B3A2A" opacity="0.25" />
+            <ellipse cx="60" cy="80.5" rx="5" ry="2.4" fill="#5B3A2A" opacity="0.18" />
 
-            {/* Mouth: a calm closed-mouth smile, and an open mouth used while talking */}
+            {/* Mouth: flat and firm with a slight one-sided smirk; open mouth used while talking */}
             <g className="cc-smile">
-              <path d="M50.5 72 Q55 70.4 60 71.2 Q65 70.4 69.5 72 Q65 75.6 60 75.6 Q55 75.6 50.5 72 Z" fill="#B0705A" />
-              <path d="M50 72 Q60 74.6 70 72" fill="none" stroke={ink} strokeWidth="1.2" strokeLinecap="round" />
-              <path d="M50 72 Q49.2 71.2 49 70.4 M70 72 Q70.8 71.2 71 70.4" fill="none" stroke={ink} strokeWidth="0.9" strokeLinecap="round" />
+              <path d="M52 73.2 Q56 72.2 60 72.6 Q64.5 72 68.6 72.5 Q64.5 76 60 76 Q55.5 76 52 73.2 Z" fill="#A76A55" />
+              <path d="M51.5 73.2 Q57 73.9 62.5 73.5 Q66.6 73.2 68.8 72.4" fill="none" stroke="#2B1712" strokeWidth="1.4" strokeLinecap="round" />
+              <path d="M68.8 72.4 Q69.6 72 70 71.3" fill="none" stroke="#2B1712" strokeWidth="0.8" strokeLinecap="round" />
             </g>
             <g className="cc-talk">
-              <path d="M52.5 71.5 Q60 69.6 67.5 71.5 Q66 78.5 60 78.5 Q54 78.5 52.5 71.5 Z" fill="#5A1F1A" stroke={ink} strokeWidth="1" />
-              <path d="M54 71.8 Q60 70.6 66 71.8 L65.4 73 Q60 72.2 54.6 73 Z" fill="#FFFFFF" />
-              <ellipse cx="60" cy="76.6" rx="3.6" ry="1.4" fill="#B5544A" />
-            </g>
-          </g>
-
-          {/* Waving hand (our left, clear of the online dot) */}
-          <g className="cc-hand">
-            <path d="M6 124 L12 99 L25 101 L27 124 Z" fill={`url(#${polo})`} stroke={ink} strokeWidth="0.9" />
-            <g fill="#C68E63" stroke={ink} strokeWidth="0.6">
-              <ellipse cx="18" cy="92" rx="7" ry="8" />
-              <rect x="11.6" y="78.5" width="3.1" height="11" rx="1.55" />
-              <rect x="15.3" y="76.5" width="3.1" height="12" rx="1.55" />
-              <rect x="19" y="77.5" width="3.1" height="11" rx="1.55" />
-              <rect x="22.4" y="80.5" width="2.9" height="9.5" rx="1.45" />
-              <rect x="8.6" y="86" width="3" height="8" rx="1.5" transform="rotate(-38 10.1 92)" />
+              <path d="M53.5 72.2 Q60 71 66.5 72.2 Q65.2 77.2 60 77.2 Q54.8 77.2 53.5 72.2 Z" fill="#4A1A15" stroke="#2B1712" strokeWidth="1" />
+              <path d="M55 72.5 Q60 71.7 65 72.5 L64.5 73.4 Q60 72.9 55.5 73.4 Z" fill="#F4ECE6" />
             </g>
           </g>
         </g>

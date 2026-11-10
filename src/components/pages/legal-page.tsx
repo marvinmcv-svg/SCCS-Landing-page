@@ -17,12 +17,12 @@ const SECTIONS: { id: string; title: L; paragraphs: L[] }[] = [
         es: "Cuando envía el formulario de consulta en la página de Admisiones, recibimos los datos que usted ingresa: nombre, correo, teléfono (opcional), el grado de interés, una fecha preferida para la visita (opcional) y su mensaje. La Oficina de Admisiones los usa solo para responderle y coordinar su visita. No los vendemos ni los compartimos.",
       },
       {
-        en: "Marvz AI, the virtual receptionist, is an AI assistant. The questions you type are sent to our AI provider to write an answer and are not used to identify you. Please do not share sensitive personal information in the chat; for anything about a specific child, contact the school directly.",
-        es: "Marvz AI, el recepcionista virtual, es un asistente de inteligencia artificial. Las preguntas que escribe se envían a nuestro proveedor de IA para redactar una respuesta y no se usan para identificarle. Le pedimos no compartir información personal sensible en el chat; para cualquier tema sobre un niño en particular, comuníquese directamente con el colegio.",
+        en: "Mr. Marvin, the virtual receptionist, is an AI assistant. The questions you type are sent to our AI provider to write an answer and are not used to identify you. Please do not share sensitive personal information in the chat; for anything about a specific child, contact the school directly.",
+        es: "Mr. Marvin, el recepcionista virtual, es un asistente de inteligencia artificial. Las preguntas que escribe se envían a nuestro proveedor de IA para redactar una respuesta y no se usan para identificarle. Le pedimos no compartir información personal sensible en el chat; para cualquier tema sobre un niño en particular, comuníquese directamente con el colegio.",
       },
       {
-        en: "This website does not use advertising or tracking cookies. Your browser remembers your language choice (English or Español) on your own device, and the site remembers for the current visit that you have seen Marvz AI's greeting.",
-        es: "Este sitio no usa cookies publicitarias ni de seguimiento. Su navegador recuerda en su propio dispositivo el idioma que eligió (English o Español), y el sitio recuerda durante la visita que ya vio el saludo de Marvz AI.",
+        en: "This website does not use advertising or tracking cookies. Your browser remembers your language choice (English or Español) on your own device, and the site remembers for the current visit that you have seen Mr. Marvin's greeting.",
+        es: "Este sitio no usa cookies publicitarias ni de seguimiento. Su navegador recuerda en su propio dispositivo el idioma que eligió (English o Español), y el sitio recuerda durante la visita que ya vio el saludo de Mr. Marvin.",
       },
       {
         en: `To see, correct or delete the information you sent us, write to ${SITE.email}.`,
@@ -35,8 +35,8 @@ const SECTIONS: { id: string; title: L; paragraphs: L[] }[] = [
     title: { en: "Terms of use", es: "Términos de uso" },
     paragraphs: [
       {
-        en: "This website gives general information about Santa Cruz Cooperative School. Official decisions on admission, enrollment, fees and policies come from the school's offices, not from this website or from Marvz AI's answers.",
-        es: "Este sitio ofrece información general sobre Santa Cruz Cooperative School. Las decisiones oficiales sobre admisión, inscripción, costos y políticas provienen de las oficinas del colegio, no de este sitio ni de las respuestas de Marvz AI.",
+        en: "This website gives general information about Santa Cruz Cooperative School. Official decisions on admission, enrollment, fees and policies come from the school's offices, not from this website or from Mr. Marvin's answers.",
+        es: "Este sitio ofrece información general sobre Santa Cruz Cooperative School. Las decisiones oficiales sobre admisión, inscripción, costos y políticas provienen de las oficinas del colegio, no de este sitio ni de las respuestas de Mr. Marvin.",
       },
       {
         en: "Photographs of students and staff belong to the SCCS community and are shared here to tell the school's story. Please do not copy or reuse them without the school's permission.",

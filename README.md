@@ -85,13 +85,13 @@ How it works: the content in `src/data/*` is the default. Edits are stored as a 
 
 The home page follows two design skills installed in `.claude/skills/`: **taste-skill** (Leonxlnx, MIT) and **apple-design** (Emil Kowalski, MIT). Hero photographs run at their own brightness, with shade only under the words. Motion is GSAP: masked headline reveals, staggered section entrances, image mask reveals, parallax, count-ups, marquees and slow-moving navy gradient fields (`src/components/home/motion.tsx`). Everything is static under `prefers-reduced-motion`.
 
-## Marvz AI, the AI receptionist
+## Mr. Marvin, the AI receptionist
 
-The "Ask Marvz AI" button (also in ⌘K) opens a bilingual chat with an animated illustrated character (`src/components/sccs/carlita-character.tsx`: idle, wave, thinking and talking moods). The code still uses the original "carlita" file and route names (`/api/carlita`). `POST /api/carlita` streams answers grounded in the verified school facts and site map (`src/lib/carlita-knowledge.ts`) plus the full **Secondary Student / Family Handbook 2025-26** (`src/data/handbook.ts`) and the **Official Secondary Schedule 2026-27** (`src/data/schedule.ts`: grade timetables, teacher timetables, advisory groups and a class index).
+The "Ask Mr. Marvin" button (also in ⌘K) opens a bilingual chat with an animated illustrated character (`src/components/sccs/carlita-character.tsx`: idle, wave, thinking and talking moods). The code still uses the original "carlita" file and route names (`/api/carlita`). `POST /api/carlita` streams answers grounded in the verified school facts and site map (`src/lib/carlita-knowledge.ts`) plus the full **Secondary Student / Family Handbook 2025-26** (`src/data/handbook.ts`) and the **Official Secondary Schedule 2026-27** (`src/data/schedule.ts`: grade timetables, teacher timetables, advisory groups and a class index).
 
 - **NVIDIA (preferred):** set `NVIDIA_API_KEY` (from build.nvidia.com) in Vercel (Project → Settings → Environment Variables) and redeploy. Optional: `NVIDIA_MODEL` (default `nvidia/nemotron-3-ultra-550b-a55b`), `NVIDIA_THINKING=off` to turn off reasoning (faster, but less accurate on schedule lookups).
 - **Claude (alternative):** used when only `ANTHROPIC_API_KEY` is set.
-- **Without a key:** Marvz AI answers from a keyword FAQ (`src/lib/carlita-offline.ts`).
+- **Without a key:** Mr. Marvin answers from a keyword FAQ (`src/lib/carlita-offline.ts`).
 - **New handbook or schedule year:** replace the text in `src/data/handbook.ts` or `src/data/schedule.ts` with the new edition (the schedule is written out day by day and block by block, which keeps his lookups accurate). Never commit API keys; for local dev put them in `.env.local` (gitignored).
 
 ## Notes for review
