@@ -69,10 +69,10 @@ export function Stepper() {
   );
 }
 
-const inputCls =
+export const inputCls =
   "min-h-11 w-full rounded-xl border border-input bg-white px-4 py-2.5 text-sm text-charcoal outline-none transition-shadow placeholder:text-mist/70 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 aria-[invalid=true]:border-red-400";
 
-function Field({ id, label, hint, error, children }: { id: string; label: React.ReactNode; hint?: string; error?: string; children: React.ReactNode }) {
+export function Field({ id, label, hint, error, children }: { id: string; label: React.ReactNode; hint?: string; error?: string; children: React.ReactNode }) {
   return (
     <div>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-navy-900">

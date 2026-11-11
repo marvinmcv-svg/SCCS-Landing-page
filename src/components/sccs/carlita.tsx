@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useStaticMotion } from "@/lib/use-static-motion";
 import { ArrowUp, Square, X } from "lucide-react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { cn, EASE } from "@/lib/utils";
@@ -81,7 +82,8 @@ function RichText({ text }: { text: string }) {
 export function Carlita() {
   const { t, lang } = useLang();
   const c = t.carlita;
-  const reduce = useReducedMotion();
+  // Hydration-safe: false on the server and the first client render, so the markup matches.
+  const reduce = useStaticMotion();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");

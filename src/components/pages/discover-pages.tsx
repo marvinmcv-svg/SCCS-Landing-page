@@ -290,24 +290,38 @@ export function LeadershipPage() {
 /* ───────── /discover/careers ───────── */
 type OpeningT = (typeof CAREERS.openings)[number];
 
+const applyHref = (slug: string) => `/discover/careers/apply?role=${encodeURIComponent(slug)}`;
+
+/** A long requirements list makes one card much taller than its neighbours; such a card takes a full row, with the list beside the summary. */
+const isWide = (job: OpeningT) => job.points.length > 4;
+
 function OpeningCard({ job, index }: { job: OpeningT; index: number }) {
   const { tr } = useLang();
-  const subject = encodeURIComponent(`Application: ${job.title.en}`);
+  const wide = isWide(job);
   return (
-    <Reveal as="li" delay={(index % 3) * 0.06} className="h-full">
-      <article id={`job-${job.slug}`} className="flex h-full scroll-mt-28 flex-col rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-lg sm:p-7">
-        <div className="flex flex-wrap gap-2 text-xs font-semibold">
-          <span className="rounded-full bg-navy-100 px-3 py-1 text-navy-800">{tr(job.division)}</span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1 text-navy-900">
-            <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
-            {tr(job.start)}
-          </span>
+    <Reveal as="li" delay={(index % 3) * 0.06} className={cn("h-full", wide && "md:col-span-full")}>
+      {/* Wide cards become a two-column grid on large screens: summary and buttons on the left, requirements on the right. DOM order (summary, requirements, buttons) is the reading order on small screens. */}
+      <article
+        id={`job-${job.slug}`}
+        className={cn(
+          "flex h-full scroll-mt-28 flex-col rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-lg sm:p-7",
+          wide && "lg:grid lg:grid-cols-[1.15fr_1fr] lg:grid-rows-[1fr_auto] lg:gap-x-10 lg:p-9",
+        )}
+      >
+        <div className={cn(wide && "lg:col-start-1 lg:row-start-1")}>
+          <div className="flex flex-wrap gap-2 text-xs font-semibold">
+            <span className="rounded-full bg-navy-100 px-3 py-1 text-navy-800">{tr(job.division)}</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1 text-navy-900">
+              <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
+              {tr(job.start)}
+            </span>
+          </div>
+          <h4 className="font-display mt-4 text-xl font-semibold leading-snug text-navy-900 sm:text-2xl">{tr(job.title)}</h4>
+          <p className="mt-1 text-sm font-semibold text-crimson-600">{tr(job.detail)}</p>
+          <p className="mt-4 text-sm leading-relaxed text-mist">{tr(job.summary)}</p>
         </div>
-        <h4 className="font-display mt-4 text-xl font-semibold leading-snug text-navy-900 sm:text-2xl">{tr(job.title)}</h4>
-        <p className="mt-1 text-sm font-semibold text-crimson-600">{tr(job.detail)}</p>
-        <p className="mt-4 text-sm leading-relaxed text-mist">{tr(job.summary)}</p>
         {job.points.length > 0 && (
-          <ul className="mt-5 space-y-2 border-t border-border pt-5 text-sm text-navy-900/85">
+          <ul className={cn("mt-5 space-y-2 border-t border-border pt-5 text-sm text-navy-900/85", wide && "lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center lg:border-l lg:border-t-0 lg:py-2 lg:pl-10")}>
             {job.points.map((pt) => (
               <li key={pt.en} className="flex gap-2.5">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-crimson-600" aria-hidden="true" />
@@ -316,12 +330,12 @@ function OpeningCard({ job, index }: { job: OpeningT; index: number }) {
             ))}
           </ul>
         )}
-        <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6">
-          <a href={`mailto:jobs@sccs.edu.bo?subject=${subject}`} className={buttonStyles.primary}>
-            <Mail className="h-4 w-4" aria-hidden="true" />
+        <div className={cn("mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6", wide && "lg:col-start-1 lg:row-start-2")}>
+          <Link href={applyHref(job.slug)} className={buttonStyles.primary}>
             {tr(CAREERS.applyLabel)}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
             <span className="sr-only">: {tr(job.title)}</span>
-          </a>
+          </Link>
           {job.posting && (
             <a href={job.posting} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-navy-800 underline-offset-4 hover:text-crimson-600 hover:underline">
               <FileText className="h-4 w-4" aria-hidden="true" />
@@ -370,7 +384,7 @@ function Openings() {
               {g.label}
               <span className="rounded-full bg-navy-100 px-2 py-0.5 text-xs tracking-normal text-navy-800">{g.jobs.length}</span>
             </h3>
-            <ul className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <ul className={cn("mt-5 grid gap-5 md:grid-cols-2", g.id !== "leadership" && "lg:grid-cols-3")}>
               {g.jobs.map((job, i) => (
                 <OpeningCard key={job.slug} job={job} index={i} />
               ))}
@@ -384,10 +398,11 @@ function Openings() {
             <p className="font-semibold text-navy-900">{tr(CAREERS.yearRoundTitle)}</p>
             <p className="mt-1 text-sm text-mist">{tr(CAREERS.yearRound)}</p>
           </div>
-          <a href={`mailto:jobs@sccs.edu.bo?subject=${encodeURIComponent("Application: Substitute / Assistant Teacher")}`} className={cn(buttonStyles.outline, "shrink-0")}>
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            jobs@sccs.edu.bo
-          </a>
+          <Link href={applyHref("year-round")} className={cn(buttonStyles.outline, "shrink-0")}>
+            {tr(CAREERS.applyLabel)}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">: {tr(CAREERS.yearRoundTitle)}</span>
+          </Link>
         </div>
       </Reveal>
     </>
@@ -398,7 +413,7 @@ export function CareersPage() {
   const { tr, t } = useLang();
   return (
     <>
-      <PageHero photo={PAGE_PHOTOS.careers.hero} kicker={tr(CAREERS.kicker)} title={tr(CAREERS.title)} lede={tr(CAREERS.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/careers", label: tr(CAREERS.kicker) }]} imgPosition="object-[50%_40%]" />
+      <PageHero photo={PAGE_PHOTOS.careers.hero} kicker={tr(CAREERS.kicker)} title={tr(CAREERS.title)} lede={tr(CAREERS.lede)} crumbs={[useDiscoverCrumb(), { href: "/discover/careers", label: tr(CAREERS.kicker) }]} imgPosition="object-[50%_55%]" />
       <Section id="openings">
         <Container>
           <Openings />
@@ -419,10 +434,16 @@ export function CareersPage() {
                   </li>
                 ))}
               </ol>
-              <a href="mailto:jobs@sccs.edu.bo" className={cn(buttonStyles.gold, "mt-7")}>
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                jobs@sccs.edu.bo
-              </a>
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <Link href="/discover/careers/apply" className={buttonStyles.gold}>
+                  {tr(CAREERS.applyOnline)}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+                <a href="mailto:jobs@sccs.edu.bo" className={buttonStyles.outlineDark}>
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                  jobs@sccs.edu.bo
+                </a>
+              </div>
               <p className="mt-8 text-sm font-semibold text-white">{tr(CAREERS.partnersTitle)}</p>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {CAREERS.partners.map((p) => (

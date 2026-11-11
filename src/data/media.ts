@@ -124,6 +124,7 @@ export const media = {
   stuco2: p("stuco-2", 1181, 561, "Student leaders planning around a table", "Líderes estudiantiles planificando alrededor de una mesa"),
   stuco3: p("stuco-3", 1181, 777, "Students gather in the gardens for a council activity", "Estudiantes reunidos en los jardines para una actividad del consejo"),
   bookFair: p("book-fair", 763, 1114, "A young reader shows off a new book from the Book Fair", "Un pequeño lector muestra su nuevo libro de la Feria del Libro"),
+  facultyTeam: p("faculty-team", 1600, 900, "SCCS faculty and staff cheer together by the campus pond", "Docentes y personal de SCCS celebran juntos junto a la laguna del campus"),
   teacherEs: p("teacher-es", 1200, 1600, "A teacher works with elementary students on the classroom rug", "Un maestro trabaja con estudiantes de Elementary sobre la alfombra del aula"),
 
   // Faculty spotlights (Instagram "Meet the People Behind the Jaguars" series)

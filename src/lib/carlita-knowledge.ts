@@ -103,7 +103,7 @@ ${LEADERSHIP.lede.en}
 - ${CAREERS.openingsTitle.en} ${CAREERS.postedOn.en}. Full list and official postings: /discover/careers#openings.
 ${CAREERS.openings.length ? bullet(CAREERS.openings.map((j) => `${j.title.en} (${j.detail.en}; ${j.division.en}; ${j.start.en}): ${j.summary.en}`)) : `- ${CAREERS.noOpenings.en}`}
 - ${CAREERS.yearRound.en}
-- How to apply: email jobs@sccs.edu.bo with the position in the subject line, including: ${CAREERS.packet.map((p) => p.en.toLowerCase()).join("; ")}.
+- How to apply: use the online application form at /discover/careers/apply (pick the position, attach a résumé, write a letter of interest), or email jobs@sccs.edu.bo with the position in the subject line, including: ${CAREERS.packet.map((p) => p.en.toLowerCase()).join("; ")}.
 - SCCS also recruits through ${CAREERS.partners.map((p) => p.name).join(", ")}.
 - What SCCS looks for: ${CAREERS.qualifications.map((q) => q.en).join("; ")}.
 

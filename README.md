@@ -26,6 +26,8 @@ Also: `/legal` (privacy, terms of use, accessibility), ⌘K / Ctrl+K command pal
 
 **API:** `POST /api/inquiries` checks the input with zod, limits each IP to 5 requests per 10 minutes, and treats a filled honeypot field as success without storing anything. It returns `201` for a valid inquiry and `400` for invalid input. Each inquiry is saved to the Vercel Blob store (or `.data/inquiries.json` in local development) and listed for staff at **/admin/inquiries**. Email notification is not set up yet.
 
+**API:** `POST /api/applications` takes the job application form on `/discover/careers/apply` (multipart: the fields plus a PDF or Word résumé up to 4 MB, checked by its first bytes, not its name). Same rate limit and honeypot as inquiries. Each application and its résumé are saved to the Vercel Blob store (or `.data/applications/` locally) and listed for staff at **/admin/applications**.
+
 ## Where content lives
 
 All copy and data are typed modules. You can edit them without touching any component.

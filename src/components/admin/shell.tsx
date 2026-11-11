@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ExternalLink, Images, Inbox, LayoutGrid, LogOut } from "lucide-react";
+import { Briefcase, ExternalLink, Images, Inbox, LayoutGrid, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Crest } from "@/components/sccs/sccs-shared";
 import type { CollectionMeta } from "./editor";
@@ -38,6 +38,10 @@ export function AdminShell({ collections: all, storage, children }: { collection
           <Link href="/admin/inquiries" className={link(pathname === "/admin/inquiries")}>
             <Inbox className="h-4 w-4" aria-hidden="true" />
             Admissions inquiries
+          </Link>
+          <Link href="/admin/applications" className={link(pathname === "/admin/applications")}>
+            <Briefcase className="h-4 w-4" aria-hidden="true" />
+            Job applications
           </Link>
           <p className="mt-5 px-3 pb-1 text-xs font-bold text-mist">Photos</p>
           <Link href="/admin/photos" className={link(pathname === "/admin/photos")}>

@@ -55,7 +55,7 @@ export const PAGE_PHOTOS = {
     campusMosaic: [media.dCampusTower, media.library, media.dSoccerAction, media.dFgFolkDance],
   },
   leadership: { hero: media.board, boardPhoto: media.board },
-  careers: { hero: media.teacherEs },
+  careers: { hero: media.facultyTeam },
 
   admissions: { hero: media.campusLawn, besideIntro: media.esLunchTrio },
   contact: { hero: media.campusGardens, visitUs: media.campusLawn },
