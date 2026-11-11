@@ -199,6 +199,30 @@ export const LEADERSHIP = {
   },
 };
 
+export type Opening = {
+  /** Stable key, also used as the in-page anchor (#job-<slug>). */
+  slug: string;
+  /** "leadership" or "faculty": which list the role appears in. */
+  group: string;
+  title: L;
+  /** Subject or level detail under the title, e.g. "Up to AP Calculus". */
+  detail: L;
+  division: L;
+  start: L;
+  summary: L;
+  points: L[];
+  /** The official posting (PDF on sccs.edu.bo). */
+  posting: string;
+};
+
+const POSTINGS = "https://sccs.edu.bo/wp-content/uploads/2026/10/";
+const FACULTY_PDF = `${POSTINGS}SCCS-Faculty-Openings-2027%E2%80%932028.pdf`;
+const FACULTY_POINTS: L[] = [
+  { en: "Bachelor's degree and full proficiency in English", es: "Título universitario y dominio pleno del inglés" },
+  { en: "At least three years in a comparable school", es: "Al menos tres años en un colegio comparable" },
+  { en: "Willing to coach or advise an after-school activity", es: "Disposición para dirigir o asesorar una actividad extracurricular" },
+];
+
 export const CAREERS = {
   kicker: { en: "Work at SCCS", es: "Trabaja en SCCS" },
   title: { en: "Teach where it matters.", es: "Enseña donde importa." },
@@ -212,11 +236,184 @@ export const CAREERS = {
     { title: { en: "A real community", es: "Una comunidad real" }, text: { en: "Mother's Club welcomes, Friendship Games, and colleagues who become family.", es: "Bienvenidas del Mother's Club, Friendship Games y colegas que se vuelven familia." } },
     { title: { en: "Santa Cruz living", es: "Vivir en Santa Cruz" }, text: { en: "Bolivia's dynamic economic hub — tropical, warm, and welcoming.", es: "El dinámico centro económico de Bolivia — tropical, cálido y acogedor." } },
   ] satisfies Item[],
+
+  openingsKicker: { en: "Open positions", es: "Vacantes abiertas" },
+  openingsTitle: { en: "We're hiring for 2027–2028.", es: "Estamos contratando para 2027–2028." },
+  openingsIntro: {
+    en: "Current openings, as posted on sccs.edu.bo and @sccsjaguars. Each role links to its official posting.",
+    es: "Vacantes vigentes, tal como se publicaron en sccs.edu.bo y @sccsjaguars. Cada puesto enlaza a su publicación oficial.",
+  },
+  postedOn: { en: "Posted October 2026", es: "Publicado en octubre de 2026" },
+  announcement: "https://www.instagram.com/p/De2JawTuy4w/",
+  leadershipLabel: { en: "Leadership", es: "Liderazgo" },
+  facultyLabel: { en: "Faculty", es: "Docentes" },
+  openings: [
+    {
+      slug: "elementary-principal",
+      group: "leadership",
+      title: { en: "Elementary School Principal", es: "Director(a) de Primaria" },
+      detail: { en: "Leadership opportunity", es: "Oportunidad de liderazgo" },
+      division: { en: "Elementary School", es: "Primaria" },
+      start: { en: "2027–2028 school year", es: "Año escolar 2027–2028" },
+      summary: {
+        en: "Inspire learning. Empower students. Build a strong community. Lead the Elementary division of a PK–12 American international school.",
+        es: "Inspira el aprendizaje. Empodera a los estudiantes. Construye una comunidad sólida. Dirige la sección de Primaria de un colegio internacional americano PK–12.",
+      },
+      points: [
+        { en: "Lead meaningful learning", es: "Liderar un aprendizaje significativo" },
+        { en: "Support a dedicated team", es: "Acompañar a un equipo comprometido" },
+        { en: "Nurture student growth and well-being", es: "Cuidar el crecimiento y el bienestar de los estudiantes" },
+        { en: "Be part of an engaged community", es: "Ser parte de una comunidad activa" },
+      ],
+      posting: `${POSTINGS}Elementary-Principal.pdf`,
+    },
+    {
+      slug: "high-school-principal",
+      group: "leadership",
+      title: { en: "High School Principal", es: "Director(a) de Secundaria Superior" },
+      detail: { en: "Leadership opportunity", es: "Oportunidad de liderazgo" },
+      division: { en: "High School", es: "High School" },
+      start: { en: "2027–2028 school year", es: "Año escolar 2027–2028" },
+      summary: {
+        en: "Inspire learning. Empower students. Build a strong community. Lead the High School through the AP program, the Dual Diploma and university admissions.",
+        es: "Inspira el aprendizaje. Empodera a los estudiantes. Construye una comunidad sólida. Dirige la High School con el programa AP, el Doble Diploma y la admisión universitaria.",
+      },
+      points: [
+        { en: "Lead meaningful learning", es: "Liderar un aprendizaje significativo" },
+        { en: "Support a dedicated team", es: "Acompañar a un equipo comprometido" },
+        { en: "Nurture student growth and well-being", es: "Cuidar el crecimiento y el bienestar de los estudiantes" },
+        { en: "Be part of an engaged community", es: "Ser parte de una comunidad activa" },
+      ],
+      posting: `${POSTINGS}High-School-Principal.pdf`,
+    },
+    {
+      slug: "sss-coordinator",
+      group: "leadership",
+      title: { en: "Student Support Services Coordinator", es: "Coordinador(a) de Servicios de Apoyo Estudiantil" },
+      detail: { en: "Learning support · MTSS", es: "Apoyo al aprendizaje · MTSS" },
+      division: { en: "PK–12", es: "PK–12" },
+      start: { en: "2027–2028 school year", es: "Año escolar 2027–2028" },
+      summary: {
+        en: "Lead and coordinate Student Support Services (SSS) so students with diverse learning needs receive appropriate support, make progress, and develop independence. Work with teachers, families, and school leaders to strengthen inclusive practices and SCCS's Multi-Tiered System of Supports (MTSS).",
+        es: "Lidera y coordina los Servicios de Apoyo Estudiantil (SSS) para que los estudiantes con necesidades de aprendizaje diversas reciban el apoyo adecuado, progresen y ganen autonomía. Trabaja con docentes, familias y directivos para fortalecer las prácticas inclusivas y el Sistema de Apoyos de Múltiples Niveles (MTSS) de SCCS.",
+      },
+      points: [
+        { en: "Bachelor's degree in special education, psychopedagogy, or a related field", es: "Licenciatura en educación especial, psicopedagogía o un área afín" },
+        { en: "Recognized teaching qualification and relevant specialist preparation", es: "Título docente reconocido y formación especializada pertinente" },
+        { en: "At least three years of relevant school experience, including coordination or teacher leadership", es: "Al menos tres años de experiencia escolar pertinente, incluida coordinación o liderazgo docente" },
+        { en: "Strong knowledge of support planning, interventions, progress monitoring, and collaborative communication", es: "Sólido conocimiento de planificación de apoyos, intervenciones, seguimiento del progreso y comunicación colaborativa" },
+        { en: "Apply with your résumé, cover letter and salary expectations", es: "Postula con tu currículum, carta de presentación y expectativa salarial" },
+      ],
+      posting: `${POSTINGS}SST.pdf`,
+    },
+    {
+      slug: "secondary-counselor",
+      group: "faculty",
+      title: { en: "Secondary Counselor", es: "Consejero(a) de Secundaria" },
+      detail: { en: "Middle & High School counseling", es: "Consejería de Middle y High School" },
+      division: { en: "Secondary", es: "Secundaria" },
+      start: { en: "Starts January 2027", es: "Inicia en enero de 2027" },
+      summary: {
+        en: "Join the Student Success Team supporting secondary students' academic, social-emotional and post-secondary growth.",
+        es: "Únete al Student Success Team para acompañar el crecimiento académico, socioemocional y postsecundario de los estudiantes de secundaria.",
+      },
+      points: FACULTY_POINTS.map((p) => ({ ...p })),
+      posting: FACULTY_PDF,
+    },
+    {
+      slug: "secondary-social-studies",
+      group: "faculty",
+      title: { en: "Secondary Social Studies Teacher", es: "Docente de Estudios Sociales" },
+      detail: { en: "Middle School", es: "Middle School" },
+      division: { en: "Secondary", es: "Secundaria" },
+      start: { en: "2027–2028 school year", es: "Año escolar 2027–2028" },
+      summary: {
+        en: "Teach Middle School Social Studies within our C3 Framework curriculum.",
+        es: "Enseña Estudios Sociales en Middle School dentro de nuestro currículo basado en el Marco C3.",
+      },
+      points: FACULTY_POINTS.map((p) => ({ ...p })),
+      posting: FACULTY_PDF,
+    },
+    {
+      slug: "secondary-science",
+      group: "faculty",
+      title: { en: "Secondary Science Teacher", es: "Docente de Ciencias" },
+      detail: { en: "AP Chemistry / Biology", es: "AP Química / Biología" },
+      division: { en: "Secondary", es: "Secundaria" },
+      start: { en: "2027–2028 school year", es: "Año escolar 2027–2028" },
+      summary: {
+        en: "Teach Chemistry and Biology through AP level in our four science labs, following NGSS.",
+        es: "Enseña Química y Biología hasta nivel AP en nuestros cuatro laboratorios de ciencias, siguiendo NGSS.",
+      },
+      points: FACULTY_POINTS.map((p) => ({ ...p })),
+      posting: FACULTY_PDF,
+    },
+    {
+      slug: "upper-elementary-homeroom",
+      group: "faculty",
+      title: { en: "Upper Elementary Homeroom Teacher", es: "Docente de Aula de Primaria Superior" },
+      detail: { en: "Upper Elementary", es: "Primaria superior" },
+      division: { en: "Elementary School", es: "Primaria" },
+      start: { en: "2027–2028 school year", es: "Año escolar 2027–2028" },
+      summary: {
+        en: "Lead an upper elementary homeroom with Common Core literacy and math and standards-based grading.",
+        es: "Dirige un aula de primaria superior con lectoescritura y matemáticas Common Core y calificación por estándares.",
+      },
+      points: FACULTY_POINTS.map((p) => ({ ...p })),
+      posting: FACULTY_PDF,
+    },
+    {
+      slug: "secondary-math",
+      group: "faculty",
+      title: { en: "Secondary Math Teacher", es: "Docente de Matemáticas" },
+      detail: { en: "Up to AP Calculus", es: "Hasta AP Cálculo" },
+      division: { en: "Secondary", es: "Secundaria" },
+      start: { en: "2027–2028 school year", es: "Año escolar 2027–2028" },
+      summary: {
+        en: "Teach secondary mathematics through AP Calculus at an official College Board AP testing center.",
+        es: "Enseña matemáticas de secundaria hasta AP Cálculo en un centro oficial de exámenes AP del College Board.",
+      },
+      points: FACULTY_POINTS.map((p) => ({ ...p })),
+      posting: FACULTY_PDF,
+    },
+  ] satisfies Opening[],
+  yearRoundTitle: { en: "Open year-round", es: "Abiertas todo el año" },
+  yearRound: {
+    en: "We welcome applications for substitute teachers, short-term replacements and assistant teaching positions at any time.",
+    es: "Recibimos postulaciones para docentes suplentes, reemplazos de corto plazo y asistentes de aula en cualquier momento.",
+  },
+  applyLabel: { en: "Apply", es: "Postular" },
+  postingLabel: { en: "Official posting (PDF)", es: "Publicación oficial (PDF)" },
+  noOpenings: {
+    en: "There are no open positions right now. Follow @sccsjaguars for the next announcement, or send us your résumé for future openings.",
+    es: "No hay vacantes abiertas en este momento. Sigue a @sccsjaguars para el próximo anuncio o envíanos tu currículum para futuras vacantes.",
+  },
+
   applyTitle: { en: "How to apply", es: "Cómo postular" },
   applyBody: {
-    en: "Send your résumé, a cover letter, and a list of references to jobs@sccs.edu.bo. Current openings are announced on our Instagram, @sccsjaguars.",
-    es: "Envía tu currículum, una carta de presentación y una lista de referencias a jobs@sccs.edu.bo. Las vacantes vigentes se anuncian en nuestro Instagram, @sccsjaguars.",
+    en: "Email jobs@sccs.edu.bo with the position in the subject line. Please include:",
+    es: "Escribe a jobs@sccs.edu.bo con el puesto en el asunto. Incluye:",
   },
+  packet: [
+    { en: "A letter of interest explaining your fit for the position", es: "Una carta de interés que explique por qué encajas en el puesto" },
+    { en: "Your résumé", es: "Tu currículum" },
+    { en: "Academic transcripts", es: "Récords académicos" },
+    { en: "Three professional references, with phone numbers or emails", es: "Tres referencias profesionales, con teléfono o correo" },
+  ] satisfies L[],
+  partnersTitle: { en: "Also recruiting through", es: "También reclutamos a través de" },
+  partners: [
+    { name: "ISS EduRecruit", url: "https://www.iss.edu/services/edurecruit" },
+    { name: "Search Associates", url: "https://www.searchassociates.com/Candidates/Get-Started.aspx" },
+    { name: "AMISA", url: "https://www.amisa.us/new-applicants" },
+  ],
+  qualificationsTitle: { en: "What we look for", es: "Lo que buscamos" },
+  qualifications: [
+    { en: "Full proficiency in English", es: "Dominio pleno del inglés" },
+    { en: "A bachelor's degree from a recognized university; over half our faculty hold advanced degrees", es: "Título de una universidad reconocida; más de la mitad de nuestros docentes tiene posgrado" },
+    { en: "At least three years' experience in a comparable school", es: "Al menos tres años de experiencia en un colegio comparable" },
+    { en: "Willingness to coach and advise after-school sports and activities", es: "Disposición para dirigir y asesorar deportes y actividades extracurriculares" },
+    { en: "A commitment to lifelong learning", es: "Compromiso con el aprendizaje continuo" },
+  ] satisfies L[],
 };
 
 export const CURRICULUM = {

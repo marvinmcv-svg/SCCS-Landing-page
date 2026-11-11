@@ -48,9 +48,9 @@ const INTENTS: Intent[] = [
     es: "La seguridad es primero: política de protección infantil de tolerancia cero revisada cada año, certificación anual para todo el personal, prácticas restaurativas, aprendizaje socioemocional CASEL y una médica y enfermera de tiempo completo en el campus. Ante cualquier inquietud, llama al +591 3 3530808.",
   },
   {
-    keys: ["job", "career", "work", "trabaj", "empleo", "vacante", "teach"],
-    en: "Send your résumé, a cover letter, and references to jobs@sccs.edu.bo. Current openings are posted on Instagram, @sccsjaguars.",
-    es: "Envía tu currículum, carta de presentación y referencias a jobs@sccs.edu.bo. Las vacantes se publican en Instagram, @sccsjaguars.",
+    keys: ["job", "career", "work", "hiring", "position", "opening", "trabaj", "empleo", "vacante", "puesto", "teach"],
+    en: "We're hiring for 2027–2028: Elementary and High School Principals, a Student Support Services Coordinator, a Secondary Counselor (from January 2027), and teachers for MS Social Studies, AP Chemistry/Biology, Upper Elementary and Secondary Math. See every role at /discover/careers, then email jobs@sccs.edu.bo with a letter of interest, résumé, transcripts and three references.",
+    es: "Estamos contratando para 2027–2028: Directores de Primaria y High School, un(a) Coordinador(a) de Apoyo Estudiantil, un(a) Consejero(a) de Secundaria (desde enero de 2027) y docentes de Estudios Sociales de MS, AP Química/Biología, Primaria Superior y Matemáticas. Mira cada puesto en /discover/careers y escribe a jobs@sccs.edu.bo con tu carta de interés, currículum, récords académicos y tres referencias.",
   },
   {
     keys: ["transfer", "abroad", "exterior", "extranjero", "moving", "transferencia"],

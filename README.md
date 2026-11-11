@@ -33,7 +33,7 @@ All copy and data are typed modules. You can edit them without touching any comp
 | File | Contents |
 |---|---|
 | `src/data/dictionary.ts` | Shared UI and home-page copy (EN + ES) |
-| `src/data/pages.ts` | Inner-page copy: history, safety, campus, leadership, careers, curriculum, support, contact, FAQ |
+| `src/data/pages.ts` | Inner-page copy: history, safety, campus, leadership, careers (including the open positions in `CAREERS.openings`), curriculum, support, contact, FAQ |
 | `src/data/experiences.ts` | The six Jaguar Experience deep pages |
 | `src/data/traditions.ts` | The nine Beyond the Classroom pages |
 | `src/data/sccs-content.ts` | News, events, team, matriculation table, Instagram grid |
@@ -62,6 +62,7 @@ The old site's stock photos (generic classroom images) were deliberately left ou
 - School facts: founding date, history, accreditation, contact details, admissions process, honor-roll rules, NHS/NJHS criteria, and La Palette pricing.
 - The Board of Directors roster and the Director's welcome (taken from sccs.edu.bo).
 - The four Instagram-sourced news stories and the faculty spotlights.
+- The open positions on `/discover/careers` (from the October 2026 postings on sccs.edu.bo and @sccsjaguars). Staff can add, edit or remove roles in **/admin → Work at SCCS**.
 
 **Sample (from the master prompt, replace in `src/data/sccs-content.ts`):**
 - The 14-person team directory.

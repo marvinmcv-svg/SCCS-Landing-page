@@ -7,7 +7,7 @@
  * The text is deterministic for a given version of the site content, so the prompt
  * cache stays warm across requests and refreshes when the admin edits the facts.
  */
-import { ADMISSIONS_FAQ, CAMPUS, CURRICULUM, DUAL_DIPLOMA, HISTORY, LEADERSHIP, LEADERSHIP_HONORS, SAFETY, SUPPORT } from "@/data/pages";
+import { ADMISSIONS_FAQ, CAMPUS, CAREERS, CURRICULUM, DUAL_DIPLOMA, HISTORY, LEADERSHIP, LEADERSHIP_HONORS, SAFETY, SUPPORT } from "@/data/pages";
 import { EXPERIENCES } from "@/data/experiences";
 import { TRADITIONS } from "@/data/traditions";
 import { dictionaries } from "@/data/dictionary";
@@ -98,6 +98,14 @@ ${HISTORY.chapters.map((c) => `- ${c.year}: ${c.body.en}`).join("\n")}
 ## Governance
 ${LEADERSHIP.lede.en}
 - Board of Directors: ${LEADERSHIP.board.map((b) => `${b.name} (${b.role.en})`).join(", ")}.
+
+## Working at SCCS (jobs)
+- ${CAREERS.openingsTitle.en} ${CAREERS.postedOn.en}. Full list and official postings: /discover/careers#openings.
+${CAREERS.openings.length ? bullet(CAREERS.openings.map((j) => `${j.title.en} (${j.detail.en}; ${j.division.en}; ${j.start.en}): ${j.summary.en}`)) : `- ${CAREERS.noOpenings.en}`}
+- ${CAREERS.yearRound.en}
+- How to apply: email jobs@sccs.edu.bo with the position in the subject line, including: ${CAREERS.packet.map((p) => p.en.toLowerCase()).join("; ")}.
+- SCCS also recruits through ${CAREERS.partners.map((p) => p.name).join(", ")}.
+- What SCCS looks for: ${CAREERS.qualifications.map((q) => q.en).join("; ")}.
 
 ## Website map (link families to the right page)
 ${PILLARS.map((p) => p.children.map((c) => `- ${c.href}: ${c.label.en} (${c.blurb.en})`).join("\n")).join("\n")}

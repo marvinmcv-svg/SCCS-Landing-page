@@ -60,7 +60,7 @@ export const COLLECTIONS: CollectionDef[] = [
   { id: "accreditations", group: "Discover SCCS", label: "Accreditations & memberships", description: "Cognia, AMISA, AAIE and Yondr: the text and links shown with each badge.", href: "/discover/school-profile", target: ACCREDITATIONS },
   { id: "ministry", group: "Discover SCCS", label: "Ministry of Education line", description: "The Bolivian Ministry of Education recognition shown with the badges.", href: "/discover/school-profile", target: MINISTRY },
   { id: "leadership", group: "Discover SCCS", label: "Leadership & Governance", description: "The Director's welcome and the Board of Directors.", href: "/discover/leadership", target: LEADERSHIP },
-  { id: "careers", group: "Discover SCCS", label: "Work at SCCS", description: "The careers page.", href: "/discover/careers", target: CAREERS },
+  { id: "careers", group: "Discover SCCS", label: "Work at SCCS", description: "The careers page: open positions (add, edit or remove a role here), how to apply and what we look for.", href: "/discover/careers", target: CAREERS, enums: { group: ["leadership", "faculty"] } },
 
   { id: "faq", group: "Admissions & contact", label: "Admissions FAQ", description: "Questions families ask.", href: "/admissions#faq", target: ADMISSIONS_FAQ },
   { id: "contact", group: "Admissions & contact", label: "Contact page", description: "Offices, phone numbers, emails and hours.", href: "/contact", target: CONTACT },
